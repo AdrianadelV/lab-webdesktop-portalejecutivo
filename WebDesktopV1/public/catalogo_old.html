@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml2/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title> Stu Nicholls | CSSplay | Cross Browser Multi Page Photograph Gallery</title>
+<meta name="Author" content="Stu Nicholls" />
+
+
+<style type="text/css">
+
+
+/* ================================================================ 
+This copyright notice must be untouched at all times.
+
+The original version of this stylesheet and the associated (x)html
+is available at http://www.cssplay.co.uk/menu/lightbox.html
+Copyright (c) 2005-2007 Stu Nicholls. All rights reserved.
+This stylesheet and the associated (x)html may be modified in any 
+way to fit your requirements.
+=================================================================== */
+/* common styling */
+
+a {color:#000;}
+a:hover {text-decoration:none;}
+a:visited {color:#000;}
+
+/* slides styling */
+
+.photo {width:635px; text-align:left; position:relative; margin:0 auto;}
+
+.photo ul.topic {padding:0; margin:0; list-style:none; width:635px; height:auto; position:relative; z-index:10;}
+
+.photo ul.topic li {display:block; width:125px; height:31px; float:left;}
+.photo ul.topic li a.set {display:block; font-size:11px; width:124px; height:30px; text-align:center; line-height:30px; color:#000; text-decoration:none; border:1px solid #fff; border-width:1px 1px 0 0; background:#ccc; font-family:verdana, arial, sans-serif;}
+
+.photo ul.topic li a ul, 
+.photo ul.topic li ul 
+{display:none;}
+
+.photo ul.topic li.active a
+{color:#000; background:#bbb;}
+
+.photo ul.topic li a:hover,
+.photo ul.topic li:hover a
+{color:#fff; background:#aaa;}
+
+.photo ul.topic li.active ul
+{display:block; position:absolute; left:0; top:31px; list-style:none; padding:0; margin:0; height:375px; background:#ddd; width:464px; padding:40px 60px; border:20px solid #bbb; z-index:1;}
+
+.photo ul.topic li a:hover ul, 
+.photo ul.topic li:hover ul
+{display:block; position:absolute; left:0; top:31px; list-style:none; padding:0; margin:0; height:375px; background:#ddd; width:464px; padding:40px 60px; border:20px solid #aaa; z-index:100;}
+
+.photo ul.topic li ul li
+{display:inline; width:112px; height:87px; float:left; border:1px solid #fff; margin:1px;}
+
+.photo ul.topic li ul li a
+{display:block; width:110px; height:85px; cursor:default; float:left; text-decoration:none; background:#444; border:1px solid #888;}
+
+.photo ul.topic li ul li a img
+{display:block; width:100px; height:75px; border:5px solid #eee;}
+
+.photo ul.topic li a:hover ul li a:hover, 
+.photo ul.topic li:hover ul li a:hover 
+{white-space:normal; position:relative;}
+
+.photo ul.topic li a:hover ul li a:hover img, 
+.photo ul.topic li:hover ul li a:hover img 
+{position:absolute; left:-50px; top:-32px; width:200px; height:150px; border-color:#fff;}
+</style>
+
+
+</head>
+
+<body>
+
+<div class="photo">
+<ul class="topic">
+	<li><a class="set" href="#Carros">Carros<!--[if gte IE 7]><!--></a><!--<![endif]-->
+	<!--[if lte IE 6]><table><tr><td><![endif]-->
+		<ul>
+			<li><a href="carros1.jpg"><img src="images/carros1.jpg" alt="" title="" /></a></li>
+			<li><a href="carros2.jpg"><img src="images/carros2.jpg" alt="" title="" /></a></li>
+			<li><a href="carros3.jpg"><img src="images/carros3.jpg" alt="" title="" /></a></li>
+			<li><a href="carros4.jpg"><img src="images/carros4.jpg" alt="" title="" /></a></li>
+			<li><a href="carros5.jpg"><img src="images/carros5.jpg" alt="" title="" /></a></li>
+			<li><a href="carros6.jpg"><img src="images/carros6.jpeg" alt="" title="" /></a></li>
+			<li><a href="carros7.jpg"><img src="images/carros7.jpg" alt="" title="" /></a></li>
+			<li><a href="carros8.jpg"><img src="images/carros8.jpeg" alt="" title="" /></a></li>
+			
+		</ul>
+	<!--[if lte IE 6]></td></tr></table></a><![endif]-->
+	</li>
+
+	<li class="active"><a class="set" href="#Camionetas">Camionetas<!--[if gte IE 7]><!--></a><!--<![endif]-->
+	<!--[if lte IE 6]><table><tr><td><![endif]-->
+		<ul>
+			<li><a href="camioneta.jpg"><img src="camioneta.jpg" alt="" title="" /></a></li>
+			<li><a href="camioneta10.jpg"><img src="images/camioneta10.jpg" alt="" title="" /></a></li>
+			<li><a href="camioneta2.jpg"><img src="images/camioneta2.jpg" alt="" title="" /></a></li>
+			<li><a href="camioneta6.jpg"><img src="images/camioneta6.jpg" alt="" title="" /></a></li>
+			<li><a href="camioneta7.jpg"><img src="images/camioneta7.jpg" alt="" title="" /></a></li>
+			<li><a href="camioneta8.jpg"><img src="images/camioneta8.jpg" alt="" title="" /></a></li>
+			<li><a href="camioneta9.jpg"><img src="images/camioneta9.jpg" alt="" title="" /></a></li>
+			<li><a href="camioneta1.jpg"><img src="images/camioneta1.jpg" alt="" title="" /></a></li>
+	   </ul>
+	<!--[if lte IE 6]></td></tr></table></a><![endif]-->
+	</li>
+</ul>
+<br class="clear" />
+</div>
+
+
+</body>
+</html>
