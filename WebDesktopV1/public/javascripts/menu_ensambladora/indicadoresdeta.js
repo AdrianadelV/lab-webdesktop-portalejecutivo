@@ -1,8 +1,8 @@
 Ext.define('indicadoresdeta', {
     extend: 'Ext.window.Window',
 
-    height: 280,
-    width: 310,
+    height: 350,
+    width: 340,
     collapsible:true,
     y : 560,
     x : 0,
@@ -46,7 +46,7 @@ Ext.define('indicadoresdeta', {
                             x: 20,
                             y: 90,
                             height: 20,
-                            width: 160,
+                            width: 190,
                             text: 'Rango de la Valores Validos'
                         },
                         {
@@ -101,7 +101,24 @@ Ext.define('indicadoresdeta', {
                             height: 20,
                             width: 150,
                             text: 'Responsable: Nombre'
+                        },
+                        {
+                            xtype: 'label',
+                            x: 20,
+                            y: 230,
+                            height: 20,
+                            width: 260,
+                            text: 'Correo: nombreresponsable@gmail.com'
+                        },
+                        {
+                            xtype: 'label',
+                            x: 20,
+                            y: 260,
+                            height: 20,
+                            width: 200,
+                            text: 'Teléfono: 0416-6665544'
                         }
+                        
             ]
         });
 
