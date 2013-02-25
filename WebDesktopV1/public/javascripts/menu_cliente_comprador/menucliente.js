@@ -56,6 +56,7 @@ Ext.onReady(function() {
 		width : 315,
 		collapsible : true,
 		title : 'Menu AEVEV ',
+		layuot : 'Accordion',
 		dockedItems : [{
 			xtype : 'toolbar',
 			items : [{
@@ -388,7 +389,6 @@ Ext.onReady(function() {
 								        }],
 								        items: chart
 								    });
-
 								}
 			}
 		}
