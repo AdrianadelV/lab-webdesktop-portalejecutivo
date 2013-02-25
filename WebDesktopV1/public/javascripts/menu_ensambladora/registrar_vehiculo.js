@@ -39,7 +39,7 @@ Ext.define('miVentana', {
 	x: 350,
     y: 210,
     height: 307,
-    width: 520,
+    width: 560,
     layout: {
         type: 'absolute'
     },
@@ -142,7 +142,25 @@ Ext.define('miVentana', {
                                             height: 60,
                                             width: 170,
                                             fieldLabel: ''
-                                        }
+                                        },
+		                                {
+		                                    xtype: 'button',
+		                                    x: 300,
+                                            y: 8,
+		                                    height: 23,
+		                                    width: 20,
+		                                    text: '',
+		                                    listeners : {
+												click : function() {
+													// alert("pase");
+													ventana_modelo = Ext.create('miCatalogo');
+													alert("pase");
+													ventana_modelo.show();
+													alert("pase");
+
+												}
+											}
+		                                }
                                     ]
                                 }
                             ]
@@ -252,7 +270,7 @@ Ext.define('miVentana', {
                                             x: 20,
                                             y: 40,
                                             height: 20,
-                                            width: 60,
+                                            width: 70,
                                             text: 'Peso neto (Kg):'
                                         },
                                         {
@@ -637,8 +655,8 @@ Ext.define('miVentana', {
                                         },
                                         {
                                             xtype: 'checkboxfield',
-                                            x: 20,
-                                            y: 170,
+                                            x: 190,
+                                            y: 130,
                                             fieldLabel: 'Rines de Aluminio',
                                             boxLabel: ''
                                         }
@@ -646,16 +664,18 @@ Ext.define('miVentana', {
                                 },
                                 {
                                     xtype: 'button',
-                                    x: 340,
-                                    y: 180,
-                                    height: 20,
-                                    width: 60,
+                                    x: 450,
+                                    y: 80,
+                                    height: 30,
+                                    width: 65,
                                     text: 'Cancelar'
                                 },
                                 {
                                     xtype: 'button',
-                                    x: 250,
-                                    y: 180,
+                                    x: 450,
+                                    y: 40,
+                                    height: 30,
+                                    width: 65,
                                     text: 'Registrar'
                                 }
                             ]

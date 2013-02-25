@@ -50,7 +50,6 @@ var usuarioStore = Ext.create('Ext.data.Store', {
         { cedula: '18923926', posicion : '1', vehiculo_comprado:'Nuvira', concesionario: 'DaewoCaro' },
         { cedula: '12345678', posicion : '3', vehiculo_comprado:'Cielo', concesionario: 'Daewocentro'},
         { cedula: '98765432', posicion : '5', vehiculo_comprado:'Matix', concesionario: 'DaewoYar'},
-        { cedula: '13218466', posicion : '2', vehiculo_comprado:'Nuvira', concesionario: 'DaewoCaro'},
         { cedula: '19618874', posicion : '4', vehiculo_comprado:'Lomox', concesionario: 'Daewoconce'}
 
     ]
