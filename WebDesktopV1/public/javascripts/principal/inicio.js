@@ -75,13 +75,6 @@ posy = parseInt(screen.height * factorh);
 								html  : '<h1>Contáctanos</h1><p>Numero Telefonico: 0251-3457869, 0426-6542322 y 0424-6754499.</p><p>Numero-Fax: 0251-9887652</p><p>Correo: empresa_marca@gmail.com</p>'
 								
 							},{
-								xtype : 'panel',
-								title : 'Servicios',
-								layuot : {
-									type: 'absolute'
-								},
-								html  : '<h6>Garantías</h6><h4 aling = "center">Terminos y Condiciones de la Garantía</h4><br/><p>Para procesar la garantia en cualquier concesionario puedes ingresar a nuestro portal</p><br/><p>y solicitar una cita para porteriormente ser atendido  por nuestro personal capacitado</p>',
-							},{
 								stype : 'panel',
 								title : 'Galeria de Vehiculos',
 									items:[{
@@ -109,7 +102,7 @@ posy = parseInt(screen.height * factorh);
 	         		y:0,
 	         		height:500,
 	         		width: 300,
-	         		collapsible: true,
+	         		//collapsible: true,
 	         		title: 'Menu A.E.V.E.V',
 	         		dockedItems : [{
 						xtype : 'toolbar',
