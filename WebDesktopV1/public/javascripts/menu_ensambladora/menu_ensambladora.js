@@ -25,6 +25,9 @@ posx = parseInt(screen.width * factorw);
 posy = parseInt(screen.height * factorh);
 
 Ext.require(['Ext.tree.*', 'Ext.data.*', 'Ext.tip.*', 'Ext.container.Viewport', 'Ext.container.ButtonGroup', 'Ext.panel.Panel']);
+Ext.require('Ext.chart.*');
+Ext.require(['Ext.Window', 'Ext.layout.container.Fit', 'Ext.fx.target.Sprite', 'Ext.window.MessageBox']);
+
 
 Ext.onReady(function() {
 	Ext.QuickTips.init();
@@ -63,8 +66,8 @@ Ext.onReady(function() {
 		}]
 	});
 	
-	ventanaacttiva = Ext.create('miVentanalista');
-                  ventanaacttiva.show();
+	ventana = Ext.create('miVentanalista');
+                  ventana.show();
 
 	ventanaindicadores = Ext.create('indicadoreseje');
                   ventanaindicadores.show();
@@ -76,7 +79,7 @@ Ext.onReady(function() {
 		store : store,
 		// store : bd,
 		title : 'Opciones',
-		// layout: 'accordion',
+	    //layout: 'accordion',
 		renderTo : 'tree_el',
 		height : 350,
 		width : 320,
@@ -96,25 +99,25 @@ Ext.onReady(function() {
 		listeners : {
 			itemclick : function(view, node) {
 				if(node.get('text') == "Registrar o Modificar Nuevos Vehiculos"){
-					ventanaacttiva.close();
-					ventanaacttiva = Ext.create('miVentana');
-                  	ventanaacttiva.show();
+					ventana.close();
+					ventana = Ext.create('miVentana');
+                  	ventana.show();
 				}
 				if(node.get('text') == "Listado de Pedidos por Concesionario"){
-					ventanaacttiva.close();
-					ventanaacttiva = Ext.create('miVentanalista');
-                  	ventanaacttiva.show();
+					ventana.close();
+					ventana = Ext.create('miVentanalista');
+                  	ventana.show();
 				}
 				if(node.get('text')=='Configurar Nuevo Indicador'){
-									ventanaacttiva.close();
-									ventanaacttiva = Ext.create('mipanelejecutivo', {
+									ventana.close();
+									ventana = Ext.create('mipanelejecutivo', {
 									    renderTo : 'tree_el',
 									    title:node.get('text'),
 								 	});	
 				}
 				if(node.get('text')=='Promedio de Vehiculos Ensamblados'){
-								 	ventanaacttiva.close();
-					var chart = Ext.create('Ext.chart.Chart', {
+								 	ventana.close();
+									var chart = Ext.create('Ext.chart.Chart', {
 							             id: 'chartCmp',
 							             xtype: 'chart',
 							             style: 'background:#fff',
@@ -163,6 +166,39 @@ Ext.onReady(function() {
 							                 yField: 'data1'
 							             }]
 							         });
+							
+							       var win= Ext.create('Ext.Window', {
+							         x:328,
+							         y:205,
+							         height : 500,
+									 width : 700,
+							         minHeight: 400,
+							         minWidth: 550,
+							         hidden: false,
+							         maximizable: true,
+							         title: 'Grafico Promedio de Vehiculos Ensamblados',
+							         renderTo: Ext.getBody(),
+							         layout: 'fit',
+							          tbar: [{
+							             text: 'Guardar Grafico',
+							             handler: function() {
+							                 Ext.MessageBox.confirm('Confirmar Descarga', '¿Desea descargar esta grafica?', function(choice){
+							                     if(choice == 'yes'){
+							                         chart.save({
+							                             type: 'image/png'
+							                         });
+							                     }
+							                });
+							             }
+							        }, {
+							            	text: 'Actializar Datos',
+							            	handler: function() {
+							                store1.loadData(generateData());
+							         	},
+							         	
+							        }],
+							        items: chart    
+							     });
 								 }
 				if(node.get('text')=='Numero de Vehiculos Vendidos por Marca Ford'){
 								 	ventana.close();
@@ -219,8 +255,8 @@ Ext.onReady(function() {
 
 
 						   			var win = Ext.create('Ext.Window', {
-						        	 x:320,
-							         y:135,
+						        	 x:328,
+							         y:205,
 							         height : 500,
 									 width : 700,
 							        minHeight: 400,
@@ -249,10 +285,10 @@ Ext.onReady(function() {
 							        }],
 							        items: chart
 							    });
-					}
+								}
 				if(node.get('text')=='Ingreso en Bolivares de Vehiculos Vendidos por Marca'){
-									store1.loadData(generateData(8));
 									ventana.close();
+									store1.loadData(generateData(8));
 								    var chart = Ext.create('Ext.chart.Chart', {
 								            id: 'chartCmp',
 								            xtype: 'chart',
@@ -303,8 +339,8 @@ Ext.onReady(function() {
 								 
 								
 								    var win = Ext.create('Ext.Window', {
-								        x:320,
-     							        y:135,
+								        x:328,
+							            y:205,
 							            height : 500,
 									    width : 700,
 								        minHeight: 400,
@@ -341,7 +377,6 @@ Ext.onReady(function() {
 								        }],
 								        items: chart
 								    });
-
 								}
 			}
 		}

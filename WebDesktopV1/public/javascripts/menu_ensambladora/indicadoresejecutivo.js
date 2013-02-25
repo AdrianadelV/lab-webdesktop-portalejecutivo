@@ -64,7 +64,6 @@ Ext.define('indicadoreseje', {
 				xtype : 'button',
 				x : 205,
 				y : 195,
-				height : 20,
 				text : 'Detalles',
 				listeners : {
 					click : function() {
