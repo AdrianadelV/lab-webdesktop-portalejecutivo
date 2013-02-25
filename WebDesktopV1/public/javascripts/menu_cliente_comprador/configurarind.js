@@ -47,12 +47,12 @@ Ext.require([
 		
 		Ext.define('mipanelejecutivo', {
 					extend : 'Ext.panel.Panel',
-					x:312,
-					y:-300,
+					x:325,
+					y:-500,
 					closable:true,
 					collapsible:true,
 					height : 500,
-					width : 715,
+					width : 705,
 					layout : {
 						type : 'absolute'
 					},
