@@ -152,12 +152,8 @@ Ext.define('miVentana', {
 		                                    text: '',
 		                                    listeners : {
 												click : function() {
-													// alert("pase");
-													ventana_modelo = Ext.create('miCatalogo');
-													alert("pase");
+													ventana_modelo = Ext.create('catalogo');
 													ventana_modelo.show();
-													alert("pase");
-
 												}
 											}
 		                                }

@@ -72,7 +72,7 @@ Ext.onReady(function() {
 	ventanaindicadores = Ext.create('indicadoreseje');
                   ventanaindicadores.show();
 
-	// ventana = Ext.create('miCatalogo');
+	// ventana = Ext.create('catalogo');
                   // ventana.show();
 
 	var tree = Ext.create('Ext.tree.Panel', {

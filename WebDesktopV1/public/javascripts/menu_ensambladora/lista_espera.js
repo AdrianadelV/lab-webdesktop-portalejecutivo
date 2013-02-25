@@ -38,14 +38,14 @@ Ext.require([
 	         ]);
 
 //Definicion del Modelo
- Ext.define('Usuarios', {
+ Ext.define('Compradores', {
     extend: 'Ext.data.Model',
     fields: [ 'cedula', 'posicion', 'vehiculo_comprado', 'concesionario']
 });
 
 //Definicion del Data Store
-var usuarioStore = Ext.create('Ext.data.Store', {
-    model: 'Usuarios',
+var compradoresStore = Ext.create('Ext.data.Store', {
+    model: 'Compradores',
     data: [
         { cedula: '18923926', posicion : '1', vehiculo_comprado:'Nuvira', concesionario: 'DaewoCaro' },
         { cedula: '12345678', posicion : '3', vehiculo_comprado:'Cielo', concesionario: 'Daewocentro'},
@@ -56,10 +56,10 @@ var usuarioStore = Ext.create('Ext.data.Store', {
 });
 
 //Definicion de la clase UsuariosGrid
-Ext.define('App.UsuariosGrid', {
+Ext.define('App.CompradoresGrid', {
     extend: 'Ext.grid.Panel',
     //Definicion del alias que puede usado en un xtype
-    alias: 'widget.usuariosgrid',
+    alias: 'widget.compradoresgrid',
 
     //Sobre escribimos este metodo de Ext.grid.Panel
     initComponent : function() {
@@ -79,11 +79,11 @@ Ext.define('App.UsuariosGrid', {
                     displayMsg : 'Personas en espera {0} - {1} de {2}',
 	  	} ];
         // Origen de los datos, de un data store
-        this.store = usuarioStore;
+        this.store = compradoresStore;
         this.forceFit = true;
 	this.scroll = true;
 	this.viewConfig = { style: {overflowY: 'hidden', overflowX: 'hidden' } };
-	this.verticalScroller = {xtype: 'usuariosgrid'};
+	this.verticalScroller = {xtype: 'compradoresgrid'};
         this.listeners = {
                           itemclick : function(view) {
                            data = this.getSelectionModel().selected.items[0].data;
@@ -94,7 +94,7 @@ Ext.define('App.UsuariosGrid', {
                           }
                          };
         //Llamamos a la super clase a iniciacion del componente
-        App.UsuariosGrid.superclass.initComponent.call(this);
+        App.CompradoresGrid.superclass.initComponent.call(this);
     }
 });
 //Definicion de Tab
@@ -328,7 +328,7 @@ Ext.define('miVentanalista', {
                     		title: 'Lista de espera en la Cola',
                     		items: [
 	                    		{ 
-	                 			xtype:'usuariosgrid',
+	                 			xtype:'compradoresgrid',
 	                 			
 	                 			viewConfig: {
 	                    		   }
