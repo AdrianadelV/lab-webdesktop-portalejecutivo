@@ -95,6 +95,11 @@ Ext.onReady(function() {
 				 ventana =Ext.create('edopedidoensamb');
 				 ventana.show();
 				 alert("PASO2");
+			 }if (node.get('text') == "Configurar nuevo Indicador")
+			  {
+				 ventana.close();
+				 ventana =Ext.create('indicadoresconcesionario');
+				 ventana.show();
 			 }
 		 }
 	 }
