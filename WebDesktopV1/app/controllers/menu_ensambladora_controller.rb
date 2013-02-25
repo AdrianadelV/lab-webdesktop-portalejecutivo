@@ -3,7 +3,6 @@ class MenuEnsambladoraController < ApplicationController
   end
   
   def generar_menu
-    puts 'Hola pase'
     @tipo=params[:tipo]
     @menu_ensambladora = MenuEnsambladora.new
     @tira = @menu_ensambladora.BuscarTodosArbolJson(@tipo)
