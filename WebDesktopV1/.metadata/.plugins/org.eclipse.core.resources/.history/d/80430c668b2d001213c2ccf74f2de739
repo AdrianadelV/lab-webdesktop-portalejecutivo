@@ -1,7 +1,0 @@
-class Ajaxejemplo08Controller < ApplicationController
- attr_accessor :nombre
- def index
-   @nombre = "Respuesta del Servidor: Bienvenido " + params[:nombre].to_s
- end
- 
-end
