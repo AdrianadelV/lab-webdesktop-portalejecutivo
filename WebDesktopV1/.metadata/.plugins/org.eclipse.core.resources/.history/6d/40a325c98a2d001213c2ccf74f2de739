@@ -1,0 +1,19 @@
+<html>
+<head>
+    <title>Introduccion a Extjs 4.1.1a Ejemplo 07</title>
+    
+    <!-- Incluya los javascripts: Extjs 4.1.1a y javascripts propios -->
+    <script type="text/javascript" src="javascripts/extjs/ext-all-debug.js"></script>
+    <script type="text/javascript" src="javascripts/ejemplo07/ExtStart07.js"></script>
+    
+    <!-- Incluya hojas de estilos de: Extjs 4.1.1a y hojas de estilos propios -->
+    <!--link rel="stylesheet" type="text/css" href="resources/css/my-ext-theme.css"-->
+    <link rel="stylesheet" type="text/css" href="javascripts/extjs/resources/css/ext-all.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/ejemplosextjs/ExtStart.css">
+
+</head>
+<body id='body'>
+ <h1>Introducci&oacute;n a Extjs 4.1.1a</h1>
+
+</body>
+</html>

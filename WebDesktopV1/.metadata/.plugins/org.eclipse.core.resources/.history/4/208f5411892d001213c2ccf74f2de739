@@ -1,0 +1,27 @@
+<html>
+<head>
+    <title>Introduccion a Extjs 4.0.7: Ejemplo 13</title>
+    
+    <!-- Incluya los javascripts: Extjs 4.0.7 y javascripts propios -->
+    <script type="text/javascript" src="javascripts/extjs/ext-all-debug.js"></script>
+    <script>
+     var s = document.createElement("script");
+     s.type = 'text/javascript';
+     s.src = "javascripts/extjs/locale/ext-lang-es.js";
+     s.charset = 'ascii';
+     document.getElementsByTagName("head")[0].appendChild(s);
+    </script>
+    <script type="text/javascript" src="javascripts/ejemplo13/ExtStart13.js"></script>
+    
+    <!-- Incluya hojas de estilos de: Extjs 4.0.7 y hojas de estilos propios -->
+    <link rel="stylesheet" type="text/css" href="javascripts/extjs/resources/css/ext-all.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/ejemplosextjs/ExtStart.css">
+
+</head>
+<body>
+ <h1>Introducci&oacute;n a Extjs 4.0.7</h1>
+<div id="myDiv">Ejemplo de Manejo Ext.treePanel</div>
+ <!-- tree panel will rendered to this element -->
+ <div id="tree_el"></div>   
+</body>
+</html>

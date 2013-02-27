@@ -1,0 +1,6 @@
+class Ejemplo12Controller < ApplicationController
+ 
+ def index
+ end
+ 
+end

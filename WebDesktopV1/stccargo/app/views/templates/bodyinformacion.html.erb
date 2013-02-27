@@ -1,0 +1,22 @@
+<body>
+<div id="header">
+	<div id="menu">
+	</div>
+</div>
+<div id="wrapper">
+
+</div>
+<div id="page">
+ <div id="content">
+	<div id="post">
+	  <h2>Bienvenidos al Mis STC-CARGO VERSION 2</h2><br/>
+
+                      <div align="center" class="h12d"><%=session[:mensajeError]%>
+                      <p><a href='<%=session[:vinculo]%>'>Regresar</a></p>
+                      </div>
+
+</div>
+<div id="post">
+	 <%= render :file => 'app/views/templates/twitter' %>
+</div>
+</div>

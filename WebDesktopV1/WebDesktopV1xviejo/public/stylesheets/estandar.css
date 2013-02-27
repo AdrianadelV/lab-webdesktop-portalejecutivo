@@ -1,0 +1,78 @@
+body {
+	background-color:#FFFFFF;
+	font-family: Arial;
+	font-size:20px;
+	color:#083772;
+	margin:0;
+	padding:0;
+}
+h1, h2, h3{
+	font-family: Georgia,"Times New Roman",Times,serif;
+	font-size:40px;
+	color:#4682B4;
+	font-weight: normal;
+	/*background:#3a454d;*/
+	padding:1px 0px;
+	text-shadow: 0px 0px 30px blue;
+	margin-bottom: 20px;
+	margin-top: 20px;
+	text-align: center;
+}
+h6{
+	font-family: Georgia,"Times New Roman",Times,serif;
+	font-size:40px;
+	color:#4682B4;
+	font-weight: normal;
+	/*background:#3a454d;*/
+	padding:1px 0px;
+	text-shadow: 0px 0px 30px blue;
+	/*margin-bottom: 20px;
+	margin-top: 20px;*/
+}
+#izquierda{
+	float: left;
+/*	width: 300px;*/
+	border: solid;
+}
+#derecha{
+	border:solid;
+	float: right;
+	margin-right: 20px;
+	border-radius: 2px;
+	/*width:800px;
+	margin-right: 200px;*/
+}
+#viewMarca{
+	width: 50;
+	margin: 50;
+	border: solid;
+}
+p {
+	margin:10px 20px;
+	line-height:18px;
+}
+/*input {
+	margin: 8px 20px;
+}*/
+#content {
+	margin-left:15px;
+}
+#myDiv {
+	border:2px solid #1F3E75;
+	background:#7E7E7E;
+	margin:20px 50px;
+	padding:10px 20px;
+	width:200px;
+	text-align:center;
+}
+.red {
+	color: red;
+}
+#tree_el{
+	width: 100%;
+	height: 500px;
+}
+#button{
+	border-radius: 2px;
+	margin-right: 20px;
+}
