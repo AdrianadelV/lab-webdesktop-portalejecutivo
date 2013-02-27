@@ -100,7 +100,7 @@ Ext.onReady(function() {
 			itemclick : function(view, node) {
 				if(node.get('text') == "Registrar o Modificar Nuevos Vehiculos"){
 					ventana.close();
-					ventana = Ext.create('miVentana');
+					ventana = Ext.create('miVetanaRegistrar');
                   	ventana.show();
 				}
 				if(node.get('text') == "Listado de Pedidos por Concesionario"){
