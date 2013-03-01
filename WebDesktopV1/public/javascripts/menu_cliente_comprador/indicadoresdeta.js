@@ -5,7 +5,7 @@ Ext.define('indicadoresdeta', {
     width: 340,
     collapsible:true,
     y : 560,
-    x : 0,
+    x : 49,
     autoScroll: true,
     layout: {
         type: 'absolute'

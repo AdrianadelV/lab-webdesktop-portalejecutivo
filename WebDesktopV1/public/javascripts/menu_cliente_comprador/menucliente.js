@@ -53,7 +53,7 @@ Ext.onReady(function() {
 		store : store,
 		renderTo : 'tree_el',
 		height : 500,
-		width : 315,
+		width : 300,
 		collapsible : true,
 		title : 'Menu AEVEV ',
 		layuot : 'Accordion',
