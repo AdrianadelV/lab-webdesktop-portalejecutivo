@@ -10,11 +10,11 @@
           </button>
           <a class="brand" href="#">SI.A.E.V.E.V</a>
           <div class="nav-collapse collapse">
-            <form class="navbar-form pull-right" action="application/autenticar_usuario" method="post">
-               <a class="active"><span><a href="registrarusuario">Registrarse</a></span></a>
-              <input class="span2" type="text" placeholder="Usuario">
-              <input class="span2" type="password" placeholder="Contraseña">
-              <button type="submit" class="btn">Entrar</button>
+            <form class="navbar-form pull-right"name="autenticar" action="#" method="post">
+              <a class="active"><span><a href="registrarusuario">Registrarse</a></span></a>
+              <input class="span2" type="text" name="nombrelogin" placeholder="Usuario">
+              <input class="span2" type="password"name="contrasena" placeholder="Contraseña">
+              <button type="submit" class="btn" onclick="capturaUsuario()">Entrar</button>
             </form>
           </div><!--/.nav-collapse -->
         </div>
