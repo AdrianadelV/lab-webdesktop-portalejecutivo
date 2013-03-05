@@ -3,7 +3,7 @@ class ConcesionarioController < ApplicationController
   end
   def generarmenu
     @tipo=params[:tipo]
-    @arbols = Arbols.new
+    @arbols = Portal_ejecutivo_desktops.new
     @tira = @arbols.BuscarTodosArbolJson(@tipo)
     render :text => @tira
   end

@@ -4,8 +4,8 @@ class MenuEnsambladoraController < ApplicationController
   
   def generar_menu
     @tipo=params[:tipo]
-    @menu_ensambladora = MenuEnsambladora.new
-    @tira = @menu_ensambladora.BuscarTodosArbolJson(@tipo)
+    @arbols = Portal_ejecutivo_desktops.new
+    @tira = @arbols.BuscarTodosArbolJson(@tipo)
     render :text => @tira
   end
 end
