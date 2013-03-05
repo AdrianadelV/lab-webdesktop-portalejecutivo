@@ -31,7 +31,7 @@ Ext.onReady(function() {
 	var store = Ext.create('Ext.data.TreeStore', {
 	proxy: {
 	type: 'ajax',
-	url: 'concesionario/generarmenu?tipo=1'
+	url: 'concesionario/generarmenu?tipo=3'
 	},
 	root: {
 	text: 'Concesionario',

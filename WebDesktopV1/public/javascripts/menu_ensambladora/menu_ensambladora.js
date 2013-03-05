@@ -52,7 +52,7 @@ Ext.onReady(function() {
 	var store = Ext.create('Ext.data.TreeStore', {
 		proxy : {
 			type : 'ajax',
-			url : 'menu_ensambladora/generar_menu?tipo=2'
+			url : 'menu_ensambladora/generar_menu?tipo=1'
 			},
 		root : {
 			text : 'Ensambladora',

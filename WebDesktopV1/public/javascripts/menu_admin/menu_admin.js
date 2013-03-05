@@ -32,7 +32,7 @@ Ext.onReady(function() {
 	var store = Ext.create('Ext.data.TreeStore', {
 		proxy : {
 			type : 'ajax',
-			url : 'menu_admin/generar_menu?tipo=4'
+			url : 'menu_admin/generar_menu?tipo=5'
 		},
 		root : {
 			text : 'Administrador',

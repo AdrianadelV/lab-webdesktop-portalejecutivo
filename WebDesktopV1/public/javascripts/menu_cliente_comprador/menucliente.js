@@ -30,7 +30,7 @@ Ext.onReady(function() {
 	var store = Ext.create('Ext.data.TreeStore', {
 		proxy : {
 			type : 'ajax',
-			url : 'cli_comprador/generarmenu?tipo=3'
+			url : 'cli_comprador/generarmenu?tipo=4'
 		},
 		root : {
 			text : 'Menu Principal',
