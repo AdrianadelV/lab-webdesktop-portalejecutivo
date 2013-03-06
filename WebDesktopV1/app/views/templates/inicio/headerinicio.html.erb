@@ -17,15 +17,15 @@ Fecha  : Febrero del 2013
     <script type="text/javascript" src="javascripts/principal/inicio.js"></script>
     <script type="text/javascript" src="javascripts/principal/marca.js"></script>
     <script language="JavaScript">
-    	var nombre=null;
-    	var contrasenausuario=null;
+    	var nombre;
+    	var contrasenausuario;
     	function capturaUsuario () {
 		  nombre=document.autenticar.nombrelogin.value;
 		  contrasenausuario=document.autenticar.contrasena.value;
-		  alert('contrasena='+contrasenausuario+'');	
-		  if ((contrasenausuario=="") {
-		  	alert("Debe llenar los campos");
-		  };  
+		  alert('contrasena='+contrasenausuario+'');
+		  if (nombre=="" || contrasenausuario=="") {
+		  	alert('Debe lllenar todos los campo')
+		  };
 		}
     </script>
     <!-- <script type="text/javascript" src="javascripts/principal/login.js"></script> -->
