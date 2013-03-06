@@ -15,11 +15,17 @@ Fecha  : Febrero del 2013
 	<script src="bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="javascripts/extjs/ext-all-debug.js"></script>
     <script type="text/javascript" src="javascripts/principal/inicio.js"></script>
+    <script type="text/javascript" src="javascripts/principal/marca.js"></script>
     <script language="JavaScript">
+    	var nombre=null;
+    	var contrasenausuario=null;
     	function capturaUsuario () {
-		  var nombre=document.autenticar.nombrelogin.value;
-		  var contrasenausuario=document.autenticar.contrasena.value;
-		  alert('nombre='+nombre+'');
+		  nombre=document.autenticar.nombrelogin.value;
+		  contrasenausuario=document.autenticar.contrasena.value;
+		  alert('contrasena='+contrasenausuario+'');	
+		  if ((contrasenausuario=="") {
+		  	alert("Debe llenar los campos");
+		  };  
 		}
     </script>
     <!-- <script type="text/javascript" src="javascripts/principal/login.js"></script> -->
