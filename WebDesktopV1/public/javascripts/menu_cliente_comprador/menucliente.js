@@ -79,8 +79,9 @@ Ext.onReady(function() {
 					ventana = Ext.create('miVentanalista');
 					ventana.show();
 				}
-				if (node.get('text') == "Ford")// (node.get('Text') == "Fiat") )//|| node.get('Text') == "Daewood" || node.get('Text') == "Toyota" || node.get('Text') == "Huyndai")
+				if (node.get('text') == "Catalogo Vehiculos")// (node.get('Text') == "Fiat") )//|| node.get('Text') == "Daewood" || node.get('Text') == "Toyota" || node.get('Text') == "Huyndai")
 				{
+					//aqui va ford
 					ventana.close();
 					ventana = Ext.create('catalogo');
 					ventana.show();
@@ -113,6 +114,11 @@ Ext.onReady(function() {
 				if (node.get('text') == "Proforma") {
 					ventana.close();
 					ventana = Ext.create('proformas');
+					ventana.show();
+				}
+				if (node.get('text') == "Proforma") {
+					ventana.close();
+					ventana = Ext.create('proforma_banco');
 					ventana.show();
 				}
 				if (node.get('text') == "Comprar Vehiculo") {
