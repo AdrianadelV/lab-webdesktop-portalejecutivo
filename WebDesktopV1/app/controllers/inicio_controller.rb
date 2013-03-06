@@ -7,4 +7,10 @@ class InicioController < ApplicationController
     @tira = @arbols.BuscarTodosArbolJson(@tipo)
     render :text => @tira
   end
+  def buscar
+   @marcas = Marca.new
+   id_marca = params[:id_marca]
+   valor = @marcas.buscar(id_marca)
+   render :text => $tirajson
+  end
 end
