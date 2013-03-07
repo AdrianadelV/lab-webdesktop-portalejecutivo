@@ -96,32 +96,6 @@ LOCK TABLES `Categoria` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Ciudad`
---
-
-DROP TABLE IF EXISTS `Ciudad`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Ciudad` (
-  `id_ciudad` int(11) NOT NULL,
-  `nombre` varchar(45) DEFAULT NULL,
-  `Estado_id_estado` int(11) NOT NULL,
-  PRIMARY KEY (`id_ciudad`),
-  KEY `fk_Ciudad_Estado1_idx` (`Estado_id_estado`),
-  CONSTRAINT `fk_Ciudad_Estado1` FOREIGN KEY (`Estado_id_estado`) REFERENCES `Estado` (`id_estado`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Ciudad`
---
-
-LOCK TABLES `Ciudad` WRITE;
-/*!40000 ALTER TABLE `Ciudad` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Ciudad` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `Comprador_Vehiculo`
 --
 
@@ -181,42 +155,6 @@ LOCK TABLES `Comprador_Vehiculo_Banco` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Concesionario_Vehiculo`
---
-
-DROP TABLE IF EXISTS `Concesionario_Vehiculo`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Concesionario_Vehiculo` (
-  `id_concesionario` int(11) NOT NULL,
-  `rif` varchar(45) DEFAULT NULL,
-  `nombre` varchar(45) DEFAULT NULL,
-  `direccion` int(11) DEFAULT NULL,
-  `telefono` varchar(45) DEFAULT NULL,
-  `correo` varchar(45) DEFAULT NULL,
-  `Marca_id_marca` int(11) NOT NULL,
-  `Usuarios_id_usuario` int(11) NOT NULL,
-  `Ciudad_id_ciudad` int(11) NOT NULL,
-  PRIMARY KEY (`id_concesionario`),
-  KEY `fk_Concesionario_Marca1_idx` (`Marca_id_marca`),
-  KEY `fk_Concesionario_Usuarios1_idx` (`Usuarios_id_usuario`),
-  KEY `fk_Concesionario_Ciudad1_idx` (`Ciudad_id_ciudad`),
-  CONSTRAINT `fk_Concesionario_Ciudad1` FOREIGN KEY (`Ciudad_id_ciudad`) REFERENCES `Ciudad` (`id_ciudad`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Concesionario_Marca1` FOREIGN KEY (`Marca_id_marca`) REFERENCES `marcas` (`id_marca`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Concesionario_Usuarios1` FOREIGN KEY (`Usuarios_id_usuario`) REFERENCES `Usuarios` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Concesionario_Vehiculo`
---
-
-LOCK TABLES `Concesionario_Vehiculo` WRITE;
-/*!40000 ALTER TABLE `Concesionario_Vehiculo` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Concesionario_Vehiculo` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `Concesionario_Vehiculo_Banco`
 --
 
@@ -230,7 +168,7 @@ CREATE TABLE `Concesionario_Vehiculo_Banco` (
   KEY `fk_Concesionario_Vehiculo_has_Banco_Banco1_idx` (`Banco_id_banco`),
   KEY `fk_Concesionario_Vehiculo_has_Banco_Concesionario_Vehiculo1_idx` (`Concesionario_Vehiculo_id_concesionario`),
   CONSTRAINT `fk_Concesionario_Vehiculo_has_Banco_Banco1` FOREIGN KEY (`Banco_id_banco`) REFERENCES `Banco` (`id_banco`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Concesionario_Vehiculo_has_Banco_Concesionario_Vehiculo1` FOREIGN KEY (`Concesionario_Vehiculo_id_concesionario`) REFERENCES `Concesionario_Vehiculo` (`id_concesionario`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_Concesionario_Vehiculo_has_Banco_Concesionario_Vehiculo1` FOREIGN KEY (`Concesionario_Vehiculo_id_concesionario`) REFERENCES `concesionario_vehiculos` (`id_concesionario`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -259,7 +197,7 @@ CREATE TABLE `Detalle_Vehiculo` (
   KEY `fk_Detalle_Vehiculo_Vehiculo1_idx` (`Vehiculo_id_vehiculo`),
   KEY `fk_Detalle_Vehiculo_Modelo_Caracteristicas1_idx` (`Modelo_Caracteristicas_Modelo_id_modelo`,`Modelo_Caracteristicas_Caracteristicas_id_caracteristicas`),
   CONSTRAINT `fk_Detalle_Vehiculo_Modelo_Caracteristicas1` FOREIGN KEY (`Modelo_Caracteristicas_Modelo_id_modelo`, `Modelo_Caracteristicas_Caracteristicas_id_caracteristicas`) REFERENCES `Modelo_Caracteristicas` (`Modelo_id_modelo`, `Caracteristicas_id_caracteristicas`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Detalle_Vehiculo_Vehiculo1` FOREIGN KEY (`Vehiculo_id_vehiculo`) REFERENCES `Vehiculo` (`id_vehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_Detalle_Vehiculo_Vehiculo1` FOREIGN KEY (`Vehiculo_id_vehiculo`) REFERENCES `vehiculos` (`id_vehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -364,7 +302,7 @@ CREATE TABLE `Ensambladora_Vehiculo` (
   KEY `fk_Ensambladora_Vehiculo_Usuarios1_idx` (`Usuarios_id_usuario`),
   KEY `fk_Ensambladora_Vehiculo_Marca1_idx` (`Marca_id_marca`),
   KEY `fk_Ensambladora_Vehiculo_Ciudad1_idx` (`Ciudad_id_ciudad`),
-  CONSTRAINT `fk_Ensambladora_Vehiculo_Ciudad1` FOREIGN KEY (`Ciudad_id_ciudad`) REFERENCES `Ciudad` (`id_ciudad`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Ensambladora_Vehiculo_Ciudad1` FOREIGN KEY (`Ciudad_id_ciudad`) REFERENCES `ciudades` (`id_ciudad`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Ensambladora_Vehiculo_Marca1` FOREIGN KEY (`Marca_id_marca`) REFERENCES `marcas` (`id_marca`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Ensambladora_Vehiculo_Usuarios1` FOREIGN KEY (`Usuarios_id_usuario`) REFERENCES `Usuarios` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -377,29 +315,6 @@ CREATE TABLE `Ensambladora_Vehiculo` (
 LOCK TABLES `Ensambladora_Vehiculo` WRITE;
 /*!40000 ALTER TABLE `Ensambladora_Vehiculo` DISABLE KEYS */;
 /*!40000 ALTER TABLE `Ensambladora_Vehiculo` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `Estado`
---
-
-DROP TABLE IF EXISTS `Estado`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Estado` (
-  `id_estado` int(11) NOT NULL,
-  `nombre` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id_estado`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Estado`
---
-
-LOCK TABLES `Estado` WRITE;
-/*!40000 ALTER TABLE `Estado` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Estado` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -548,7 +463,7 @@ CREATE TABLE `Garantia_Vehiculo` (
   `Vehiculo_id_vehiculo` int(11) NOT NULL,
   PRIMARY KEY (`id_garantia`),
   KEY `fk_Garantia_Vehiculo1_idx` (`Vehiculo_id_vehiculo`),
-  CONSTRAINT `fk_Garantia_Vehiculo1` FOREIGN KEY (`Vehiculo_id_vehiculo`) REFERENCES `Vehiculo` (`id_vehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_Garantia_Vehiculo1` FOREIGN KEY (`Vehiculo_id_vehiculo`) REFERENCES `vehiculos` (`id_vehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -609,7 +524,7 @@ CREATE TABLE `Modelo_Caracteristicas` (
   KEY `fk_Modelo_Caracteristicas_Ensambladora_Vehiculo1_idx` (`Ensambladora_Vehiculo_id_ensambladora`),
   CONSTRAINT `fk_Modelo_Caracteristicas_Ensambladora_Vehiculo1` FOREIGN KEY (`Ensambladora_Vehiculo_id_ensambladora`) REFERENCES `Ensambladora_Vehiculo` (`id_ensambladora`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Modelo_has_Caracteristicas_Caracteristicas1` FOREIGN KEY (`Caracteristicas_id_caracteristicas`) REFERENCES `Caracteristicas_Vehiculo` (`id_caracteristicas`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Modelo_has_Caracteristicas_Modelo1` FOREIGN KEY (`Modelo_id_modelo`) REFERENCES `Modelo_Vehiculo` (`id_modelo`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_Modelo_has_Caracteristicas_Modelo1` FOREIGN KEY (`Modelo_id_modelo`) REFERENCES `modelo_vehiculos` (`id_modelo`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -620,36 +535,6 @@ CREATE TABLE `Modelo_Caracteristicas` (
 LOCK TABLES `Modelo_Caracteristicas` WRITE;
 /*!40000 ALTER TABLE `Modelo_Caracteristicas` DISABLE KEYS */;
 /*!40000 ALTER TABLE `Modelo_Caracteristicas` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `Modelo_Vehiculo`
---
-
-DROP TABLE IF EXISTS `Modelo_Vehiculo`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Modelo_Vehiculo` (
-  `id_modelo` int(11) NOT NULL,
-  `descripcion` varchar(45) DEFAULT NULL,
-  `ano_m` varchar(45) DEFAULT NULL,
-  `Marca_id_marca` int(11) NOT NULL,
-  `Tipo_Vehiculo_id_tipo` int(11) NOT NULL,
-  PRIMARY KEY (`id_modelo`),
-  KEY `fk_Modelo_Marca1_idx` (`Marca_id_marca`),
-  KEY `fk_Modelo_Tipo_Vehiculo1_idx` (`Tipo_Vehiculo_id_tipo`),
-  CONSTRAINT `fk_Modelo_Marca1` FOREIGN KEY (`Marca_id_marca`) REFERENCES `marcas` (`id_marca`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Modelo_Tipo_Vehiculo1` FOREIGN KEY (`Tipo_Vehiculo_id_tipo`) REFERENCES `Tipo_Vehiculo` (`id_tipo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Modelo_Vehiculo`
---
-
-LOCK TABLES `Modelo_Vehiculo` WRITE;
-/*!40000 ALTER TABLE `Modelo_Vehiculo` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Modelo_Vehiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -714,30 +599,6 @@ LOCK TABLES `Proforma` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Rol`
---
-
-DROP TABLE IF EXISTS `Rol`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Rol` (
-  `id_rol` int(11) NOT NULL,
-  `nombre` varchar(20) NOT NULL,
-  `estatus` varchar(20) NOT NULL,
-  PRIMARY KEY (`id_rol`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Rol`
---
-
-LOCK TABLES `Rol` WRITE;
-/*!40000 ALTER TABLE `Rol` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Rol` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `Servicios`
 --
 
@@ -752,7 +613,7 @@ CREATE TABLE `Servicios` (
   `Concesionario_Vehiculo_id_concesionario` int(11) NOT NULL,
   PRIMARY KEY (`id_servicio`),
   KEY `fk_Servicios_Concesionario_Vehiculo1_idx` (`Concesionario_Vehiculo_id_concesionario`),
-  CONSTRAINT `fk_Servicios_Concesionario_Vehiculo1` FOREIGN KEY (`Concesionario_Vehiculo_id_concesionario`) REFERENCES `Concesionario_Vehiculo` (`id_concesionario`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_Servicios_Concesionario_Vehiculo1` FOREIGN KEY (`Concesionario_Vehiculo_id_concesionario`) REFERENCES `concesionario_vehiculos` (`id_concesionario`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -818,29 +679,6 @@ LOCK TABLES `Tipo_Indicador` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `Tipo_Vehiculo`
---
-
-DROP TABLE IF EXISTS `Tipo_Vehiculo`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Tipo_Vehiculo` (
-  `id_tipo` int(11) NOT NULL,
-  `descripcion` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id_tipo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Tipo_Vehiculo`
---
-
-LOCK TABLES `Tipo_Vehiculo` WRITE;
-/*!40000 ALTER TABLE `Tipo_Vehiculo` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Tipo_Vehiculo` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `Usuarios`
 --
 
@@ -854,7 +692,7 @@ CREATE TABLE `Usuarios` (
   `rol_id_rol` int(11) NOT NULL,
   PRIMARY KEY (`id_usuario`),
   KEY `fk_usuarios_rol_idx` (`rol_id_rol`),
-  CONSTRAINT `fk_usuarios_rol` FOREIGN KEY (`rol_id_rol`) REFERENCES `Rol` (`id_rol`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_usuarios_rol` FOREIGN KEY (`rol_id_rol`) REFERENCES `roles` (`id_rol`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -865,40 +703,6 @@ CREATE TABLE `Usuarios` (
 LOCK TABLES `Usuarios` WRITE;
 /*!40000 ALTER TABLE `Usuarios` DISABLE KEYS */;
 /*!40000 ALTER TABLE `Usuarios` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `Vehiculo`
---
-
-DROP TABLE IF EXISTS `Vehiculo`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Vehiculo` (
-  `id_vehiculo` int(11) NOT NULL,
-  `matricula` varchar(45) DEFAULT NULL,
-  `costo` varchar(45) DEFAULT NULL,
-  `ano_fabricacion` varchar(45) DEFAULT NULL,
-  `color` varchar(45) DEFAULT NULL,
-  `serial_motor` varchar(45) DEFAULT NULL,
-  `estatus` varchar(45) DEFAULT NULL,
-  `Tipo_Vehiculo_id_tipo` int(11) NOT NULL,
-  `Concesionario_id_concesionario` int(11) NOT NULL,
-  PRIMARY KEY (`id_vehiculo`),
-  KEY `fk_Vehiculo_Tipo_Vehiculo1_idx` (`Tipo_Vehiculo_id_tipo`),
-  KEY `fk_Vehiculo_Concesionario1_idx` (`Concesionario_id_concesionario`),
-  CONSTRAINT `fk_Vehiculo_Concesionario1` FOREIGN KEY (`Concesionario_id_concesionario`) REFERENCES `Concesionario_Vehiculo` (`id_concesionario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Vehiculo_Tipo_Vehiculo1` FOREIGN KEY (`Tipo_Vehiculo_id_tipo`) REFERENCES `Tipo_Vehiculo` (`id_tipo`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `Vehiculo`
---
-
-LOCK TABLES `Vehiculo` WRITE;
-/*!40000 ALTER TABLE `Vehiculo` DISABLE KEYS */;
-/*!40000 ALTER TABLE `Vehiculo` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -914,7 +718,7 @@ CREATE TABLE `Vehiculos_Existencia` (
   `Vehiculo_id_vehiculo` int(11) NOT NULL,
   PRIMARY KEY (`id_stock`),
   KEY `fk_Vehiculos_Existencia_Vehiculo1_idx` (`Vehiculo_id_vehiculo`),
-  CONSTRAINT `fk_Vehiculos_Existencia_Vehiculo1` FOREIGN KEY (`Vehiculo_id_vehiculo`) REFERENCES `Vehiculo` (`id_vehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `fk_Vehiculos_Existencia_Vehiculo1` FOREIGN KEY (`Vehiculo_id_vehiculo`) REFERENCES `vehiculos` (`id_vehiculo`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -925,6 +729,91 @@ CREATE TABLE `Vehiculos_Existencia` (
 LOCK TABLES `Vehiculos_Existencia` WRITE;
 /*!40000 ALTER TABLE `Vehiculos_Existencia` DISABLE KEYS */;
 /*!40000 ALTER TABLE `Vehiculos_Existencia` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `ciudades`
+--
+
+DROP TABLE IF EXISTS `ciudades`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ciudades` (
+  `id_ciudad` int(11) NOT NULL,
+  `nombre` varchar(45) DEFAULT NULL,
+  `Estado_id_estado` int(11) NOT NULL,
+  PRIMARY KEY (`id_ciudad`),
+  KEY `fk_Ciudad_Estado1_idx` (`Estado_id_estado`),
+  CONSTRAINT `fk_Ciudad_Estado1` FOREIGN KEY (`Estado_id_estado`) REFERENCES `estados` (`id_estado`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `ciudades`
+--
+
+LOCK TABLES `ciudades` WRITE;
+/*!40000 ALTER TABLE `ciudades` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ciudades` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `concesionario_vehiculos`
+--
+
+DROP TABLE IF EXISTS `concesionario_vehiculos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `concesionario_vehiculos` (
+  `id_concesionario` int(11) NOT NULL,
+  `rif` varchar(45) DEFAULT NULL,
+  `nombre` varchar(45) DEFAULT NULL,
+  `direccion` int(11) DEFAULT NULL,
+  `telefono` varchar(45) DEFAULT NULL,
+  `correo` varchar(45) DEFAULT NULL,
+  `Marca_id_marca` int(11) NOT NULL,
+  `Usuarios_id_usuario` int(11) NOT NULL,
+  `Ciudad_id_ciudad` int(11) NOT NULL,
+  PRIMARY KEY (`id_concesionario`),
+  KEY `fk_Concesionario_Marca1_idx` (`Marca_id_marca`),
+  KEY `fk_Concesionario_Usuarios1_idx` (`Usuarios_id_usuario`),
+  KEY `fk_Concesionario_Ciudad1_idx` (`Ciudad_id_ciudad`),
+  CONSTRAINT `fk_Concesionario_Ciudad1` FOREIGN KEY (`Ciudad_id_ciudad`) REFERENCES `ciudades` (`id_ciudad`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Concesionario_Marca1` FOREIGN KEY (`Marca_id_marca`) REFERENCES `marcas` (`id_marca`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Concesionario_Usuarios1` FOREIGN KEY (`Usuarios_id_usuario`) REFERENCES `Usuarios` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `concesionario_vehiculos`
+--
+
+LOCK TABLES `concesionario_vehiculos` WRITE;
+/*!40000 ALTER TABLE `concesionario_vehiculos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `concesionario_vehiculos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `estados`
+--
+
+DROP TABLE IF EXISTS `estados`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `estados` (
+  `id_estado` int(11) NOT NULL,
+  `nombre` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id_estado`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `estados`
+--
+
+LOCK TABLES `estados` WRITE;
+/*!40000 ALTER TABLE `estados` DISABLE KEYS */;
+/*!40000 ALTER TABLE `estados` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -952,8 +841,40 @@ CREATE TABLE `marcas` (
 
 LOCK TABLES `marcas` WRITE;
 /*!40000 ALTER TABLE `marcas` DISABLE KEYS */;
-INSERT INTO `marcas` VALUES (5,'Toyota','/images/carros8.jpeg','Letras Letras letras','Letras Letras letras','Letras Letras letras','Letras Letras letras'),(7,'Daewood','/images/carrodaewood.jpg','Letras Letras letras','Letras Letras letras','Letras Letras letras','Letras Letras letras'),(9,'Ford','/images/camioneta7.jpg','Letras Letras letras','Letras Letras letras','Letras Letras letras','Letras Letras letras');
+INSERT INTO `marcas` VALUES (1,'Toyota','/images/logo_Toyota.jpg','Letras Letras letras','Letras Letras letras','Letras Letras letras','Letras Letras letras'),(2,'Daewood','/images/logo_Daewood.jpg','Letras Letras letras','Letras Letras letras','Letras Letras letras','Letras Letras letras'),(3,'Ford','/images/logo_Ford.jpg','Letras Letras letras','Letras Letras letras','Letras Letras letras','Letras Letras letras'),(4,'Chevrolet','/images/logo_Chevrolet.jpg','Letras','Letras','Letras','Letras');
 /*!40000 ALTER TABLE `marcas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `modelo_vehiculos`
+--
+
+DROP TABLE IF EXISTS `modelo_vehiculos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `modelo_vehiculos` (
+  `id_modelo` int(11) NOT NULL,
+  `descripcion` varchar(45) DEFAULT NULL,
+  `ano_m` varchar(45) DEFAULT NULL,
+  `Marca_id_marca` int(11) NOT NULL,
+  `Tipo_Vehiculo_id_tipo` int(11) NOT NULL,
+  `imagen` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id_modelo`),
+  KEY `fk_Modelo_Marca1_idx` (`Marca_id_marca`),
+  KEY `fk_Modelo_Tipo_Vehiculo1_idx` (`Tipo_Vehiculo_id_tipo`),
+  CONSTRAINT `fk_Modelo_Marca1` FOREIGN KEY (`Marca_id_marca`) REFERENCES `marcas` (`id_marca`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Modelo_Tipo_Vehiculo1` FOREIGN KEY (`Tipo_Vehiculo_id_tipo`) REFERENCES `tipo_vehiculos` (`id_tipo`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `modelo_vehiculos`
+--
+
+LOCK TABLES `modelo_vehiculos` WRITE;
+/*!40000 ALTER TABLE `modelo_vehiculos` DISABLE KEYS */;
+INSERT INTO `modelo_vehiculos` VALUES (1,'Ford 4x4 fortaleza','2010',3,1,'/images/camioneta.jpg');
+/*!40000 ALTER TABLE `modelo_vehiculos` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -979,8 +900,114 @@ CREATE TABLE `portal_ejecutivo_desktops` (
 
 LOCK TABLES `portal_ejecutivo_desktops` WRITE;
 /*!40000 ALTER TABLE `portal_ejecutivo_desktops` DISABLE KEYS */;
-INSERT INTO `portal_ejecutivo_desktops` VALUES (1,1,'Registrar o Modificar Nuevos Vehiculos','',0),(2,1,'Listado de Pedidos por Concesionario','',0),(3,1,'Configurar Nuevo Indicador','',4),(4,1,'Portal Ejecutivo','',0),(5,2,'Toyota','',0),(6,2,'Hyundai','',0),(7,2,'Daewood','',0),(8,2,'Chevroleth','',0),(9,2,'Ford','',0),(10,3,'Registrar Planes de Servicios','',0),(11,3,'Estado de la Proforma','',0),(12,3,'Configurar nuevo Indicador','',17),(13,3,'Portal Ejecutivo','',0),(14,3,'Lista de Espera','',0),(15,4,'Actualizar Datos Personales','',0),(16,4,'Lista de Espera','',0),(17,4,'Anular Pedido','',0),(18,4,'Catalogo Vehiculos','',0),(19,4,'Proforma','',0),(20,4,'Comprar Vehiculo','',0),(21,4,'Ford','',18),(22,4,'Fiat','',18),(23,4,'Daewood','',18),(24,4,'Toyota','',18),(25,4,'Huyndai','',18),(26,4,'Portal Ejecutivo','',0),(27,4,'Configurar Nuevo Indicador','',26),(28,5,'Registrar Marca','',0),(29,5,'Registrar Concesionario','',0),(30,5,'Registrar Ensambladora','',0),(31,5,'Lista de Espera de Pedido','',0),(32,5,'Listado de Concesionarios','',0),(33,5,'Listado de Ensambladoras','',0),(34,5,'Listado de Marcas','',0);
+INSERT INTO `portal_ejecutivo_desktops` VALUES (1,1,'Registrar o Modificar Nuevos Vehiculos','',0),(2,1,'Listado de Pedidos por Concesionario','',0),(3,1,'Configurar Nuevo Indicador','',4),(4,1,'Portal Ejecutivo','',0),(10,3,'Registrar Planes de Servicios','',0),(11,3,'Estado de la Proforma','',0),(12,3,'Configurar nuevo Indicador','',17),(13,3,'Portal Ejecutivo','',0),(14,3,'Lista de Espera','',0),(15,4,'Actualizar Datos Personales','',0),(16,4,'Lista de Espera','',0),(17,4,'Anular Pedido','',0),(18,4,'Catalogo Vehiculos','',0),(19,4,'Proforma','',0),(20,4,'Comprar Vehiculo','',0),(21,4,'Ford','',18),(22,4,'Fiat','',18),(23,4,'Daewood','',18),(24,4,'Toyota','',18),(25,4,'Huyndai','',18),(26,4,'Portal Ejecutivo','',0),(27,4,'Configurar Nuevo Indicador','',26),(28,5,'Registrar Marca','',0),(29,5,'Registrar Concesionario','',0),(30,5,'Registrar Ensambladora','',0),(31,5,'Lista de Espera de Pedido','',0),(32,5,'Listado de Concesionarios','',0),(33,5,'Listado de Ensambladoras','',0),(34,5,'Listado de Marcas','',0);
 /*!40000 ALTER TABLE `portal_ejecutivo_desktops` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `roles`
+--
+
+DROP TABLE IF EXISTS `roles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `roles` (
+  `id_rol` int(11) NOT NULL,
+  `nombre` varchar(20) NOT NULL,
+  `estatus` varchar(20) NOT NULL,
+  PRIMARY KEY (`id_rol`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `roles`
+--
+
+LOCK TABLES `roles` WRITE;
+/*!40000 ALTER TABLE `roles` DISABLE KEYS */;
+/*!40000 ALTER TABLE `roles` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tipo_vehiculos`
+--
+
+DROP TABLE IF EXISTS `tipo_vehiculos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tipo_vehiculos` (
+  `id_tipo` int(11) NOT NULL,
+  `descripcion` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id_tipo`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tipo_vehiculos`
+--
+
+LOCK TABLES `tipo_vehiculos` WRITE;
+/*!40000 ALTER TABLE `tipo_vehiculos` DISABLE KEYS */;
+INSERT INTO `tipo_vehiculos` VALUES (1,'Camioneta'),(2,'Camion'),(3,'Carro');
+/*!40000 ALTER TABLE `tipo_vehiculos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `usuarios`
+--
+
+DROP TABLE IF EXISTS `usuarios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `usuarios` (
+  `id_usuario` varchar(100) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  PRIMARY KEY (`id_usuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `usuarios`
+--
+
+LOCK TABLES `usuarios` WRITE;
+/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+INSERT INTO `usuarios` VALUES ('adrianas','123');
+/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `vehiculos`
+--
+
+DROP TABLE IF EXISTS `vehiculos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `vehiculos` (
+  `id_vehiculo` int(11) NOT NULL,
+  `matricula` varchar(45) DEFAULT NULL,
+  `costo` varchar(45) DEFAULT NULL,
+  `ano_fabricacion` varchar(45) DEFAULT NULL,
+  `color` varchar(45) DEFAULT NULL,
+  `serial_motor` varchar(45) DEFAULT NULL,
+  `estatus` varchar(45) DEFAULT NULL,
+  `Tipo_Vehiculo_id_tipo` int(11) NOT NULL,
+  `Concesionario_id_concesionario` int(11) NOT NULL,
+  PRIMARY KEY (`id_vehiculo`),
+  KEY `fk_Vehiculo_Tipo_Vehiculo1_idx` (`Tipo_Vehiculo_id_tipo`),
+  KEY `fk_Vehiculo_Concesionario1_idx` (`Concesionario_id_concesionario`),
+  CONSTRAINT `fk_Vehiculo_Concesionario1` FOREIGN KEY (`Concesionario_id_concesionario`) REFERENCES `concesionario_vehiculos` (`id_concesionario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Vehiculo_Tipo_Vehiculo1` FOREIGN KEY (`Tipo_Vehiculo_id_tipo`) REFERENCES `tipo_vehiculos` (`id_tipo`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `vehiculos`
+--
+
+LOCK TABLES `vehiculos` WRITE;
+/*!40000 ALTER TABLE `vehiculos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `vehiculos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -992,4 +1019,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-03-06 18:20:36
+-- Dump completed on 2013-03-07 19:10:16
