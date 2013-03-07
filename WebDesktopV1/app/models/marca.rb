@@ -19,4 +19,24 @@ class Marca < ActiveRecord::Base
     end 
     return valor
   end
+  def generarArbol
+    @arbols = Marca.find(:all)
+    totaldeRegistros = @arbols.count;
+    @tira='[ '
+    if totaldeRegistros>0
+      j=0
+      @arbols.each do |arbol|
+        @tira = @tira+" { text: '" + arbol.nombre + "', id: '" + arbol.id_marca.to_s  + "', leaf: true "
+        j=j+1
+        if j<totaldeRegistros
+          @tira = @tira+ " }, "
+        else
+          @tira = @tira+" } ] "
+        end
+      end
+    else
+      @tira= @tira+"{ { text: 'No hay datos', id: '0', href: '', leaf: true } } ]"
+    end
+    return @tira
+  end
 end
