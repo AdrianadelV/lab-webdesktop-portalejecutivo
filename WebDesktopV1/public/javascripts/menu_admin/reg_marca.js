@@ -1,10 +1,10 @@
 Ext.define('VentanaMarca', {
     extend: 'Ext.window.Window',
 
-    height: 298,
-    width: 320,
+    height: 398,
+    width: 520,
     x: 380,
-	y: 150,
+	y: 225,
     layout: {
         type: 'absolute'
     },
@@ -21,7 +21,8 @@ Ext.define('VentanaMarca', {
                     xtype: 'panel',
                     x: 0,
                     y: 0,
-                    height: 270,
+                    height: 300,
+                    width:  520,
                     layout: {
                         type: 'absolute'
                     },
@@ -29,19 +30,49 @@ Ext.define('VentanaMarca', {
                         {
                             xtype: 'textfield',
                             x: 20,
-                            y: 80,
+                            y: 20,
                             fieldLabel: 'Nombre de la Marca'
                         },
                         {
+                            xtype: 'textfield',
+                            x: 20,
+                            y: 60,
+                            fieldLabel: 'Imagen de la Marca'
+                        },
+                        {
+                            xtype: 'textfield',
+                            x: 20,
+                            y: 100,
+                            fieldLabel: 'Mision'
+                        },
+                        {
+                            xtype: 'textfield',
+                            x: 20,
+                            y: 140,
+                            fieldLabel: 'Vision'
+                        },
+                        {
+                            xtype: 'textfield',
+                            x: 20,
+                            y: 180,
+                            fieldLabel: 'Valores'
+                        },
+                        {
+                            xtype: 'textfield',
+                            x: 20,
+                            y: 220,
+                            fieldLabel: 'Contacto'
+                        },
+                        {
                             xtype: 'button',
-                            x: 220,
-                            y: 190,
+                            x: 270,
+                            y: 260,
                             text: 'Registrar'
                         },
                         {
                             xtype: 'button',
-                            x: 130,
-                            y: 190,
+                            x: 180,
+                            y: 260,
                             text: 'Cancelar'
                         }
                     ]
