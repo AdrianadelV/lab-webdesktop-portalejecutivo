@@ -20,14 +20,15 @@ Fecha  : Febrero del 2013
     	var nombre;
     	var contrasenausuario;
     	function capturaUsuario () {
-		  nombre=document.autenticar.nombrelogin.value;
-		  contrasenausuario=document.autenticar.contrasena.value;
+		  nombre=document.getElementById("nombrelogin").value;
+		  contrasenausuario=document.getElementById("contrasena").value;
 		  alert('contrasena='+contrasenausuario+'');
 		  if (nombre=="" || contrasenausuario=="") {
 		  	alert('Debe lllenar todos los campo')
 		  };
 		}
     </script>
+    
     <script type="text/javascript" src="javascripts/principal/login.js"></script>
 <!--     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js?ver=1.4.2"></script> -->
 
@@ -38,6 +39,12 @@ Fecha  : Febrero del 2013
    	<link rel="stylesheet" href="bootstrap/css/bootstrap-responsive.css">
     <link rel="stylesheet" type="text/css" href="javascripts/extjs/resources/css/ext-neptune.css">
     <link rel="stylesheet" type="text/css" href="stylesheets/estandar.css">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+    </style>
     <!-- <link rel="stylesheet" type="text/css" href="stylesheets/style.css"> -->
 
 </head>

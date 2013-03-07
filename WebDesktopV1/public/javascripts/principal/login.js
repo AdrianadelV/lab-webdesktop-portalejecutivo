@@ -1,25 +1,19 @@
-
-
 function enviar() {
-	alert("paso");
-	var header = Ext.Ajax.defaultHeaders = {
- 'Accept': 'application/json'
-};
+	capturaUsuario();
 	Ext.Ajax.request({
-		url : 'http://192.168.1.122:8080/serviciosAEVEV/Usuarios/autenticarUsuario',
-		  defaultHeaders: header,
+		url : 'inicio/autenticarUsuario',
 		//Enviando los parametros a la pagina servidora
 		params : {
-			login :'adrianas',
-			contrasena : '1234'
+			id_usuario : nombre,
+			password : contrasenausuario
 		},
 		//Retorno exitoso de la pagina servidora a traves del formato JSON
 		success : function(resultado, request) {
 			datos = Ext.JSON.decode(resultado.responseText);
 			if (datos.exito) {
-				alert(datos.nombre_login);
-			} else {
 				Ext.Msg.alert("Error", "Usuario o clave incorrecta!");
+			} else {
+				Ext.Msg.alert("Error", datos.id_usuario);
 			}
 		},
 		//No hay retorno de la pagina servidora
@@ -28,4 +22,5 @@ function enviar() {
 		}
 	});
 }
+
 

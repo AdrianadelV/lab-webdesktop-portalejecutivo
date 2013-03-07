@@ -19,4 +19,11 @@ class InicioController < ApplicationController
     valor = @modelos.buscarModelosMarca(id_marca)
     render :text => $tirajson
   end
+  def autenticarUsuario
+    id_usuario = params[:id_usuario]
+    password = params[:password]
+    @usuarios = Usuario.new
+    valor = @usuarios.autenticarUsuario(id_usuario,password)
+    render :text => $tirajson
+  end
 end
