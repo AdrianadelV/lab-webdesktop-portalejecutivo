@@ -29,7 +29,7 @@ Ext.onReady(function() {
 	var store = Ext.create('Ext.data.TreeStore', {
 		proxy : {
 			type : 'ajax',
-			url : 'inicio/generarmenu?tipo=2'
+			url : 'inicio/generarmenu
 		},
 		root : {
 			text : 'Marca',
