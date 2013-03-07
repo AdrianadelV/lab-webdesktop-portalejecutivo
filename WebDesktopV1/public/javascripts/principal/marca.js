@@ -1,5 +1,7 @@
+ var tirahtmlgaleria = "";
+
 function buscar(id_marca) {
-	var marca123 = "hola";
+	tirahtmlgaleria = buscarModelos(id_marca);
 	var ajax = Ext.Ajax.request({
 		url : '/inicio/buscar',
 		//Enviando los parametros a la pagina servidora
@@ -11,8 +13,7 @@ function buscar(id_marca) {
 		//Retorno exitoso de la pagina servidora a traves del formato JSON
 		success : function(resultado, request) {
 			datos = Ext.JSON.decode(resultado.responseText);
-			if (datos.exito == 'true') {
-				marca123 = datos.nombre_marca;
+			if (datos.exito == 'true') {				
 				Ext.create('MyApp.view.MyTabPanel', {
 					renderTo : 'tree_el',
 					title : datos.nombre_marca,
@@ -33,7 +34,7 @@ function buscar(id_marca) {
 					}, {
 						stype : 'panel',
 						title : 'Galeria de Vehiculos',
-						html : '<div align="center"><img src="' + datos.imagen + '"></div>'
+						html : tirahtmlgaleria
 					}]
 				});
 			} else {
@@ -46,5 +47,31 @@ function buscar(id_marca) {
 		}
 	});
 }
-
-
+ function buscarModelos (id_marca)   {
+   var ajax = Ext.Ajax.request({
+		url : '/inicio/buscarModelos',
+		//Enviando los parametros a la pagina servidora
+		params : {
+			ajax : 'true',
+			funcion : 'buscarModelos',
+			id_marca : id_marca
+		},
+		//Retorno exitoso de la pagina servidora a traves del formato JSON
+		success : function(resultado, request) {
+			datos = Ext.JSON.decode(resultado.responseText);
+			if (datos.exito == 'false') {
+				Ext.Msg.alert("Error", "paso");
+			} else {
+				tirahtmlgaleria="<div align='center' style='border:solid;overflow:auto; height:400px;'>";
+				for (var i = 0; i < datos.length; i++) {
+					tirahtmlgaleria = tirahtmlgaleria+ "<img src='" + datos[i].imagen + "' style='margin:5px;height:200px; width:200px;'/>"
+				};
+				tirahtmlgaleria = tirahtmlgaleria + "</div>";
+			}
+		},
+		//No hay retorno de la pagina servidora
+		failure : function() {
+			Ext.Msg.alert("Error", "No se encontraron modelos");
+		}
+	});
+ } 
