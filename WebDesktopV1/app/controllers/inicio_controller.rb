@@ -2,9 +2,8 @@ class InicioController < ApplicationController
   def index
   end 
    def generarmenu
-    @tipo=params[:tipo]
-    @arbols = Portal_ejecutivo_desktops.new
-    @tira = @arbols.BuscarTodosArbolJson(@tipo)
+    @arbols = Marca.new
+    @tira = @arbols.generarArbol()
     render :text => @tira
   end
   def buscar
