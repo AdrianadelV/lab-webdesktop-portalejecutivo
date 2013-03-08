@@ -47,6 +47,8 @@ Ext.require([
 		
 		Ext.define('mipanelejecutivo', {
 					extend : 'Ext.panel.Panel',
+					alias: 'widget.mipanelejecutivo1',
+    				id: 'mipanelejecutivo1',
 					x:325,
 					y:-350,
 					closable:true,
@@ -151,14 +153,22 @@ Ext.require([
 						fieldLabel : 'Responsable'
 					}, {
 						xtype : 'button',
-						x : 620,
+						icon: 'images/grabar.png',
+						x : 500,
 						y : 410,
 						text : 'Guardar'
 					}, {
 						xtype : 'button',
-						x : 510,
+						icon: 'images/limpiar.png',
+						x : 410,
 						y : 410,
-						text : 'Cancelar'
+						text : 'Limpiar'
+					}, {
+						xtype : 'button',
+						icon: 'images/eliminar.png',
+						x : 590,
+						y : 410,
+						text : 'Eliminar'
 					}]
 				});
 				me.callParent(arguments);

@@ -29,47 +29,6 @@ Ext.require('Ext.chart.*');
 Ext.require(['Ext.Window', 'Ext.layout.container.Fit', 'Ext.fx.target.Sprite', 'Ext.window.MessageBox']);
 
 
-
-function menu(tipo)
-{
- //var myDivPage = Ext.select('page',true);	
- var myDivPage = Ext.get('page');
-alert('pase');
- if (tipo==1) {
- 	myDivPage.setOpacity(1, {duration: 0.5});
- 	if (Ext.getCmp('miVentanalista').isVisible()) {
- 	 Ext.getCmp('miVentanalista').setVisible(false);	
- 	}
- 	if (Ext.getCmp('mipanelejecutivo').isVisible()) {
- 	 Ext.getCmp('mipanelejecutivo').setVisible(false);	
- 	}
- 	Ext.getCmp('miVetanaRegistrar').show();
- }
- if (tipo==2) {
- 	//myDivPage.setVisibilityMode(Ext.Element.OFFSETS);
- 	//myDivPage.hide();
-    //Ext.fly(myDivPage).setVisible(false).setOpacity(1);
-    myDivPage.setOpacity(0, {duration: 0.5});
- 	if (Ext.getCmp('mipanelejecutivo').isVisible()) {
- 	 Ext.getCmp('mipanelejecutivo').setVisible(false);
-    }
-    if (Ext.getCmp('miVetanaRegistrar').isVisible()) {
- 	 Ext.getCmp('miVetanaRegistrar').setVisible(false);
-    }
-    Ext.getCmp('miVentanalista').show();
- }
- if (tipo==3) {
- 	myDivPage.setOpacity(0, {duration: 0.5});
- 	if (Ext.getCmp('miVetanaRegistrar').isVisible()) {
- 	 Ext.getCmp('miVetanaRegistrar').setVisible(false);	
- 	}
- 	if (Ext.getCmp('miVentanalista').isVisible()) {
- 	 Ext.getCmp('miVentanalista').setVisible(false);	
- 	}
- 	Ext.getCmp('mipanelejecutivo').show();
- }	 	
-}
-
 Ext.onReady(function() {
 	Ext.QuickTips.init();
 	
@@ -139,24 +98,24 @@ Ext.onReady(function() {
 		useArrows : true,
 		listeners : {
 			itemclick : function(view, node) {
-				// if(node.get('text') == "Registrar o Modificar Nuevos Vehiculos"){
-					// ventana.close();
-					// ventana = Ext.create('miVetanaRegistrar');
-                  	// ventana.show();
-				// }
-				// if(node.get('text') == "Listado de Pedidos por Concesionario"){
-					// ventana.close();
-					// ventana = Ext.create('miVentanalista');
-                  	// ventana.show();
-				// }
-				// if(node.get('text')=='Configurar Nuevo Indicador'){
-									// ventana.close();
-									// ventana = Ext.create('mipanelejecutivo', {
-									    // renderTo : 'tree_el',
-									    // title:node.get('text'),
-								 	// });	
-				// }
-				 if(node.get('text')=='Promedio de Vehiculos Ensamblados'){
+				if(node.get('text') == "Registrar o Modificar Nuevos Vehiculos"){
+					ventana.close();
+					ventana = Ext.create('miVetanaRegistrar');
+                  	ventana.show();
+				}
+				if(node.get('text') == "Listado de Pedidos por Concesionario"){
+					ventana.close();
+					ventana = Ext.create('miVentanalista');
+                  	ventana.show();
+				}
+				if(node.get('text')=='Configurar Nuevo Indicador'){
+									ventana.close();
+									ventana = Ext.create('mipanelejecutivo', {
+									    renderTo : 'tree_el',
+									    title:node.get('text'),
+								 	});	
+				}
+				if(node.get('text')=='Promedio de Vehiculos Ensamblados'){
 								 	ventana.close();
 									var chart = Ext.create('Ext.chart.Chart', {
 							             id: 'chartCmp',

@@ -295,8 +295,8 @@ Ext.define('miVentanalista', {
     extend: 'Ext.window.Window',
 
                 layout: 'fit',
-                x: 350,
-                y: 30,
+                x: 440,
+                y: 35,
                 width       : 650,
                 height      : 575,
                 closeAction :'hide',

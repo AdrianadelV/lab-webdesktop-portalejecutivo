@@ -150,17 +150,25 @@ Ext.require([
 				y : 410,
 				width : 310,
 				fieldLabel : 'Email del Responsable'
-			}, {
-				xtype : 'button',
-				x : 620,
-				y : 450,
-				text : 'Guardar'
-			}, {
-				xtype : 'button',
-				x : 510,
-				y : 450,
-				text : 'Cancelar'
-			}]
+			}, 
+			{			xtype : 'button',
+						icon: 'images/grabar.png',
+						x : 500,
+						y : 410,
+						text : 'Guardar'
+					}, {
+						xtype : 'button',
+						icon: 'images/limpiar.png',
+						x : 410,
+						y : 410,
+						text : 'Limpiar'
+					}, {
+						xtype : 'button',
+						icon: 'images/eliminar.png',
+						x : 590,
+						y : 410,
+						text : 'Eliminar'
+					}]
 		});
 		me.callParent(arguments);
 	}

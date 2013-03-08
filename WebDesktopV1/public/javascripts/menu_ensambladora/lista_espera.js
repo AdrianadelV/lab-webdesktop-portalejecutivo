@@ -292,10 +292,11 @@ Ext.define('ventanatab', {
 //Definicion de la ventana contendora del grid
 Ext.define('miVentanalista', {
     extend: 'Ext.window.Window',
-
+    			alias: 'widget.miVentanalista1',
+				id: 'miVentanalista1',
                 layout: 'fit',
-                x: 350,
-                y: 30,
+                x: 500,
+                y: 800,
                 width       : 650,
                 height      : 575,
                 closeAction :'hide',

@@ -35,11 +35,12 @@ Ext.require([
 
 Ext.define('miVetanaRegistrar', {
     extend: 'Ext.window.Window',
-
-    x: 350,
-    y: 210,
+    alias: 'widget.miVetanaRegistrar1',
+	id: 'miVetanaRegistrar1',
+    x: 375,
+    y: 250,
     height: 340,
-    width: 560,
+    width: 600,
     layout: {
         type: 'absolute'
     },
@@ -73,9 +74,10 @@ Ext.define('miVetanaRegistrar', {
                                 },
                                 {
                                     xtype: 'button',
-                                    x: 380,
+                                    icon: 'images/ver.png',
+                                    x: 405,
                                     y: 20,
-                                    height: 20,
+                                    height: 25,
                                     width: 30,
                                     listeners : {
 									click : function() {
@@ -114,7 +116,7 @@ Ext.define('miVetanaRegistrar', {
                                 },
                                 {
                                     xtype: 'textfield',
-                                    x: 270,
+                                    x: 290,
                                     y: 30,
                                     fieldLabel: 'Transmisión:'
                                 },
@@ -126,7 +128,7 @@ Ext.define('miVetanaRegistrar', {
                                 },
                                 {
                                     xtype: 'textfield',
-                                    x: 270,
+                                    x: 290,
                                     y: 70,
                                     fieldLabel: 'Tipo de Frenos:'
                                 },
@@ -138,7 +140,7 @@ Ext.define('miVetanaRegistrar', {
                                 },
                                 {
                                     xtype: 'textfield',
-                                    x: 270,
+                                    x: 290,
                                     y: 110,
                                     fieldLabel: 'Tipo de Tapiceria:'
                                 },
@@ -151,25 +153,28 @@ Ext.define('miVetanaRegistrar', {
                                 },
                                 {
                                     xtype: 'textfield',
-                                    x: 270,
+                                    x: 290,
                                     y: 160,
                                     width: 250,
                                     fieldLabel: 'N°. Pasajeros:'
                                 },
                                 {
                                     xtype: 'button',
+                                    icon: 'images/eliminar.png',
                                     x: 440,
                                     y: 220,
                                     text: 'Eliminar'
                                 },
                                 {
                                     xtype: 'button',
+                                    icon: 'images/grabar.png',
                                     x: 350,
                                     y: 220,
                                     text: 'Guardar'
                                 },
                                 {
                                     xtype: 'button',
+                                    icon: 'images/limpiar.png',
                                     x: 260,
                                     y: 220,
                                     text: 'Limpiar'

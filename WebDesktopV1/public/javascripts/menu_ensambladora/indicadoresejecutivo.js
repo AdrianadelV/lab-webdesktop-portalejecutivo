@@ -5,7 +5,7 @@ Ext.define('indicadoreseje', {
 	width : 320,
 	collapsible : true,
 	y : 207,
-	x : 1035,
+	x : 1095,
 	autoScroll : true,
 	layout : {
 		type : 'absolute'
