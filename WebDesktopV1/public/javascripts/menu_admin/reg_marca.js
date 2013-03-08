@@ -31,44 +31,77 @@ Ext.define('VentanaMarca', {
                             xtype: 'textfield',
                             x: 20,
                             y: 20,
-                            fieldLabel: 'Nombre de la Marca'
+                            fieldLabel: 'nombre',
+                            id:'nombre'
+                            
                         },
                         {
                             xtype: 'textfield',
                             x: 20,
                             y: 60,
-                            fieldLabel: 'Imagen de la Marca'
+                            fieldLabel: 'Imagen de la Marca',
+                            id:'imagen'
                         },
                         {
                             xtype: 'textfield',
                             x: 20,
                             y: 100,
-                            fieldLabel: 'Mision'
+                            fieldLabel: 'Mision',
+                            id:'mision'
                         },
                         {
                             xtype: 'textfield',
                             x: 20,
                             y: 140,
-                            fieldLabel: 'Vision'
+                            fieldLabel: 'Vision',
+                            id:'vision'
                         },
                         {
                             xtype: 'textfield',
                             x: 20,
                             y: 180,
-                            fieldLabel: 'Valores'
+                            fieldLabel: 'Valores',
+                            id:'valores'
                         },
                         {
                             xtype: 'textfield',
                             x: 20,
                             y: 220,
-                            fieldLabel: 'Contacto'
+                            fieldLabel: 'Contacto',
+                            id:'contacto'
                         },
                         {
                             xtype: 'button',
                             x: 270,
                             y: 260,
-                            text: 'Registrar'
-                        },
+                            text: 'Registrar',
+                            listeners:{
+                            	click: function(){
+                            		alert('Pase');
+                            		Ext.Ajax.request({
+                            			url:'menu_admin/grabar_marca',
+                            			params:{
+                            				ajax: 'true',
+                            				funcion:'grabar_marca',
+                            				nombre  :Ext.getCmp('nombre').getValue(),
+                            				imagen  :Ext.getCmp('imagen').getValue(),
+                            				mision  :Ext.getCmp('mision').getValue(),
+                            				vision  :Ext.getCmp('vision').getValue(),
+                            				valores :Ext.getCmp('valores').getValue(),
+                            				contacto:Ext.getCmp('nombre').getValue(),
+                            			},
+                            			sucess: function(resultado,request)
+                            			{
+                            				datos =Ext.JSON.decode(resultado,reponseText);
+                            				Ext.Msg.alert('Mensaje',datos.message);
+                            			},
+                            			failure: function(){
+                            				Ext.Msg.alert("Error","Servidor NO Conectado!!");
+                            			}
+                            		});
+                            	}
+                            }
+                         },
                         {
                             xtype: 'button',
                             x: 180,
