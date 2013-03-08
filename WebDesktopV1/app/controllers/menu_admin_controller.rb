@@ -1,9 +1,14 @@
 class MenuAdminController < ApplicationController
   def index
-    puts session[:nombre_login]
     if(session[:nombre_login]==nil)
       redirect_to '/inicio'
-    end 
+    elsif(session[:id_rol]=='1')
+      redirect_to '/cli_comprador'
+    elsif(session[:id_rol]=='2')
+      redirect_to '/concesionario'
+    elsif(session[:id_rol]=='3')
+      redirect_to '/menu_ensambladora'
+    end
   end
 
   def generar_menu

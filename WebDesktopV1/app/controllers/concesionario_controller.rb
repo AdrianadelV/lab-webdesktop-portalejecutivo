@@ -1,10 +1,16 @@
 class ConcesionarioController < ApplicationController
   def index
-    puts session[:nombre_login]
     if(session[:nombre_login]==nil)
       redirect_to '/inicio'
-    end 
+    elsif(session[:id_rol]=='1')
+      redirect_to '/cli_comprador'
+    elsif(session[:id_rol]=='3')
+      redirect_to '/menu_ensambladora'
+    elsif(session[:id_rol]=='4')
+      redirect_to '/menu_admin'
+    end
   end
+
   def generarmenu
     @tipo=params[:tipo]
     @arbols = Portal_ejecutivo_desktops.new

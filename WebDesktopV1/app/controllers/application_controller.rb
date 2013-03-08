@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  
-  def autenticar_usuario
-     redirect_to :controller => :inicio
+  def cerrarSession
+    session[:nombre_login]=nil
+    redirect_to '/inicio'
   end
 end
