@@ -126,276 +126,276 @@ Ext.onReady(function() {
 					ventana = Ext.create('comprarvehiculo');
 					ventana.show();
 				}
-				if(node.get('text')=='Configurar Nuevo Indicador'){
+				if (node.get('text') == 'Configurar Nuevo Indicador') {
 					ventana.close();
 					ventana = Ext.create('mipanelejecutivo', {
-				    renderTo : 'tree_el',
-				    title:node.get('text'),
-				 	});	
+						renderTo : 'tree_el',
+						title : node.get('text'),
+					});
 				}
-				if(node.get('text')=='Promedio de Vehiculos Ensamblados'){
-								 	ventana.close();
-									var chart = Ext.create('Ext.chart.Chart', {
-							             id: 'chartCmp',
-							             xtype: 'chart',
-							             style: 'background:#fff',
-							             width: 400,
-							             height: 350,
-							             animate: true,
-							             shadow: true,
-							             store: store1,
-							             axes: [{
-							                 type: 'Numeric',
-							                 position: 'left',
-							                 fields: ['data1'],
-							                 label: {
-							                     renderer: Ext.util.Format.numberRenderer('0,0')
-							                 },
-							                 title: 'Promedio de Vehiculos Ensamblados',
-							                 grid: true,
-							                 minimum: 0
-							             }, {
-							                 type: 'Category',
-							                 position: 'bottom',
-							               	 fields: ['name'],
-							                 title: 'Meses del año'
-							             }],
-							             series: [{
-							                 type: 'column',
-							                 axis: 'left',
-							                 highlight: true,
-							                 tips: {
-							                   trackMouse: true,
-							                   width: 140,
-							                   height: 28,
-							                   renderer: function(storeItem, item) {
-							                     this.setTitle(storeItem.get('name') + ': ' + storeItem.get('data1') + ' $');
-							                  }
-							                 },
-							                 label: {
-							                   display: 'insideEnd',
-							                   'text-anchor': 'middle',
-							                     field: 'data1',
-							                     renderer: Ext.util.Format.numberRenderer('0'),
-							                     orientation: 'vertical',
-							                     color: '#333'
-							                 },
-							                 xField: 'name',
-							                 yField: 'data1'
-							             }]
-							         });
-							
-							       var win= Ext.create('Ext.Window', {
-							         x:328,
-							         y:205,
-							         height : 500,
-									 width : 700,
-							         minHeight: 400,
-							         minWidth: 550,
-							         hidden: false,
-							         maximizable: true,
-							         title: 'Grafico Promedio de Vehiculos Ensamblados',
-							         renderTo: Ext.getBody(),
-							         layout: 'fit',
-							          tbar: [{
-							             text: 'Guardar Grafico',
-							             handler: function() {
-							                 Ext.MessageBox.confirm('Confirmar Descarga', '¿Desea descargar esta grafica?', function(choice){
-							                     if(choice == 'yes'){
-							                         chart.save({
-							                             type: 'image/png'
-							                         });
-							                     }
-							                });
-							             }
-							        }, {
-							            	text: 'Actializar Datos',
-							            	handler: function() {
-							                store1.loadData(generateData());
-							         	},
-							         	
-							        }],
-							        items: chart    
-							     });
-								 }
-				if(node.get('text')=='Numero de Vehiculos Vendidos por Marca Ford'){
-								 	ventana.close();
-								 	var chart = Ext.create('Ext.chart.Chart', {
-						            xtype: 'chart',
-						            animate: true,
-						            style: 'background:#fff',
-						            shadow: false,
-						            store: store1,
-						            axes: [{
-						                type: 'Numeric',
-						                position: 'bottom',
-						                fields: ['data1'],
-						                label: {
-						                   renderer: Ext.util.Format.numberRenderer('0,0')
-						                },
-						                title: 'Numeros de Vehiculos Vendidos',
-						                minimum: 0
-						            }, {
-						                type: 'Category',
-						                position: 'left',
-						                fields: ['name'],
-						                title: 'Meses del Año'
-						            }],
-						            series: [{
-						                type: 'bar',
-						                axis: 'bottom',
-						                label: {
-						                    display: 'insideEnd',
-						                    field: 'data1',
-						                    renderer: Ext.util.Format.numberRenderer('0'),
-						                    orientation: 'horizontal',
-						                    color: '#333',
-						                    'text-anchor': 'middle',
-						                    contrast: true
-						                },
-						                xField: 'name',
-						                yField: ['data1'],
-						                //color renderer
-						                renderer: function(sprite, record, attr, index, store) {
-						                    var fieldValue = Math.random() * 20 + 10;
-						                    var value = (record.get('data1') >> 0) % 5;
-						                    var color = ['rgb(213, 70, 121)', 
-						                                 'rgb(44, 153, 201)', 
-						                                 'rgb(146, 6, 157)', 
-						                                 'rgb(49, 149, 0)', 
-						                                 'rgb(249, 153, 0)'][value];
-						                    return Ext.apply(attr, {
-						                        fill: color
-						                    });
-						                }
-						            }]
-						        });
-
-
-						   			var win = Ext.create('Ext.Window', {
-						        	 x:328,
-							         y:205,
-							         height : 500,
-									 width : 700,
-							        minHeight: 400,
-							        minWidth: 550,
-							        hidden: false,
-							        maximizable: true,
-							        title: 'Grafico Numero de Vehiculos Vendidos por Marca Ford',
-							        renderTo: Ext.getBody(),
-							        layout: 'fit',
-							        tbar: [{
-							            text: 'Guardar Grafico',
-							            handler: function() {
-							                Ext.MessageBox.confirm('Confirmar Descarga', '¿Desea descargar esta grafica?', function(choice){
-							                    if(choice == 'yes'){
-							                        chart.save({
-							                            type: 'image/png'
-							                        });
-							                    }
-							                });
-							            }
-							        }, {
-							            text: 'Actualizar Datos',
-							            handler: function() {
-							                store1.loadData(generateData());
-							            }
-							        }],
-							        items: chart
-							    });
+				if (node.get('text') == 'Promedio de Vehiculos Ensamblados') {
+					ventana.close();
+					var chart = Ext.create('Ext.chart.Chart', {
+						id : 'chartCmp',
+						xtype : 'chart',
+						style : 'background:#fff',
+						width : 400,
+						height : 350,
+						animate : true,
+						shadow : true,
+						store : store1,
+						axes : [{
+							type : 'Numeric',
+							position : 'left',
+							fields : ['data1'],
+							label : {
+								renderer : Ext.util.Format.numberRenderer('0,0')
+							},
+							title : 'Promedio de Vehiculos Ensamblados',
+							grid : true,
+							minimum : 0
+						}, {
+							type : 'Category',
+							position : 'bottom',
+							fields : ['name'],
+							title : 'Meses del año'
+						}],
+						series : [{
+							type : 'column',
+							axis : 'left',
+							highlight : true,
+							tips : {
+								trackMouse : true,
+								width : 140,
+								height : 28,
+								renderer : function(storeItem, item) {
+									this.setTitle(storeItem.get('name') + ': ' + storeItem.get('data1') + ' $');
 								}
-				if(node.get('text')=='Ingreso en Bolivares de Vehiculos Vendidos por Marca'){
-									ventana.close();
-									store1.loadData(generateData(8));
-								    var chart = Ext.create('Ext.chart.Chart', {
-								            id: 'chartCmp',
-								            xtype: 'chart',
-								            style: 'background:#fff',
-								            animate: true,
-								            theme: 'Category1',
-								            store: store1,
-								            axes: [{
-								                type: 'Numeric',
-								                position: 'left',
-								                fields: ['data1', 'data2', 'data3'],
-								                title: 'Ingresos en Bs. por Ventas',
-								                grid: true
-								            }, {
-								                type: 'Category',
-								                position: 'bottom',
-								                fields: ['name'],
-								                title: 'Meses del Año'
-								            }],
-								            series: [{
-								                type: 'column',
-								                axis: 'left',
-								                xField: 'name',
-								                yField: 'data1',
-								                markerConfig: {
-								                    type: 'cross',
-								                    size: 3
-								                }
-								            }, {
-								                type: 'scatter',
-								                axis: 'left',
-								                xField: 'name',
-								                yField: 'data2',
-								                markerConfig: {
-								                    type: 'circle',
-								                    size: 5
-								                }
-								            }, {
-								                type: 'line',
-								                axis: 'left',
-								                smooth: true,
-								                fill: true,
-								                fillOpacity: 0.5,
-								                xField: 'name',
-								                yField: 'data3'
-								            }]
-								        });
-								 
-								
-								    var win = Ext.create('Ext.Window', {
-								        x:328,
-							            y:205,
-							            height : 500,
-									    width : 700,
-								        minHeight: 400,
-								        minWidth: 550,
-								        hidden: false,
-								        maximizable: true,
-								        title: 'Grafico de Ingreso en bolivares de Vehiculos Vendidos por Marca',
-								        renderTo: Ext.getBody(),
-								        layout: 'fit',
-								        tbar: [{
-								            text: 'Guardar Grafico',
-								            handler: function() {
-								                Ext.MessageBox.confirm('Confirmar Descarga', 'Desea descargar esta Grafica?', function(choice){
-								                    if(choice == 'yes'){
-								                        chart.save({
-								                            type: 'image/png'
-								                        });
-								                    }
-								                });
-								            }
-								        }, {
-								            text: 'Actualizar Datos',
-								            handler: function() {
-								                store1.loadData(generateData(8));
-								            }
-								        }, {
-								            enableToggle: true,
-								            pressed: true,
-								            text: 'Animate',
-								            toggleHandler: function(btn, pressed) {
-								                var chart = Ext.getCmp('chartCmp');
-								                chart.animate = pressed ? { easing: 'ease', duration: 500 } : false;
-								            }
-								        }],
-								        items: chart
-								    });
-								}
+							},
+							label : {
+								display : 'insideEnd',
+								'text-anchor' : 'middle',
+								field : 'data1',
+								renderer : Ext.util.Format.numberRenderer('0'),
+								orientation : 'vertical',
+								color : '#333'
+							},
+							xField : 'name',
+							yField : 'data1'
+						}]
+					});
+
+					var win = Ext.create('Ext.Window', {
+						x : 328,
+						y : 205,
+						height : 500,
+						width : 700,
+						minHeight : 400,
+						minWidth : 550,
+						hidden : false,
+						maximizable : true,
+						title : 'Grafico Promedio de Vehiculos Ensamblados',
+						renderTo : Ext.getBody(),
+						layout : 'fit',
+						tbar : [{
+							text : 'Guardar Grafico',
+							handler : function() {
+								Ext.MessageBox.confirm('Confirmar Descarga', '¿Desea descargar esta grafica?', function(choice) {
+									if (choice == 'yes') {
+										chart.save({
+											type : 'image/png'
+										});
+									}
+								});
+							}
+						}, {
+							text : 'Actializar Datos',
+							handler : function() {
+								store1.loadData(generateData());
+							},
+						}],
+						items : chart
+					});
+				}
+				if (node.get('text') == 'Numero de Vehiculos Vendidos por Marca Ford') {
+					ventana.close();
+					var chart = Ext.create('Ext.chart.Chart', {
+						xtype : 'chart',
+						animate : true,
+						style : 'background:#fff',
+						shadow : false,
+						store : store1,
+						axes : [{
+							type : 'Numeric',
+							position : 'bottom',
+							fields : ['data1'],
+							label : {
+								renderer : Ext.util.Format.numberRenderer('0,0')
+							},
+							title : 'Numeros de Vehiculos Vendidos',
+							minimum : 0
+						}, {
+							type : 'Category',
+							position : 'left',
+							fields : ['name'],
+							title : 'Meses del Año'
+						}],
+						series : [{
+							type : 'bar',
+							axis : 'bottom',
+							label : {
+								display : 'insideEnd',
+								field : 'data1',
+								renderer : Ext.util.Format.numberRenderer('0'),
+								orientation : 'horizontal',
+								color : '#333',
+								'text-anchor' : 'middle',
+								contrast : true
+							},
+							xField : 'name',
+							yField : ['data1'],
+							//color renderer
+							renderer : function(sprite, record, attr, index, store) {
+								var fieldValue = Math.random() * 20 + 10;
+								var value = (record.get('data1') >> 0) % 5;
+								var color = ['rgb(213, 70, 121)',
+								'rgb(44, 153, 201)',
+								'rgb(146, 6, 157)',
+								'rgb(49, 149, 0)',
+								'rgb(249, 153, 0)'][value];
+								return Ext.apply(attr, {
+									fill : color
+								});
+							}
+						}]
+					});
+
+					var win = Ext.create('Ext.Window', {
+						x : 328,
+						y : 205,
+						height : 500,
+						width : 700,
+						minHeight : 400,
+						minWidth : 550,
+						hidden : false,
+						maximizable : true,
+						title : 'Grafico Numero de Vehiculos Vendidos por Marca Ford',
+						renderTo : Ext.getBody(),
+						layout : 'fit',
+						tbar : [{
+							text : 'Guardar Grafico',
+							handler : function() {
+								Ext.MessageBox.confirm('Confirmar Descarga', '¿Desea descargar esta grafica?', function(choice) {
+									if (choice == 'yes') {
+										chart.save({
+											type : 'image/png'
+										});
+									}
+								});
+							}
+						}, {
+							text : 'Actualizar Datos',
+							handler : function() {
+								store1.loadData(generateData());
+							}
+						}],
+						items : chart
+					});
+				}
+				if (node.get('text') == 'Ingreso en Bolivares de Vehiculos Vendidos por Marca') {
+					ventana.close();
+					store1.loadData(generateData(8));
+					var chart = Ext.create('Ext.chart.Chart', {
+						id : 'chartCmp',
+						xtype : 'chart',
+						style : 'background:#fff',
+						animate : true,
+						theme : 'Category1',
+						store : store1,
+						axes : [{
+							type : 'Numeric',
+							position : 'left',
+							fields : ['data1', 'data2', 'data3'],
+							title : 'Ingresos en Bs. por Ventas',
+							grid : true
+						}, {
+							type : 'Category',
+							position : 'bottom',
+							fields : ['name'],
+							title : 'Meses del Año'
+						}],
+						series : [{
+							type : 'column',
+							axis : 'left',
+							xField : 'name',
+							yField : 'data1',
+							markerConfig : {
+								type : 'cross',
+								size : 3
+							}
+						}, {
+							type : 'scatter',
+							axis : 'left',
+							xField : 'name',
+							yField : 'data2',
+							markerConfig : {
+								type : 'circle',
+								size : 5
+							}
+						}, {
+							type : 'line',
+							axis : 'left',
+							smooth : true,
+							fill : true,
+							fillOpacity : 0.5,
+							xField : 'name',
+							yField : 'data3'
+						}]
+					});
+
+					var win = Ext.create('Ext.Window', {
+						x : 328,
+						y : 205,
+						height : 500,
+						width : 700,
+						minHeight : 400,
+						minWidth : 550,
+						hidden : false,
+						maximizable : true,
+						title : 'Grafico de Ingreso en bolivares de Vehiculos Vendidos por Marca',
+						renderTo : Ext.getBody(),
+						layout : 'fit',
+						tbar : [{
+							text : 'Guardar Grafico',
+							handler : function() {
+								Ext.MessageBox.confirm('Confirmar Descarga', 'Desea descargar esta Grafica?', function(choice) {
+									if (choice == 'yes') {
+										chart.save({
+											type : 'image/png'
+										});
+									}
+								});
+							}
+						}, {
+							text : 'Actualizar Datos',
+							handler : function() {
+								store1.loadData(generateData(8));
+							}
+						}, {
+							enableToggle : true,
+							pressed : true,
+							text : 'Animate',
+							toggleHandler : function(btn, pressed) {
+								var chart = Ext.getCmp('chartCmp');
+								chart.animate = pressed ? {
+									easing : 'ease',
+									duration : 500
+								} : false;
+							}
+						}],
+						items : chart
+					});
+				}
 			}
 		}
 	});
@@ -403,4 +403,10 @@ Ext.onReady(function() {
 	// ventana = Ext.create('listaespera');
 	//ventana.show();
 
-}); 
+});
+
+function editCuentaUsuario() {
+		ventana.close();
+		ventana = Ext.create('actualizar');
+		ventana.show();
+	}
