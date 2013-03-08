@@ -5,7 +5,7 @@ Ext.define('VentanaMarca', {
 	width : 520,
 	x : 380,
 	y : 225,
-	tooltip: 'Registrar Marca',
+	tooltip : 'Registrar Marca',
 	layout : {
 		type : 'absolute'
 	},
@@ -33,10 +33,10 @@ Ext.define('VentanaMarca', {
 					y : 20,
 					fieldLabel : 'Nombre',
 					allowBlank : false,
-					blankText: 'Este campo es requerido',
-                    minLength: 1,
-                    emptyText: 'Nombre de la Marca',
-                    vtype: 'alphanum',
+					blankText : 'Este campo es requerido',
+					minLength : 1,
+					emptyText : 'Nombre de la Marca',
+					vtype : 'alphanum',
 					id : 'nombre'
 
 				}, {
@@ -45,10 +45,10 @@ Ext.define('VentanaMarca', {
 					y : 60,
 					fieldLabel : 'Imagen',
 					allowBlank : false,
-					blankText: 'Este campo es requerido',
-                    minLength: 1,
-                    emptyText: 'Imagen de la Marca',
-                    vtype: 'alphanum',
+					blankText : 'Este campo es requerido',
+					minLength : 1,
+					emptyText : 'Imagen de la Marca',
+					vtype : 'alphanum',
 					id : 'imagen'
 				}, {
 					xtype : 'textfield',
@@ -56,10 +56,10 @@ Ext.define('VentanaMarca', {
 					y : 100,
 					fieldLabel : 'Mision',
 					allowBlank : false,
-					blankText: 'Este campo es requerido',
-                    minLength: 30,
-                    emptyText: 'Mision De la Marca',
-                    vtype: 'alphanum',
+					blankText : 'Este campo es requerido',
+					minLength : 30,
+					emptyText : 'Mision De la Marca',
+					vtype : 'alphanum',
 					id : 'mision'
 				}, {
 					xtype : 'textfield',
@@ -67,10 +67,10 @@ Ext.define('VentanaMarca', {
 					y : 140,
 					fieldLabel : 'Vision',
 					allowBlank : false,
-					blankText: 'Este campo es requerido',
-                    minLength: 30,
-                    emptyText: 'Vision de la Marca',
-                    vtype: 'alphanum',
+					blankText : 'Este campo es requerido',
+					minLength : 30,
+					emptyText : 'Vision de la Marca',
+					vtype : 'alphanum',
 					id : 'vision'
 				}, {
 					xtype : 'textfield',
@@ -78,10 +78,10 @@ Ext.define('VentanaMarca', {
 					y : 180,
 					fieldLabel : 'Valores',
 					allowBlank : false,
-					blankText: 'Este campo es requerido',
-                    minLength: 1,
-                    emptyText: 'Nombre del Concesionario',
-                    vtype: 'alphanum',
+					blankText : 'Este campo es requerido',
+					minLength : 1,
+					emptyText : 'Nombre del Concesionario',
+					vtype : 'alphanum',
 					id : 'valores'
 				}, {
 					xtype : 'textfield',
@@ -89,10 +89,10 @@ Ext.define('VentanaMarca', {
 					y : 220,
 					fieldLabel : 'Contacto',
 					allowBlank : false,
-					blankText: 'Este campo es requerido',
-                    minLength: 1,
-                    emptyText: 'Contacto de la Marca',
-                    vtype: 'alphanum',
+					blankText : 'Este campo es requerido',
+					minLength : 1,
+					emptyText : 'Contacto de la Marca',
+					vtype : 'alphanum',
 					id : 'contacto'
 				}, {
 					xtype : 'button',
@@ -100,7 +100,7 @@ Ext.define('VentanaMarca', {
 					y : 260,
 					tooltip : 'Registrar una Marca',
 					text : 'Registrar',
-					id:'registrar',
+					id : 'registrar',
 					listeners : {
 						click : function() {
 							Ext.Ajax.request({
@@ -117,13 +117,7 @@ Ext.define('VentanaMarca', {
 								},
 								success : function(exito, request) {
 									Ext.Msg.alert("Exito", "Se ha Guardado la Marca!!");
-									Ext.getCmp('nombre').setValue("");
-									Ext.getCmp('imagen').setValue("");
-									Ext.getCmp('vision').setValue("");
-									Ext.getCmp('mision').setValue("");
-									Ext.getCmp('valores').setValue("");
-									Ext.getCmp('contacto').setValue("");
-									Ext.getCmp('nombre').focus();
+					                limpiar();
 									datos = Ext.JSON.decode(exito, reponseText);
 								},
 								failure : function() {
@@ -140,19 +134,39 @@ Ext.define('VentanaMarca', {
 					tooltip : 'Cancelar',
 					id : 'cancelar',
 					listeners : {
-						click : function() {
-							Ext.getCmp('nombre').setValue("");
-							Ext.getCmp('imagen').setValue("");
-							Ext.getCmp('vision').setValue("");
-							Ext.getCmp('mision').setValue("");
-							Ext.getCmp('valores').setValue("");
-							Ext.getCmp('contacto').setValue("");
+						click : function cancelar() {
+							limpiar();
 						}
 					}
-				}]
+				},
+				{
+					xtype : 'button',
+					x : 300,
+					y : 20,
+					text : '......',
+					tooltip : 'Catalogo Marcas',
+					id : 'catalogo',
+					listeners:{
+						click :function click()
+						{
+							Ext.getCmp('catalogo').setText("...");
+						}
+					}
+					
+				}
+				]
 			}]
 		});
 
 		me.callParent(arguments);
 	}
 });
+function limpiar(){
+	Ext.getCmp('nombre').setValue("");
+	Ext.getCmp('imagen').setValue("");
+	Ext.getCmp('vision').setValue("");
+	Ext.getCmp('mision').setValue("");
+	Ext.getCmp('valores').setValue("");
+	Ext.getCmp('contacto').setValue("");
+	Ext.getCmp('nombre').focus();
+}
