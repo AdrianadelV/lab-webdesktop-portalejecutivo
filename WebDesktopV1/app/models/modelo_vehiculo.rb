@@ -1,7 +1,7 @@
 class Modelo_Vehiculo < ActiveRecord::Base
   def buscarModelosMarca(id_marca)
     valor = 0
-    @objmarcas = Modelo_Vehiculo.find(:all, :conditions => "Marca_id_marca='#{id_marca}'")
+    @objmarcas = Modelo_Vehiculo.find(:all, :conditions => "mv_id_marca='#{id_marca}'")
     if @objmarcas!=nil
       $tirajson = @objmarcas.to_json
       valor = 1
