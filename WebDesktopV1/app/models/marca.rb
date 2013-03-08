@@ -49,6 +49,7 @@ class Marca < ActiveRecord::Base
     @marca.valores=valores
     @marca.contacto=contacto
     @marca.save
+    valor=1
     $tirajson = '{ "success": "true", "exito": "true", "message": "Datos guardados satisfactoriamente!" }'
     
     
