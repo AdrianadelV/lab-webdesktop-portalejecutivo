@@ -1,16 +1,45 @@
-<body>
-	<table border="2" bordercolor="#4682B4" style="background-color:7096A6" width="100%" cellpadding="3" cellspacing="3" aling="left">
-		<tr>
-			<td style="color:#4682B4; font-size:15px; font-weight: bold ">Bienvenido: Gobierno</td>
-		</tr>
-	</table>
-	<div id="button" align= "left">
-		<input name="button" type="button"onclick="window.close('inicio');"onclick="window.open('menu_admin');" value="Cerrar Sesion"/>
+<body  data-spy="scroll" data-target=".bs-docs-sidebar">
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="brand" href="#">SI.A.E.V.E.V</a>
+				<div class="nav-collapse collapse" id="autenticar">
+					<!-- <form class="navbar-form pull-right" action="application/autenticar_usuario" method="post"> -->
+					<div class="navbar-form pull-right"id="autenticar" >
+					<div class="btn-group">
+						<a class="btn btn-primary" href="#"><i class="icon-user icon-white"></i> Gobierno</a>
+						<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="#"><i class="icon-pencil"></i> Edit</a></li>
+							<li><a href="#"><i class="icon-ban-circle"></i> Ban</a></li>
+							<li class="divider"></li>
+							<li><a href="#"><i class="i"></i> Salir</a></li>
+						</ul>
+					</div>
+					</div>
+					<!-- </form> -->
+				</div><!--/.nav-collapse -->
+			</div>
+		</div>
 	</div>
-	<h1>Asignacion Equitativa de Vehiculos en Venezuela</h1>
-	<h1></h1>
-	<div align="letf"><img src="images/AEVEV4.png"></div>
-	<div id="tree_el"></div>
-	<div id="viewRegistrar"></div>
+	<header class="jumbotron subhead" id="overview">
+		<div class="container">
+			<img src="images/siaevev.png" class="img-rounded">
+			<p class="lead">
+				Sistema de Asignacion Equitativa de Vehiculos en Venezuela.
+			</p>
+		</div>
+	</header>
+	<div class="container">
+		<div id="tree_el"></div>
+	</div>
+	<div>
+		<div id="viewRegistrar"></div>
+	</div>
 </body>
 </html>
