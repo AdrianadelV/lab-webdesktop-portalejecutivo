@@ -1,5 +1,5 @@
 class InicioController < ApplicationController
-  def index
+  def index  
   end 
    def generarmenu
     @arbols = Marca.new
@@ -13,7 +13,6 @@ class InicioController < ApplicationController
    render :text => $tirajson
   end
   def buscarModelos
-    puts 'hola'
     id_marca = params[:id_marca]
     @modelos = Modelo_Vehiculo.new
     valor = @modelos.buscarModelosMarca(id_marca)
@@ -24,6 +23,12 @@ class InicioController < ApplicationController
     password = params[:password]
     @usuarios = Usuario.new
     valor = @usuarios.autenticarUsuario(id_usuario,password)
+    if (valor==1)
+       parsed_json = ActiveSupport::JSON.decode($tirajson)
+       session[:nombre_login]=id_usuario
+       session[:contrasena]=password
+       session[:id_rol]= parsed_json["u_id_rol"]
+    end
     render :text => $tirajson
   end
 end

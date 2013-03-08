@@ -1,5 +1,9 @@
 class MenuAdminController < ApplicationController
   def index
+    puts session[:nombre_login]
+    if(session[:nombre_login]==nil)
+      redirect_to '/inicio'
+    end 
   end
 
   def generar_menu
