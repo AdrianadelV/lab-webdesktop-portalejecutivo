@@ -1,26 +1,29 @@
 <body  data-spy="scroll" data-target=".bs-docs-sidebar">
-	<div class="navbar navbar-inverse">
+	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
 				<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
+					<a class="breadcrumb" href="#">Registrarse</a>
 				</button>
 				<a class="brand" href="#">SI.A.E.V.E.V</a>
-				<div class="nav-collapse collapse">
-					<form class="navbar-form pull-right" action="application/autenticar_usuario" method="post">
-						<div class="btn-group">
-						  <a class="btn btn-primary" href="#"><i class="icon-user icon-white"></i> Cliente Comprador</a>
-						  <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
-						  <ul class="dropdown-menu">
-						    <li><a href="#"><i class="icon-pencil"></i> Edit</a></li>
-						    <li><a href="#"><i class="icon-ban-circle"></i> Ban</a></li>
-						    <li class="divider"></li>
-						    <li><a href="#"><i class="i"></i> Salir</a></li>
-						  </ul>
-						</div>
-					</form>                
+				<div class="nav-collapse collapse" id="autenticar">
+					<!-- <form class="navbar-form pull-right" action="application/autenticar_usuario" method="post"> -->
+					<div class="navbar-form pull-right"id="autenticar" >
+					<div class="btn-group">
+						<a class="btn btn-primary" href="#"><i class="icon-user icon-white"></i> Cliente Comprador</a>
+						<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="#"><i class="icon-pencil"></i> Edit</a></li>
+							<li><a href="#"><i class="icon-ban-circle"></i> Ban</a></li>
+							<li class="divider"></li>
+							<li><a href="#"><i class="i"></i> Salir</a></li>
+						</ul>
+					</div>
+					</div>
+					<!-- </form> -->
 				</div><!--/.nav-collapse -->
 			</div>
 		</div>
@@ -40,3 +43,4 @@
 		<div id="viewRegistrar"></div>
 	</div>
 </body>
+</html>
