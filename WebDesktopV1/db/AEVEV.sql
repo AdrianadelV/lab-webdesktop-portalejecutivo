@@ -985,7 +985,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES ('AdrianaS','1234','a','','1');
+INSERT INTO `usuarios` VALUES ('AdrianaS','1234','a','','1'),('Fernando','1234','a','','4'),('Jose','1234','a',NULL,'2'),('Maria','1234','a',NULL,'3');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1061,4 +1061,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-03-08 16:41:50
+-- Dump completed on 2013-03-08 17:40:19
