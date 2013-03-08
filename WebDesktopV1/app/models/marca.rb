@@ -39,4 +39,19 @@ class Marca < ActiveRecord::Base
     end
     return @tira
   end
+  def grabar_marca(nombre,imagen,mision,vision,valores,contacto)
+    puts "paseo"
+    @marca = Marca.new
+    @marca.nombre=nombre
+    @marca.imagen=imagen
+    @marca.mision=mision
+    @marca.vision=vision
+    @marca.valores=valores
+    @marca.contacto=contacto
+    @marca.save
+    $tirajson = '{ "success": "true", "exito": "true", "message": "Datos guardados satisfactoriamente!" }'
+    
+    
+  end
+  
 end
