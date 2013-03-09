@@ -1,16 +1,16 @@
+var marcaStore = null;
+var data = null;
 Ext.define('VentanaMarca', {
 	extend : 'Ext.window.Window',
-	id : 'registrarmarca',
-	height : 398,
-	width : 520,
+
+	height : 549,
+	id : 'ventanamarca',
+	width : 561,
 	x : 380,
 	y : 225,
-	tooltip : 'Registrar Marca',
 	layout : {
 		type : 'absolute'
 	},
-	bodyBorder : true,
-	collapsible : true,
 	title : 'Registrar Marca',
 
 	initComponent : function() {
@@ -18,155 +18,134 @@ Ext.define('VentanaMarca', {
 
 		Ext.applyIf(me, {
 			items : [{
-				xtype : 'panel',
+				xtype : 'form',
 				x : 0,
 				y : 0,
-				height : 300,
-				width : 520,
-				id : 'panelmarca',
+				autoRender : false,
+				height : 420,
+				id : 'formulariomarca',
 				layout : {
 					type : 'absolute'
 				},
+				bodyPadding : 10,
+				title : '',
 				items : [{
 					xtype : 'textfield',
-					x : 20,
-					y : 20,
+					x : 60,
+					y : 50,
+					formBind : false,
+					width : 320,
+					tabIndex : 1,
 					fieldLabel : 'Nombre',
-					allowBlank : false,
-					blankText : 'Este campo es requerido',
+					msgTarget : 'under',
+					enableKeyEvents : true,
 					minLength : 1,
-					emptyText : 'Nombre de la Marca',
 					vtype : 'alphanum',
 					id : 'nombre'
-
 				}, {
 					xtype : 'textfield',
-					x : 20,
-					y : 60,
-					fieldLabel : 'Imagen',
-					allowBlank : false,
-					blankText : 'Este campo es requerido',
-					minLength : 1,
-					emptyText : 'Imagen de la Marca',
-					vtype : 'alphanum',
-					id : 'imagen'
-				}, {
-					xtype : 'textfield',
-					x : 20,
+					x : 60,
 					y : 100,
-					fieldLabel : 'Mision',
-					allowBlank : false,
-					blankText : 'Este campo es requerido',
-					minLength : 30,
-					emptyText : 'Mision De la Marca',
-					vtype : 'alphanum',
-					id : 'mision'
+					width : 360,
+					id : 'imagen',
+					fieldLabel : 'Imagen'
 				}, {
 					xtype : 'textfield',
-					x : 20,
-					y : 140,
-					fieldLabel : 'Vision',
-					allowBlank : false,
-					blankText : 'Este campo es requerido',
-					minLength : 30,
-					emptyText : 'Vision de la Marca',
-					vtype : 'alphanum',
-					id : 'vision'
+					x : 60,
+					y : 150,
+					width : 360,
+					id : 'mision',
+					fieldLabel : 'Mision'
 				}, {
 					xtype : 'textfield',
-					x : 20,
-					y : 180,
-					fieldLabel : 'Valores',
-					allowBlank : false,
-					blankText : 'Este campo es requerido',
-					minLength : 1,
-					emptyText : 'Nombre del Concesionario',
-					vtype : 'alphanum',
-					id : 'valores'
+					x : 60,
+					y : 200,
+					width : 360,
+					id : 'vision',
+					fieldLabel : 'Vision'
 				}, {
 					xtype : 'textfield',
-					x : 20,
-					y : 220,
-					fieldLabel : 'Contacto',
-					allowBlank : false,
-					blankText : 'Este campo es requerido',
-					minLength : 1,
-					emptyText : 'Contacto de la Marca',
-					vtype : 'alphanum',
-					id : 'contacto'
+					x : 60,
+					y : 250,
+					width : 360,
+					id : 'valores',
+					fieldLabel : 'Valores'
+				}, {
+					xtype : 'textfield',
+					x : 60,
+					y : 300,
+					width : 360,
+					id : 'contacto',
+					fieldLabel : 'Contacto'
 				}, {
 					xtype : 'button',
-					x : 270,
-					y : 260,
-					tooltip : 'Registrar una Marca',
-					text : 'Registrar',
-					id : 'registrar',
+					x : 390,
+					y : 50,
+					text : '.....',
+					id : 'btncatalogo',
 					listeners : {
 						click : function() {
-							Ext.Ajax.request({
-								url : 'menu_admin/grabar_marca',
-								params : {
-									ajax : 'true',
-									funcion : 'grabar_marca',
-									nombre : Ext.getCmp('nombre').getValue(),
-									imagen : Ext.getCmp('imagen').getValue(),
-									mision : Ext.getCmp('mision').getValue(),
-									vision : Ext.getCmp('vision').getValue(),
-									valores : Ext.getCmp('valores').getValue(),
-									contacto : Ext.getCmp('nombre').getValue(),
-								},
-								success : function(exito, request) {
-									Ext.Msg.alert("Exito", "Se ha Guardado la Marca!!");
-					                limpiar();
-									datos = Ext.JSON.decode(exito, reponseText);
-								},
-								failure : function() {
-									Ext.Msg.alert("Error", "Servidor NO Conectado!!");
-								}
-							});
+							alert('pase');
+							//this.findById("formulario")
 						}
 					}
 				}, {
 					xtype : 'button',
 					x : 180,
-					y : 260,
+					y : 350,
 					text : 'Cancelar',
-					tooltip : 'Cancelar',
 					id : 'cancelar',
 					listeners : {
-						click : function cancelar() {
-							limpiar();
+						click : function() {
+							Ext.getCmp('formulariomarca').getForm().reset();
 						}
 					}
-				},
-				{
+				}, {
 					xtype : 'button',
-					x : 300,
-					y : 20,
-					text : '......',
-					tooltip : 'Catalogo Marcas',
-					id : 'catalogo',
+					x : 270,
+					y : 350,
+					text : 'Registrar',
+					tooltip : 'Registrar una Marca',
+					id : 'btnregistrar',
 					listeners:{
-						click :function click()
-						{
-							Ext.getCmp('catalogo').setText("...");
+						click:function(){
+							grabar_marca();
 						}
 					}
-					
-				}
-				]
+				}]
 			}]
 		});
+		
+	//metodo para hacer grabar los datos
+		function grabar_marca() {
+			Ext.Ajax.request({
+				url : 'menu_admin/grabar_marca',
+				params : {
+					ajax : 'true',
+					funcion : 'grabar_marca',
+					nombre : Ext.getCmp('nombre').getValue(),
+					imagen : Ext.getCmp('imagen').getValue(),
+					mision : Ext.getCmp('mision').getValue(),
+					vision : Ext.getCmp('vision').getValue(),
+					valores : Ext.getCmp('valores').getValue(),
+					contacto : Ext.getCmp('contacto').getValue(),
+				},
+				success : function(exito, request) {
+					Ext.Msg.alert("Exito", "Se ha Guardado la Marca!!");
+					Ext.getCmp('formulariomarca').getForm().reset();
+					datos = Ext.JSON.decode(exito, reponseText);
+				},
+				failure : function() {
+					Ext.Msg.alert("Error", "Servidor NO Conectado!!");
+				}
+			});
+		}
+		//metodo seleccionar marca
+		function seleccionar_marca(){
+			
+		}
+
 
 		me.callParent(arguments);
 	}
 });
-function limpiar(){
-	Ext.getCmp('nombre').setValue("");
-	Ext.getCmp('imagen').setValue("");
-	Ext.getCmp('vision').setValue("");
-	Ext.getCmp('mision').setValue("");
-	Ext.getCmp('valores').setValue("");
-	Ext.getCmp('contacto').setValue("");
-	Ext.getCmp('nombre').focus();
-}
