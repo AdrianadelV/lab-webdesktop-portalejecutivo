@@ -38,9 +38,18 @@ Ext.define('VentanaMarca', {
 					tabIndex : 1,
 					fieldLabel : 'Nombre',
 					msgTarget : 'under',
+					blankText : 'Este campo es requerido',
 					enableKeyEvents : true,
 					minLength : 1,
+					emptyText : 'Nombre de la Marca',
 					vtype : 'alphanum',
+					listeners: {
+                      specialkey: function(field, e){
+                       if (e.getKey() == e.ENTER) {
+                         buscar_marca();
+                       }
+                      }
+                   },
 					id : 'nombre'
 				}, {
 					xtype : 'textfield',
@@ -48,12 +57,20 @@ Ext.define('VentanaMarca', {
 					y : 100,
 					width : 360,
 					id : 'imagen',
+					allowBlank : false,
+					blankText : 'Este campo es requerido',
+					minLength : 1,
+					emptyText : 'Imagen de la Marca',
 					fieldLabel : 'Imagen'
 				}, {
 					xtype : 'textfield',
 					x : 60,
 					y : 150,
 					width : 360,
+					allowBlank : false,
+					blankText : 'Este campo es requerido',
+					minLength : 1,
+					emptyText : 'Mision de la Marca',
 					id : 'mision',
 					fieldLabel : 'Mision'
 				}, {
@@ -62,6 +79,10 @@ Ext.define('VentanaMarca', {
 					y : 200,
 					width : 360,
 					id : 'vision',
+					allowBlank : false,
+					blankText : 'Este campo es requerido',
+					minLength : 1,
+					emptyText : 'Vision de la Marca',
 					fieldLabel : 'Vision'
 				}, {
 					xtype : 'textfield',
@@ -69,6 +90,10 @@ Ext.define('VentanaMarca', {
 					y : 250,
 					width : 360,
 					id : 'valores',
+					allowBlank : false,
+					blankText : 'Este campo es requerido',
+					minLength : 1,
+					emptyText : 'Valores de la Marca',
 					fieldLabel : 'Valores'
 				}, {
 					xtype : 'textfield',
@@ -76,6 +101,10 @@ Ext.define('VentanaMarca', {
 					y : 300,
 					width : 360,
 					id : 'contacto',
+					allowBlank : false,
+					blankText : 'Este campo es requerido',
+					minLength : 1,
+					emptyText : 'Contactos de la Marca',
 					fieldLabel : 'Contacto'
 				}, {
 					xtype : 'button',
@@ -144,8 +173,41 @@ Ext.define('VentanaMarca', {
 		function seleccionar_marca(){
 			
 		}
+		
+		function buscar_marca() {
+			Ext.Ajax.request({
+				url : 'menu_admin/buscar_marca',
+				params : {
+					ajax : 'true',
+					funcion : 'buscar_marca',
+					nombre : Ext.getCmp('nombre').getValue()
+				},
+				//Retorno exitoso de la pagina servidora a traves del formato JSON
+				success : function(exito, request) {
+					datos = Ext.JSON.decode(exito.responseText);
+					if (datos.exito == 'true') {
+						Ext.getCmp('imagen').setValue(datos.imagen);
+						Ext.getCmp('mision').setValue(datos.mision);
+						Ext.getCmp('vision').setValue(datos.vision);
+						Ext.getCmp('valores').setValue(datos.valores);
+						Ext.getCmp('contacto').setValue(datos.contacto);
+					} else {
+						Ext.Msg.alert("Error", datos.msg);
+					}
+				},
+				//No hay retorno de la pagina servidora
+				failure : function() {
+					alert(Ext.getCmp('nombre').getValue());
+					Ext.Msg.alert("Error", "Servidor no conectado");
+					
+				}
+			});
+			Ext.getCmp('nombre').focus();
+
+		}
 
 
 		me.callParent(arguments);
-	}
-});
+		}
+		});
+
