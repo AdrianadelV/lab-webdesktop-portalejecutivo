@@ -29,4 +29,11 @@ class MenuAdminController < ApplicationController
     @marca.grabar_marca(@nombre,@imagen,@mision,@vision,@valores,@contacto)
     render :text => $tirajson
   end
+  
+  def buscar_marca
+    @marca = Marca.new
+   nombre = params[:nombre]
+   valor = @marca.busca_marca_existe(nombre)
+   render :text => $tirajson
+  end
 end
