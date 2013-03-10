@@ -177,9 +177,11 @@ Ext.define('VentanaMarca', {
 					contacto : Ext.getCmp('contacto').getValue(),
 				},
 				success : function(exito, request) {
+					datos = Ext.JSON.decode(exito, reponseText);
+					datos = Ext.JSON.decode(exito, reponseText);
 					Ext.Msg.alert("Exito", "Se ha Guardado la Marca!!");
 					Ext.getCmp('formulariomarca').getForm().reset();
-					datos = Ext.JSON.decode(exito, reponseText);
+					Ext.getCmp('btnregistrar').disable(false);
 				},
 				failure : function() {
 					Ext.Msg.alert("Error", "Servidor NO Conectado!!");
@@ -226,6 +228,7 @@ Ext.define('VentanaMarca', {
 				success : function(exito, request) {
 					datos = Ext.JSON.decode(exito.responseText);
 					if (datos.exito == 'true') {
+						Ext.getCmp('nombre').setValue(datos.nombre);
 						Ext.getCmp('imagen').setValue(datos.imagen);
 						Ext.getCmp('mision').setValue(datos.mision);
 						Ext.getCmp('vision').setValue(datos.vision);
@@ -235,6 +238,8 @@ Ext.define('VentanaMarca', {
 						Ext.getCmp('imagen0').setSrc(Ext.getCmp('imagen').getValue());
 					} else {
 						Ext.Msg.alert("Error", datos.msg);
+						Ext.getCmp('btnregistrar').enable(false);
+						Ext.getCmp('btneliminar').disable(true);
 					}
 				},
 				//No hay retorno de la pagina servidora
