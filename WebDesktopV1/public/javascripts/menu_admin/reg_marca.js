@@ -5,7 +5,7 @@ Ext.define('VentanaMarca', {
 
 	height : 549,
 	id : 'ventanamarca',
-	width : 561,
+	width : 661,
 	x : 380,
 	y : 225,
 	layout : {
@@ -43,13 +43,13 @@ Ext.define('VentanaMarca', {
 					minLength : 1,
 					emptyText : 'Nombre de la Marca',
 					vtype : 'alphanum',
-					listeners: {
-                      specialkey: function(field, e){
-                       if (e.getKey() == e.ENTER) {
-                         buscar_marca();
-                       }
-                      }
-                   },
+					listeners : {
+						specialkey : function(field, e) {
+							if (e.getKey() == e.ENTER) {
+								buscar_marca();
+							}
+						}
+					},
 					id : 'nombre'
 				}, {
 					xtype : 'textfield',
@@ -84,6 +84,16 @@ Ext.define('VentanaMarca', {
 					minLength : 1,
 					emptyText : 'Vision de la Marca',
 					fieldLabel : 'Vision'
+				}, {
+					xtype : 'image',
+					id : 'imagen0',
+					x : 450,
+					y : 45,
+					border : '',
+					frame : true,
+					height : 110,
+					width : 130,
+					src:'images/AEVEV4.png'
 				}, {
 					xtype : 'textfield',
 					x : 60,
@@ -120,10 +130,17 @@ Ext.define('VentanaMarca', {
 					}
 				}, {
 					xtype : 'button',
-					x : 180,
+					x : 170,
+					y : 350,
+					text : 'Eliminar',
+					tooltip : 'Eliminar Marca',
+					id : 'btneliminar'
+				}, {
+					xtype : 'button',
+					x : 250,
 					y : 350,
 					text : 'Cancelar',
-					id : 'cancelar',
+					id : 'btncancelar',
 					listeners : {
 						click : function() {
 							Ext.getCmp('formulariomarca').getForm().reset();
@@ -131,21 +148,21 @@ Ext.define('VentanaMarca', {
 					}
 				}, {
 					xtype : 'button',
-					x : 270,
+					x : 340,
 					y : 350,
 					text : 'Registrar',
 					tooltip : 'Registrar una Marca',
 					id : 'btnregistrar',
-					listeners:{
-						click:function(){
+					listeners : {
+						click : function() {
 							grabar_marca();
 						}
 					}
 				}]
 			}]
 		});
-		
-	//metodo para hacer grabar los datos
+
+		//metodo para hacer grabar los datos
 		function grabar_marca() {
 			Ext.Ajax.request({
 				url : 'menu_admin/grabar_marca',
@@ -169,11 +186,34 @@ Ext.define('VentanaMarca', {
 				}
 			});
 		}
+
 		//metodo seleccionar marca
-		function seleccionar_marca(){
-			
+		function eliminar_marca() {
+			Ext.Ajax.request({
+				url : 'menu_admin/eli_marca',
+				params : {
+					ajax : 'true',
+					funcion : 'eli_marca',
+					nombre : Ext.getCmp('nombre').getValue()
+				},
+				//Retorno exitoso de la pagina servidora a traves del formato JSON
+				success : function(exito, request) {
+					datos = Ext.JSON.decode(exito.responseText);
+					if (datos.exito == 'true') {
+						Ext.Msg.alert("Mensaje", datos.msg);
+					} else {
+						Ext.Msg.alert("Mensaje", datos.msg);
+					}
+				},
+				//No hay retorno de la pagina servidora
+				failure : function() {
+					alert(Ext.getCmp('nombre').getValue());
+					Ext.Msg.alert("Mensaje", "Servidor no conectado");
+
+				}
+			});
 		}
-		
+
 		function buscar_marca() {
 			Ext.Ajax.request({
 				url : 'menu_admin/buscar_marca',
@@ -191,6 +231,8 @@ Ext.define('VentanaMarca', {
 						Ext.getCmp('vision').setValue(datos.vision);
 						Ext.getCmp('valores').setValue(datos.valores);
 						Ext.getCmp('contacto').setValue(datos.contacto);
+						Ext.getCmp('btnregistrar').disable(false);
+						Ext.getCmp('imagen0').setSrc(Ext.getCmp('imagen').getValue());
 					} else {
 						Ext.Msg.alert("Error", datos.msg);
 					}
@@ -199,15 +241,16 @@ Ext.define('VentanaMarca', {
 				failure : function() {
 					alert(Ext.getCmp('nombre').getValue());
 					Ext.Msg.alert("Error", "Servidor no conectado");
-					
+
 				}
 			});
+			//Ext.getCmp('btnregistrar').disable(false);
 			Ext.getCmp('nombre').focus();
 
 		}
 
 
 		me.callParent(arguments);
-		}
-		});
+	}
+});
 
