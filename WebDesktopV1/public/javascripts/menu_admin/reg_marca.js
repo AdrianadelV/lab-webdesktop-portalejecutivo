@@ -130,16 +130,18 @@ Ext.define('VentanaMarca', {
 					}
 				}, {
 					xtype : 'button',
-					x : 170,
+					x : 155,
 					y : 350,
 					text : 'Eliminar',
+					icon: 'images/eliminar.png',
 					tooltip : 'Eliminar Marca',
 					id : 'btneliminar'
 				}, {
 					xtype : 'button',
 					x : 250,
 					y : 350,
-					text : 'Cancelar',
+					text : 'Limpiar',
+					icon: 'images/limpiar.png',
 					id : 'btncancelar',
 					listeners : {
 						click : function() {
@@ -150,7 +152,8 @@ Ext.define('VentanaMarca', {
 					xtype : 'button',
 					x : 340,
 					y : 350,
-					text : 'Registrar',
+					text : 'Guardar',
+					icon: 'images/grabar.png',
 					tooltip : 'Registrar una Marca',
 					id : 'btnregistrar',
 					listeners : {
