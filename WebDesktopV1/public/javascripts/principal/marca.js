@@ -29,7 +29,7 @@ function buscar(id_marca) {
 					}, {
 						xtype : 'panel',
 						title : 'Contacto',
-						html : '<h1>Contáctanos</h1><p>' + datos.contacto + '</p>'
+						html : '<h1>Contáctanos</h1><p></p><a href=' + datos.contacto + '>' + datos.contacto + '</a> '
 
 					}, {
 						stype : 'panel',
