@@ -1,6 +1,6 @@
 class CliCompradorController < ApplicationController
   def index
-    if(session[:nombre_login]==nil)
+    if(session[:nombre]==nil)
       redirect_to '/inicio'
     elsif(session[:id_rol]=='2')
       redirect_to '/concesionario'
@@ -16,5 +16,14 @@ class CliCompradorController < ApplicationController
     @arbols = Arbols.new
     @tira = @arbols.BuscarTodosArbolJson(@tipo)
     render :text => @tira
+  end
+   def buscarUsuarioLo
+    id_usuario = params[:id_usuario]
+    @usuarios = Usuario.new
+    if (session[:nombre_login]==id_usuario)
+      puts id_usuario
+      valor = @usuarios.buscarUsuarioLo(id_usuario)
+      render :text => @tira
+    end
   end
 end

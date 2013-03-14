@@ -19,15 +19,15 @@ class InicioController < ApplicationController
     render :text => $tirajson
   end
   def autenticarUsuario
-    id_usuario = params[:id_usuario]
+    nombre = params[:nombre]
     password = params[:password]
     @usuarios = Usuario.new
-    valor = @usuarios.autenticarUsuario(id_usuario,password)
+    valor = @usuarios.autenticarUsuario(nombre,password)
     if (valor==1)
        parsed_json = ActiveSupport::JSON.decode($tirajson)
-       session[:nombre_login]=id_usuario
+       session[:nombre]=nombre
        session[:contrasena]=password
-       session[:id_rol]= parsed_json["u_id_rol"]
+       session[:rol_id]= parsed_json["rol_id"]
     end
     render :text => $tirajson
   end
