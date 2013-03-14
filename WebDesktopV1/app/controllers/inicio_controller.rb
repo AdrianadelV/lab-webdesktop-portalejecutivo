@@ -13,9 +13,9 @@ class InicioController < ApplicationController
    render :text => $tirajson
   end
   def buscarModelos
-    id_marca = params[:id_marca]
+    id = params[:id]
     @modelos = Modelo_Vehiculo.new
-    valor = @modelos.buscarModelosMarca(id_marca)
+    valor = @modelos.buscarModelosMarca(id)
     render :text => $tirajson
   end
   def autenticarUsuario

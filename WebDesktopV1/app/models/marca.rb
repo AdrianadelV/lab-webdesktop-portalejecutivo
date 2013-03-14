@@ -1,11 +1,11 @@
 class Marca < ActiveRecord::Base
    def buscar(id_marca)
    valor = 0
-    @objmarcas = Marca.find(:first, :conditions => "id_marca='#{id_marca}'")
+    @objmarcas = Marca.find(:first, :conditions => "id='#{id}'")
     if @objmarcas!=nil
       $tirajson = '{"success": "true", 
                     "exito": "true",
-                    "id_marca": "'+@objmarcas.id_marca.to_s()+'",
+                    "id": "'+@objmarcas.id.to_s()+'",
                     "nombre_marca": "'+@objmarcas.nombre+'",
                     "mision": "'+@objmarcas.mision+'",
                     "vision": "'+@objmarcas.vision+'",
@@ -26,7 +26,7 @@ class Marca < ActiveRecord::Base
     if totaldeRegistros>0
       j=0
       @arbols.each do |arbol|
-        @tira = @tira+" { text: '" + arbol.nombre + "', id: '" + arbol.id_marca.to_s  + "', leaf: true "
+        @tira = @tira+" { text: '" + arbol.nombre + "', id: '" + arbol.id.to_s  + "', leaf: true "
         j=j+1
         if j<totaldeRegistros
           @tira = @tira+ " }, "
