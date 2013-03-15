@@ -10,8 +10,8 @@ class Usuario < ActiveRecord::Base
     end 
     return valor
   end
-  def buscarUsuarioLo(id_usuario)
-     @usuario = Usuario.find(:first, :conditions => "id_usuario='#{id_usuario}'")
+  def buscarUsuarioLo(nombre)
+     @usuario = Usuario.find(:first, :conditions => "nombre='#{nombre}'")
     if @usuario!=nil
       $tirajson = @usuario.to_json
       valor = 1
@@ -21,4 +21,5 @@ class Usuario < ActiveRecord::Base
     end 
     return valor
   end
+
 end
