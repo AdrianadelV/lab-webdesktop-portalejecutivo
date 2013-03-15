@@ -26,221 +26,152 @@ posy = parseInt(screen.height * factorh);
 
 Ext.onReady(function(){
 		
-	Ext.define('VentaRegistrarUsuario', {
-		extend : 'Ext.window.Window',
-		
-	// initComponent : function() {
-      // this.dockedItems = [ {
-        // dock: 'bottom',
-        // buttons: [{
-          // text: 'Ir a Pagina Principal',
-          // handler: function() {
-           // location.href="inicio"
-          // }
-        // },{
-          // text: 'Limpiar',
-    	  // icon: 'images/limpiar.png',
-          // handler: function() {
-           // Ext.getCmp('VentaRegistrarUsuario').getForm().reset();
-           // Ext.getCmp('cedula').focus();
-          // }
-        // },{
-         // text: 'Cargar',
-         // icon: 'images/grabar.png',
-         // formBind: true, // Disponible hasta que los campos esten validados
-         // disabled: true,
-         // // handler: function() {
-          // // enviar();  
-         // // }
-        // }
-        // ]
-// 
-        // } ];
-		
-		height : 439,
-		width : 635, 
-		y : 180,
-		layout : {
-			type : 'absolute'
-		},
-		title : 'Registrarse',
-		items : [{
-			xtype : 'textfield',
-			x : 20,
-			y : 30,
-			width : 270,
-			allowBlank: false,
-			blankText: 'Campo  Oblicagorio',
-			name: 'cedula',
-          	id: 'cedula',
-			fieldLabel : 'Cedula'
-		}, {
-			xtype : 'textfield',
-			x : 20,
-			y : 70,
-			width : 270,
-			id: 'nombre',
-			allowBlank: false,
-			blankText: 'Campo  Oblicagorio',
-			fieldLabel : 'Nombre'
-		}, {
-			xtype : 'textfield',
-			x : 320,
-			y : 70,
-			width : 280,
-			id:'apellidos',
-			allowBlank: false,
-			blankText: 'Campo  Oblicagorio',
-			fieldLabel : 'Apellido'
-		}, {
-			xtype : 'textfield',
-			x : 20,
-			y : 120,
-			width : 270,
-			id: 'telefono',
-			allowBlank: false,
-			blankText: 'Campo  Oblicagorio',
-			fieldLabel : 'Telefono'
-		}, {
-			xtype : 'textfield',
-			x : 20,
-			y : 170,
-			width : 580,
-			id: 'direccion',
-			allowBlank: false,
-			blankText: 'Campo  Oblicagorio',
-			fieldLabel : 'Direccion'
-		}, {
-			xtype : 'combobox',
-			x : 320,
-			y : 120,
-			width : 280,
-			fieldLabel : 'Sexo'
-		}, {
-			xtype : 'textfield',
-			x : 20,
-			y : 220,
-			width : 350,
-			allowBlank: false,
-			id: 'email',
-			blankText: 'Campo  Oblicagorio',
-			fieldLabel : 'email'
-		}, {
-			xtype : 'label',
-			x : 320,
-			y : 30,
-			height : 20,
-			width : 220,
-			text : 'Rol: Cliente Comprador'
-		}, {
-			xtype : 'textfield',
-			x : 20,
-			y : 270,
-			width : 350,
-			id: 'contrsena',
-			allowBlank: false,
-			blankText: 'Campo  Oblicagorio',
-			inputType: 'password',
-			fieldLabel : 'Contraseña'
-		}, {
-			xtype : 'textfield',
-			x : 20,
-			y : 320,
-			width : 350,
-			id:'contrasena2',
-			allowBlank: false,
-			blankText: 'Campo  Oblicagorio',
-			inputType: 'password',
-			fieldLabel : 'Confirmar Contraseña'
-		}, {
-			xtype : 'button',
-			icon: 'images/grabar.png',
-         	formBind: true,
-			x : 530,
-			y : 360,
-			width : 78,
-			height : 30,
-			text : 'Grabar',
-		
-			// handler: function() {
-// 
-            // Ext.Ajax.request({
-             // url: 'registrarusuario/grabar',
-             // //Enviando los parametros a la pagina servidora
-             // params: {
-              // ajax: 'true',
-              // funcion: 'grabar',
-              // nombre: Ext.getCmp('cedula').getValue(), //obtiene el valor a traves del id del campo
-              // correo: Ext.getCmp('nombres').getValue(),
-              // twitter: Ext.getCmp('apellidos').getValue(),
-              // celular: Ext.getCmp('telefono').getValue(),
-              // direccion: Ext.getCmp('direccion').getValue(),
-              // telefono: Ext.getCmp('correo').getValue(),
-             // },
-             // //Retorno exitoso de la pagina servidora a traves del formato JSON
-             // success: function( resultado, request ) {
-              // datos=Ext.JSON.decode(resultado.responseText);
-              // Ext.Msg.alert('Mensaje', datos.msg);
-             // },
-             // //No hay retorno de la pagina servidora
-             // failure: function() {
-              // Ext.Msg.alert("Error", "Servidor no conectado!");
-             // }
-            // });
-         // },
-			
-				listeners: {
-					click:function(){
-						// alert('Registro Existoso');
+	Ext.define('registrarusuario', {
+    extend: 'Ext.window.Window',
 
+    height: 293,
+    width: 660,
+    title: 'Ventana de registro',
 
-					Ext.Ajax.request({
-						url : 'registrarusuario/grabar',
-						//Enviando los parametros a la pagina servidora
-						params : {
-							ajax : 'true',
-							funcion : 'grabar',
-							nombre : Ext.getCmp('cedula').getValue(), //obtiene el valor a traves del id del campo
-							correo : Ext.getCmp('nombres').getValue(),
-							twitter : Ext.getCmp('apellidos').getValue(),
-							celular : Ext.getCmp('telefono').getValue(),
-							direccion : Ext.getCmp('direccion').getValue(),
-							telefono : Ext.getCmp('correo').getValue(),
-						},
-						//Retorno exitoso de la pagina servidora a traves del formato JSON
-						success : function(resultado, request) {
-							datos = Ext.JSON.decode(resultado.responseText);
-							Ext.Msg.alert('Mensaje', datos.msg);
-						},
-						//No hay retorno de la pagina servidora
-						failure : function() {
-							Ext.Msg.alert("Error", "Servidor no conectado!");
-						}
-					}); 
+    initComponent: function() {
+        var me = this;
 
+        Ext.applyIf(me, {
+            items: [
+                {
+                    xtype: 'form',
+                    height: 254,
+                    width: 637,
+                    layout: {
+                        type: 'absolute'
+                    },
+                    bodyPadding: 10,
+                    title: 'Crear cuanta de usuario',
+                    items: [
+                        {
+                            xtype: 'textfield',
+                            x: 20,
+                            y: 20,
+                            width: 200,
+                            fieldLabel: 'Cedula',
+                            id : 'cedula'
+                        },
+                        {
+                            xtype: 'textfield',
+                            x: 20,
+                            y: 50,
+                            width: 290,
+                            fieldLabel: 'Nombres',
+                            id : 'nombres'
+                        },
+                        {
+                            xtype: 'textfield',
+                            x: 20,
+                            y: 80,
+                            width: 290,
+                            fieldLabel: 'Apellidos',
+                            id : 'apellidos'
+                        },
+                        {
+                            xtype: 'textfield',
+                            x: 20,
+                            y: 110,
+                            width: 250,
+                            fieldLabel: 'Telefono',
+                            id : 'telefono'
+                        },
+                        {
+                            xtype: 'textfield',
+                            x: 340,
+                            y: 100,
+                            fieldLabel: 'Correo',
+                            id : 'correo'
+                        },
+                        {
+                            xtype: 'textfield',
+                            x: 20,
+                            y: 140,
+                            width: 430,
+                            fieldLabel: 'Direccion',
+                            id : 'direccion'
+                        },
+                        {
+                            xtype: 'datefield',
+                            x: 340,
+                            y: 20,
+                            fieldLabel: 'Fecha de nacimiento',
+                            id : 'fecha_nacimiento'
+                        },
+                        {
+                            xtype: 'combobox',
+                            x: 340,
+                            y: 60,
+                            width: 200,
+                            fieldLabel: 'Sexo',
+                            id : 'sexo'
+                        },
+                        {
+                            xtype: 'textfield',
+                            x: 20,
+                            y: 170,
+                            fieldLabel: 'Nombre de usuario',
+                            id : 'nusuario'
+                            
+                        },
+                        {
+                            xtype: 'textfield',
+                            x: 280,
+                            y: 170,
+                            fieldLabel: 'Contraseña',
+                            id : 'password'
+                            
+                        },
+                        {
+                            xtype: 'textfield',
+                            x: 280,
+                            y: 190,
+                            fieldLabel: 'Repetir contraseña',
+                            id : 'password2'
+                        },
+                        {
+                            xtype: 'button',
+                            x: 550,
+                            y: 160,
+                            text: 'Grabar'
+                            handler: function() {
+ 
+            					Ext.Ajax.request({
+             					url: 'inicio/grabarcli',
+             
+            				  // ajax: 'true',
+            					  // funcion: 'grabar',
+              					cedula: Ext.getCmp('cedula').getValue(), //obtiene el valor a traves del id del campo
+              					nombres: Ext.getCmp('nombres').getValue(),
+                				apellidos: Ext.getCmp('apellidos').getValue(),
+              					telefono: Ext.getCmp('telefono').getValue(),
+              					direccion: Ext.getCmp('direccion').getValue(),
+              					correo: Ext.getCmp('correo').getValue(),
+              					fecha_nacimiento: Ext.getCmp('fecha_nacimiento').getValue(),
+              					sexo: Ext.getComp('sexo').getValue(),
+              					nusuario: Ext.getComp('nusuario').getValue(),
+              					password: Ext.getComp('password').getValue(),
+             			},
+                        },
+                        {
+                            xtype: 'button',
+                            x: 550,
+                            y: 190,
+                            text: 'Cancelar'
+                        }
+                    ]
+                }
+            ]
+        });
 
+        me.callParent(arguments);
+    }
 
-					}
-			  },
-			    // url:'cli_comprador'
-		},{
-			xtype : 'button',
-			icon: 'images/limpiar.png',
-         	formBind: true,
-			x : 430,
-			y : 360,
-			width : 78,
-			height : 30,
-			text : 'Limpiar',
-			listeners: {
-					click:function(){
-						Ext.getCmp('VentaRegistrarUsuario').getForm().reset();
-           				Ext.getCmp('cedula').focus();
-					}
-			  },
-		}]
-
-	}); 
+});
 	ventanaregistrarusuario= Ext.create('VentaRegistrarUsuario')
 		ventanaregistrarusuario.show();
 	
