@@ -16,7 +16,7 @@ function buscar(id_marca) {
 			if (datos.exito == 'true') {				
 				Ext.create('MyApp.view.MyTabPanel', {
 					renderTo : 'tree_el',
-					title : datos.nombre_marca,
+					title : datos.nombre,
 					items : [{
 						xtype : 'panel',
 						title : 'Quienes Somos',
@@ -38,7 +38,7 @@ function buscar(id_marca) {
 					}]
 				});
 			} else {
-				Ext.Msg.alert("Error", "paso");
+				Ext.Msg.alert("Error", "pasopaso");
 			}
 		},
 		//No hay retorno de la pagina servidora
