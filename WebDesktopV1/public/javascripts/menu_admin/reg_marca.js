@@ -93,7 +93,7 @@ Ext.define('VentanaMarca', {
 					frame : true,
 					height : 110,
 					width : 130,
-					src:'images/AEVEV4.png'
+					src : 'images/AEVEV4.png'
 				}, {
 					xtype : 'textfield',
 					x : 60,
@@ -133,7 +133,7 @@ Ext.define('VentanaMarca', {
 					x : 155,
 					y : 350,
 					text : 'Eliminar',
-					icon: 'images/eliminar.png',
+					icon : 'images/eliminar.png',
 					tooltip : 'Eliminar Marca',
 					id : 'btneliminar'
 				}, {
@@ -141,7 +141,7 @@ Ext.define('VentanaMarca', {
 					x : 250,
 					y : 350,
 					text : 'Limpiar',
-					icon: 'images/limpiar.png',
+					icon : 'images/limpiar.png',
 					id : 'btncancelar',
 					listeners : {
 						click : function() {
@@ -153,7 +153,7 @@ Ext.define('VentanaMarca', {
 					x : 340,
 					y : 350,
 					text : 'Guardar',
-					icon: 'images/grabar.png',
+					icon : 'images/grabar.png',
 					tooltip : 'Registrar una Marca',
 					id : 'btnregistrar',
 					listeners : {
@@ -225,7 +225,7 @@ Ext.define('VentanaMarca', {
 				params : {
 					ajax : 'true',
 					funcion : 'buscar_marca',
-					nombre : Ext.getCmp('nombre').getValue()
+					nombre : Ext.getCmp('nombre').getValue(),
 				},
 				//Retorno exitoso de la pagina servidora a traves del formato JSON
 				success : function(exito, request) {
