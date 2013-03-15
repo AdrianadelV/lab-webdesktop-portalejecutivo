@@ -1,3 +1,4 @@
+Ext.require(['Ext.tree.*', 'Ext.data.*', 'Ext.tip.*', 'Ext.container.Viewport', 'Ext.container.ButtonGroup', 'Ext.panel.Panel']);
 function enviar() {
 	capturaUsuario();
 	Ext.Ajax.request({
@@ -29,6 +30,11 @@ function enviar() {
 			Ext.Msg.alert("Error", "Servidor no conectado");
 		}
 	});
+}
+function registrarusuario()
+{
+   ventanaacttiva = Ext.create('registrarusuario');
+   ventanaacttiva.show();
 }
 
 
