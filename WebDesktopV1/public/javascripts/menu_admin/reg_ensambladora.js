@@ -36,7 +36,7 @@ Ext.require([
 Ext.define('VentanaEnsambladoraAdmin', {
     extend: 'Ext.window.Window',
 
-    height: 390,
+    height: 480,
 	width: 614,
 	x: 380,
 	y: 150,
@@ -57,11 +57,14 @@ Ext.define('VentanaEnsambladoraAdmin', {
                     activeTab: 0,
                     items: [
                         {
-                            xtype: 'panel',
+                            xtype: 'form',
                             height: 340,
+                            autoRender : false,
+                            id : 'formaularioensambladora',                            
                             layout: {
                                 type: 'absolute'
                             },
+                            bodyPadding : 10,
                             title: 'Datos Ensambladora',
                             items: [
                                 {
@@ -69,13 +72,25 @@ Ext.define('VentanaEnsambladoraAdmin', {
                                     x: 20,
                                     y: 30,
                                     width: 410,
-                                    fieldLabel: 'rif'
+                                    id : 'rif',
+                                    msgTarget : 'under',
+									blankText : 'Este campo es requerido',
+									enableKeyEvents : true,
+									minLength : 1,
+									emptyText : 'R.I.F. de la Ensambladora',
+                                    fieldLabel: 'Rif'
                                 },
                                 {
                                     xtype: 'textfield',
                                     x: 310,
                                     y: 130,
                                     width: 270,
+                                    id : 'telefono',
+                                    msgTarget : 'under',
+									blankText : 'Este campo es requerido',
+									enableKeyEvents : true,
+									minLength : 1,
+									emptyText : 'Teléfono de la Ensambladora',
                                     fieldLabel: 'Teléfono'
                                 },
                                 {
@@ -83,6 +98,12 @@ Ext.define('VentanaEnsambladoraAdmin', {
                                     x: 20,
                                     y: 80,
                                     width: 410,
+                                    id: 'nombre',
+                                    msgTarget : 'under',
+									blankText : 'Este campo es requerido',
+									enableKeyEvents : true,
+									minLength : 1,
+									emptyText : 'Nombre de la Ensambladora',
                                     fieldLabel: 'Nombre'
                                 },
                                 {
@@ -90,6 +111,12 @@ Ext.define('VentanaEnsambladoraAdmin', {
                                     x: 20,
                                     y: 130,
                                     width: 280,
+                                    id : 'correo',
+                                    msgTarget : 'under',
+									blankText : 'Este campo es requerido',
+									enableKeyEvents : true,
+									minLength : 1,
+									emptyText : 'Correo de la Ensambladora',
                                     fieldLabel: 'Correo'
                                 },
                                 {
@@ -97,6 +124,12 @@ Ext.define('VentanaEnsambladoraAdmin', {
                                     x: 20,
                                     y: 240,
                                     width: 560,
+                                    id : 'direccion',
+                                    msgTarget : 'under',
+									blankText : 'Este campo es requerido',
+									enableKeyEvents : true,
+									minLength : 1,
+									emptyText : 'Dirección de la Ensambladora',
                                     fieldLabel: 'Dirección'
                                 },
                                 {
@@ -104,6 +137,7 @@ Ext.define('VentanaEnsambladoraAdmin', {
                                     x: 20,
                                     y: 180,
                                     width: 280,
+                                    id : 'cmb_estado',
                                     fieldLabel: 'Estado'
                                 },
                                 {
@@ -111,6 +145,7 @@ Ext.define('VentanaEnsambladoraAdmin', {
                                     x: 310,
                                     y: 180,
                                     width: 270,
+                                    id : 'cmb_ciudad',
                                     fieldLabel: 'Ciudad'
                                 },
                                 {
@@ -118,12 +153,13 @@ Ext.define('VentanaEnsambladoraAdmin', {
                                     x: 20,
                                     y: 290,
                                     width: 280,
+                                    id : 'cmb_marca',
                                     fieldLabel: 'Marca Asociada'
                                 }
                             ]
                         },
                         {
-                            xtype: 'panel',
+                            xtype: 'form',
                             height: 340,
                             layout: {
                                 type: 'absolute'
@@ -135,6 +171,12 @@ Ext.define('VentanaEnsambladoraAdmin', {
                                     x: 20,
                                     y: 30,
                                     width: 300,
+                                    id: 'nombre_usuario',
+                                    msgTarget : 'under',
+									blankText : 'Este campo es requerido',
+									enableKeyEvents : true,
+									minLength : 1,
+									emptyText : 'Login del usuario',
                                     fieldLabel: 'Nombre de Usuario'
                                 },
                                 {
@@ -143,6 +185,7 @@ Ext.define('VentanaEnsambladoraAdmin', {
                                     y: 90,
                                     height: 20,
                                     width: 110,
+                                    id : 'rol_usuario',
                                     text: 'Rol del Usuario:'
                                 },
                                 {
@@ -151,6 +194,7 @@ Ext.define('VentanaEnsambladoraAdmin', {
                                     y: 90,
                                     height: 40,
                                     width: 160,
+                                    id: 'ensamblador',
                                     text: 'Ensambladora'
                                 },
                                 {
@@ -158,6 +202,13 @@ Ext.define('VentanaEnsambladoraAdmin', {
                                     x: 20,
                                     y: 130,
                                     width: 300,
+                                    id: 'contrasena',
+                                    msgTarget : 'under',
+									blankText : 'Este campo es requerido',
+									enableKeyEvents : true,
+									minLength : 1,
+									emptyText : 'Contraseña del Usuario ',
+									inputType: 'password',
                                     fieldLabel: 'Contraseña'
                                 },
                                 {
@@ -165,19 +216,41 @@ Ext.define('VentanaEnsambladoraAdmin', {
                                     x: 20,
                                     y: 180,
                                     width: 300,
+                                    id: 'contrasena2',
+                                    msgTarget : 'under',
+									blankText : 'Este campo es requerido',
+									enableKeyEvents : true,
+									minLength : 1,
+									emptyText : 'Contraseña del Usuario ',
+									inputType: 'password',
                                     fieldLabel: 'Confirmar Contraseña'
                                 },
                                 {
                                     xtype: 'button',
-                                    x: 510,
+                                    x: 490,
                                     y: 260,
-                                    text: 'Registrar'
+                                    text : 'Guardar',
+									icon: 'images/grabar.png',
+									tooltip : 'Registrar una Datos de la Ensambladora',
+									id : 'btnregistrar',
                                 },
                                 {
                                     xtype: 'button',
-                                    x: 430,
+                                    x: 400,
                                     y: 260,
-                                    text: 'Cancelar'
+                                    text : 'Limpiar',
+									icon: 'images/limpiar.png',
+									tooltip : 'Limpiar Campos',
+									id : 'btnlimpiar'
+                                },
+                                 {
+                                    xtype: 'button',
+                                    x: 300,
+                                    y: 260,
+                                    text : 'Eliminar',
+									icon: 'images/eliminar.png',
+									tooltip : 'Eliminar Ensambladora',
+									id : 'btneliminar'
                                 }
                             ]
                         }
@@ -190,3 +263,5 @@ Ext.define('VentanaEnsambladoraAdmin', {
     }
 
 });
+
+              		
