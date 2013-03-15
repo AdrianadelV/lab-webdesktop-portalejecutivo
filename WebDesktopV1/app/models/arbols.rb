@@ -12,7 +12,7 @@ class Arbols < ActiveRecord::Base
         @arbols = Arbols.find(:all, :conditions => "tipo=#{tipo} and padre_id=#{padreid}" )
         j=0
         @arbols.each do |arbol|
-          @tira = @tira+" { text: '" + arbol.text + "', id: '" + arbol.id.to_s  + "', href: '"+arbol.vinculo+"', "
+          @tira = @tira+" { text: '" + arbol.texto + "', id: '" + arbol.id.to_s  + "', href: '"+arbol.vinculo+"', "
           self.ObtenerHijos(tipo,arbol.id)
           j=j+1
           if j<totaldeRegistros
@@ -34,7 +34,7 @@ class Arbols < ActiveRecord::Base
         @arbols = Arbols.find(:all, :conditions => "tipo=#{tipo} and padre_id=0" )
         j=0
         @arbols.each do |arbol|
-          @tira = @tira+" { text: '" + arbol.text + "', id: '" + arbol.id.to_s  + "', href: '', "
+          @tira = @tira+" { text: '" + arbol.texto + "', id: '" + arbol.id.to_s  + "', href: '', "
           self.ObtenerHijos(tipo,arbol.id)
           j=j+1
      if j<totaldeRegistros
