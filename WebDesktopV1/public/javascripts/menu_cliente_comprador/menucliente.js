@@ -408,5 +408,6 @@ Ext.onReady(function() {
 function editCuentaUsuario() {
 		ventana.close();
 		ventana = Ext.create('actualizar');
+		buscar_comprador();
 		ventana.show();
 	}
