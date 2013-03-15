@@ -1,12 +1,13 @@
 class CliCompradorController < ApplicationController
   def index
+    
     if(session[:nombre]==nil)
       redirect_to '/inicio'
-    elsif(session[:id_rol]=='2')
+    elsif(session[:rol_id]==2)
       redirect_to '/concesionario'
-    elsif(session[:id_rol]=='3')
+    elsif(session[:rol_id]==3)
       redirect_to '/menu_ensambladora'
-    elsif(session[:id_rol]=='4')
+    elsif(session[:rol_id]==4)
       redirect_to '/menu_admin'
     end
   end
@@ -18,12 +19,16 @@ class CliCompradorController < ApplicationController
     render :text => @tira
   end
    def buscarUsuarioLo
-    id_usuario = params[:id_usuario]
-    @usuarios = Usuario.new
-    if (session[:nombre_login]==id_usuario)
-      puts id_usuario
-      valor = @usuarios.buscarUsuarioLo(id_usuario)
-      render :text => @tira
-    end
+   @usuarios = Usuario.new
+    valor = @usuarios.buscarUsuarioLo(session[:nombre])
+  end
+  def buscarComprador
+    buscarUsuarioLo()
+    puts $tirajson
+    parsed_json = ActiveSupport::JSON.decode($tirajson)
+    @comprador=Comprador_Vehiculo.new
+    valor=@comprador.buscarUsuarioComprador(parsed_json["id"])
+    puts $tirajson
+     render :text => $tirajson
   end
 end
