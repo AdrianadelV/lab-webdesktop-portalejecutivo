@@ -235,6 +235,7 @@ Ext.define('VentanaMarca', {
 				success : function(exito, request) {
 					datos = Ext.JSON.decode(exito.responseText);
 					if (datos.exito == 'true') {
+						var id_marca= datos.id;
 						Ext.getCmp('nombre').setValue(datos.nombre);
 						Ext.getCmp('imagen').setValue(datos.imagen);
 						Ext.getCmp('mision').setValue(datos.mision);
@@ -265,4 +266,3 @@ Ext.define('VentanaMarca', {
 		me.callParent(arguments);
 	}
 });
-
