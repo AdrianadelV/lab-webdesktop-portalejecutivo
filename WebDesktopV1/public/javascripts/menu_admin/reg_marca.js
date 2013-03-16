@@ -158,7 +158,11 @@ Ext.define('VentanaMarca', {
 					id : 'btnregistrar',
 					listeners : {
 						click : function() {
-							grabar_marca();
+							if (Ext.getCmp('nombre').getValue() == "" || Ext.getCmp('imagen').getValue() == "" || Ext.getCmp('mision').getValue() == "" || Ext.getCmp('vision').getValue() == "" || Ext.getCmp('valores').getValue() == "" || Ext.getCmp('imagen').getValue() == "") {
+								Ext.Msg.alert("Error", "Debes LLenar todos los campos");
+							} else {
+								grabar_marca();
+							}
 						}
 					}
 				}]
