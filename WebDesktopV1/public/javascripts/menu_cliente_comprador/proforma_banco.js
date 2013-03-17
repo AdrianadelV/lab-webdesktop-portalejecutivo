@@ -130,7 +130,8 @@ Ext.define('proforma_banco', {
                     emptyText: 'Fecha',
                     vtype: 'alphanum',
                     vtypeText: 'solo texto',
-                    fieldLabel: 'Fecha'
+                    fieldLabel: 'Fecha',
+                    id:'fecha2'
                 },
                 {
                     xtype: 'textfield',
@@ -239,7 +240,8 @@ Ext.define('proforma_banco', {
                     emptyText: 'Validez',
                     vtype: 'alphanum',
                     vtypeText: 'solo texto',
-                    fieldLabel: 'Validez'
+                    fieldLabel: 'Validez',
+                    id:'validez'
                 },
                 {
                     xtype: 'textfield',
@@ -254,6 +256,20 @@ Ext.define('proforma_banco', {
                     vtypeText: 'solo texto',
                     fieldLabel: 'Cedula',
                     id:'cedula'
+                },
+                {
+                    xtype: 'textfield',
+                    x: 370,
+                    y: 120,
+                    width: 310,
+                    allowBlank:  false,
+                    blankText: 'Este campo es requerido',
+                    minLength: 1,
+                    emptyText: 'Sexo',
+                    vtype: 'alphanum',
+                    vtypeText: 'solo texto',
+                    fieldLabel: 'Sexo',
+                    id:'sexo'
                 }
             ]
         });
