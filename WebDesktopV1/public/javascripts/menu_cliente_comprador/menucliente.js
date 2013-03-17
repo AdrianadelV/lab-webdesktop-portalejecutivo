@@ -73,6 +73,7 @@ Ext.onReady(function() {
 					ventana.close();
 					ventana = Ext.create('actualizar');
 					ventana.show();
+					buscar_comprador();
 				}
 				if (node.get('text') == "Lista de Espera") {
 					ventana.close()
@@ -120,6 +121,7 @@ Ext.onReady(function() {
 					ventana.close();
 					ventana = Ext.create('proforma_banco');
 					ventana.show();
+					buscar_comprador();  
 				}
 				if (node.get('text') == "Comprar Vehiculo") {
 					ventana.close();
