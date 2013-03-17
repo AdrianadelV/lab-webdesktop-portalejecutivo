@@ -191,8 +191,9 @@ function buscar_comprador() {
 				Ext.getCmp('direccion').setValue(datos.direccion);
 				Ext.getCmp('telefono').setValue(datos.telefono);
 				Ext.getCmp('correo').setValue(datos.correo);
-				Ext.getCmp('fecha').setValue(datos.fecha_nacimiento);
 				Ext.getCmp('sexo').setValue(datos.sexo);
+				Ext.getCmp('fecha').setValue(datos.fecha_nacimiento);
+				
 			}
 		},
 		//No hay retorno de la pagina servidora
