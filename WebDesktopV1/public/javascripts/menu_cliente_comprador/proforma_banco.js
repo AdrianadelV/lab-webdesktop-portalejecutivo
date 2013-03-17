@@ -54,7 +54,8 @@ Ext.define('proforma_banco', {
                     emptyText: 'Nombre',
                     vtype: 'alpha',
                     vtypeText: 'solo texto',
-                    fieldLabel: 'Nombre(S)'
+                    fieldLabel: 'Nombre(S)',
+                    id:'nombre'
                 },
                 {
                     xtype: 'textfield',
@@ -67,7 +68,8 @@ Ext.define('proforma_banco', {
                     emptyText: 'Apellido',
                     vtype: 'alpha',
                     vtypeText: 'solo texto',
-                    fieldLabel: 'Apellido(S)'
+                    fieldLabel: 'Apellido(S)',
+                    id:'apellido'
                 },
                 {
                     xtype: 'textfield',
@@ -80,7 +82,8 @@ Ext.define('proforma_banco', {
                     emptyText: 'Telefono',
                     vtype: 'alphanum',
                     vtypeText: 'solo numeros',
-                    fieldLabel: 'Telefono'
+                    fieldLabel: 'Telefono',
+                    id:'telefono'
                 },
                 {
                     xtype: 'textfield',
@@ -93,7 +96,8 @@ Ext.define('proforma_banco', {
                     emptyText: 'Direccion',
                     vtype: 'alpha',
                     vtypeText: 'solo texto',
-                    fieldLabel: 'Direccion'
+                    fieldLabel: 'Direccion',
+                    id:'direccion'
                 },
                 {
                     xtype: 'textfield',
@@ -107,6 +111,7 @@ Ext.define('proforma_banco', {
                     fieldLabel: 'Correo Electronico',
                     vtype: 'email',
                     vtypeText: 'email',
+                    id:'correo'
                 },
                 {
                     xtype: 'label',
@@ -247,7 +252,8 @@ Ext.define('proforma_banco', {
                     emptyText: 'Cedula',
                     vtype: 'alpha',
                     vtypeText: 'solo texto',
-                    fieldLabel: 'Cedula'
+                    fieldLabel: 'Cedula',
+                    id:'cedula'
                 }
             ]
         });
