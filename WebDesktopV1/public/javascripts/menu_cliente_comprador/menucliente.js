@@ -121,7 +121,9 @@ Ext.onReady(function() {
 					ventana.close();
 					ventana = Ext.create('proforma_banco');
 					ventana.show();
-					buscar_comprador();  
+					buscar_comprador(); 
+					var currentDate = new Date();
+					Ext.getCmp('fecha2').setValue(currentDate);
 				}
 				if (node.get('text') == "Comprar Vehiculo") {
 					ventana.close();
