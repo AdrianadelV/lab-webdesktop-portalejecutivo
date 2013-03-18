@@ -124,6 +124,28 @@ Ext.onReady(function() {
 					buscar_comprador(); 
 					var currentDate = new Date();
 					Ext.getCmp('fecha2').setValue(currentDate);
+					alert(currentDate.getDate());
+				    var day=currentDate.getDate();
+				    // el mes es devuelto entre 0 y 11
+				    var month=currentDate.getMonth()+1;
+				    var year=currentDate.getFullYear();
+				    alert("Fecha actual: "+day+"/"+month+"/"+year);
+				    
+					var tiempo=currentDate.getTime();
+				    //Calculamos los milisegundos sobre la fecha que hay que sumar o restar...
+				    var milisegundos=parseInt(30*24*60*60*1000);
+				    //Modificamos la fecha actual
+				    var total=currentDate.setTime(tiempo+milisegundos);
+				    day=currentDate.getDate();
+				    month=currentDate.getMonth()+1;
+				    year=currentDate.getFullYear();
+				    currentDate.setDate(day);
+				    currentDate.setMonth(month);
+				    currentDate.setYear(year);
+				    //alert("Fecha modificada: "+day+"/"+month+"/"+year);
+				    alert(currentDate);					
+					Ext.getCmp('validez').setValue(currentDate);
+					
 				}
 				if (node.get('text') == "Comprar Vehiculo") {
 					ventana.close();
