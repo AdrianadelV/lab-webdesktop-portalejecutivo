@@ -31,10 +31,3 @@ function enviar() {
 		}
 	});
 }
-function registrarusuario()
-{
-   ventanaacttiva = Ext.create('registrarusuario');
-   ventanaacttiva.show();
-}
-
-
