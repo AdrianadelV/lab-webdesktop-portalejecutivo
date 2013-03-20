@@ -1,5 +1,58 @@
 var marcaStore = null;
 var data = null;
+var typeExtension="image";
+
+function checkFileExtension(elem) {
+        var filePath = elem;
+
+        if(filePath.indexOf('.') == -1)
+            return false;
+                  
+        var validExtensions = new Array();
+        var ext = filePath.substring(filePath.lastIndexOf('.') + 1).toLowerCase();
+    
+        if (typeExtension=="image") {
+         validExtensions[0] = 'jpg';
+         validExtensions[1] = 'jpeg';
+         validExtensions[3] = 'png';
+         validExtensions[4] = 'gif'; 
+        }
+        else {
+         validExtensions[0] = 'pdf';
+        }   
+
+        for(var i = 0; i < validExtensions.length; i++) {
+            if(ext == validExtensions[i])
+                return true;
+        }
+
+        Ext.Msg.alert('Advertencia', 'La extension .'+ext+' del archivo ' + filePath + ' no es permitida!');
+        if (typeExtension=="image") {
+         document.getElementsByName('ufile[]')[0].value='';
+         // xt.getCmp('imagen0').setSrc('images/transporte.jpg'); 
+        }
+        // else {
+         // document.getElementsByName('ufile1[]')[0].value='';
+         // xt.getCmp('planilla0').setSrc('helloworld.pdf');	
+        // } 
+        return false;
+    }
+
+function previewImage(input) {
+   	typeExtension="image";
+   	if (!checkFileExtension(encodeURIComponent(document.getElementsByName("ufile[]")[0].value)))
+   	{
+   	 return false;	
+   	}
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+       document.getElementById('imagen0').src = e.target.result
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+}
+
 Ext.define('VentanaMarca', {
 	extend : 'Ext.window.Window',
 
@@ -85,15 +138,16 @@ Ext.define('VentanaMarca', {
 					emptyText : 'Vision de la Marca',
 					fieldLabel : 'Vision'
 				}, {
-					xtype : 'image',
+					// xtype : 'image',
 					id : 'imagen0',
 					x : 450,
 					y : 45,
 					border : '',
-					frame : true,
-					height : 110,
-					width : 130,
-					src : 'images/AEVEV4.png'
+					html: '<input type="file" class="x-form-file-input" size="40" name="ufile[]" onchange="previewImage(this)" />',
+					// frame : true,
+					// height : 110,
+					// width : 130,
+					// src : 'images/AEVEV4.png'
 				}, {
 					xtype : 'textfield',
 					x : 60,
