@@ -14,13 +14,13 @@ function enviar() {
 			if (datos.exito) {
 				Ext.Msg.alert("Error", "Usuario o clave incorrecta!");
 			} else {
-				if (datos.rol_id=='1') {
+				if (datos.rols_id=='1') {
 					location.href='cli_comprador'
-				}if (datos.rol_id=='2') {
+				}if (datos.rols_id=='2') {
 					location.href='concesionario'	
-				}if (datos.rol_id=='3'){
+				}if (datos.rols_id=='3'){
 					location.href='menu_ensambladora'	
-				}if(datos.rol_id=='4'){
+				}if(datos.rols_id=='4'){
 					location.href='menu_admin'
 				}
 			}
