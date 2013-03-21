@@ -27,7 +27,7 @@ class InicioController < ApplicationController
        parsed_json = ActiveSupport::JSON.decode($tirajson)
        session[:nombre]=nombre
        session[:contrasena]=password
-       session[:rol_id]= parsed_json["rol_id"]
+       session[:rols_id]= parsed_json["rols_id"]
     end
     render :text => $tirajson
   end
