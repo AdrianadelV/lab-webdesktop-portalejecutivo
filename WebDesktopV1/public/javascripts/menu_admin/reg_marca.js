@@ -1,56 +1,53 @@
 var marcaStore = null;
 var data = null;
-var typeExtension="image";
+var typeExtension = "image";
 
 function checkFileExtension(elem) {
-        var filePath = elem;
+	var filePath = elem;
+    if (filePath.indexOf('.') == -1)
+		return false;
 
-        if(filePath.indexOf('.') == -1)
-            return false;
-                  
-        var validExtensions = new Array();
-        var ext = filePath.substring(filePath.lastIndexOf('.') + 1).toLowerCase();
-    
-        if (typeExtension=="image") {
-         validExtensions[0] = 'jpg';
-         validExtensions[1] = 'jpeg';
-         validExtensions[3] = 'png';
-         validExtensions[4] = 'gif'; 
-        }
-        else {
-         validExtensions[0] = 'pdf';
-        }   
+	var validExtensions = new Array();
+	var ext = filePath.substring(filePath.lastIndexOf('.') + 1).toLowerCase();
 
-        for(var i = 0; i < validExtensions.length; i++) {
-            if(ext == validExtensions[i])
-                return true;
-        }
+	if (typeExtension == "image") {
+		validExtensions[0] = 'jpg';
+		validExtensions[1] = 'jpeg';
+		validExtensions[3] = 'png';
+		validExtensions[4] = 'gif';
+	} else {
+		validExtensions[0] = 'pdf';
+	}
 
-        Ext.Msg.alert('Advertencia', 'La extension .'+ext+' del archivo ' + filePath + ' no es permitida!');
-        if (typeExtension=="image") {
-         document.getElementsByName('ufile[]')[0].value='';
-         // xt.getCmp('imagen0').setSrc('images/transporte.jpg'); 
-        }
-        // else {
-         // document.getElementsByName('ufile1[]')[0].value='';
-         // xt.getCmp('planilla0').setSrc('helloworld.pdf');	
-        // } 
-        return false;
-    }
+	for (var i = 0; i < validExtensions.length; i++) {
+		if (ext == validExtensions[i])
+			return true;
+	}
+
+	Ext.Msg.alert('Advertencia', 'La extension .' + ext + ' del archivo ' + filePath + ' no es permitida!');
+	if (typeExtension == "image") {
+		document.getElementsByName('ufile[]')[0].value = '';
+		// xt.getCmp('imagen0').setSrc('images/transporte.jpg');
+	}
+	// else {
+	// document.getElementsByName('ufile1[]')[0].value='';
+	// xt.getCmp('planilla0').setSrc('helloworld.pdf');
+	// }
+	return false;
+}
 
 function previewImage(input) {
-   	typeExtension="image";
-   	if (!checkFileExtension(encodeURIComponent(document.getElementsByName("ufile[]")[0].value)))
-   	{
-   	 return false;	
-   	}
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
-      reader.onload = function (e) {
-       document.getElementById('imagen0').src = e.target.result
-      }
-      reader.readAsDataURL(input.files[0]);
-    }
+	typeExtension = "image";
+	if (!checkFileExtension(encodeURIComponent(document.getElementsByName("ufile[]")[0].value))) {
+		return false;
+	}
+	if (input.files && input.files[0]) {
+		var reader = new FileReader();
+		reader.onload = function(e) {
+			document.getElementById('imagen0').src = e.target.result
+		}
+		reader.readAsDataURL(input.files[0]);
+	}
 }
 
 Ext.define('VentanaMarca', {
@@ -75,7 +72,7 @@ Ext.define('VentanaMarca', {
 				x : 0,
 				y : 0,
 				autoRender : false,
-				height : 420,
+				height : 520,
 				id : 'formulariomarca',
 				layout : {
 					type : 'absolute'
@@ -107,18 +104,7 @@ Ext.define('VentanaMarca', {
 				}, {
 					xtype : 'textfield',
 					x : 60,
-					y : 100,
-					width : 360,
-					id : 'imagen',
-					allowBlank : false,
-					blankText : 'Este campo es requerido',
-					minLength : 1,
-					emptyText : 'Imagen de la Marca',
-					fieldLabel : 'Imagen'
-				}, {
-					xtype : 'textfield',
-					x : 60,
-					y : 150,
+					y : 200,
 					width : 360,
 					allowBlank : false,
 					blankText : 'Este campo es requerido',
@@ -129,7 +115,7 @@ Ext.define('VentanaMarca', {
 				}, {
 					xtype : 'textfield',
 					x : 60,
-					y : 200,
+					y : 250,
 					width : 360,
 					id : 'vision',
 					allowBlank : false,
@@ -138,20 +124,25 @@ Ext.define('VentanaMarca', {
 					emptyText : 'Vision de la Marca',
 					fieldLabel : 'Vision'
 				}, {
-					// xtype : 'image',
+					xtype : 'image',
 					id : 'imagen0',
-					x : 450,
-					y : 45,
+					y : 75,
+					x : 160,
 					border : '',
-					html: '<input type="file" class="x-form-file-input" size="40" name="ufile[]" onchange="previewImage(this)" />',
-					// frame : true,
-					// height : 110,
-					// width : 130,
-					// src : 'images/AEVEV4.png'
+					frame : true,
+					height : 110,
+					width : 130,
+					src : ''
+				}, {
+					id : 'imagen1',
+					border : '',
+					x : 160,
+					y : 180,
+					html : '<input type="file" class="x-form-file-input" size="10" name="ufile[]" onchange="previewImage(this) />',
 				}, {
 					xtype : 'textfield',
 					x : 60,
-					y : 250,
+					y : 290,
 					width : 360,
 					id : 'valores',
 					allowBlank : false,
@@ -162,7 +153,7 @@ Ext.define('VentanaMarca', {
 				}, {
 					xtype : 'textfield',
 					x : 60,
-					y : 300,
+					y : 330,
 					width : 360,
 					id : 'contacto',
 					allowBlank : false,
@@ -185,7 +176,7 @@ Ext.define('VentanaMarca', {
 				}, {
 					xtype : 'button',
 					x : 155,
-					y : 350,
+					y : 400,
 					text : 'Eliminar',
 					icon : 'images/eliminar.png',
 					tooltip : 'Eliminar Marca',
@@ -193,7 +184,7 @@ Ext.define('VentanaMarca', {
 				}, {
 					xtype : 'button',
 					x : 250,
-					y : 350,
+					y : 400,
 					text : 'Limpiar',
 					icon : 'images/limpiar.png',
 					id : 'btncancelar',
@@ -205,7 +196,7 @@ Ext.define('VentanaMarca', {
 				}, {
 					xtype : 'button',
 					x : 340,
-					y : 350,
+					y : 400,
 					text : 'Guardar',
 					icon : 'images/grabar.png',
 					tooltip : 'Registrar una Marca',
@@ -289,7 +280,7 @@ Ext.define('VentanaMarca', {
 				success : function(exito, request) {
 					datos = Ext.JSON.decode(exito.responseText);
 					if (datos.exito == 'true') {
-						var id_marca= datos.id;
+						var id_marca = datos.id;
 						Ext.getCmp('nombre').setValue(datos.nombre);
 						Ext.getCmp('imagen').setValue(datos.imagen);
 						Ext.getCmp('mision').setValue(datos.mision);
@@ -315,7 +306,6 @@ Ext.define('VentanaMarca', {
 			Ext.getCmp('nombre').focus();
 
 		}
-
 
 		me.callParent(arguments);
 	}
