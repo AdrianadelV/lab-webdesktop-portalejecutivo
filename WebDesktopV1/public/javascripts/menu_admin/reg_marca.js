@@ -1,6 +1,11 @@
 var marcaStore = null;
 var data = null;
 var typeExtension = "image";
+Ext.require([
+    'Ext.form.field.File',
+    'Ext.form.Panel',
+    'Ext.window.MessageBox'
+]);
 
 function checkFileExtension(elem) {
 	var filePath = elem;
@@ -53,11 +58,11 @@ function previewImage(input) {
 Ext.define('VentanaMarca', {
 	extend : 'Ext.window.Window',
 
-	height : 549,
+	height : 450,
 	id : 'ventanamarca',
-	width : 661,
-	x : 380,
-	y : 225,
+	width : 600,
+	x : 400,
+	y : 260,
 	layout : {
 		type : 'absolute'
 	},
@@ -104,7 +109,7 @@ Ext.define('VentanaMarca', {
 				}, {
 					xtype : 'textfield',
 					x : 60,
-					y : 200,
+					y : 130,
 					width : 360,
 					allowBlank : false,
 					blankText : 'Este campo es requerido',
@@ -115,7 +120,7 @@ Ext.define('VentanaMarca', {
 				}, {
 					xtype : 'textfield',
 					x : 60,
-					y : 250,
+					y : 170,
 					width : 360,
 					id : 'vision',
 					allowBlank : false,
@@ -124,25 +129,37 @@ Ext.define('VentanaMarca', {
 					emptyText : 'Vision de la Marca',
 					fieldLabel : 'Vision'
 				}, {
-					xtype : 'image',
-					id : 'imagen0',
-					y : 75,
-					x : 160,
-					border : '',
-					frame : true,
-					height : 110,
-					width : 130,
-					src : ''
-				}, {
-					id : 'imagen1',
-					border : '',
-					x : 160,
-					y : 180,
-					html : '<input type="file" class="x-form-file-input" size="10" name="ufile[]" onchange="previewImage(this) />',
+					// xtype : 'image',
+					// id : 'imagen0',
+					// y : 75,
+					// x : 160,
+					// border : '',
+					// frame : true,
+					// height : 110,
+					// width : 130,
+					// src : ''
+				}, {		
+		            xtype: 'filefield',
+		            x : 60,
+					y : 90,
+		            id: 'imagen',
+		            emptyText: 'Imagen',
+		            fieldLabel: 'Imagen',
+		            name: 'photo-path',
+		            buttonText: 'Seleccionar Archivo',
+		            buttonConfig: {
+		                iconCls: 'upload-icon'
+			        }
+			    
+					// id : 'imagen1',
+					// border : '',
+					// x : 160,
+					// y : 180,
+					// html : '<input type="file" class="x-form-file-input" size="10" name="ufile[]" onchange="previewImage(this) />',
 				}, {
 					xtype : 'textfield',
 					x : 60,
-					y : 290,
+					y : 200,
 					width : 360,
 					id : 'valores',
 					allowBlank : false,
@@ -153,7 +170,7 @@ Ext.define('VentanaMarca', {
 				}, {
 					xtype : 'textfield',
 					x : 60,
-					y : 330,
+					y : 230,
 					width : 360,
 					id : 'contacto',
 					allowBlank : false,
@@ -176,7 +193,7 @@ Ext.define('VentanaMarca', {
 				}, {
 					xtype : 'button',
 					x : 155,
-					y : 400,
+					y : 270,
 					text : 'Eliminar',
 					icon : 'images/eliminar.png',
 					tooltip : 'Eliminar Marca',
@@ -184,7 +201,7 @@ Ext.define('VentanaMarca', {
 				}, {
 					xtype : 'button',
 					x : 250,
-					y : 400,
+					y : 270,
 					text : 'Limpiar',
 					icon : 'images/limpiar.png',
 					id : 'btncancelar',
@@ -196,7 +213,7 @@ Ext.define('VentanaMarca', {
 				}, {
 					xtype : 'button',
 					x : 340,
-					y : 400,
+					y : 270,
 					text : 'Guardar',
 					icon : 'images/grabar.png',
 					tooltip : 'Registrar una Marca',
@@ -222,18 +239,19 @@ Ext.define('VentanaMarca', {
 					ajax : 'true',
 					funcion : 'grabar_marca',
 					nombre : Ext.getCmp('nombre').getValue(),
-					imagen : Ext.getCmp('imagen').getValue(),
 					mision : Ext.getCmp('mision').getValue(),
 					vision : Ext.getCmp('vision').getValue(),
 					valores : Ext.getCmp('valores').getValue(),
 					contacto : Ext.getCmp('contacto').getValue(),
+					imagen : Ext.getCmp('imagen').getValue(),
 				},
 				success : function(exito, request) {
-					datos = Ext.JSON.decode(exito, reponseText);
-					datos = Ext.JSON.decode(exito, reponseText);
+					alert('PasoImagen');
+					// datos = Ext.JSON.decode(exito, reponseText);
+					// datos = Ext.JSON.decode(exito, reponseText);
 					Ext.Msg.alert("Exito", "Se ha Guardado la Marca!!");
 					Ext.getCmp('formulariomarca').getForm().reset();
-					Ext.getCmp('btnregistrar').disable(false);
+					// Ext.getCmp('btnregistrar').disable(false);
 				},
 				failure : function() {
 					Ext.Msg.alert("Error", "Servidor NO Conectado!!");
