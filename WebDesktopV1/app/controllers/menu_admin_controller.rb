@@ -36,4 +36,33 @@ class MenuAdminController < ApplicationController
    valor = @marca.busca_marca_existe(nombre)
    render :text => $tirajson
   end
+  
+   def generardatacombosestados
+   @estados = Estados.all
+   @son = Estados.count
+   @i=1
+   @tirajson = '[ '
+   @estados.each do |estado|
+    if @i<@son
+      @tirajson = @tirajson + ' { "id": "'+@i.to_s+'", "nombre": "' + estado.nombre + '"},'
+    else
+      @tirajson = @tirajson + ' { "id": "'+@i.to_s+'", "nombre": "' + estado.nombre + '"} '
+    end
+    @i=@i+1
+   end
+   @tirajson = @tirajson + ' ] '
+   render :text => @tirajson
+  end
+  
+  def buscar_estadoid 
+    nombre = params[:estado]
+    @estados = Estados.new
+    valor = @Estados.buscar_ciudad(nombre)
+    if (valor==1)
+       parsed_json = ActiveSupport::JSON.decode($tirajson)
+       idciudad= parsed_json["id"]
+       puts idciudad
+    end
+    render :text => $tirajson
+  end
 end
