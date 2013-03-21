@@ -33,6 +33,25 @@ Ext.require([
     			'Ext.panel.Panel'
 	         ]);
 
+//Definicion del Modelo
+Ext.define('Estados', {
+ extend: 'Ext.data.Model',
+           fields: [
+            {name: 'id', type: 'int'},
+            {name: 'nombre', type: 'varchar'}
+           ],
+           proxy: {
+            type: 'ajax',
+            url : 'menu_admin/generardatacombos'
+           }
+});
+
+//Definicion del Data Store
+var estadoStore = Ext.create('Ext.data.Store', {
+    model: 'Estados',
+    autoLoad: true,
+});
+
 Ext.define('VentanaConcesionarioAdmin', {
     extend: 'Ext.window.Window',
 
@@ -134,11 +153,26 @@ Ext.define('VentanaConcesionarioAdmin', {
                                 },
                                 {
                                     xtype: 'combobox',
+                                    store: estadoStore,
                                     x: 20,
                                     y: 180,
                                     width: 280,
                                     id : 'cmb_estado',
-                                    fieldLabel: 'Estado'
+                                    valueField: 'id',
+					                displayField: 'nombre',   
+					                queryMode: 'remote',
+					                typeAhead: true,
+					                emptyText:'Seleccionar',
+					                triggerAction: 'all',
+					                selecOnFocus: true,
+                                    fieldLabel: 'Estado',
+                                    listeners: {
+						                load: function(store, options) {
+						                      var combo = Ext.getCmp('cmb_estado');
+						                      combo.setValue(combo.getValue()); 
+						             } }
+                                    
+                                    
                                 },
                                 {
                                     xtype: 'combobox',
