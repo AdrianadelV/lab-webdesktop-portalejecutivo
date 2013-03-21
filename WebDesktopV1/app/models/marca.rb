@@ -52,7 +52,7 @@ class Marca < ActiveRecord::Base
     @marca.save
     valor=1
     $tirajson = '{ "success": "true", "exito": "true", "message": "Datos guardados satisfactoriamente!" }'
-
+    puts $tirajson 
   end
   
 end
