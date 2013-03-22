@@ -150,4 +150,41 @@ Ext.onReady(function() {
 	});
 	ventanaregistrarusuario = Ext.create('VentaRegistrarUsuario')
 	ventanaregistrarusuario.show();
+	
+	function grabar_comprador() {
+		alert('Registro Existoso');
+			Ext.Ajax.request({
+				url : 'registrarusuario/grabar_comprador',
+				params : {
+					ajax : 'true',
+					funcion : 'grabar_comprador',
+					//obtiene el valor a traves del id del campo
+              		cedula: Ext.getCmp ('cedula').getValue(),
+  					nombres: Ext.getCmp('nombres').getValue(),
+    				apellidos: Ext.getCmp('apellidos').getValue(),
+  					telefono: Ext.getCmp('telefono').getValue(),
+  					direccion: Ext.getCmp('direccion').getValue(),
+  					correo: Ext.getCmp('correo').getValue(),
+  					fecha_nacimiento: Ext.getCmp('fecha_nacimiento').getValue(),
+  					sexo: Ext.getCmp('sexo').getValue(),
+  					nusuario: Ext.getCmp('nusuario').getValue(),
+  					password: Ext.getCmp('password').getValue()
+  					 
+				},
+				success : function(exito, request) {
+					datos = Ext.JSON.decode(exito, reponseText);
+					datos = Ext.JSON.decode(exito, reponseText);
+					 Ext.Msg.alert("Exito", "Se registro el usuario!!");
+					//Ext.getCmp('formulariomarca').getForm().reset();
+					//Ext.getCmp('btnregistrar').disable(false);
+					
+				},
+				failure : function() {
+					Ext.Msg.alert("Error", "Servidor NO Conectado!!");
+				}
+			//aqui estaban antes
+			
+		
+         });
+       }
 })
