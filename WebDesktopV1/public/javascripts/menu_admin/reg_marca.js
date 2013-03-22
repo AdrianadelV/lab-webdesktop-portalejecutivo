@@ -220,7 +220,9 @@ Ext.define('VentanaMarca', {
 					id : 'btnregistrar',
 					listeners : {
 						click : function() {
-							if (Ext.getCmp('nombre').getValue() == "" || Ext.getCmp('imagen').getValue() == "" || Ext.getCmp('mision').getValue() == "" || Ext.getCmp('vision').getValue() == "" || Ext.getCmp('valores').getValue() == "" || Ext.getCmp('imagen').getValue() == "") {
+							if (Ext.getCmp('nombre').getValue() == "" || Ext.getCmp('mision').getValue() == "" || 
+							    Ext.getCmp('vision').getValue() == "" || Ext.getCmp('valores').getValue() == "" ||
+                                Ext.getCmp('contacto').getValue() == "") {
 								Ext.Msg.alert("Error", "Debes LLenar todos los campos");
 							} else {
 								grabar_marca();
@@ -298,18 +300,17 @@ Ext.define('VentanaMarca', {
 				success : function(exito, request) {
 					datos = Ext.JSON.decode(exito.responseText);
 					if (datos.exito == 'true') {
-						var id_marca = datos.id;
 						Ext.getCmp('nombre').setValue(datos.nombre);
 						Ext.getCmp('imagen').setValue(datos.imagen);
 						Ext.getCmp('mision').setValue(datos.mision);
 						Ext.getCmp('vision').setValue(datos.vision);
 						Ext.getCmp('valores').setValue(datos.valores);
 						Ext.getCmp('contacto').setValue(datos.contacto);
-						Ext.getCmp('btnregistrar').disable(false);
+					//	Ext.getCmp('btnregistrar').disable(true);
 						Ext.getCmp('imagen0').setSrc(Ext.getCmp('imagen').getValue());
 					} else {
 						Ext.Msg.alert("Error", datos.msg);
-						Ext.getCmp('btnregistrar').enable(false);
+						Ext.getCmp('btnregistrar').enable(true);
 						Ext.getCmp('btneliminar').disable(true);
 					}
 				},
@@ -321,7 +322,7 @@ Ext.define('VentanaMarca', {
 				}
 			});
 			//Ext.getCmp('btnregistrar').disable(false);
-			Ext.getCmp('nombre').focus();
+			//Ext.getCmp('nombre').focus();
 
 		}
 
