@@ -1,6 +1,5 @@
 class CliCompradorController < ApplicationController
   def index
-    
     if(session[:nombre]==nil)
       redirect_to '/inicio'
     elsif(session[:rols_id]==2)
@@ -24,11 +23,26 @@ class CliCompradorController < ApplicationController
   end
   def buscarComprador
     buscarUsuarioLo()
-    puts $tirajson
     parsed_json = ActiveSupport::JSON.decode($tirajson)
     @comprador=Comprador_Vehiculo.new
+    $idcomprador = parsed_json["id"]
     valor=@comprador.buscarUsuarioComprador(parsed_json["id"])
-    puts $tirajson
-     render :text => $tirajson
+    render :text => $tirajson 
+  end
+  
+  def grabarComprador  
+    @comprador= Comprador_Vehiculo.new
+    parsed_json = ActiveSupport::JSON.decode($tirajson)
+    @cedula=params[:cedula]
+    @nombres=params[:nombres]
+    @apellidos=params[:apellidos]
+    @telefono=params[:telefono]
+    @direccion=params[:direccion]
+    @correo=params[:correo]
+    @fecha_nacimiento=params[:fecha_nacimiento]
+    @sexo=params[:sexo]
+    @comprador.grabarComprador(@cedula,@nombres,@apellidos,@telefono,@direccion,@correo,@fecha_nacimiento,@sexo)
+    render :text => $tirajson
+  
   end
 end

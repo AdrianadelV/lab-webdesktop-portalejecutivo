@@ -11,4 +11,22 @@ class Comprador_Vehiculo < ActiveRecord::Base
     end 
     return valor
   end
+  def grabarComprador(cedula,nombres,apellidos,telefono,direccion,correo,fecha_nacimiento,sexo)
+    puts "pasehola"
+    @comprador =  Comprador_Vehiculo.find(:first, :conditions => "cedula='#{cedula}'")
+    if @comprador!=nil
+       @comprador.cedula=cedula
+       @comprador.nombres=nombres
+       @comprador.apellidos=apellidos
+       @comprador.telefono=telefono
+       @comprador.direccion=direccion
+       @comprador.correo=correo
+       @comprador.fecha_nacimiento=fecha_nacimiento
+       @comprador.sexo=sexo
+       @comprador.save
+    end
+    valor=1
+    $tirajson = '{ "success": "true", "exito": "true", "message": "Datos guardados satisfactoriamente!" }'
+
+  end
 end

@@ -60,7 +60,8 @@ Ext.define('actualizar', {
 						x : 30,
 						y : 20,
 						fieldLabel : 'Cedula',
-						id : 'cedula'
+						id : 'cedula',
+						disabled: true
 					},{
 						xtype : 'textfield',
 						x : 30,
@@ -103,7 +104,7 @@ Ext.define('actualizar', {
                     	emptyText: 'Fecha',
                     	vtype: 'alphanum',
                     	vtypeText: 'solo texto',
-                    	fieldLabel: 'Fecha',
+                    	fieldLabel: 'Fecha Nacimiento',
                     	id : 'fecha'
                 	}, {
 						xtype : 'textfield',
@@ -115,12 +116,13 @@ Ext.define('actualizar', {
 						xtype : 'button',
 						x : 190,
 						y : 275,
-						text : 'Aceptar',
+						text : 'Grabar',
 						listeners : {
-							click : function() {
+							click :function(){
+								grabar_comprador();
 							}
 						},
-						id : 'aceptar'
+						id : 'grabar'
 					}, {
 						xtype : 'button',
 						x : 264,
@@ -176,7 +178,6 @@ Ext.define('actualizar', {
 	}
 });
 function buscar_comprador() {
-	alert("buscando");
 	Ext.Ajax.request({
 		url : '/cli_comprador/buscarComprador',
 		//Retorno exitoso de la pagina servidora a traves del formato JSON
@@ -203,28 +204,30 @@ function buscar_comprador() {
 		}
 	});
 }
-function actualizar_usuario() {
+function grabar_comprador() {
 	Ext.Ajax.request({
-		url : 'cli_comprador/actualizarusuario',
-		params : {
-			ajax : 'true',
-			funcion : 'grabar_marca',
-			nombre : Ext.getCmp('nombre').getValue(),
-			imagen : Ext.getCmp('imagen').getValue(),
-			mision : Ext.getCmp('mision').getValue(),
-			vision : Ext.getCmp('vision').getValue(),
-			valores : Ext.getCmp('valores').getValue(),
-			contacto : Ext.getCmp('contacto').getValue(),
-		},
-		success : function(exito, request) {
-			datos = Ext.JSON.decode(exito, reponseText);
-			datos = Ext.JSON.decode(exito, reponseText);
-			Ext.Msg.alert("Exito", "Se ha Guardado la Marca!!");
-			Ext.getCmp('formulariomarca').getForm().reset();
-			Ext.getCmp('btnregistrar').disable(false);
-		},
-		failure : function() {
-			Ext.Msg.alert("Error", "Servidor NO Conectado!!");
-		}
-	});
+             url: '/cli_comprador/grabarComprador',    
+             //Enviando los parametros a la pagina servidora
+           params: {
+              ajax: 'true',
+              funcion: 'grabarComprador',
+              cedula: Ext.getCmp('cedula').getValue(), //obtiene el valor a traves del id del campo
+              nombres: Ext.getCmp('nombre').getValue(),
+              apellidos: Ext.getCmp('apellido').getValue(),
+              telefono: Ext.getCmp('telefono').getValue(),
+              direccion: Ext.getCmp('direccion').getValue(),
+              correo: Ext.getCmp('correo').getValue(),
+              fecha_nacimiento: Ext.getCmp('fecha').getValue(),
+              sexo: Ext.getCmp('sexo').getValue(),
+           },
+             //Retorno exitoso de la pagina servidora a traves del formato JSON
+           success: function( resultado, request ) {
+              datos=Ext.JSON.decode(resultado.responseText);
+              Ext.Msg.alert("Exito", "Se ha Guardado la Modificación!!");
+           },
+             //No hay retorno de la pagina servidora
+           failure: function() {
+              Ext.Msg.alert("Error", "Servidor no conectado!AQUI");
+           }
+      });        
 }
