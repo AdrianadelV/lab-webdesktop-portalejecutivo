@@ -103,7 +103,7 @@ Ext.onReady(function() {
 				}
 				if(node.get('text') == "Listado de Marcas"){
 					ventanaacttiva.close();
-					ventanaacttiva = Ext.create('miVentanalista1');
+					ventanaacttiva = Ext.create('miVentanalistamarca');
                   	ventanaacttiva.show();
 				}
 			}

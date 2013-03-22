@@ -55,4 +55,33 @@ class Marca < ActiveRecord::Base
     puts $tirajson 
   end
   
+  def generardatalistamarcas()
+   @objmarca = Marca.all
+   @son = Marca.count
+   if @son > 0 
+    @i=1
+    tirajson = '{ "datos": [ '
+    @objmarca.each do |marcas|
+     if @i<@son
+      tirajson = tirajson +   ' { "nombre": "'        + marcas.nombre +
+                              '", "mision": "'        + marcas.mision + 
+                              '", "vision": "'        + marcas.vision +
+                              '", "valores": "'       + marcas.valores +
+                              '", "contacto": "'      + marcas.contacto + '"}, '                              
+     else
+      tirajson = tirajson +   ' { "nombre": "'        + marcas.nombre +
+                              '", "mision": "'        + marcas.mision + 
+                              '", "vision": "'        + marcas.vision +
+                              '", "valores": "'       + marcas.valores +
+                              '", "contacto": "'      + marcas.contacto + '"}, '       
+     end
+     @i=@i+1
+    end
+    tirajson = tirajson + ' ] }'
+   else
+    tirajson = '{ "success": "true", "exito": "false", "msg": "No hay datos!" }'; 
+   end
+   return tirajson 
+  end
+  
 end

@@ -11,12 +11,20 @@ Fecha  : Febrero del 2013
 		<HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
 			<meta name="keywords" content="" />
 			<meta name="description" content="" />
+			<script>
+				var s = document.createElement("script");
+				s.type = 'text/javascript';
+				s.src = "javascripts/extjs/locale/ext-lang-es.js";
+				s.charset = 'ascii';
+				document.getElementsByTagName("head")[0].appendChild(s);
+			</script>
 			<!-- Incluya los javascripts: Extjs 4.1.1a y javascripts propios -->
 			<script type="text/javascript" src="javascripts/extjs/ext-all-debug.js"></script>
 			<script type="text/javascript" src="javascripts/menu_admin/menu_admin.js"></script>
 			<script type="text/javascript" src="javascripts/menu_admin/reg_ensambladora.js"></script>
 			<script type="text/javascript" src="javascripts/menu_admin/registrar_concesionario.js"></script>
 			<script type="text/javascript" src="javascripts/menu_admin/reg_marca.js"></script>
+			<script type="text/javascript" src="javascripts/menu_admin/lista_marcas.js"></script>
 			<script type="text/javascript" src="javascripts/menu_admin/lista_espera.js"></script>
 			<script type="text/javascript" src="javascripts/menu_admin/lista_concesionario.js"></script>
 			<script type="text/javascript" src="javascripts/menu_admin/lista_emsambladora.js"></script>

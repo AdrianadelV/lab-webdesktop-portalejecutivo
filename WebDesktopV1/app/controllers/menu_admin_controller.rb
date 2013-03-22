@@ -65,4 +65,10 @@ class MenuAdminController < ApplicationController
     # end
     # render :text => $tirajson
   # end
+  
+  def generardatalistamarcas
+   @marca = Marca.new
+   $tirajson=@marca.generardatalistamarcas()
+   render :text => $tirajson  
+  end
 end
