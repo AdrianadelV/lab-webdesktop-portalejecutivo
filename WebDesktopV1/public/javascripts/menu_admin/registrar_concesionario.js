@@ -42,7 +42,7 @@ Ext.define('Estados', {
            ],
            proxy: {
             type: 'ajax',
-            url : 'menu_admin/generardatacombos'
+            url : 'menu_admin/generardatacombosestados'
            }
 });
 
@@ -170,6 +170,8 @@ Ext.define('VentanaConcesionarioAdmin', {
 						                load: function(store, options) {
 						                      var combo = Ext.getCmp('cmb_estado');
 						                      combo.setValue(combo.getValue()); 
+						                      // enviar_nombreciudad();
+						                      // alert('pase');
 						             } }
                                     
                                     
@@ -297,5 +299,24 @@ Ext.define('VentanaConcesionarioAdmin', {
     }
 
 });
+
+// function enviar_nombreciudad () {
+	// var nombre_estado = Ext.getCmp('cmb_estado').getValue();
+  	// Ext.Ajax.request({
+		// url : 'menu_admin/buscar_estadoid',
+		// //Enviando los parametros a la pagina servidora
+		// params : {
+			// nombre : nombre_estado
+		// },
+		// //Retorno exitoso de la pagina servidora a traves del formato JSON
+		// success : function(resultado, request) {
+			// datos = Ext.JSON.decode(resultado.responseText);
+		// },
+		// //No hay retorno de la pagina servidora
+		// failure : function() {
+			// Ext.Msg.alert("Error", "Servidor no conectado");
+		// }
+	// });
+// }
 
               		
