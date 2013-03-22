@@ -54,15 +54,15 @@ class MenuAdminController < ApplicationController
    render :text => @tirajson
   end
   
-  def buscar_estadoid 
-    nombre = params[:estado]
-    @estados = Estados.new
-    valor = @Estados.buscar_ciudad(nombre)
-    if (valor==1)
-       parsed_json = ActiveSupport::JSON.decode($tirajson)
-       idciudad= parsed_json["id"]
-       puts idciudad
-    end
-    render :text => $tirajson
-  end
+  # def buscar_estadoid 
+    # nombre = params[:estado]
+    # @estados = Estados.new
+    # valor = @Estados.buscar_ciudad(nombre)
+    # if (valor==1)
+       # parsed_json = ActiveSupport::JSON.decode($tirajson)
+       # idciudad= parsed_json["id"]
+       # puts idciudad
+    # end
+    # render :text => $tirajson
+  # end
 end
