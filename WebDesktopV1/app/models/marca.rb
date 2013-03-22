@@ -83,5 +83,33 @@ class Marca < ActiveRecord::Base
    end
    return tirajson 
   end
+  def grabar_marca(nombre,imagen,mision,vision,valores,contacto)
+    puts "paseo"
+    @objmarcas = Marca.find(:first, :conditions => "nombre='#{nombre}'")
+    if @objmarcas!=nil
+    @objmarcas.id=@objmarcas.id
+    @objmarcas.nombre=nombre
+    @objmarcas.imagen=imagen
+    @objmarcas.mision=mision
+    @objmarcas.vision=vision
+    @objmarcas.valores=valores
+    @objmarcas.contacto=contacto
+    @objmarcas.save
+    valor=1
+    $tirajson = '{ "success": "true", "exito": "true", "message": "Datos de la Marca Actualizada" }'
+    puts $tirajson 
+    end
+    @objmarcas = Marca.new
+    @objmarcas.nombre=nombre
+    @objmarcas.imagen=imagen
+    @objmarcas.mision=mision
+    @objmarcas.vision=vision
+    @objmarcas.valores=valores
+    @objmarcas.contacto=contacto
+    @objmarcas.save
+    valor=1
+    $tirajson = '{ "success": "true", "exito": "true", "message": "NuevDatos guardados satisfactoriamente!" }'
+  end
+  #dasda
   
 end
