@@ -33,20 +33,23 @@ class Usuario < ActiveRecord::Base
      valor=1
     $tirajson = '{ "success": "true", "exito": "true", "message": "Datos guardados satisfactoriamente!" }'
     puts' graba tira de js usuario------------------------------------'
-    return retornarid(nombre)
+  
   end
   
   def retornarid(nombre)
+    puts' busca el usuairo por nombre --------------------------'+ nombre +'---a buscar---'
      @usuario = Usuario.find(:first, :conditions => "nombre='#{nombre}'")
      @identidad=''
-     puts' busca el usuairo por nombre --------------------------'+ nombre +'----------'
+      puts' busca el ' + @usuario.id+''
       if @usuario!=nil
-        identidad = @usuario.id
+        usuario.id = @usuario.id
           
         else  identidad=''
       end
       return identidad
-      puts' busca el ' + identidad+''
+     
   end
+  
+  
   
 end
