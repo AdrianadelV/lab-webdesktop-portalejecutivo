@@ -1,7 +1,7 @@
 class Marca < ActiveRecord::Base
-   def buscar(id_marca)
+   def buscar(nombre)
    valor = 0
-    @objmarcas = Marca.find(:first, :conditions => "id='#{id_marca}'")
+    @objmarcas = Marca.find(:first, :conditions => "nombre='#{nombre}'")
     if @objmarcas!=nil
       $tirajson = '{"success": "true", 
                     "exito": "true",
@@ -39,22 +39,7 @@ class Marca < ActiveRecord::Base
     end
     return @tira
   end
-  
- def grabar_marca(nombre,imagen,mision,vision,valores,contacto)
-    puts "paseo"
-    @marca = Marca.new
-    @marca.nombre=nombre
-    @marca.imagen=imagen
-    @marca.mision=mision
-    @marca.vision=vision
-    @marca.valores=valores
-    @marca.contacto=contacto
-    @marca.save
-    valor=1
-    $tirajson = '{ "success": "true", "exito": "true", "message": "Datos guardados satisfactoriamente!" }'
-    puts $tirajson 
-  end
-  
+ 
   def generardatalistamarcas()
    @objmarca = Marca.all
    @son = Marca.count
@@ -108,7 +93,7 @@ class Marca < ActiveRecord::Base
     @objmarcas.contacto=contacto
     @objmarcas.save
     valor=1
-    $tirajson = '{ "success": "true", "exito": "true", "message": "NuevDatos guardados satisfactoriamente!" }'
+    $tirajson = '{ "success": "true", "exito": "true", "message": "Nuevo Datos guardados satisfactoriamente!" }'
   end
   #dasda
   
