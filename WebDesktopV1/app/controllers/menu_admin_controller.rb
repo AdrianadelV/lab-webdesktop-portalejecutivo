@@ -29,46 +29,51 @@ class MenuAdminController < ApplicationController
     @marca.grabar_marca(@nombre,@imagen,@mision,@vision,@valores,@contacto)
     render :text => $tirajson
   end
-  
+
   def buscar_marca
     @marca = Marca.new
-   nombre = params[:nombre]
-   valor = @marca.buscar(nombre)
-   render :text => $tirajson
+    nombre = params[:nombre]
+    valor = @marca.buscar(nombre)
+    render :text => $tirajson
   end
-  
-   def generardatacombosestados
-   @estados = Estados.all
-   @son = Estados.count
-   @i=1
-   @tirajson = '[ '
-   @estados.each do |estado|
-    if @i<@son
-      @tirajson = @tirajson + ' { "id": "'+@i.to_s+'", "nombre": "' + estado.nombre + '"},'
-    else
-      @tirajson = @tirajson + ' { "id": "'+@i.to_s+'", "nombre": "' + estado.nombre + '"} '
+
+  def generardatacombosestados
+    @estados = Estados.all
+    @son = Estados.count
+    @i=1
+    @tirajson = '[ '
+    @estados.each do |estado|
+      if @i<@son
+        @tirajson = @tirajson + ' { "id": "'+@i.to_s+'", "nombre": "' + estado.nombre + '"},'
+      else
+        @tirajson = @tirajson + ' { "id": "'+@i.to_s+'", "nombre": "' + estado.nombre + '"} '
+      end
+      @i=@i+1
     end
-    @i=@i+1
-   end
-   @tirajson = @tirajson + ' ] '
-   render :text => @tirajson
+    @tirajson = @tirajson + ' ] '
+    render :text => @tirajson
   end
-  
-  # def buscar_estadoid 
-    # nombre = params[:estado]
-    # @estados = Estados.new
-    # valor = @Estados.buscar_ciudad(nombre)
-    # if (valor==1)
-       # parsed_json = ActiveSupport::JSON.decode($tirajson)
-       # idciudad= parsed_json["id"]
-       # puts idciudad
-    # end
-    # render :text => $tirajson
-  # end
-  
+
+  def generardatacombosciudades
+    @ciudads = Ciudads.all
+    @son = Ciudads.count
+    @i=1
+    @tirajson = '[ '
+    @ciudads.each do |ciudad|
+      if @i<@son
+        @tirajson = @tirajson + ' {"idestados":"'+ciudad.estados_id.to_s+'","idciudades":"'+ciudad.id.to_s+'", "ciudades": "' +ciudad.nombre+ '"},'
+      else
+        @tirajson = @tirajson + ' {"idestados":"'+ciudad.estados_id.to_s+'","idciudades":"'+ciudad.id.to_s+'", "ciudades": "' +ciudad.nombre+ '"} '
+        @i=@i+1
+      end
+      @tirajson = @tirajson + ' ] '
+      render :text => @tirajson
+    end
+  end
+
   def generardatalistamarcas
-   @marca = Marca.new
-   $tirajson=@marca.generardatalistamarcas()
-   render :text => $tirajson  
+    @marca = Marca.new
+    $tirajson=@marca.generardatalistamarcas()
+    render :text => $tirajson
   end
 end

@@ -24,6 +24,8 @@
 posx = parseInt(screen.width * factorw);
 posy = parseInt(screen.height * factorh);
 
+var primeravez = true;
+
 Ext.require([
 	         	'Ext.tree.*',
 	         	'Ext.data.*',
@@ -49,6 +51,26 @@ Ext.define('Estados', {
 //Definicion del Data Store
 var estadoStore = Ext.create('Ext.data.Store', {
     model: 'Estados',
+    autoLoad: true,
+});
+
+//Definicion del Modelo Ciudades
+Ext.define('Ciudades', {
+ extend: 'Ext.data.Model',
+           fields: [
+            {name: 'estados_id', type: 'string'},
+            {name: 'id_ciudades', type: 'string'},
+            {name: 'nombre_ciudad', type: 'string'}
+           ],
+           proxy: {
+            type: 'ajax',
+            url : 'menu_admin/generardatacombosciudades'
+           }
+});
+
+//Definicion del Data Store de ciudades
+var ciudadeStore = Ext.create('Ext.data.Store', {
+    model: 'Ciudades',
     autoLoad: true,
 });
 
@@ -164,17 +186,25 @@ Ext.define('VentanaConcesionarioAdmin', {
 					                typeAhead: true,
 					                emptyText:'Seleccionar',
 					                triggerAction: 'all',
+					                editable: 'false',
 					                selecOnFocus: true,
                                     fieldLabel: 'Estado',
                                     listeners: {
-						                load: function(store, options) {
-						                      var combo = Ext.getCmp('cmb_estado');
-						                      combo.setValue(combo.getValue()); 
-						                      // enviar_nombreciudad();
-						                      // alert('pase');
-						             } }
-                                    
-                                    
+						                scope: this,
+						                 'select': function(combo, rec) { 
+						                   var estado_val = rec[0].get(combo.valueField);
+						                   alert(estado_val);
+						                   var ciudades_obj = Ext.getCmp('cmb_ciudad');
+						                   if (primeravez) {
+							                   	primeravez=false;
+							                   	ciudades_obj.clearValue();
+						                   } else {
+							                   	ciudades_obj.clearValue();
+							                   	ciudades_obj.getStore().clearFilter();
+						                   }
+						                   ciudades_obj.store.filter('estados_id', estado_val);
+						                 }  
+						            }
                                 },
                                 {
                                     xtype: 'combobox',
@@ -182,6 +212,15 @@ Ext.define('VentanaConcesionarioAdmin', {
                                     y: 180,
                                     width: 270,
                                     id : 'cmb_ciudad',
+                                    store: ciudadeStore,
+                                    valueField: 'id_ciudades',
+                                    displayField: 'nombre_ciudad',
+                                    queryMode: 'remote',
+                                    typeAhead: true,
+                                    emptyText:'Seleccionar',
+                                    triggerActio: 'all',
+                                    editable: 'false',
+                                    selecOnFocus: true,
                                     fieldLabel: 'Ciudad'
                                 },
                                 {
@@ -300,23 +339,5 @@ Ext.define('VentanaConcesionarioAdmin', {
 
 });
 
-// function enviar_nombreciudad () {
-	// var nombre_estado = Ext.getCmp('cmb_estado').getValue();
-  	// Ext.Ajax.request({
-		// url : 'menu_admin/buscar_estadoid',
-		// //Enviando los parametros a la pagina servidora
-		// params : {
-			// nombre : nombre_estado
-		// },
-		// //Retorno exitoso de la pagina servidora a traves del formato JSON
-		// success : function(resultado, request) {
-			// datos = Ext.JSON.decode(resultado.responseText);
-		// },
-		// //No hay retorno de la pagina servidora
-		// failure : function() {
-			// Ext.Msg.alert("Error", "Servidor no conectado");
-		// }
-	// });
-// }
 
               		
