@@ -14,7 +14,11 @@ class Comprador_Vehiculo < ActiveRecord::Base
 
   
   #lo nuevo
-  def grabar_comprador(cedula,nombres,apellidos,telefono,direccion,correo,fecha_nacimiento,sexo,usuarios_id)
+  def grabar_comprador(cedula,nombres,apellidos,telefono,direccion,correo,fecha_nacimiento,sexo,nusuario)
+    @usuario = Usuario.find(:first, :conditions => "nombre='#{nusuario}'")
+    if @usuario!=nil
+      
+ 
      puts "**********************************************************************modelo"
     @comprador_vehiculo=Comprador_Vehiculo.new
     @comprador_vehiculo.cedula=cedula
@@ -25,13 +29,16 @@ class Comprador_Vehiculo < ActiveRecord::Base
     @comprador_vehiculo.correo=correo
     @comprador_vehiculo.fecha_nacimiento=fecha_nacimiento
     @comprador_vehiculo.sexo=sexo
-    @comprador_vehiculo.usuarios_id=usuario_id
+    @comprador_vehiculo.usuarios_id=@usuario.id
     @comprador_vehiculo.save
     valor=1
     $tirajson = '{ "success": "true", "exito": "true", "message": "Datos guardados satisfactoriamente!" }'
-
+    else
+      $tirajson = '{ "success": "true", "exito": "false", "msg": " no se registro el comprador" }'
+    end
+     puts "********************* FIN"
   end
-
+  
  
 
 end
