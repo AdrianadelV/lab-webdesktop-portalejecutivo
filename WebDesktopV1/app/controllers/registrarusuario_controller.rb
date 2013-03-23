@@ -21,13 +21,13 @@ class RegistrarusuarioController < ApplicationController
     @nusuario=params[:nusuario]
     @password=params[:password]
     puts ''+ @nusuario +  ''
-    @id=grabar_usuario(@nusuario, @password);
+    grabar_usuario(@nusuario, @password);
     
     
     puts '+++++++++++++++++++++++++++++++++++++++++++++++++++++++metio usuario'
     
-    @usuarios_id=id
-    @comprador_vehiculo.grabar_comprador(@cedula,@nombres,@apellidos,@telefono,@direccion,@correo,@fecha_nacimiento,@sexo,@usuarios_id)
+  
+    @comprador_vehiculo.grabar_comprador(@cedula,@nombres,@apellidos,@telefono,@direccion,@correo,@fecha_nacimiento,@sexo,@nusuario)
     render :text => $tirajson
   end
   
