@@ -33,7 +33,7 @@ class MenuAdminController < ApplicationController
   def buscar_marca
     @marca = Marca.new
    nombre = params[:nombre]
-   valor = @marca.busca_marca_existe(nombre)
+   valor = @marca.buscar(nombre)
    render :text => $tirajson
   end
   
