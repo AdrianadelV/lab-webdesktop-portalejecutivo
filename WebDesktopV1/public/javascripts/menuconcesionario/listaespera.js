@@ -28,20 +28,26 @@ var data = null;
 var ventana = null;
 var boton = null;
 
+Ext.require([
+	         	'Ext.tree.*',
+	         	'Ext.data.*',
+	         	'Ext.tip.*',
+				'Ext.container.Viewport',
+    			'Ext.container.ButtonGroup',
+    			'Ext.panel.Panel'
+	         ]);
+
 //Definicion del Modelo
  Ext.define('Usuarios', {
     extend: 'Ext.data.Model',
-    fields: [ 'cedula', 'nombre', 'posicion','modelo','ubicacion','fecha']
+    fields: [ 'nombre', 'apellido', 'posicion', 'fecha_solicitud', 'modelo_vehi', 'concesionario']
 });
 
 //Definicion del Data Store
 var usuarioStore = Ext.create('Ext.data.Store', {
     model: 'Usuarios',
     data: [
-        { cedula: '18923926', nombre: 'Fernando Colmenarez', posicion : '1',modelo :'focus',ubicacion:'Barquisimeto',fecha :'01/01/2013' },
-        { cedula: '12345678', nombre: 'Maria Paez', posicion : '2',modelo :'explorer',ubicacion:'Quibor',fecha :'09/01/2013' },
-        { cedula: '98765432', nombre: 'Adriana Santana', posicion : '3',modelo :'fortaleza',ubicacion:'Barquisimeto',fecha :'10/01/2013' },
-        { cedula: '13218466', nombre: 'Jose M Galindez', posicion : '4',modelo :'focus',ubicacion:'Cuji-tamaca',fecha :'11/01/2013' }
+        { nombre: 'maria', apellido: 'paez', posicion: '1',  fecha_solicitud: '2012-02-12', modelo_vehi: 'explorer', concesionario: 'Carofordmotors'}
     ]
 });
 
@@ -55,14 +61,13 @@ Ext.define('App.UsuariosGrid', {
     initComponent : function() {
         //Definicion de las columnas del grid
         this.columns = [
-            {xtype: 'rownumberer', width: 40, sortable: false},
-            {text: "Cedula", width: 60, dataIndex: 'cedula', sortable: true},
-            {text: "Nombre", flex: 90, dataIndex: 'nombre', sortable: true},
+            {xtype: 'rownumberer', width: 20, sortable: true},
+            {text: "Nombre", width: 60, dataIndex: 'nombre', sortable: true},
+            {text: "Apellido", width: 100, dataIndex: 'apellido', sortable: true},
             {text: "Posicion", width: 100, dataIndex: 'posicion', sortable: true},
-            {text: "Modelo", width: 100, dataIndex: 'modelo', sortable: true},
+            {text: "Fecha de Solicitud", width: 100, dataIndex: 'fecha_solicitud', sortable: true},
+            {text: "Modelo Vehiculo", width: 100, dataIndex: 'modelo_vehi', sortable: true},
             {text: "Concesionario", width: 100, dataIndex: 'concesionario', sortable: true},
-            {text: "Ubicacion", width: 100, dataIndex: 'ubicacion', sortable: true},
-            {text: "Fecha", width: 100, dataIndex: 'fecha', sortable: true},
         ];
         this.dockedItems = [ {
 	  		xtype: 'pagingtoolbar',
@@ -74,90 +79,319 @@ Ext.define('App.UsuariosGrid', {
         // Origen de los datos, de un data store
         this.store = usuarioStore;
         this.forceFit = true;
-	this.scroll = false;
-	this.viewConfig = { style: {overflow: 'auto', overflowX: 'hidden' } };
-	//this.verticalScroller = {xtype: 'paginggridscroller'};
+	this.scroll = true;
+	this.viewConfig = { style: {overflowY: 'hidden', overflowX: 'hidden' } };
+	this.verticalScroller = {xtype: 'usuariosgrid'};
         this.listeners = {
-                          itemclick : function() {
+                          itemclick : function(view) {
                            data = this.getSelectionModel().selected.items[0].data;
-                           //alert(data.usuario);
+                           //alert('hadjasdha');
+                             ventanatab = Ext.create('ventanatab');
+                  			 ventanatab.show();
+                  			 ventanalista.close();
                           }
                          };
         //Llamamos a la super clase a iniciacion del componente
         App.UsuariosGrid.superclass.initComponent.call(this);
     }
 });
+//Definicion de Tab
+Ext.define('ventanatab', {
+    extend: 'Ext.tab.Panel',
+	alias: 'widget.tabinform',
+    x: 0,
+    y: 175,
+    height: 500,
+    width: 650,
+    activeTab: 0,
+
+    initComponent: function() {
+        var me = this;
+
+        Ext.applyIf(me, {
+            items: [
+                {
+                    xtype: 'panel',
+                    layout: {
+                        type: 'absolute'
+                    },
+                    title: 'Comprador',
+					items: [
+                                {
+                                    xtype: 'textfield',
+                                    x: 70,
+                                    y: 20,
+                                    disabled: true,
+                                    fieldLabel: 'Cedula'
+                                },
+                                {
+                                    xtype: 'textfield',
+                                    x: 70,
+                                    y: 60,
+                                    disabled: true,
+                                    fieldLabel: 'Nombre'
+                                },
+                                {
+                                    xtype: 'textfield',
+                                    x: 70,
+                                    y: 100,
+                                    disabled: true,
+                                    fieldLabel: 'Apellido'
+                                },
+                                {
+                                    xtype: 'textfield',
+                                    x: 70,
+                                    y: 140,
+                                    disabled: true,
+                                    fieldLabel: 'Telefono'
+                                },
+                                {
+                                    xtype: 'combobox',
+                                    x: 70,
+                                    y: 180,
+                                    width: 310,
+                                    disabled: true,
+                                    fieldLabel: 'Sexo'
+                                },
+                                {
+                                    xtype: 'textfield',
+                                    x: 70,
+                                    y: 220,
+                                    disabled: true,
+                                    fieldLabel: 'Dirección'
+                                },
+                                {
+                                    xtype: 'textfield',
+                                    x: 70,
+                                    y: 260,
+                                    disabled: true,
+                                    fieldLabel: 'Correo'
+                                },
+                                {
+                                	x: 450,
+                                	y: 50,
+                                	height: 200,
+    								width: 150,
+                                	html:'<div align="left"><img src="images/silueta.jpg""></div>'
+                                }
+                            ]
+                },
+                {
+                    xtype: 'panel',
+                    layout: {
+                        type: 'absolute'
+                    },
+                    title: 'Vehiculo',
+                    items: [
+                                {
+                                    xtype: 'textfield',
+                                    x: 70,
+                                    y: 20,
+                                    disabled: true,
+                                    fieldLabel: 'Matricula'
+                                },
+                                {
+                                    xtype: 'textfield',
+                                    x: 70,
+                                    y: 60,
+                                    disabled: true,
+                                    fieldLabel: 'Costo'
+                                },
+                                {
+                                    xtype: 'textfield',
+                                    x: 70,
+                                    y: 100,
+                                    disabled: true,
+                                    fieldLabel: 'Año'
+                                },
+                                {
+                                    xtype: 'textfield',
+                                    x: 70,
+                                    y: 140,
+                                    disabled: true,
+                                    fieldLabel: 'Color'
+                                },
+                                {
+                                    xtype: 'textfield',
+                                    x: 70,
+                                    y: 180,
+                                    disabled: true,
+                                    fieldLabel: 'Serial del Motor'
+                                },                                
+                                {
+                                	x: 400,
+                                	y: 55,
+                                	height: 200,
+    								width: 250,
+                                	html:'<div align="left"><img src="images/carrodaewood.jpg""></div>'
+                                }
+                            ]
+                },
+                {
+                    xtype: 'panel',
+                    layout: {
+                        type: 'absolute'
+                    },
+                    title: 'Concesionario',
+                    items: [
+                                {
+                                    xtype: 'textfield',
+                                    x: 70,
+                                    y: 20,
+                                    disabled: true,
+                                    fieldLabel: 'R.I.F.'
+                                },
+                                {
+                                    xtype: 'textfield',
+                                    x: 70,
+                                    y: 60,
+                                    disabled: true,
+                                    fieldLabel: 'Nombre'
+                                },
+                                {
+                                    xtype: 'textfield',
+                                    x: 70,
+                                    y: 100,
+                                    disabled: true,
+                                    fieldLabel: 'Dirección'
+                                },
+                                {
+                                    xtype: 'textfield',
+                                    x: 70,
+                                    y: 140,
+                                    disabled: true,
+                                    fieldLabel: 'Telefono'
+                                },
+                                {
+                                    xtype: 'textfield',
+                                    x: 70,
+                                    y: 180,
+                                    disabled: true,
+                                    fieldLabel: 'Correo'
+                                },
+                                {
+                                	x: 400,
+                                	y: 50,
+                                	height: 200,
+    								width: 300,
+                                	html:'<div align="left"><img src="images/Daewoo.jpg""></div>'
+                                }
+                                
+                            ]
+                },
+                {
+                    xtype: 'panel',
+                    layout: {
+                        type: 'absolute'
+                    },
+                    title: 'Proforma',
+                    items: [
+                                {
+                                    xtype: 'textfield',
+                                    x: 70,
+                                    y: 40,
+                                    disabled: true,
+                                    fieldLabel: 'Fecha de Solicitud:'
+                                },
+                                {
+                                    xtype: 'textfield',
+                                    x: 70,
+                                    y: 100,
+                                    disabled: true,
+                                    fieldLabel: 'Fecha de Validez:'
+                                },
+                                {
+                                    xtype: 'textfield',
+                                    x: 70,
+                                    y: 160,
+                                    disabled: true,
+                                    fieldLabel: 'Estatus:'
+                                }
+                                // {
+                                    // xtype: 'textfield',
+                                    // x: 70,
+                                    // y: 140,
+                                    // disabled: true,
+                                    // fieldLabel: 'Color'
+                                // },
+                                // {
+                                    // xtype: 'textfield',
+                                    // x: 70,
+                                    // y: 180,
+                                    // disabled: true,
+                                    // fieldLabel: 'Serial del Motor'
+                                // },                                
+                                // {
+                                	// x: 400,
+                                	// y: 55,
+                                	// height: 200,
+    								// width: 250,
+                                	// html:'<div align="left"><img src="images/carrodaewood.jpg""></div>'
+                                // }
+                            ]
+                }
+            ]
+        });
+
+         me.callParent(arguments);
+    }
+
+});
 
 //Definicion de la ventana contendora del grid
-Ext.define('lista_espera', {
+Ext.define('miVentanalista', {
     extend: 'Ext.window.Window',
 
-                layout: 'absolute',
-                	x: 320,
-                	y: 210,
-                width       : 700,
-                height      : 170,
+                layout: 'fit',
+                x: 440,
+                y: 35,
+                width       : 650,
+                height      : 575,
                 closeAction :'hide',
                 plain       : true,
                 closable    : true,
                 colapsable  : true,
                 resizable   : true,
+                maximizable : false,
+                minimizable : false,
                 modal       : false,
-                title       : 'Lista de Espera',
+                title       : 'Listados',
                 buttonAlign : 'center',
                 constrain   : true,
-                items:[
-                 { xtype:'usuariosgrid' }
-                 /*{
-                    xtype: 'button',
-                    text: 'Aceptar',
-                    width: 50,
-                    heigth: 50,
-                    listeners: {
-                      click : function() {
-                       if (data!=null) {
-                        var usuario = data.usuario;
-                        var clave = data.clave;
-                        var nivel = data.nivel;
-                        Ext.MessageBox.show({
-                         title: 'Mensaje',
-                         msg: 'El usuario seleccionado es: ' + usuario + '<br>' + 'La clave seleccionada es: ' + clave + '<br>' + 'El nivel seleccionado es: ' + nivel,
-                         width:400,
-                         buttons: Ext.MessageBox.OK
-                        });
-                       }
-                       else {
-                       	alert("No ha seleccionado un item."); 
-                       }
-                      }
-                    }
-                },
-                {
-                    xtype: 'button',
-                    text: 'Salir',
-                    width: 50,
-                    heigth: 50,
-                    listeners: {
-                      click : function() {
-                       ventana.close();
-                      }
-                    }
-                }*/
-                ]
+        		collapsible: true,
+        	    renderTo: 'tree_el', 
+        	    initComponent: function() {
+        			var me = this;  
+        	    	Ext.applyIf(me, {
+          			items: [
+		                {
+		                	xtype: 'panel',
+		                	width: 350,
+               				height: 500,
+		                    frameHeader: true,
+		                    collapsible: true,
+		                    layout: {
+                                type: 'absolute'
+                            },
+                    		header: true,
+                    		title: 'Lista de espera en la Cola',
+                    		items: [
+	                    		{ 
+	                 			xtype:'usuariosgrid',
+	                 			
+	                 			viewConfig: {
+	                    		   }
+	                 		    },
+			                    {
+				                  xtype:'tabinform',
+				                 	viewConfig: {
+			                    		}
+				                },
+                    		]
+		                 },    		          		    
+                ],
+                   });
 
-
-            });
-//Instanciamos la ventana
-//Ext.onReady(function() {
- //ventana = Ext.create('miVentana');
- // //Definimos un boton para luego mostrar la ventana
- // boton = Ext.create('Ext.Button',
-             // { 
-             	// text: 'Listado de Personas en Espera',
-             	// renderTo: Ext.getBody(),
-                // handler : function()
-		        // {
-                 //ventana.show();
-                 
-            // });
-//});
+        me.callParent(arguments);
+    }
+   });

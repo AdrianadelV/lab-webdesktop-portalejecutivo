@@ -40,19 +40,14 @@ Ext.require([
 //Definicion del Modelo
  Ext.define('Usuarios', {
     extend: 'Ext.data.Model',
-    fields: [ 'cedula','nombres','apellidos', 'posicion','vehiculo_comprado', 'concesionario','fecha']
+    fields: [ 'nombre', 'apellido', 'posicion', 'fecha_solicitud', 'modelo_vehi', 'concesionario']
 });
 
 //Definicion del Data Store
 var usuarioStore = Ext.create('Ext.data.Store', {
     model: 'Usuarios',
     data: [
-        { cedula: '18923926',nombres:'Fernando E',apellidos:'Colmenarez O', posicion : '1', vehiculo_comprado:'Nubira', concesionario: 'DaewoCaro',fecha:'01/03/2012' },
-        { cedula: '98765432',nombres:'Maria A',apellidos:'Paez T', posicion : '2', vehiculo_comprado:'Matiz', concesionario: 'Daewoo Occidental',fecha:'09/03/2012' },
-        { cedula: '13453453',nombres:'Adriana ',apellidos:'Satana', posicion : '3', vehiculo_comprado:'lanos', concesionario: 'Decaro Motors',fecha:'16/03/2012' },
-        { cedula: '12312399',nombres:'Jose Manuel',apellidos:'Galindez', posicion : '4', vehiculo_comprado:'cielo', concesionario: 'Malecon Motors',fecha:'19/03/2012' }
-      
-        
+        { nombre: 'maria', apellido: 'paez', posicion: '1',  fecha_solicitud: '2012-02-12', modelo_vehi: 'explorer', concesionario: 'Carofordmotors'}
     ]
 });
 
@@ -67,20 +62,19 @@ Ext.define('App.UsuariosGrid', {
         //Definicion de las columnas del grid
         this.columns = [
             {xtype: 'rownumberer', width: 20, sortable: true},
-            {text: "Cedula", width: 60, dataIndex: 'cedula', sortable: true},
-            {text: "Nombres", width: 60, dataIndex: 'nombres', sortable: true},
-            {text: "Apellidos", width: 60, dataIndex: 'apellidos', sortable: true},
+            {text: "Nombre", width: 60, dataIndex: 'nombre', sortable: true},
+            {text: "Apellido", width: 100, dataIndex: 'apellido', sortable: true},
             {text: "Posicion", width: 100, dataIndex: 'posicion', sortable: true},
-            {text: "Vehiculo Comprado", width: 100, dataIndex: 'vehiculo_comprado', sortable: true},
+            {text: "Fecha de Solicitud", width: 100, dataIndex: 'fecha_solicitud', sortable: true},
+            {text: "Modelo Vehiculo", width: 100, dataIndex: 'modelo_vehi', sortable: true},
             {text: "Concesionario", width: 100, dataIndex: 'concesionario', sortable: true},
-            {text: "Fecha", width: 100, dataIndex: 'fecha', sortable: true},
         ];
         this.dockedItems = [ {
 	  		xtype: 'pagingtoolbar',
                     dock: 'bottom',
                     width: 360,
                     displayInfo: true,
-                    displayMsg : 'Personas en espera {6} - {1} de {2}',
+                    displayMsg : 'Personas en espera {0} - {1} de {2}',
 	  	} ];
         // Origen de los datos, de un data store
         this.store = usuarioStore;
@@ -91,6 +85,7 @@ Ext.define('App.UsuariosGrid', {
         this.listeners = {
                           itemclick : function(view) {
                            data = this.getSelectionModel().selected.items[0].data;
+                           //alert('hadjasdha');
                              ventanatab = Ext.create('ventanatab');
                   			 ventanatab.show();
                   			 ventanalista.close();
@@ -283,6 +278,57 @@ Ext.define('ventanatab', {
                                 }
                                 
                             ]
+                },
+                {
+                    xtype: 'panel',
+                    layout: {
+                        type: 'absolute'
+                    },
+                    title: 'Proforma',
+                    items: [
+                                {
+                                    xtype: 'textfield',
+                                    x: 70,
+                                    y: 40,
+                                    disabled: true,
+                                    fieldLabel: 'Fecha de Solicitud:'
+                                },
+                                {
+                                    xtype: 'textfield',
+                                    x: 70,
+                                    y: 100,
+                                    disabled: true,
+                                    fieldLabel: 'Fecha de Validez:'
+                                },
+                                {
+                                    xtype: 'textfield',
+                                    x: 70,
+                                    y: 160,
+                                    disabled: true,
+                                    fieldLabel: 'Estatus:'
+                                }
+                                // {
+                                    // xtype: 'textfield',
+                                    // x: 70,
+                                    // y: 140,
+                                    // disabled: true,
+                                    // fieldLabel: 'Color'
+                                // },
+                                // {
+                                    // xtype: 'textfield',
+                                    // x: 70,
+                                    // y: 180,
+                                    // disabled: true,
+                                    // fieldLabel: 'Serial del Motor'
+                                // },                                
+                                // {
+                                	// x: 400,
+                                	// y: 55,
+                                	// height: 200,
+    								// width: 250,
+                                	// html:'<div align="left"><img src="images/carrodaewood.jpg""></div>'
+                                // }
+                            ]
                 }
             ]
         });
@@ -297,9 +343,9 @@ Ext.define('miVentanalista', {
     extend: 'Ext.window.Window',
 
                 layout: 'fit',
-                x: 400,
-                y: 30,
-                width       : 625,
+                x: 440,
+                y: 35,
+                width       : 650,
                 height      : 575,
                 closeAction :'hide',
                 plain       : true,
@@ -343,43 +389,6 @@ Ext.define('miVentanalista', {
 				                },
                     		]
 		                 },    		          		    
-                 		
-                 /*{
-                    xtype: 'button',
-                    text: 'Aceptar',
-                    width: 50,
-                    heigth: 50,
-                    listeners: {
-                      click : function() {
-                       if (data!=null) {
-                        var usuario = data.usuario;
-                        var clave = data.clave;
-                        var nivel = data.nivel;
-                        Ext.MessageBox.show({
-                         title: 'Mensaje',
-                         msg: 'El usuario seleccionado es: ' + usuario + '<br>' + 'La clave seleccionada es: ' + clave + '<br>' + 'El nivel seleccionado es: ' + nivel,
-                         width:400,
-                         buttons: Ext.MessageBox.OK
-                        });
-                       }
-                       else {
-                       	alert("No ha seleccionado un item."); 
-                       }
-                      }
-                    }
-                },
-                {
-                    xtype: 'button',
-                    text: 'Salir',
-                    width: 50,
-                    heigth: 50,
-                    listeners: {
-                      click : function() {
-                       ventana.close();
-                      }
-                    }
-                }*/
-               		
                 ],
                    });
 

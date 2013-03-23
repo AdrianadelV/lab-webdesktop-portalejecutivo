@@ -44,7 +44,7 @@ Ext.onReady(function() {
 	direction: 'ASC'
 	}],
 });
- ventana = Ext.create('lista_espera');
+ ventana = Ext.create('miVentanalista');
 	ventana.show();
 
  ventanaindicadores = Ext.create('indicadoreseje');
@@ -79,7 +79,7 @@ Ext.onReady(function() {
 			 if (node.get('text') == "Lista de Espera")
 			  {
 				 ventana.close();
-				 ventana = Ext.create('lista_espera');
+				 ventana = Ext.create('miVentanalista');
 				 ventana.show();
 			 }
 			 if (node.get('text') == "Registrar Planes de Servicios")

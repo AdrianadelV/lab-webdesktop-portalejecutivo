@@ -40,19 +40,14 @@ Ext.require([
 //Definicion del Modelo
  Ext.define('Usuarios', {
     extend: 'Ext.data.Model',
-    fields: [ 'cedula', 'posicion', 'vehiculo_comprado', 'concesionario']
+    fields: [ 'nombre', 'apellido', 'posicion', 'fecha_solicitud', 'modelo_vehi', 'concesionario']
 });
 
 //Definicion del Data Store
 var usuarioStore = Ext.create('Ext.data.Store', {
     model: 'Usuarios',
     data: [
-        { cedula: '18923926', posicion : '1', vehiculo_comprado:'Nuvira', concesionario: 'DaewoCaro' },
-        { cedula: '12345678', posicion : '3', vehiculo_comprado:'Cielo', concesionario: 'Daewocentro'},
-        { cedula: '98765432', posicion : '5', vehiculo_comprado:'Matix', concesionario: 'DaewoYar'},
-        { cedula: '13218466', posicion : '2', vehiculo_comprado:'Nuvira', concesionario: 'DaewoCaro'},
-        { cedula: '19618874', posicion : '4', vehiculo_comprado:'Lomox', concesionario: 'Daewoconce'}
-
+        { nombre: 'maria', apellido: 'paez', posicion: '1',  fecha_solicitud: '2012-02-12', modelo_vehi: 'explorer', concesionario: 'Carofordmotors'}
     ]
 });
 
@@ -67,9 +62,11 @@ Ext.define('App.UsuariosGrid', {
         //Definicion de las columnas del grid
         this.columns = [
             {xtype: 'rownumberer', width: 20, sortable: true},
-            {text: "Cedula", width: 60, dataIndex: 'cedula', sortable: true},
+            {text: "Nombre", width: 60, dataIndex: 'nombre', sortable: true},
+            {text: "Apellido", width: 100, dataIndex: 'apellido', sortable: true},
             {text: "Posicion", width: 100, dataIndex: 'posicion', sortable: true},
-            {text: "Vehiculo Comprado", width: 100, dataIndex: 'vehiculo_comprado', sortable: true},
+            {text: "Fecha de Solicitud", width: 100, dataIndex: 'fecha_solicitud', sortable: true},
+            {text: "Modelo Vehiculo", width: 100, dataIndex: 'modelo_vehi', sortable: true},
             {text: "Concesionario", width: 100, dataIndex: 'concesionario', sortable: true},
         ];
         this.dockedItems = [ {
@@ -280,6 +277,57 @@ Ext.define('ventanatab', {
                                 	html:'<div align="left"><img src="images/Daewoo.jpg""></div>'
                                 }
                                 
+                            ]
+                },
+                {
+                    xtype: 'panel',
+                    layout: {
+                        type: 'absolute'
+                    },
+                    title: 'Proforma',
+                    items: [
+                                {
+                                    xtype: 'textfield',
+                                    x: 70,
+                                    y: 40,
+                                    disabled: true,
+                                    fieldLabel: 'Fecha de Solicitud:'
+                                },
+                                {
+                                    xtype: 'textfield',
+                                    x: 70,
+                                    y: 100,
+                                    disabled: true,
+                                    fieldLabel: 'Fecha de Validez:'
+                                },
+                                {
+                                    xtype: 'textfield',
+                                    x: 70,
+                                    y: 160,
+                                    disabled: true,
+                                    fieldLabel: 'Estatus:'
+                                }
+                                // {
+                                    // xtype: 'textfield',
+                                    // x: 70,
+                                    // y: 140,
+                                    // disabled: true,
+                                    // fieldLabel: 'Color'
+                                // },
+                                // {
+                                    // xtype: 'textfield',
+                                    // x: 70,
+                                    // y: 180,
+                                    // disabled: true,
+                                    // fieldLabel: 'Serial del Motor'
+                                // },                                
+                                // {
+                                	// x: 400,
+                                	// y: 55,
+                                	// height: 200,
+    								// width: 250,
+                                	// html:'<div align="left"><img src="images/carrodaewood.jpg""></div>'
+                                // }
                             ]
                 }
             ]
