@@ -54,4 +54,10 @@ class MenuAdminController < ApplicationController
     $tirajson=@marca.generardatalistamarcas()
     render :text => $tirajson
   end
+  
+  def generardatacomboMarcas
+    @marca = Marca.all
+    $tirajson = @marca.to_json
+    render :text => $tirajson
+  end
 end
