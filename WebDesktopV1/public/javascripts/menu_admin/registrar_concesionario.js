@@ -375,7 +375,7 @@ function guardarConcesionario() {
 					contrasena : Ext.getCmp('contrasena').getValue(),
 				},
 				success : function(exito, request) {
-					Ext.Msg.alert("Exito", "Se ha Guardado la Marca!!");
+					Ext.Msg.alert("Exito", "Se ha Guardado el Concesionario!!");
 					//Ext.getCmp('formulariomarca').getForm().reset();
 				},
 				failure : function() {
