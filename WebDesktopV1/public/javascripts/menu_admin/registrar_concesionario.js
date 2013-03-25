@@ -330,7 +330,12 @@ Ext.define('VentanaConcesionarioAdmin', {
 						id : 'btnregistrar',
 						listeners : {
 							click : function() {
-								guardarConcesionario();
+								if (Ext.getCmp('rif').getValue() == "" || Ext.getCmp('nombre').getValue() == "" || Ext.getCmp('correo').getValue() == "" || Ext.getCmp('cmb_ciudad').getValue() == "" || Ext.getCmp('direccion').getValue() == "" ||
+								    Ext.getCmp('nombre_usuario').getValue() == ""|| Ext.getCmp('contrasena').getValue() == "" || Ext.getCmp('contrasena2').getValue() ) {
+									Ext.Msg.alert("Error", "Debes LLenar todos los campos");
+								} else {
+									guardarConcesionario();
+								}
 							}
 						}
 					}, {
