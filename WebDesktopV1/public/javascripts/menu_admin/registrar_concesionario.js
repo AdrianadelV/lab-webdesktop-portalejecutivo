@@ -22,6 +22,7 @@ posx = parseInt(screen.width * factorw);
 posy = parseInt(screen.height * factorh);
 
 var primeravez = true;
+var valoridmarca = 0;
 
 Ext.require(['Ext.tree.*', 'Ext.data.*', 'Ext.tip.*', 'Ext.container.Viewport', 'Ext.container.ButtonGroup', 'Ext.panel.Panel']);
 
@@ -89,7 +90,7 @@ var ciudadeStore = Ext.create('Ext.data.Store', {
 
 //Definicion del Data Store de Marcas
 var marcaStore = Ext.create('Ext.data.Store', {
-	model : 'Estados',
+	model : 'Marcas',
 	autoLoad : true,
 });
 
@@ -249,12 +250,14 @@ Ext.define('VentanaConcesionarioAdmin', {
 						editable : 'false',
 						selecOnFocus : true,
 						fieldLabel : 'Marca Asociada',
-						// listeners: {
-			                 // scope: this,
-			                // 'select': function(combo, rec) {
-			                      // alert(rec[0].get(combo.displayField)); 
-			                 // }
-			            // }
+						listeners: {
+			                 scope: this,
+			                'select': function(combo, rec) {
+			                      alert(rec[0].get(combo.valueField)); 
+			                      valoridmarca =rec[0].get(combo.valueField);
+			                      alert(valoridmarca); 
+			                 }
+			            }
 					}]
 				}, {
 					xtype : 'form',
@@ -325,6 +328,11 @@ Ext.define('VentanaConcesionarioAdmin', {
 						icon : 'images/grabar.png',
 						tooltip : 'Registrar una Datos del Concesionario',
 						id : 'btnregistrar',
+						listeners : {
+							click : function() {
+								guardarConcesionario();
+							}
+						}
 					}, {
 						xtype : 'button',
 						x : 400,
@@ -345,8 +353,37 @@ Ext.define('VentanaConcesionarioAdmin', {
 				}]
 			}]
 		});
-
 		me.callParent(arguments);
 	}
 });
+function guardarConcesionario() {
+	alert('Comenzando');
+	if (Ext.getCmp('contrasena').getValue()==Ext.getCmp('contrasena2').getValue()) {
+		Ext.Ajax.request({
+				url : 'menu_admin/grabar_concesionario',
+				params : {
+					ajax : 'true',
+					funcion : 'grabar_concesionario',
+					rif : Ext.getCmp('rif').getValue(),
+					nombre : Ext.getCmp('nombre').getValue(),
+					correo : Ext.getCmp('correo').getValue(),
+					telefono : Ext.getCmp('telefono').getValue(),
+					ciudad : Ext.getCmp('cmb_ciudad').getValue(),
+					direccion : Ext.getCmp('direccion').getValue(),
+					marca : Ext.getCmp('cmb_marca').getValue(),
+					nombre_usuario : Ext.getCmp('nombre_usuario').getValue(),
+					contrasena : Ext.getCmp('contrasena').getValue(),
+				},
+				success : function(exito, request) {
+					Ext.Msg.alert("Exito", "Se ha Guardado la Marca!!");
+					//Ext.getCmp('formulariomarca').getForm().reset();
+				},
+				failure : function() {
+					Ext.Msg.alert("Error", "Servidor NO Conectado!!");
+				}
+			});	
+	} else{
+		Ext.Msg.alert("Error", "Las contraseñas no son iguales");
+	};
+}
 

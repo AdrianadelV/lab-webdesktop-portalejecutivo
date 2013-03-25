@@ -60,4 +60,47 @@ class MenuAdminController < ApplicationController
     $tirajson = @marca.to_json
     render :text => $tirajson
   end
+  #Adriana Santana -->Sino quieren ver una trigra con tigritos recien nacidos por favor no borren esto
+  def grabar_concesionario
+    puts 'AQUI'
+    @concesionario = Concesionario_vehiculos.new
+    @usuario = Usuario.new
+    @rif=params[:rif]
+    @nombre=params[:nombre]
+    @correo=params[:correo]
+    @telefono=params[:telefono]
+    @ciudad=params[:ciudad]
+    @direccion=params[:direccion]
+    @marca=params[:marca]
+    #------
+    @nombre_usuario=params[:nombre_usuario]
+    @contrasena=params[:contrasena]
+    puts ''+@nombre_usuario+''
+    @usuario.grabar_usuario_concesionario(@nombre_usuario, @contrasena);
+    puts '+++++++++++++++++++++++++++++++++++++++++++++++++++++++metio usuario'
+    @concesionario.grabar_concesionario(@rif,@nombre,@correo,@telefono,@ciudad,@direccion,@marca,@nombre_usuario)
+    render :text => $tirajson
+  end
+  #Adriana Santana -->Sino quieren ver una trigra con tigritos recien nacidos por favor no borren esto
+  def grabar_ensambladora
+    puts 'AQUI'
+    @ensambladora = Ensambladora_vehiculos.new
+    @usuario = Usuario.new
+    @rif=params[:rif]
+    @nombre=params[:nombre]
+    @correo=params[:correo]
+    @telefono=params[:telefono]
+    @ciudad=params[:ciudad]
+    @direccion=params[:direccion]
+    @marca=params[:marca]
+    #------
+    @nombre_usuario=params[:nombre_usuario]
+    @contrasena=params[:contrasena]
+    puts ''+@nombre_usuario+''
+    @usuario.grabar_usuario_concesionario(@nombre_usuario, @contrasena);
+    puts '+++++++++++++++++++++++++++++++++++++++++++++++++++++++metio usuario'
+    @ensambladora.grabar_ensambladora(@rif,@nombre,@correo,@telefono,@ciudad,@direccion,@marca,@nombre_usuario)
+    render :text => $tirajson
+  end
 end
+        

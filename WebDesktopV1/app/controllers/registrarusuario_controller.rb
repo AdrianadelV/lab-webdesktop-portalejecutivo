@@ -1,14 +1,11 @@
 class RegistrarusuarioController < ApplicationController
   def index
   end
-  
-  #lo nuevo
-  
+
+  #lo nuevo 
   def grabar_comprador
     @comprador_vehiculo=Comprador_Vehiculo.new
     puts '+++++++++++++++++++++++++++++++++++++++++++++++++++++++controler'
- 
- 
     @cedula=params[:cedula]
     @nombres=params[:nombres]
     @apellidos=params[:apellidos]
@@ -22,11 +19,7 @@ class RegistrarusuarioController < ApplicationController
     @password=params[:password]
     puts ''+ @nusuario +  ''
     grabar_usuario(@nusuario, @password);
-    
-    
     puts '+++++++++++++++++++++++++++++++++++++++++++++++++++++++metio usuario'
-    
-  
     @comprador_vehiculo.grabar_comprador(@cedula,@nombres,@apellidos,@telefono,@direccion,@correo,@fecha_nacimiento,@sexo,@nusuario)
     render :text => $tirajson
   end
@@ -47,6 +40,4 @@ class RegistrarusuarioController < ApplicationController
      puts '+++++++++++++++++++++++++++++llama el guardar del modelo usuario'
     return @usuario.grabar_usuario(@nombre,@password)
   end
-  
-  
 end

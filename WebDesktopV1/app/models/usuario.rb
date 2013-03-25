@@ -21,7 +21,7 @@ class Usuario < ActiveRecord::Base
     end 
     return valor
   end
-  	def grabar_usuario(nombre,password)
+  def grabar_usuario(nombre,password)
     @usuario= Usuario.new
     @usuario.nombre=nombre
     @usuario.password=password
@@ -32,7 +32,23 @@ class Usuario < ActiveRecord::Base
     $tirajson = '{ "success": "true", "exito": "true", "message": "Datos guardados satisfactoriamente!" }'
     puts' graba tira de js usuario------------------------------------'
   end
-   	def retornarid(nombre)
+  #Adriana Santana -->Sino quieren ver una trigra con tigritos recien nacidos por favor no borren esto 
+  def grabar_usuario_concesionario(nombre,password)
+    @usuario = Usuario.find(:first, :conditions => "nombre='#{nombre}'")
+    if @usuario!=nil
+       $tirajson = '{ "success": "true", "exito": "true", "message": "Ya existe ese nombre de usuario!" }'
+    else
+      @usuario= Usuario.new
+      @usuario.nombre=nombre
+      @usuario.password=password
+      @usuario.rols_id= 2
+      @usuario.estatus='a'
+      @usuario.save
+    end
+     valor=1
+     $tirajson = '{ "success": "true", "exito": "true", "message": "Datos guardados satisfactoriamente!" }'
+  end
+  def retornarid(nombre)
     puts' busca el usuairo por nombre --------------------------'+ nombre +'---a buscar---'
     @usuario = Usuario.find(:first, :conditions => "nombre='#{nombre}'")
     @identidad=''
