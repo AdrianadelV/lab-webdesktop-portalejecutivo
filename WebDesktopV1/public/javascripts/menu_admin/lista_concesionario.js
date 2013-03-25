@@ -37,26 +37,61 @@ Ext.require([
     			'Ext.panel.Panel'
 	         ]);
 
-//Definicion del Modelo
- Ext.define('Concesionario', {
-    extend: 'Ext.data.Model',
-    fields: [ 'marca', 'concesionario', 'estado', 'ciudad']
+
+//Definicion del Data model Concesionario
+Ext.define('Concesionarios', {
+ extend: 'Ext.data.Model',
+           fields: [
+            {name: 'id', type: 'int'},
+            {name: 'rif', type: 'varchar'},
+            {name: 'nombre', type: 'varchar'},
+            {name: 'direccion', type: 'varchar'},
+            {name: 'telefono', type: 'varchar'},
+            {name: 'correo', type: 'varchar'},
+            {name: 'latitud', type: 'varchar'},
+            {name: 'longitud', type: 'varchar'},
+            {name: 'ciudads_id', type: 'varchar'},
+            {name: 'usuarios_id', type: 'int'},
+            {name: 'marcas_id', type: 'int'},
+           ],
 });
 
-//Definicion del Data Store
-var concesionarioStore = Ext.create('Ext.data.Store', {
-    model: 'Concesionario',
-    data: [
-        { marca: 'Ford', concesionario : 'FordCard', estado:'Lara', ciudad: 'Barquisimeto' },
-        { marca: 'Fiat', concesionario : 'FiatCard', estado:'Yaracuy', ciudad: 'San Felipe' },
-        { marca: 'Chevrolet', concesionario : 'ChevyCard', estado:'Lara', ciudad: 'Quibor' },
-        { marca: 'Huyndai', concesionario : 'HuyndaiCard', estado:'Carabobo', ciudad: 'Valencia' },
-        { marca: 'Daewood', concesionario : 'DaewoodCard', estado:'Lara', ciudad: 'Barquisimeto' },
-
-    ]
+//Definicion del Data Store Concesionarios
+ concesionarioStore = Ext.create('Ext.data.Store', {
+    model: 'Concesionarios',
+    autoLoad: true,
+    proxy: {
+         type: 'ajax',
+         url : 'menu_admin/generardatalistaConcesionarios',
+         reader: {
+                  type: 'json',
+                  root: 'datos'
+              }
+           }
 });
 
-//Definicion de la clase UsuariosGrid
+
+// 
+// //Definicion del Modelo
+ // Ext.define('Concesionario', {
+    // extend: 'Ext.data.Model',
+    // fields: [ 'marca', 'concesionario', 'estado', 'ciudad']
+// });
+// 
+// //Definicion del Data Store
+// var concesionarioStore = Ext.create('Ext.data.Store', {
+    // model: 'Concesionario',
+    // data: [
+        // { marca: 'Ford', concesionario : 'FordCard', estado:'Lara', ciudad: 'Barquisimeto' },
+        // { marca: 'Fiat', concesionario : 'FiatCard', estado:'Yaracuy', ciudad: 'San Felipe' },
+        // { marca: 'Chevrolet', concesionario : 'ChevyCard', estado:'Lara', ciudad: 'Quibor' },
+        // { marca: 'Huyndai', concesionario : 'HuyndaiCard', estado:'Carabobo', ciudad: 'Valencia' },
+        // { marca: 'Daewood', concesionario : 'DaewoodCard', estado:'Lara', ciudad: 'Barquisimeto' },
+// 
+    // ]
+// });
+
+//Definicion de la clase ConcesionariosGrid
 Ext.define('App.ConcesionarioGrid', {
     extend: 'Ext.grid.Panel',
     //Definicion del alias que puede usado en un xtype
@@ -67,10 +102,11 @@ Ext.define('App.ConcesionarioGrid', {
         //Definicion de las columnas del grid
         this.columns = [
             {xtype: 'rownumberer', width: 20, sortable: true},
-            {text: "Marca", width: 60, dataIndex: 'marca', sortable: true},
-            {text: "Concesionario", width: 100, dataIndex: 'concesionario', sortable: true},
-            {text: "Estado", width: 100, dataIndex: 'estado', sortable: true},
-            {text: "Ciudad", width: 100, dataIndex: 'ciudad', sortable: true},
+            {text: "Rif", width: 60, dataIndex: 'rif', sortable: true},
+            {text: "Nombre", width: 100, dataIndex: 'nombre', sortable: true},
+            {text: "Dirección", width: 100, dataIndex: 'direccion', sortable: true},
+            {text: "Telefono", width: 100, dataIndex: 'telefono', sortable: true},
+            {text: "Correo", width: 100, dataIndex: 'correo', sortable: true},
         ];
         // this.dockedItems = [ {
 	  		// xtype: 'pagingtoolbar',
@@ -88,12 +124,102 @@ Ext.define('App.ConcesionarioGrid', {
         this.listeners = {
                           itemclick : function(view) {
                            data = this.getSelectionModel().selected.items[0].data;
-                  			 ventanalista.close();
+                           alert(data.ciudads_id);
+                           asignarDatosConcesionario();
                           }
                          };
         //Llamamos a la super clase a iniciacion del componente
         App.ConcesionarioGrid.superclass.initComponent.call(this);
     }
+});
+
+//Definicion de Tab
+Ext.define('ventanatabconcesionario', {
+    extend: 'Ext.tab.Panel',
+	alias: 'widget.tabinformconcesionario',
+    x: 0,
+    y: 175,
+    height: 500,
+    width: 650,
+    activeTab: 0,
+
+    initComponent: function() {
+        var me = this;
+
+        Ext.applyIf(me, {
+            items: [
+                {
+                    xtype: 'panel',
+                    layout: {
+                        type: 'absolute'
+                    },
+                    title: 'Concesionario',
+					items: [
+                                {
+                                    xtype: 'textfield',
+                                    x: 100,
+                                    y: 20,
+                                    id: 'rif',
+                                    disabled: true,
+                                    fieldLabel: 'Rif:'
+                                },
+                                {
+                                    xtype: 'textfield',
+                                    x: 100,
+                                    y: 60,
+                                    id: 'nombre',
+                                    disabled: true,
+                                    fieldLabel: 'Nombre'
+                                },
+                                {
+                                    xtype: 'textfield',
+                                    x: 100,
+                                    y: 100,
+                                    id: 'direccion',
+                                    disabled: true,
+                                    fieldLabel: 'Dirección'
+                                },
+                                {
+                                    xtype: 'textfield',
+                                    x: 100,
+                                    y: 140,
+                                    id: 'telefono',
+                                    disabled: true,
+                                    fieldLabel: 'Telefono'
+                                },
+                                {
+                                    xtype: 'textfield',
+                                    x: 100,
+                                    y: 180,
+                                    id: 'correo',
+                                    width: 310,
+                                    disabled: true,
+                                    fieldLabel: 'Correo'
+                                },
+                                {
+                                    xtype: 'textfield',
+                                    x: 100,
+                                    y: 220,
+                                    id: 'ciudad',
+                                    disabled: true,
+                                    fieldLabel: 'Ciudad'
+                                },
+                                {
+                                    xtype: 'textfield',
+                                    x: 100,
+                                    y: 260,
+                                    id: 'estado',
+                                    disabled: true,
+                                    fieldLabel: 'Estado'
+                                }
+                            ]
+                }
+            ]
+        });
+
+         me.callParent(arguments);
+    }
+
 });
 
 //Definicion de la ventana contendora del grid
@@ -104,7 +230,7 @@ Ext.define('miVentanalistaconcesionario', {
                 x: 350,
                 y: 30,
                 width       : 650,
-                height      : 575,
+                height      : 600,
                 closeAction :'hide',
                 plain       : true,
                 closable    : true,
@@ -140,6 +266,11 @@ Ext.define('miVentanalistaconcesionario', {
 	                 			viewConfig: {
 	                    		   }
 	                 		    },
+	                 		    {
+				                  xtype:'tabinformconcesionario',
+				                 	viewConfig: {
+			                    		}
+				                },
                     		]
 		                 },    		          		    
                 ],
@@ -147,4 +278,15 @@ Ext.define('miVentanalistaconcesionario', {
 
         me.callParent(arguments);
     }
-   });
+});
+   
+function asignarDatosConcesionario () {
+  Ext.getCmp('rif').setValue(data.rif);
+  Ext.getCmp('nombre').setValue(data.nombre);
+  Ext.getCmp('direccion').setValue(data.direccion);
+  Ext.getCmp('telefono').setValue(data.telefono);
+  Ext.getCmp('correo').setValue(data.correo);
+  Ext.getCmp('cuidad').setValue(data.cuidads_id);
+  // Ext.getCmp('estado').setValue(data.estado);
+};
+
