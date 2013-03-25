@@ -2,18 +2,21 @@
 
 function buscar(id_marca) {
 	tirahtmlgaleria = buscarModelos(id_marca);
+	alert('AQUI')
 	var ajax = Ext.Ajax.request({
-		url : '/inicio/buscar',
+		url : '/inicio/buscarIdMarca',
 		//Enviando los parametros a la pagina servidora
 		params : {
 			ajax : 'true',
-			funcion : 'buscar',
+			funcion : 'buscarIdMarca',
 			id_marca : id_marca
 		},
 		//Retorno exitoso de la pagina servidora a traves del formato JSON
 		success : function(resultado, request) {
 			datos = Ext.JSON.decode(resultado.responseText);
-			if (datos.exito == 'true') {				
+				// alert(datos.id);	
+			//if (datos.exito == 'true') {	
+				alert(datos.nombre);			
 				Ext.create('MyApp.view.MyTabPanel', {
 					renderTo : 'tree_el',
 					title : datos.nombre,
@@ -37,9 +40,9 @@ function buscar(id_marca) {
 						html : tirahtmlgaleria
 					}]
 				});
-			} else {
-				Ext.Msg.alert("Error", "pasopaso");
-			}
+			//} else {
+			//	Ext.Msg.alert("Error", "NOPaso");
+			//}
 		},
 		//No hay retorno de la pagina servidora
 		failure : function() {

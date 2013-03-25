@@ -39,36 +39,14 @@ class MenuAdminController < ApplicationController
 
   def generardatacombosestados
     @estados = Estados.all
-    @son = Estados.count
-    @i=1
-    @tirajson = '[ '
-    @estados.each do |estado|
-      if @i<@son
-        @tirajson = @tirajson + ' { "id": "'+@i.to_s+'", "nombre": "' + estado.nombre + '"},'
-      else
-        @tirajson = @tirajson + ' { "id": "'+@i.to_s+'", "nombre": "' + estado.nombre + '"} '
-      end
-      @i=@i+1
-    end
-    @tirajson = @tirajson + ' ] '
+    @tirajson = @estados.to_json
     render :text => @tirajson
   end
 
   def generardatacombosciudades
     @ciudads = Ciudads.all
-    @son = Ciudads.count
-    @i=1
-    @tirajson = '[ '
-    @ciudads.each do |ciudad|
-      if @i<@son
-        @tirajson = @tirajson + ' {"idestados":"'+ciudad.estados_id.to_s+'","idciudades":"'+ciudad.id.to_s+'", "ciudades": "' +ciudad.nombre+ '"},'
-      else
-        @tirajson = @tirajson + ' {"idestados":"'+ciudad.estados_id.to_s+'","idciudades":"'+ciudad.id.to_s+'", "ciudades": "' +ciudad.nombre+ '"} '
-        @i=@i+1
-      end
-      @tirajson = @tirajson + ' ] '
-      render :text => @tirajson
-    end
+    $tirajson = @ciudads.to_json
+    render :text => $tirajson
   end
 
   def generardatalistamarcas

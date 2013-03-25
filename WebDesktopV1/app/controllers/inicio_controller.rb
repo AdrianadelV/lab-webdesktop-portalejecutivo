@@ -12,6 +12,14 @@ class InicioController < ApplicationController
    valor = @marcas.buscar(id_marca)
    render :text => $tirajson
   end
+  def buscarIdMarca
+    puts 'aqui'
+   @marcas = Marca.new
+   id_marca = params[:id_marca]
+   valor = @marcas.buscarMarca(id_marca)
+   render :text => $tirajson
+   puts $tirajson
+  end
   def buscarModelos
     id = params[:id]
     @modelos = Modelo_Vehiculo.new

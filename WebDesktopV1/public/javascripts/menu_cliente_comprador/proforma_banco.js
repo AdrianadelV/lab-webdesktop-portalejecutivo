@@ -241,7 +241,8 @@ Ext.define('proforma_banco', {
                     vtype: 'alphanum',
                     vtypeText: 'solo texto',
                     fieldLabel: 'Validez',
-                    id:'validez'
+                    id:'validez',
+                    disabled: true
                 },
                 {
                     xtype: 'textfield',

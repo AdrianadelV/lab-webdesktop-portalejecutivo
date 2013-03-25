@@ -19,6 +19,18 @@ class Marca < ActiveRecord::Base
     end 
     return valor
   end
+  #Adriana Santana -->Sino quieren ver una trigra con tigritos recien nacidos por favor no borren esto 
+  def buscarMarca(id_marca)
+    @marca =  Marca.find(:first, :conditions => "id='#{id_marca}'")
+    if @marca!=nil
+      $tirajson = @marca.to_json
+      valor = 1
+    else
+      $tirajson = '{ "success": "true", "exito": "false", "msg": " no existe!" }'
+      valor = 0
+    end 
+    return valor
+  end
   def generarArbol
     @arbols = Marca.find(:all)
     totaldeRegistros = @arbols.count;
@@ -94,7 +106,5 @@ class Marca < ActiveRecord::Base
     @objmarcas.save
     valor=1
     $tirajson = '{ "success": "true", "exito": "true", "message": "Nuevo Datos guardados satisfactoriamente!" }'
-  end
-  #dasda
-  
+  end  
 end

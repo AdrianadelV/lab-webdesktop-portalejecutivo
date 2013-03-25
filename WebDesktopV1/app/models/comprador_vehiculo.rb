@@ -11,14 +11,27 @@ class Comprador_Vehiculo < ActiveRecord::Base
     end 
     return valor
   end
-
-  
-  #lo nuevo
+  #Adriana Santana -->Sino quieren ver una trigra con tigritos recien nacidos por favor no borren esto 
+  def grabarComprador(cedula,nombres,apellidos,telefono,direccion,correo,fecha_nacimiento,sexo)
+    puts "pasehola"
+    @comprador =  Comprador_Vehiculo.find(:first, :conditions => "cedula='#{cedula}'")
+    if @comprador!=nil
+       @comprador.cedula=cedula
+       @comprador.nombres=nombres
+       @comprador.apellidos=apellidos
+       @comprador.telefono=telefono
+       @comprador.direccion=direccion
+       @comprador.correo=correo
+       @comprador.fecha_nacimiento=fecha_nacimiento
+       @comprador.sexo=sexo
+       @comprador.save
+    end
+    valor=1
+    $tirajson = '{ "success": "true", "exito": "true", "message": "Datos guardados satisfactoriamente!" }'
+  end
   def grabar_comprador(cedula,nombres,apellidos,telefono,direccion,correo,fecha_nacimiento,sexo,nusuario)
     @usuario = Usuario.find(:first, :conditions => "nombre='#{nusuario}'")
     if @usuario!=nil
-      
- 
      puts "**********************************************************************modelo"
     @comprador_vehiculo=Comprador_Vehiculo.new
     @comprador_vehiculo.cedula=cedula
@@ -38,7 +51,4 @@ class Comprador_Vehiculo < ActiveRecord::Base
     end
      puts "********************* FIN"
   end
-  
- 
-
 end

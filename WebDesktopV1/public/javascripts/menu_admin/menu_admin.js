@@ -28,7 +28,7 @@ Ext.require(['Ext.tree.*', 'Ext.data.*', 'Ext.tip.*', 'Ext.container.Viewport', 
 
 Ext.onReady(function() {
 	Ext.QuickTips.init();
-	
+
 	var store = Ext.create('Ext.data.TreeStore', {
 		proxy : {
 			type : 'ajax',

@@ -19,13 +19,12 @@ class CliCompradorController < ApplicationController
   end
    def buscarUsuarioLo
    @usuarios = Usuario.new
-    valor = @usuarios.buscarUsuarioLo(session[:nombre])
+   valor = @usuarios.buscarUsuarioLo(session[:nombre])
   end
   def buscarComprador
     buscarUsuarioLo()
     parsed_json = ActiveSupport::JSON.decode($tirajson)
     @comprador=Comprador_Vehiculo.new
-    $idcomprador = parsed_json["id"]
     valor=@comprador.buscarUsuarioComprador(parsed_json["id"])
     render :text => $tirajson 
   end
@@ -43,6 +42,14 @@ class CliCompradorController < ApplicationController
     @sexo=params[:sexo]
     @comprador.grabarComprador(@cedula,@nombres,@apellidos,@telefono,@direccion,@correo,@fecha_nacimiento,@sexo)
     render :text => $tirajson
+  end
   
+  def modificarContrasena
+    @usuario = Usuario.new
+    @nombre = params[:nombre]
+    @canterior=params[:canterior]
+    @cnueva=params[:cnueva]
+    @usuario.modificarContrasena(@nombre,@canterior,@cnueva,)
+    render :text => $tirajson
   end
 end

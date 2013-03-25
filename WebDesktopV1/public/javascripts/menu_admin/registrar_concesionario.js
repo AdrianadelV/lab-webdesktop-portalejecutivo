@@ -48,31 +48,30 @@ Ext.define('Estados', {
            }
 });
 
-//Definicion del Data Store
-var estadoStore = Ext.create('Ext.data.Store', {
-    model: 'Estados',
-    autoLoad: true,
-});
-
 //Definicion del Modelo Ciudades
 Ext.define('Ciudades', {
  extend: 'Ext.data.Model',
            fields: [
-            {name: 'estados_id', type: 'string'},
-            {name: 'id_ciudades', type: 'string'},
-            {name: 'nombre_ciudad', type: 'string'}
+            {name: 'estados_id', type: 'int'},
+            {name: 'id', type: 'int'},
+            {name: 'nombre', type: 'varchar'}
            ],
            proxy: {
             type: 'ajax',
             url : 'menu_admin/generardatacombosciudades'
            }
 });
+	//Definicion del Data Store
+	var estadoStore = Ext.create('Ext.data.Store', {
+		model : 'Estados',
+		autoLoad : true,
+	});
+	//Definicion del Data Store de ciudades
+	var ciudadeStore = Ext.create('Ext.data.Store', {
+		model : 'Ciudades',
+		autoLoad : true,
+	}); 
 
-//Definicion del Data Store de ciudades
-var ciudadeStore = Ext.create('Ext.data.Store', {
-    model: 'Ciudades',
-    autoLoad: true,
-});
 
 Ext.define('VentanaConcesionarioAdmin', {
     extend: 'Ext.window.Window',
@@ -213,8 +212,8 @@ Ext.define('VentanaConcesionarioAdmin', {
                                     width: 270,
                                     id : 'cmb_ciudad',
                                     store: ciudadeStore,
-                                    valueField: 'id_ciudades',
-                                    displayField: 'nombre_ciudad',
+                                    valueField: 'id',
+                                    displayField: 'nombre',
                                     queryMode: 'remote',
                                     typeAhead: true,
                                     emptyText:'Seleccionar',

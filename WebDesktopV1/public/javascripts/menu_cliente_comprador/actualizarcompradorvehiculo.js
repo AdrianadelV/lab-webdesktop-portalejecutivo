@@ -159,10 +159,10 @@ Ext.define('actualizar', {
 						xtype : 'button',
 						x : 220,
 						y : 180,
-						text : 'Cargar',
+						text : 'Guardar',
 						listeners : {
 							click : function() {
-
+								cambiarContrasena();
 							}
 						}
 					}, {
@@ -230,4 +230,35 @@ function grabar_comprador() {
               Ext.Msg.alert("Error", "Servidor no conectado!AQUI");
            }
       });        
+}
+
+function cambiarContrasena() {
+	if (Ext.getCmp('contrasenanueva').getValue()== Ext.getCmp('repetircontrasena').getValue()) {
+		Ext.Ajax.request({
+			method: 'POST',
+		    headers: {
+                    "Accept" : 'application/json'
+                },
+		   url: '/cli_comprador/modificarContrasena',    
+		     //Enviando los parametros a la pagina servidora
+		   params: {
+		      nombre: document.getElementById("user_name").textContent,
+		      canterior: Ext.getCmp('contrasena').getValue(),
+		      cnueva: Ext.getCmp('contrasenanueva').getValue(),
+		   },
+		     //Retorno exitoso de la pagina servidora a traves del formato JSON
+		   success: function( resultado, request ) {
+		      datos=Ext.JSON.decode(resultado.responseText);
+		      //alert(datos.nombre);
+		      Ext.Msg.alert("Exito", datos.message);
+		   },
+		     //No hay retorno de la pagina servidora
+		   failure: function() {
+		      Ext.Msg.alert("Error", "Servidor no conectado!AQUI");
+		   }
+		});
+	} else{
+		  Ext.Msg.alert("Error", "Las contraseñas nuevas deben ser iguales");
+	};
+  
 }

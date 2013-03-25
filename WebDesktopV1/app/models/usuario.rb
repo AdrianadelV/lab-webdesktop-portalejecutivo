@@ -10,8 +10,7 @@ class Usuario < ActiveRecord::Base
       end 
     return valor
   end
-  
-  def buscarUsuarioLo(nombre)
+  	def buscarUsuarioLo(nombre)
      @usuario = Usuario.find(:first, :conditions => "nombre='#{nombre}'")
     if @usuario!=nil
       $tirajson = @usuario.to_json
@@ -22,8 +21,7 @@ class Usuario < ActiveRecord::Base
     end 
     return valor
   end
-  
-  def grabar_usuario(nombre,password)
+  	def grabar_usuario(nombre,password)
     @usuario= Usuario.new
     @usuario.nombre=nombre
     @usuario.password=password
@@ -33,23 +31,31 @@ class Usuario < ActiveRecord::Base
      valor=1
     $tirajson = '{ "success": "true", "exito": "true", "message": "Datos guardados satisfactoriamente!" }'
     puts' graba tira de js usuario------------------------------------'
-  
   end
-  
-  def retornarid(nombre)
+   	def retornarid(nombre)
     puts' busca el usuairo por nombre --------------------------'+ nombre +'---a buscar---'
-     @usuario = Usuario.find(:first, :conditions => "nombre='#{nombre}'")
-     @identidad=''
-      puts' busca el ' + @usuario.id+''
-      if @usuario!=nil
-        usuario.id = @usuario.id
-          
-        else  identidad=''
-      end
-      return identidad
-     
+    @usuario = Usuario.find(:first, :conditions => "nombre='#{nombre}'")
+    @identidad=''
+    puts' busca el ' + @usuario.id+''
+    if @usuario!=nil
+      usuario.id = @usuario.id
+
+    else  identidad=''
+    end
+    return identidad
   end
-  
-  
-  
+  def modificarContrasena(nombre,canterior,cnueva)
+    @objusuario = Usuario.find(:first, :conditions => "nombre='#{nombre}'")
+    if @objusuario!=nil
+      if @objusuario.password==canterior
+        @objusuario.password=cnueva
+        @objusuario.save
+        $tirajson = '{ "success": "true", "exito": "true", "message": "Datos Actualizados" }'
+      else
+        $tirajson = '{ "success": "true", "exito": "true", "message": "Contrasena Anterior es incorrecta" }'
+      end
+    else
+      $tirajson = '{ "success": "true", "exito": "false", "message": " no se encontro comprador" }'
+    end
+  end
 end
