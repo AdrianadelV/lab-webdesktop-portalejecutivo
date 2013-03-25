@@ -11,8 +11,7 @@ class Concesionario_vehiculos < ActiveRecord::Base
       @concesionario.telefono=telefono
       @concesionario.ciudads_id=ciudad
       @concesionario.direccion=direccion
-      #AQUI DEBE IR ES MARCA SOLO SE ESTA PROBANDO SI EL METODO FUNCIONA CORRECTAMENTE
-      @concesionario.marcas_id=ciudad
+      @concesionario.marcas_id=marca
       @concesionario.usuarios_id=@usuario.id
       @concesionario.save
       valor=1

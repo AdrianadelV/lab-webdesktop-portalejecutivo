@@ -97,7 +97,7 @@ class MenuAdminController < ApplicationController
     @nombre_usuario=params[:nombre_usuario]
     @contrasena=params[:contrasena]
     puts ''+@nombre_usuario+''
-    @usuario.grabar_usuario_concesionario(@nombre_usuario, @contrasena);
+    @usuario.grabar_usuario_ensambladora(@nombre_usuario, @contrasena);
     puts '+++++++++++++++++++++++++++++++++++++++++++++++++++++++metio usuario'
     @ensambladora.grabar_ensambladora(@rif,@nombre,@correo,@telefono,@ciudad,@direccion,@marca,@nombre_usuario)
     render :text => $tirajson

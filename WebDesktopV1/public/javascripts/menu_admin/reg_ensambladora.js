@@ -87,7 +87,7 @@ var ciudadeStore = Ext.create('Ext.data.Store', {
 
 //Definicion del Data Store de Marcas
 var marcaStore = Ext.create('Ext.data.Store', {
-	model : 'Estados',
+	model : 'Marcas',
 	autoLoad : true,
 });
 
@@ -246,12 +246,12 @@ Ext.define('VentanaEnsambladoraAdmin', {
 						editable : 'false',
 						selecOnFocus : true,
 						fieldLabel : 'Marca Asociada',
-						// listeners: {
-						// scope: this,
-						// 'select': function(combo, rec) {
-						// alert(rec[0].get(combo.displayField));
-						// }
-						// }
+						listeners: { scope: this,
+							'select': function(combo, rec) {
+								alert(rec[0].get(combo.valueField));
+							}
+						}
+
 					}]
 				}, {
 					xtype : 'form',
@@ -322,6 +322,11 @@ Ext.define('VentanaEnsambladoraAdmin', {
 						icon : 'images/grabar.png',
 						tooltip : 'Registrar una Datos de la Ensambladora',
 						id : 'btnregistrar',
+						listeners : {
+							click : function() {
+									guardarEnsambladora();
+							}
+						}
 					}, {
 						xtype : 'button',
 						x : 400,
@@ -346,4 +351,33 @@ Ext.define('VentanaEnsambladoraAdmin', {
 		me.callParent(arguments);
 	}
 });
-
+function guardarEnsambladora() {
+	alert('Comenzando');
+	if (Ext.getCmp('contrasena').getValue()==Ext.getCmp('contrasena2').getValue()) {
+		Ext.Ajax.request({
+				url : 'menu_admin/grabar_ensambladora',
+				params : {
+					ajax : 'true',
+					funcion : 'grabar_ensambladora',
+					rif : Ext.getCmp('rif').getValue(),
+					nombre : Ext.getCmp('nombre').getValue(),
+					correo : Ext.getCmp('correo').getValue(),
+					telefono : Ext.getCmp('telefono').getValue(),
+					ciudad : Ext.getCmp('cmb_ciudad').getValue(),
+					direccion : Ext.getCmp('direccion').getValue(),
+					marca : Ext.getCmp('cmb_marca').getValue(),
+					nombre_usuario : Ext.getCmp('nombre_usuario').getValue(),
+					contrasena : Ext.getCmp('contrasena').getValue(),
+				},
+				success : function(exito, request) {
+					Ext.Msg.alert("Exito", "Se ha Guardado la Ensambladora!!");
+					//Ext.getCmp('formulariomarca').getForm().reset();
+				},
+				failure : function() {
+					Ext.Msg.alert("Error", "Servidor NO Conectado!!");
+				}
+			});	
+	} else{
+		Ext.Msg.alert("Error", "Las contraseñas no son iguales");
+	};
+}

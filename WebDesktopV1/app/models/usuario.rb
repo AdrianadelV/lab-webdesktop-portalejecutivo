@@ -48,6 +48,22 @@ class Usuario < ActiveRecord::Base
      valor=1
      $tirajson = '{ "success": "true", "exito": "true", "message": "Datos guardados satisfactoriamente!" }'
   end
+   #Adriana Santana -->Sino quieren ver una trigra con tigritos recien nacidos por favor no borren esto 
+  def grabar_usuario_ensambladora(nombre,password)
+    @usuario = Usuario.find(:first, :conditions => "nombre='#{nombre}'")
+    if @usuario!=nil
+       $tirajson = '{ "success": "true", "exito": "true", "message": "Ya existe ese nombre de usuario!" }'
+    else
+      @usuario= Usuario.new
+      @usuario.nombre=nombre
+      @usuario.password=password
+      @usuario.rols_id= 3
+      @usuario.estatus='a'
+      @usuario.save
+    end
+     valor=1
+     $tirajson = '{ "success": "true", "exito": "true", "message": "Datos guardados satisfactoriamente!" }'
+  end
   def retornarid(nombre)
     puts' busca el usuairo por nombre --------------------------'+ nombre +'---a buscar---'
     @usuario = Usuario.find(:first, :conditions => "nombre='#{nombre}'")

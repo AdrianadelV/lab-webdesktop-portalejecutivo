@@ -60,13 +60,15 @@ class Marca < ActiveRecord::Base
     tirajson = '{ "datos": [ '
     @objmarca.each do |marcas|
      if @i<@son
-      tirajson = tirajson +   ' { "nombre": "'        + marcas.nombre +
+      tirajson = tirajson +   ' { "id": "'            + marcas.id.to_s +
+                              '", "nombre": "'        + marcas.nombre +
                               '", "mision": "'        + marcas.mision + 
                               '", "vision": "'        + marcas.vision +
                               '", "valores": "'       + marcas.valores +
                               '", "contacto": "'      + marcas.contacto + '"}, '                              
      else
-      tirajson = tirajson +   ' { "nombre": "'        + marcas.nombre +
+      tirajson = tirajson +   ' { "id": "'            + marcas.id.to_s +
+                              '", "nombre": "'        + marcas.nombre +
                               '", "mision": "'        + marcas.mision + 
                               '", "vision": "'        + marcas.vision +
                               '", "valores": "'       + marcas.valores +
