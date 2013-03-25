@@ -142,18 +142,21 @@ Ext.define('actualizar', {
 						x : 60,
 						y : 30,
 						fieldLabel : 'Contraseña anterior',
+						inputType: 'password',
 						id : 'contrasena'
 					}, {
 						xtype : 'textfield',
 						x : 60,
 						y : 70,
 						fieldLabel : 'Contraseña nueva',
+						inputType: 'password',
 						id : 'contrasenanueva'
 					}, {
 						xtype : 'textfield',
 						x : 60,
 						y : 110,
 						fieldLabel : 'Repetir Contraseña',
+						inputType: 'password',
 						id : 'repetircontrasena'
 					}, {
 						xtype : 'button',
