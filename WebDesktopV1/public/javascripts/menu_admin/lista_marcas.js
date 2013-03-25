@@ -38,7 +38,7 @@ Ext.require([
     			'Ext.panel.Panel'
 	         ]);
 
-
+//Definicion del Data model marcas
 Ext.define('Marcas', {
  extend: 'Ext.data.Model',
            fields: [
@@ -51,7 +51,7 @@ Ext.define('Marcas', {
            ],
 });
 
-//Definicion del Data Store
+//Definicion del Data Store Marcas
  marcaStore = Ext.create('Ext.data.Store', {
     model: 'Marcas',
     autoLoad: true,
