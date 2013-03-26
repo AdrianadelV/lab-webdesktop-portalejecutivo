@@ -27,6 +27,7 @@ posy = parseInt(screen.height * factorh);
 var data = null;
 var ventana = null;
 var boton = null;
+var idestado= null;
 
 Ext.require([
 	         	'Ext.tree.*',
@@ -70,27 +71,6 @@ Ext.define('Concesionarios', {
            }
 });
 
-
-// 
-// //Definicion del Modelo
- // Ext.define('Concesionario', {
-    // extend: 'Ext.data.Model',
-    // fields: [ 'marca', 'concesionario', 'estado', 'ciudad']
-// });
-// 
-// //Definicion del Data Store
-// var concesionarioStore = Ext.create('Ext.data.Store', {
-    // model: 'Concesionario',
-    // data: [
-        // { marca: 'Ford', concesionario : 'FordCard', estado:'Lara', ciudad: 'Barquisimeto' },
-        // { marca: 'Fiat', concesionario : 'FiatCard', estado:'Yaracuy', ciudad: 'San Felipe' },
-        // { marca: 'Chevrolet', concesionario : 'ChevyCard', estado:'Lara', ciudad: 'Quibor' },
-        // { marca: 'Huyndai', concesionario : 'HuyndaiCard', estado:'Carabobo', ciudad: 'Valencia' },
-        // { marca: 'Daewood', concesionario : 'DaewoodCard', estado:'Lara', ciudad: 'Barquisimeto' },
-// 
-    // ]
-// });
-
 //Definicion de la clase ConcesionariosGrid
 Ext.define('App.ConcesionarioGrid', {
     extend: 'Ext.grid.Panel',
@@ -126,6 +106,7 @@ Ext.define('App.ConcesionarioGrid', {
                            data = this.getSelectionModel().selected.items[0].data;
                            alert(data.ciudads_id);
                            asignarDatosConcesionario();
+                           buscar_nombreCiudad();
                           }
                          };
         //Llamamos a la super clase a iniciacion del componente
@@ -274,19 +255,71 @@ Ext.define('miVentanalistaconcesionario', {
                     		]
 		                 },    		          		    
                 ],
-                   });
+                   });           
 
         me.callParent(arguments);
     }
 });
-   
+   //Metodo para buscar y mostrar el nombre de la ciudad
+   function buscar_nombreCiudad() {
+			Ext.Ajax.request({
+				url : 'menu_admin/buscar_nombreCiudad',
+				params : {
+					ajax : 'true',
+					funcion : 'buscar_nombreCiudad',
+					idciudad : data.ciudads_id,
+				},
+				//Retorno exitoso de la pagina servidora a traves del formato JSON
+				success : function(exito, request) {
+					datos = Ext.JSON.decode(exito.responseText);
+					if (datos.exito == 'false') {
+						Ext.Msg.alert("Error", datos.msg);
+					} else {
+						Ext.getCmp('ciudad').setValue(datos.nombre);
+						idestado = datos.estados_id;
+						buscar_nombreEstado();
+					}
+				},
+				//No hay retorno de la pagina servidora
+				failure : function() {
+					Ext.Msg.alert("Error", "Servidor no conectado");
+
+				}
+			});
+};  
+
+//Metodo para buscar y mostrar el nombre del estado
+   function buscar_nombreEstado() {
+			Ext.Ajax.request({
+				url : 'menu_admin/buscar_nombreEstado',
+				params : {
+					ajax : 'true',
+					funcion : 'buscar_nombreEstado',
+					id_estado : idestado,
+				},
+				//Retorno exitoso de la pagina servidora a traves del formato JSON
+				success : function(exito, request) {
+					datos = Ext.JSON.decode(exito.responseText);
+					if (datos.exito == 'false') {
+						Ext.Msg.alert("Error", datos.msg);
+					} else {
+						Ext.getCmp('estado').setValue(datos.nombre);
+					}
+				},
+				//No hay retorno de la pagina servidora
+				failure : function() {
+					Ext.Msg.alert("Error", "Servidor no conectado");
+				}
+			});
+}; 
+
 function asignarDatosConcesionario () {
   Ext.getCmp('rif').setValue(data.rif);
   Ext.getCmp('nombre').setValue(data.nombre);
   Ext.getCmp('direccion').setValue(data.direccion);
   Ext.getCmp('telefono').setValue(data.telefono);
   Ext.getCmp('correo').setValue(data.correo);
-  Ext.getCmp('cuidad').setValue(data.cuidads_id);
-  // Ext.getCmp('estado').setValue(data.estado);
 };
+
+
 
