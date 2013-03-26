@@ -1,11 +1,14 @@
 class RegistrarusuarioController < ApplicationController
   def index
   end
-
-  #lo nuevo 
+  
+  #lo nuevo
+  #de jose
   def grabar_comprador
     @comprador_vehiculo=Comprador_Vehiculo.new
     puts '+++++++++++++++++++++++++++++++++++++++++++++++++++++++controler'
+ 
+ 
     @cedula=params[:cedula]
     @nombres=params[:nombres]
     @apellidos=params[:apellidos]
@@ -18,26 +21,49 @@ class RegistrarusuarioController < ApplicationController
     @nusuario=params[:nusuario]
     @password=params[:password]
     puts ''+ @nusuario +  ''
-    grabar_usuario(@nusuario, @password);
-    puts '+++++++++++++++++++++++++++++++++++++++++++++++++++++++metio usuario'
-    @comprador_vehiculo.grabar_comprador(@cedula,@nombres,@apellidos,@telefono,@direccion,@correo,@fecha_nacimiento,@sexo,@nusuario)
-    render :text => $tirajson
+     @imagen=params[:imagen]
+     
+    if  buscar_u(params[:nusuario]) 
+      puts '+++++++++++++++++++++++++++++++++++++++++++++++++++++++no metio'
+       # $tirajson = '{ "success": "false", "exito": "false", "msg": " el nombre de usuario ya existe" }'
+    else
+      grabar_usuario(@nusuario, @password,@imagen);
+      puts '+++++++++++++++++++++++++++++++++++++++++++++++++++++++metio usuario'
+      @comprador_vehiculo.grabar_comprador1(@cedula,@nombres,@apellidos,@telefono,@direccion,@correo,@fecha_nacimiento,@sexo,@nusuario)
+      render :text => $tirajson
+      valor = 0 
+    end
+    
+     
+    
+    
   end
   
-  #def buscar_comprador
-  #  @cv=Comprador_Vehiculo.new
- #  nombres = params[:nombres]
-  # valor = @marca.busca_comprador_existe(nombre)
-   #render :text => $tirajson
-  #end
-  
-  #la parte del usuario
-  def grabar_usuario(nusuario, password)
+#de jose
+  def grabar_usuario(nusuario, password,imagen)
     @usuario=Usuario.new
     @nombre=nusuario
     @password=password
-    render :text => $tirajson
+    @imagen=imagen
+   # render :text => $tirajson
      puts '+++++++++++++++++++++++++++++llama el guardar del modelo usuario'
-    return @usuario.grabar_usuario(@nombre,@password)
+    @usuario.grabar_usuario1(@nombre,@password,@imagen)
+  end
+  
+  #de jose
+  
+  
+  def buscar_u(nombre)
+    puts ''+ nombre+  ''
+    resp = false
+   
+    @usuario=Usuario.new
+    @usuario = Usuario.find(:first, :conditions => "nombre='#{nombre}'")
+     if @usuario !=nil
+     resp = true
+     else
+       resp = false
+     end
+   return resp
   end
 end
