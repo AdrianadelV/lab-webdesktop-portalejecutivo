@@ -11,6 +11,7 @@ class Comprador_Vehiculo < ActiveRecord::Base
     end 
     return valor
   end
+
   #Adriana Santana -->Sino quieren ver una trigra con tigritos recien nacidos por favor no borren esto 
   def grabarComprador(cedula,nombres,apellidos,telefono,direccion,correo,fecha_nacimiento,sexo)
     puts "pasehola"
@@ -29,9 +30,12 @@ class Comprador_Vehiculo < ActiveRecord::Base
     valor=1
     $tirajson = '{ "success": "true", "exito": "true", "message": "Datos guardados satisfactoriamente!" }'
   end
-  def grabar_comprador(cedula,nombres,apellidos,telefono,direccion,correo,fecha_nacimiento,sexo,nusuario)
+  #lo nuevo
+  def grabar_comprador1(cedula,nombres,apellidos,telefono,direccion,correo,fecha_nacimiento,sexo,nusuario)
     @usuario = Usuario.find(:first, :conditions => "nombre='#{nusuario}'")
     if @usuario!=nil
+      
+ 
      puts "**********************************************************************modelo"
     @comprador_vehiculo=Comprador_Vehiculo.new
     @comprador_vehiculo.cedula=cedula
@@ -45,10 +49,13 @@ class Comprador_Vehiculo < ActiveRecord::Base
     @comprador_vehiculo.usuarios_id=@usuario.id
     @comprador_vehiculo.save
     valor=1
-    $tirajson = '{ "success": "true", "exito": "true", "message": "Datos guardados satisfactoriamente!" }'
+    $tirajson = '{ "success": "true", "exito": "true", "message": "Datos de comprador guardados satisfactoriamente!" }'
     else
       $tirajson = '{ "success": "true", "exito": "false", "msg": " no se registro el comprador" }'
     end
      puts "********************* FIN"
   end
+  
+ 
+
 end
