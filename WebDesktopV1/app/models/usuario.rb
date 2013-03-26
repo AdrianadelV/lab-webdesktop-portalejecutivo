@@ -21,17 +21,7 @@ class Usuario < ActiveRecord::Base
     end 
     return valor
   end
-  def grabar_usuario(nombre,password)
-    @usuario= Usuario.new
-    @usuario.nombre=nombre
-    @usuario.password=password
-    @usuario.rol_id= 1
-    @usuario.estatus='a'
-    @usuario.save
-     valor=1
-    $tirajson = '{ "success": "true", "exito": "true", "message": "Datos guardados satisfactoriamente!" }'
-    puts' graba tira de js usuario------------------------------------'
-  end
+  
   #Adriana Santana -->Sino quieren ver una trigra con tigritos recien nacidos por favor no borren esto 
   def grabar_usuario_concesionario(nombre,password)
     @usuario = Usuario.find(:first, :conditions => "nombre='#{nombre}'")
@@ -64,18 +54,7 @@ class Usuario < ActiveRecord::Base
      valor=1
      $tirajson = '{ "success": "true", "exito": "true", "message": "Datos guardados satisfactoriamente!" }'
   end
-  def retornarid(nombre)
-    puts' busca el usuairo por nombre --------------------------'+ nombre +'---a buscar---'
-    @usuario = Usuario.find(:first, :conditions => "nombre='#{nombre}'")
-    @identidad=''
-    puts' busca el ' + @usuario.id+''
-    if @usuario!=nil
-      usuario.id = @usuario.id
-
-    else  identidad=''
-    end
-    return identidad
-  end
+  
   def modificarContrasena(nombre,canterior,cnueva)
     @objusuario = Usuario.find(:first, :conditions => "nombre='#{nombre}'")
     if @objusuario!=nil
@@ -89,5 +68,22 @@ class Usuario < ActiveRecord::Base
     else
       $tirajson = '{ "success": "true", "exito": "false", "message": " no se encontro comprador" }'
     end
+  end
+  
+  #metodo de jose
+  def grabar_usuario1(nombre,password,imagen)
+   
+    @usuario= Usuario.new
+    @usuario.nombre=nombre
+    @usuario.password=password
+    @usuario.rols_id= 1
+    @usuario.imagen=imagen
+    @usuario.estatus='a'
+    
+    @usuario.save
+     valor=1
+    $tirajson = '{ "success": "true", "exito": "true", "message": "Datos de usuario guardados satisfactoriamente!" }'
+    puts' graba tira de js usuario------------------------------------'
+  
   end
 end
