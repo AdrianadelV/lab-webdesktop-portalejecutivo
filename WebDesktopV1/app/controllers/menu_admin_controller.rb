@@ -60,6 +60,18 @@ class MenuAdminController < ApplicationController
     $tirajson=@marca.generardatalistamarcas()
     render :text => $tirajson
   end
+  #Adriana Santana
+  def generardatacombostipos
+    @tipo = Tipo_Vehiculos.all
+    $tirajson = @tipo.to_json
+    render :text => $tirajson
+  end
+  #Adriana Santana
+  def generarcomboModelo
+    @modelo = Modelo_Vehiculo.all
+    $tirajson = @modelo.to_json
+    render :text => $tirajson
+  end
 
   def generardatalistaConcesionarios
     @concesionario = Concesionario_vehiculos.new
@@ -69,7 +81,6 @@ class MenuAdminController < ApplicationController
 
   #Adriana Santana -->Sino quieren ver una trigra con tigritos recien nacidos por favor no borren esto
   def grabar_concesionario
-    puts 'AQUI'
     @concesionario = Concesionario_vehiculos.new
     @usuario = Usuario.new
     @rif=params[:rif]
@@ -82,16 +93,13 @@ class MenuAdminController < ApplicationController
     #------
     @nombre_usuario=params[:nombre_usuario]
     @contrasena=params[:contrasena]
-    puts ''+@nombre_usuario+''
     @usuario.grabar_usuario_concesionario(@nombre_usuario, @contrasena);
-    puts '+++++++++++++++++++++++++++++++++++++++++++++++++++++++metio usuario'
     @concesionario.grabar_concesionario(@rif,@nombre,@correo,@telefono,@ciudad,@direccion,@marca,@nombre_usuario)
     render :text => $tirajson
   end
 
   #Adriana Santana -->Sino quieren ver una trigra con tigritos recien nacidos por favor no borren esto
   def grabar_ensambladora
-    puts 'AQUI'
     @ensambladora = Ensambladora_vehiculos.new
     @usuario = Usuario.new
     @rif=params[:rif]
@@ -104,9 +112,7 @@ class MenuAdminController < ApplicationController
     #------
     @nombre_usuario=params[:nombre_usuario]
     @contrasena=params[:contrasena]
-    puts ''+@nombre_usuario+''
     @usuario.grabar_usuario_concesionario(@nombre_usuario, @contrasena);
-    puts '+++++++++++++++++++++++++++++++++++++++++++++++++++++++metio usuario'
     @ensambladora.grabar_ensambladora(@rif,@nombre,@correo,@telefono,@ciudad,@direccion,@marca,@nombre_usuario)
     render :text => $tirajson
   end
