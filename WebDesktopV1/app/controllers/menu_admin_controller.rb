@@ -49,17 +49,24 @@ class MenuAdminController < ApplicationController
     render :text => $tirajson
   end
 
+  def generarcomboMarcas
+    @marca = Marca.all
+    $tira = @marca.to_json
+    render :text => $tira
+  end
+
   def generardatalistamarcas
     @marca = Marca.new
     $tirajson=@marca.generardatalistamarcas()
     render :text => $tirajson
   end
-  
-  def generardatacomboMarcas
-    @marca = Marca.all
-    $tirajson = @marca.to_json
+
+  def generardatalistaConcesionarios
+    @concesionario = Concesionario_vehiculos.new
+    $tirajson=@concesionario.generardatalistaConcesionarios()
     render :text => $tirajson
   end
+
   #Adriana Santana -->Sino quieren ver una trigra con tigritos recien nacidos por favor no borren esto
   def grabar_concesionario
     puts 'AQUI'
@@ -81,6 +88,7 @@ class MenuAdminController < ApplicationController
     @concesionario.grabar_concesionario(@rif,@nombre,@correo,@telefono,@ciudad,@direccion,@marca,@nombre_usuario)
     render :text => $tirajson
   end
+
   #Adriana Santana -->Sino quieren ver una trigra con tigritos recien nacidos por favor no borren esto
   def grabar_ensambladora
     puts 'AQUI'
@@ -97,10 +105,9 @@ class MenuAdminController < ApplicationController
     @nombre_usuario=params[:nombre_usuario]
     @contrasena=params[:contrasena]
     puts ''+@nombre_usuario+''
-    @usuario.grabar_usuario_ensambladora(@nombre_usuario, @contrasena);
+    @usuario.grabar_usuario_concesionario(@nombre_usuario, @contrasena);
     puts '+++++++++++++++++++++++++++++++++++++++++++++++++++++++metio usuario'
     @ensambladora.grabar_ensambladora(@rif,@nombre,@correo,@telefono,@ciudad,@direccion,@marca,@nombre_usuario)
     render :text => $tirajson
   end
 end
-        
