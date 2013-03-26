@@ -11,7 +11,8 @@ class Concesionario_vehiculos < ActiveRecord::Base
       @concesionario.telefono=telefono
       @concesionario.ciudads_id=ciudad
       @concesionario.direccion=direccion
-      @concesionario.marcas_id=marca
+      #AQUI DEBE IR ES MARCA SOLO SE ESTA PROBANDO SI EL METODO FUNCIONA CORRECTAMENTE
+      @concesionario.marcas_id=ciudad
       @concesionario.usuarios_id=@usuario.id
       @concesionario.save
       valor=1
@@ -21,4 +22,46 @@ class Concesionario_vehiculos < ActiveRecord::Base
     end
       puts "********************* FIN"
   end
+  
+  def generardatalistaConcesionarios()
+   @@objConcesionario_vehiculos = Concesionario_vehiculos.all
+   @son = Concesionario_vehiculos.count
+   if @son > 0 
+    @i=1
+    tirajson = '{ "datos": [ '
+    @@objConcesionario_vehiculos.each do |concesionario|
+     if @i<@son
+      tirajson = tirajson +   ' { "id": "'        + concesionario.id.to_s +
+                              '", "rif": "'        + concesionario.rif + 
+                              '", "nombre": "'        + concesionario.nombre +
+                              '", "direccion": "'       + concesionario.direccion +
+                              '", "telefono": "'      + concesionario.telefono + 
+                              '", "correo": "'       + concesionario.correo +
+                              '", "latitud": "'       + concesionario.latitud +
+                              '", "longitud": "'       + concesionario.longitud +
+                              '", "ciudads_id": "'       + concesionario.ciudads_id.to_s +
+                              '", "usuarios_id": "'       + concesionario.usuarios_id.to_s +
+                              '", "marcas_id": "'       + concesionario.marcas_id.to_s + '"},'                              
+     else
+      tirajson = tirajson +   ' { "id": "'        + concesionario.id.to_s +
+                              '", "rif": "'        + concesionario.rif + 
+                              '", "nombre": "'        + concesionario.nombre +
+                              '", "direccion": "'       + concesionario.direccion +
+                              '", "telefono": "'      + concesionario.telefono + 
+                              '", "correo": "'       + concesionario.correo +
+                              '", "latitud": "'       + concesionario.latitud +
+                              '", "longitud": "'       + concesionario.longitud +
+                              '", "ciudads_id": "'       + concesionario.ciudads_id.to_s +
+                              '", "usuarios_id": "'       + concesionario.usuarios_id.to_s +
+                              '", "marcas_id": "'       + concesionario.marcas_id.to_s + '"}, '       
+     end
+     @i=@i+1
+    end
+    tirajson = tirajson + ' ] }'
+   else
+    tirajson = '{ "success": "true", "exito": "false", "msg": "No hay datos!" }'; 
+   end
+   return tirajson 
+  end
+
 end
