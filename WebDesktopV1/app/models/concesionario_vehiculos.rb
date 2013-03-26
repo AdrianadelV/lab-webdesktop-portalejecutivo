@@ -3,7 +3,6 @@ class Concesionario_vehiculos < ActiveRecord::Base
   def grabar_concesionario(rif,nombre,correo,telefono,ciudad,direccion,marca,nombre_usuario)
     @usuario = Usuario.find(:first, :conditions => "nombre='#{nombre_usuario}'")
     if @usuario!=nil
-      puts "**********************************************************************modelo"
       @concesionario=Concesionario_vehiculos.new
       @concesionario.rif=rif
       @concesionario.nombre=nombre
@@ -11,8 +10,7 @@ class Concesionario_vehiculos < ActiveRecord::Base
       @concesionario.telefono=telefono
       @concesionario.ciudads_id=ciudad
       @concesionario.direccion=direccion
-      #AQUI DEBE IR ES MARCA SOLO SE ESTA PROBANDO SI EL METODO FUNCIONA CORRECTAMENTE
-      @concesionario.marcas_id=ciudad
+      @concesionario.marcas_id=marca
       @concesionario.usuarios_id=@usuario.id
       @concesionario.save
       valor=1
@@ -20,7 +18,6 @@ class Concesionario_vehiculos < ActiveRecord::Base
     else
       $tirajson = '{ "success": "true", "exito": "false", "msg": " no se registro el comprador" }'
     end
-      puts "********************* FIN"
   end
   
   def generardatalistaConcesionarios()
