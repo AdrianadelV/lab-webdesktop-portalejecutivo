@@ -44,11 +44,17 @@ class MenuAdminController < ApplicationController
   end
 
   def generardatacombosciudades
-    @ciudads = Ciudads.all
+    @ciudads = tipo.all
     $tirajson = @ciudads.to_json
     render :text => $tirajson
   end
-
+  
+  def generardatacombostipos
+    @tipos = Tipo_Vehiculos.all
+    $tirajson = @tipos.to_json
+    render :text => $tirajson
+  end
+  
   def generarcomboMarcas
     @marca = Marca.all
     $tira = @marca.to_json

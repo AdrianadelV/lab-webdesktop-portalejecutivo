@@ -3,7 +3,6 @@ class Ensambladora_vehiculos < ActiveRecord::Base
   def grabar_ensambladora(rif,nombre,correo,telefono,ciudad,direccion,marca,nombre_usuario)
     @usuario = Usuario.find(:first, :conditions => "nombre='#{nombre_usuario}'")
     if @usuario!=nil
-      puts "**********************************************************************modelo"
       @ensambladora=Ensambladora_vehiculos.new
       @ensambladora.rif=rif
       @ensambladora.nombre=nombre
@@ -11,8 +10,7 @@ class Ensambladora_vehiculos < ActiveRecord::Base
       @ensambladora.telefono=telefono
       @ensambladora.ciudads_id=ciudad
       @ensambladora.direccion=direccion
-      #AQUI DEBE IR ES MARCA SOLO SE ESTA PROBANDO SI EL METODO FUNCIONA CORRECTAMENTE
-      @ensambladora.marcas_id=ciudad
+      @ensambladora.marcas_id=marca
       @ensambladora.usuarios_id=@usuario.id
       @ensambladora.save
       valor=1
@@ -20,6 +18,27 @@ class Ensambladora_vehiculos < ActiveRecord::Base
     else
       $tirajson = '{ "success": "true", "exito": "false", "msg": " no se registro el comprador" }'
     end
-      puts "********************* FIN"
+  end
+  #Adriana Santana
+  def buscar_usuario(nombre)
+    @usuario = Usuario.find(:first, :conditions => "nombre='#{nombre}'")
+    if @usuario!=nil
+      $tirajson = @usuario.to_json
+      valor = 1
+    else
+      $tirajson = '{ "success": "true", "exito": "false", "msg": " no existe!" }'
+      valor = 0
+    end 
+  end
+  #Adriana Santana
+  def buscar_ensambladora_marca(usuarios_id)
+    @ensambladora = Ensambladora_vehiculos.find(:first, :conditions => "usuarios_id='#{usuarios_id}'")
+    if @ensambladora!=nil
+      $tirajson = @ensambladora.to_json
+      valor = 1
+    else
+      $tirajson = '{ "success": "true", "exito": "false", "msg": " no existe!" }'
+      valor = 0
+    end 
   end
 end

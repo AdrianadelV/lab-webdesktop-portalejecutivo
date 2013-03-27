@@ -2,7 +2,6 @@
 
 function buscar(id_marca) {
 	tirahtmlgaleria = buscarModelos(id_marca);
-	alert('AQUI')
 	var ajax = Ext.Ajax.request({
 		url : '/inicio/buscarIdMarca',
 		//Enviando los parametros a la pagina servidora
