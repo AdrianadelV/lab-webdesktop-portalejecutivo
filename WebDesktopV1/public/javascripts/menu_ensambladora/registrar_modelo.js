@@ -209,7 +209,7 @@ function buscarEnsambladora_marca () {
 		      	 Ext.Msg.alert("Error", datos.msg);
 		      } else{
 		      	marca_id=datos.marcas_id;
-		      	guardarModeloVehiculo()
+		      	guardarModeloVehiculo();
 		      	Ext.Msg.alert("Exito",'Encontro');
 		      };
 		   },

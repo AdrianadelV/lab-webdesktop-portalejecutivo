@@ -55,6 +55,18 @@ class MenuAdminController < ApplicationController
     render :text => $tirajson
   end
   
+  def generardatacombosmodelos
+    @modelos = Modelo_Vehiculo.all
+    $tirajson = @modelos.to_json
+    render :text => $tirajson
+  end
+  
+  def generardatacomboscaracteristicas
+    @caracteristicas = Caracteristicas.all
+    $tirajson = @caracteristicas.to_json
+    render :text => $tirajson
+  end
+  
   def generarcomboMarcas
     @marca = Marca.all
     $tira = @marca.to_json

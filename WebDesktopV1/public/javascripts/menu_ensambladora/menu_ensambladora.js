@@ -119,6 +119,11 @@ Ext.onReady(function() {
 					ventana.close();
 					ventana = Ext.create('miVentanaModelo');
                   	ventana.show();
+				}
+				if (node.get('text') == "Registrar Caracteristica de un Modelo") {
+					ventana.close();
+					ventana = Ext.create('miVentanaCaracteristica');
+                  	ventana.show();
 				};
 			}
 		}
