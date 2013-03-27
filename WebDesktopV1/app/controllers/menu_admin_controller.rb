@@ -44,7 +44,7 @@ class MenuAdminController < ApplicationController
   end
 
   def generardatacombosciudades
-    @ciudads = tipo.all
+    @ciudads = Ciudads.all
     $tirajson = @ciudads.to_json
     render :text => $tirajson
   end
@@ -144,4 +144,80 @@ class MenuAdminController < ApplicationController
     valor = @estados.buscarnombreEstado(id_estado)
     render :text => $tirajson
   end
+  
+  def generardataListaGlobal
+    @solicitud_vehiculos = Solicitud_vehiculos.all
+    @son = Solicitud_vehiculos.count
+    @i=1
+    @tirajson = '{ "datos": [ '
+    @solicitud_vehiculos.each do |solicitud_vehiculos|
+      @objproforma = Proformas.new
+      proforma = @objproforma.buscarprofroma(@solicitud_vehiculos[@i-1].proformas_id)
+      @objcomprador_vehiculo = Comprador_Vehiculo.new
+      comprador_vehiculo = @objcomprador_vehiculo.buscarcomprador(proforma.comprador_vehiculos_id)
+      @objconcesionario = Concesionario_vehiculos.new
+      concesionario = @objconcesionario.buscarconcesionario(proforma.concesionario_vehiculos_id)
+      @objdetalle_vehiculo = Detalle_vehiculos.new
+      detalle_vehiculos = @objdetalle_vehiculo.buscardetalle_vehiculo(proforma.detalle_vehiculos_id)
+      @objvehiculos = Vehiculos.new
+      vehiculo = @objvehiculos.buscarid(detalle_vehiculos.vehiculos_id)
+      @objmodelo_vehiculos = Modelo_vehiculo.new
+      modelo_vehiculos = @objmodelo_vehiculos.buscarmodelovehiculos(vehiculo.modelo_vehiculos_id)
+      @objmarca = Marca.new
+      marca = @objmarca.buscamarca(modelo_vehiculos.marcas_id)
+      #print proforma
+      
+      if @i<@son
+        @tirajson = @tirajson + ' { "nombre": "' + comprador_vehiculo.nombres + '", "posicion": "' + @i + '", "fecha": "' + proforma.fecha.to_s + '", "modelo_vehiculo": "' + modelo_vehiculos.descripcion + '", "concesionarios": "' + concesionario.nombre + '", "marcas": "' + marca.nombre + '"},'
+      else
+        @tirajson = @tirajson + ' { "nombre": "' + comprador_vehiculo.nombres + '", "posicion": "' + @i + '", "fecha": "' + proforma.fecha.to_s + '", "modelo_vehiculo": "' + modelo_vehiculos.descripcion + '", "concesionarios": "' + concesionario.nombre + '", "marcas": "' + marca.nombre + '"},'
+      end
+      @i=@i+1
+    end
+    @tirajson = @tirajson + ' ] }'
+    render :text => @tirajson
+  end
+  
+  # def generarDataProforma
+    # @proforma = Proforma.all
+    # @tira_proformajson = @proforma.to_json
+    # render :text => @tira_proformajson
+  # end
+# 
+  # def generarDataCompradorVehiculo
+    # @comprador_vehiculos = Comprador_vehiculos.all
+    # @tira_compradorjson = @comprador_vehiculos.to_json
+    # render :text => @tira_compradorjson
+  # end
+#   
+   # def generardataSolicitudVehiculo
+    # @solicitud_vehiculos = Solicitud_vehiculos.all
+    # $tira_solicitudjson = @solicitud_vehiculos.to_json
+    # render :text => $tira_solicitudjson
+  # end
+#   
+  # def generardataDetalleVehiculo
+    # @detalle_vehiculos = Detalle_vehiculos.all
+    # $tira_detallejson = @detalle_vehiculos.to_json
+    # render :text => $tira_detallejson
+  # end
+#   
+  # def generardataVehiculo
+    # @vehiculos = Vehiculos.all
+    # $tira_vehiculosjson = @vehiculos.to_json
+    # render :text => $tira_vehiculosjson
+  # end
+# 
+  # def generardataModeloVehiculo
+    # @modelo_vehiculos = Vehiculos.all
+    # $tira_modelovehiculosjson = @modelo_vehiculos.to_json
+    # render :text => $tira_modelovehiculosjson
+  # end
+# 
+  # def generardataConcesionario
+    # @concesionario_vehiculos = Concesionario_vehiculos.all
+    # $tira_concesionariojson = @concesionario_vehiculos.to_json
+    # render :text => $tira_concesionariojson
+  # end
+
 end
