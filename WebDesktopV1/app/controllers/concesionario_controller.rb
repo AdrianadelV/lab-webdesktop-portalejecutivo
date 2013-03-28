@@ -17,4 +17,25 @@ class ConcesionarioController < ApplicationController
     @tira = @arbols.BuscarTodosArbolJson(@tipo)
     render :text => @tira
   end
+  #Adriana Santana
+  def generardatacombosindicadores
+    @indicadores = Indicadors.all
+    @tirajson = @indicadores.to_json
+    render :text => @tirajson 
+  end
+  def generardatacombosunidades
+    @unidades = Unidads.all
+    @tirajson = @unidades.to_json
+    render :text => @tirajson 
+  end
+  def generardatacombosestadosindicador
+    @estadosindi = Estados_Indicadors.all
+    @tirajson = @estadosindi.to_json
+    render :text => @tirajson 
+  end
+  def generardatacombosfrecuencia
+    @frecuencia = Frecuencia_Notificacions.all
+    @tirajson = @frecuencia.to_json
+    render :text => @tirajson
+  end
 end

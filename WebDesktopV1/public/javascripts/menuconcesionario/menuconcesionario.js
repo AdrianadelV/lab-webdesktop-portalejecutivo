@@ -71,34 +71,30 @@ Ext.onReady(function() {
 	 useArrows : true,
 	 listeners : {
 		 itemclick : function(view, node) {
-			 if (node.get('text') == "Estado de la Proforma") {
+			 if (node.get('text') == "Estado de la Proforma"){
 				 ventana.close();
 				 ventana = Ext.create('edoproforma');
 				 ventana.show();
 			 }
-			 if (node.get('text') == "Lista de Espera")
-			  {
+			 if (node.get('text') == "Lista de Espera"){
 				 ventana.close();
 				 ventana = Ext.create('miVentanalista');
 				 ventana.show();
 			 }
-			 if (node.get('text') == "Registrar Planes de Servicios")
-			  {
+			 if (node.get('text') == "Registrar Planes de Servicios"){
 				 ventana.close();
 				 ventana = Ext.create('registrarservicios');
 				 ventana.show();
 			 }
-			 if (node.get('text') == "Estado de Pedidos a la Ensambladora")
-			  {
+			 if (node.get('text') == "Estado de Pedidos a la Ensambladora"){
 				 ventana.close();
 				 alert("PASO");
 				 ventana =Ext.create('edopedidoensamb');
 				 ventana.show();
 				 alert("PASO2");
-			 }if (node.get('text') == "Configurar nuevo Indicador")
-			  {
+			 }if (node.get('text') == "Configurar nuevo Indicador"){
 				 ventana.close();
-				 ventana =Ext.create('indicadoresconcesionario');
+				 ventana =Ext.create(miVentanaIndicadores);
 				 ventana.show();
 			 }
 		 }
