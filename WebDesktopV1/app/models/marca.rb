@@ -108,5 +108,17 @@ class Marca < ActiveRecord::Base
     @objmarcas.save
     valor=1
     $tirajson = '{ "success": "true", "exito": "true", "message": "Nuevo Datos guardados satisfactoriamente!" }'
+  end
+  #Ma.Ale
+   def buscamarca(mode_marcas_id)
+    @objmarcas =  Marca.find(:first, :conditions => "id='#{mode_marcas_id}'")
+    if @objmarcas!=nil
+      $tirajson = @objmarcas.to_json
+      valor = 1
+    else
+      $tirajson = '{ "success": "true", "exito": "false", "msg": " no existe!" }'
+      valor = 0
+    end 
+    return @objmarcas
   end  
 end

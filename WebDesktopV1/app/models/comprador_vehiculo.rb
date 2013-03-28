@@ -56,6 +56,42 @@ class Comprador_Vehiculo < ActiveRecord::Base
      puts "********************* FIN"
   end
   
+  def buscarcomprador(pro_comprador_vehiculos_id)
+    @comprador_vehiculo =  Comprador_Vehiculo.find(:first, :conditions => "id='#{pro_comprador_vehiculos_id}'")
+    if @comprador_vehiculo!=nil
+      $tira_compradorjson = @comprador_vehiculo.to_json
+      valor = 1
+    else
+      $tira_compradorjson = '{ "success": "true", "exito": "false", "msg": " no existe!" }'
+      valor = 0
+    end 
+    return @comprador_vehiculo
+  end
  
+   def buscarcomprador(pro_comprador_vehiculos_id)
+    @comprador_vehiculo =  Comprador_Vehiculo.find(:first, :conditions => "id='#{pro_comprador_vehiculos_id}'")
+    if @comprador_vehiculo!=nil
+      $tira_compradorjson = @comprador_vehiculo.to_json
+      valor = 1
+    else
+      $tira_compradorjson = '{ "success": "true", "exito": "false", "msg": " no existe!" }'
+      valor = 0
+    end 
+    return @comprador_vehiculo
+  end
+  
+    def buscar_CompradorVehiculo(idcomprador)
+    @comprador_vehiculo =  Comprador_Vehiculo.find(:first, :conditions => "id='#{idcomprador}'")
+    if @comprador_vehiculo!=nil
+      $tira_compradorjson = @comprador_vehiculo.to_json
+      valor = 1
+    else
+      $tira_compradorjson = '{ "success": "true", "exito": "false", "msg": " no existe!" }'
+      valor = 0
+    end 
+        puts 'tira  comprador'
+        puts $tira_compradorjson
+    return valor  
+  end
 
 end

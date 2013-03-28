@@ -37,4 +37,16 @@ class Modelo_Vehiculo < ActiveRecord::Base
     valor=1
     $tirajson = '{ "success": "true", "exito": "true", "message": "Datos guardados satisfactoriamente!" }'
   end
+    #Ma.Ale
+   def buscarmodelovehiculos(vehic_modelo_vehiculos_id)
+    @modelo =  Modelo_Vehiculo.find(:first, :conditions => "id='#{vehic_modelo_vehiculos_id}'")
+    if @modelo!=nil
+      $tirajson = @modelo.to_json
+      valor = 1
+    else
+      $tirajson = '{ "success": "true", "exito": "false", "msg": " no existe!" }'
+      valor = 0
+    end 
+    return @modelo
+  end
 end

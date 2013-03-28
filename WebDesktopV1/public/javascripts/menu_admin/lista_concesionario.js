@@ -76,7 +76,7 @@ Ext.define('App.ConcesionarioGrid', {
     extend: 'Ext.grid.Panel',
     //Definicion del alias que puede usado en un xtype
     alias: 'widget.concesionariogrid',
-
+	height: 180,
     //Sobre escribimos este metodo de Ext.grid.Panel
     initComponent : function() {
         //Definicion de las columnas del grid
@@ -104,7 +104,6 @@ Ext.define('App.ConcesionarioGrid', {
         this.listeners = {
                           itemclick : function(view) {
                            data = this.getSelectionModel().selected.items[0].data;
-                           alert(data.ciudads_id);
                            asignarDatosConcesionario();
                            buscar_nombreCiudad();
                           }

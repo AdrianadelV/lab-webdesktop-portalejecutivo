@@ -26,7 +26,6 @@ posy = parseInt(screen.height * factorh);
 
 var data = null;
 var ventana = null;
-var boton = null;
 
 Ext.require([
 	         	'Ext.tree.*',
@@ -37,25 +36,56 @@ Ext.require([
     			'Ext.panel.Panel'
 	         ]);
 
-//Definicion del Modelo
- Ext.define('Usuarios', {
-    extend: 'Ext.data.Model',
-    fields: [ 'nombre', 'apellido', 'posicion', 'fecha_solicitud', 'modelo_vehi', 'concesionario']
+//Definicion del Data model Concesionario
+Ext.define('ListaColaGeneral', {
+ extend: 'Ext.data.Model',
+           fields: [
+            {name: 'nombre', type: 'varchar'},
+            {name: 'cedula', type: 'varchar'},
+            {name: 'idcomprador', type: 'varchar'},
+            {name: 'apellido', type: 'varchar'},
+            {name: 'telefono_comp', type: 'varchar'},
+            {name: 'direccion_comp', type: 'varchar'},
+            {name: 'correo_comp', type: 'varchar'},
+            {name: 'fechanacim_comp', type: 'varchar'},
+            {name: 'posicion', type: 'string'},
+            {name: 'fecha', type: 'string'},
+            {name: 'validez', type: 'string'},
+            {name: 'estatus', type: 'string'},
+            {name: 'modelo', type: 'varchar'},
+            {name: 'concesionario', type: 'varchar'},
+            {name: 'rif_conce', type: 'varchar'},
+            {name: 'direccion_conc', type: 'varchar'},
+            {name: 'telefono_conc', type: 'varchar'},
+            {name: 'correo_conc', type: 'varchar'},
+            {name: 'marca', type: 'varchar'},
+            {name: 'matricula', type: 'string'},
+            {name: 'ano_fabricacion', type: 'varchar'},
+            {name: 'precio_venta', type: 'varchar'},
+            {name: 'serial_motor', type: 'varchar'},
+           ],
 });
 
-//Definicion del Data Store
-var usuarioStore = Ext.create('Ext.data.Store', {
-    model: 'Usuarios',
-    data: [
-        { nombre: 'maria', apellido: 'paez', posicion: '1',  fecha_solicitud: '2012-02-12', modelo_vehi: 'explorer', concesionario: 'Carofordmotors'}
-    ]
+//Definicion del Data Store ListaColaGeneral
+ listageneralStore = Ext.create('Ext.data.Store', {
+    model: 'ListaColaGeneral',
+    autoLoad: true,
+    proxy: {
+         type: 'ajax',
+         url : 'menu_admin/generardataListaGlobal',
+         reader: {
+                  type: 'json',
+                  root: 'datos'
+              }
+           }
 });
 
-//Definicion de la clase UsuariosGrid
-Ext.define('App.UsuariosGrid', {
+
+//Definicion de la clase ConcesionarioGrid
+Ext.define('App.ListaColaGeneralGrid', {
     extend: 'Ext.grid.Panel',
     //Definicion del alias que puede usado en un xtype
-    alias: 'widget.usuariosgrid',
+    alias: 'widget.listaColaGeneralgrid',
 
     //Sobre escribimos este metodo de Ext.grid.Panel
     initComponent : function() {
@@ -63,11 +93,11 @@ Ext.define('App.UsuariosGrid', {
         this.columns = [
             {xtype: 'rownumberer', width: 20, sortable: true},
             {text: "Nombre", width: 60, dataIndex: 'nombre', sortable: true},
-            {text: "Apellido", width: 100, dataIndex: 'apellido', sortable: true},
-            {text: "Posicion", width: 100, dataIndex: 'posicion', sortable: true},
-            {text: "Fecha de Solicitud", width: 100, dataIndex: 'fecha_solicitud', sortable: true},
-            {text: "Modelo Vehiculo", width: 100, dataIndex: 'modelo_vehi', sortable: true},
+            {text: "posicion", width: 100, dataIndex: 'posicion', sortable: true},
+            {text: "Fecha de Solicitud", width: 100, dataIndex: 'fecha', sortable: true},
+            {text: "Modelo Vehiculo", width: 100, dataIndex: 'modelo', sortable: true},
             {text: "Concesionario", width: 100, dataIndex: 'concesionario', sortable: true},
+            {text: "Marca", width: 100, dataIndex: 'marca', sortable: true},
         ];
         this.dockedItems = [ {
 	  		xtype: 'pagingtoolbar',
@@ -77,22 +107,24 @@ Ext.define('App.UsuariosGrid', {
                     displayMsg : 'Personas en espera {0} - {1} de {2}',
 	  	} ];
         // Origen de los datos, de un data store
-        this.store = usuarioStore;
+        this.store = listageneralStore;
         this.forceFit = true;
-	this.scroll = true;
-	this.viewConfig = { style: {overflowY: 'hidden', overflowX: 'hidden' } };
-	this.verticalScroller = {xtype: 'usuariosgrid'};
+		this.scroll = true;
+		this.viewConfig = { style: {overflowY: 'hidden', overflowX: 'hidden' } };
+		this.verticalScroller = {xtype: 'listaColaGeneralgrid'};
         this.listeners = {
                           itemclick : function(view) {
                            data = this.getSelectionModel().selected.items[0].data;
-                           //alert('hadjasdha');
-                             ventanatab = Ext.create('ventanatab');
-                  			 ventanatab.show();
-                  			 ventanalista.close();
+                           asignarDatosComprador();
+                           asignarDatosVehiculo();
+                           asignarDatosConcesionarioLista();
+                           asignarDatosProforma()
+                           ventanatab = Ext.create('ventanatab');
+                		   ventanatab.show();
                           }
                          };
         //Llamamos a la super clase a iniciacion del componente
-        App.UsuariosGrid.superclass.initComponent.call(this);
+        App.ListaColaGeneralGrid.superclass.initComponent.call(this);
     }
 });
 //Definicion de Tab
@@ -122,6 +154,7 @@ Ext.define('ventanatab', {
                                     x: 70,
                                     y: 20,
                                     disabled: true,
+                                    id: 'cedula_comp',
                                     fieldLabel: 'Cedula'
                                 },
                                 {
@@ -129,6 +162,7 @@ Ext.define('ventanatab', {
                                     x: 70,
                                     y: 60,
                                     disabled: true,
+                                    id: 'nombre_comp',
                                     fieldLabel: 'Nombre'
                                 },
                                 {
@@ -136,6 +170,7 @@ Ext.define('ventanatab', {
                                     x: 70,
                                     y: 100,
                                     disabled: true,
+                                    id: 'apellido_comp',
                                     fieldLabel: 'Apellido'
                                 },
                                 {
@@ -143,21 +178,24 @@ Ext.define('ventanatab', {
                                     x: 70,
                                     y: 140,
                                     disabled: true,
+                                    id: 'telefono_comp',
                                     fieldLabel: 'Telefono'
                                 },
                                 {
-                                    xtype: 'combobox',
+                                    xtype: 'textfield',
                                     x: 70,
                                     y: 180,
                                     width: 310,
                                     disabled: true,
-                                    fieldLabel: 'Sexo'
+                                    id: 'fechanacimiento_comp',
+                                    fieldLabel: 'Fecha de Nacimiento'
                                 },
                                 {
                                     xtype: 'textfield',
                                     x: 70,
                                     y: 220,
                                     disabled: true,
+                                    id: 'direccion_comp',
                                     fieldLabel: 'Dirección'
                                 },
                                 {
@@ -165,6 +203,7 @@ Ext.define('ventanatab', {
                                     x: 70,
                                     y: 260,
                                     disabled: true,
+                                    id: 'correo_comp',
                                     fieldLabel: 'Correo'
                                 },
                                 {
@@ -188,6 +227,7 @@ Ext.define('ventanatab', {
                                     x: 70,
                                     y: 20,
                                     disabled: true,
+                                    id: 'matricula',
                                     fieldLabel: 'Matricula'
                                 },
                                 {
@@ -195,13 +235,15 @@ Ext.define('ventanatab', {
                                     x: 70,
                                     y: 60,
                                     disabled: true,
-                                    fieldLabel: 'Costo'
+                                    id: 'precio',
+                                    fieldLabel: 'Precio'
                                 },
                                 {
                                     xtype: 'textfield',
                                     x: 70,
                                     y: 100,
                                     disabled: true,
+                                    id: 'ano',
                                     fieldLabel: 'Año'
                                 },
                                 {
@@ -209,13 +251,7 @@ Ext.define('ventanatab', {
                                     x: 70,
                                     y: 140,
                                     disabled: true,
-                                    fieldLabel: 'Color'
-                                },
-                                {
-                                    xtype: 'textfield',
-                                    x: 70,
-                                    y: 180,
-                                    disabled: true,
+                                    id: 'serial',
                                     fieldLabel: 'Serial del Motor'
                                 },                                
                                 {
@@ -239,6 +275,7 @@ Ext.define('ventanatab', {
                                     x: 70,
                                     y: 20,
                                     disabled: true,
+                                    id: 'rif_conc',
                                     fieldLabel: 'R.I.F.'
                                 },
                                 {
@@ -246,6 +283,7 @@ Ext.define('ventanatab', {
                                     x: 70,
                                     y: 60,
                                     disabled: true,
+                                    id: 'nombre_conc',
                                     fieldLabel: 'Nombre'
                                 },
                                 {
@@ -253,6 +291,7 @@ Ext.define('ventanatab', {
                                     x: 70,
                                     y: 100,
                                     disabled: true,
+                                    id: 'direccion_conc',
                                     fieldLabel: 'Dirección'
                                 },
                                 {
@@ -260,6 +299,7 @@ Ext.define('ventanatab', {
                                     x: 70,
                                     y: 140,
                                     disabled: true,
+                                    id: 'telefono_conc',
                                     fieldLabel: 'Telefono'
                                 },
                                 {
@@ -267,6 +307,7 @@ Ext.define('ventanatab', {
                                     x: 70,
                                     y: 180,
                                     disabled: true,
+                                    id: 'correo_conc',
                                     fieldLabel: 'Correo'
                                 },
                                 {
@@ -291,6 +332,7 @@ Ext.define('ventanatab', {
                                     x: 70,
                                     y: 40,
                                     disabled: true,
+                                    id: 'fecha',
                                     fieldLabel: 'Fecha de Solicitud:'
                                 },
                                 {
@@ -298,6 +340,7 @@ Ext.define('ventanatab', {
                                     x: 70,
                                     y: 100,
                                     disabled: true,
+                                    id: 'validez',
                                     fieldLabel: 'Fecha de Validez:'
                                 },
                                 {
@@ -305,29 +348,9 @@ Ext.define('ventanatab', {
                                     x: 70,
                                     y: 160,
                                     disabled: true,
+                                    id: 'estatus',
                                     fieldLabel: 'Estatus:'
                                 }
-                                // {
-                                    // xtype: 'textfield',
-                                    // x: 70,
-                                    // y: 140,
-                                    // disabled: true,
-                                    // fieldLabel: 'Color'
-                                // },
-                                // {
-                                    // xtype: 'textfield',
-                                    // x: 70,
-                                    // y: 180,
-                                    // disabled: true,
-                                    // fieldLabel: 'Serial del Motor'
-                                // },                                
-                                // {
-                                	// x: 400,
-                                	// y: 55,
-                                	// height: 200,
-    								// width: 250,
-                                	// html:'<div align="left"><img src="images/carrodaewood.jpg""></div>'
-                                // }
                             ]
                 }
             ]
@@ -377,7 +400,7 @@ Ext.define('miVentanalista', {
                     		title: 'Lista de espera en la Cola',
                     		items: [
 	                    		{ 
-	                 			xtype:'usuariosgrid',
+	                 			xtype:'listaColaGeneralgrid',
 	                 			
 	                 			viewConfig: {
 	                    		   }
@@ -395,3 +418,64 @@ Ext.define('miVentanalista', {
         me.callParent(arguments);
     }
    });
+   
+  
+   //Metodo para buscar y mostrar datos del comprador de vehiculo
+   function buscar_CompradorVehiculo() {
+   	alert('metodo buscar comprado');
+			Ext.Ajax.request({
+				url : 'menu_admin/buscar_CompradorVehiculo',
+				params : {
+					ajax : 'true',
+					funcion : 'buscar_CompradorVehiculo',
+					idcomprador : idcomprador,
+				},
+				//Retorno exitoso de la pagina servidora a traves del formato JSON
+				success : function(exito, request) {
+					datos = Ext.JSON.decode(exito.responseText);
+					if (datos.exito == 'false') {
+						Ext.Msg.alert("Error", datos.msg);
+					} else {
+						alert(datos.cedula);
+						Ext.getCmp('cedula_comp').setValue(datos.cedula);
+						// buscar_nombreEstado();
+					}
+				},
+				//No hay retorno de la pagina servidora
+				failure : function() {
+					Ext.Msg.alert("Error", "Servidor no conectado");
+
+				}
+			});
+}; 
+
+function asignarDatosComprador () {
+  Ext.getCmp('cedula_comp').setValue(data.cedula);
+  Ext.getCmp('nombre_comp').setValue(data.nombre);
+  Ext.getCmp('apellido_comp').setValue(data.apellido);
+  Ext.getCmp('direccion_comp').setValue(data.direccion_comp);
+  Ext.getCmp('telefono_comp').setValue(data.telefono_comp);
+  Ext.getCmp('correo_comp').setValue(data.correo_comp);
+  Ext.getCmp('fechanacimiento_comp').setValue(data.fechanacim_comp);
+};
+
+function asignarDatosVehiculo () {
+  Ext.getCmp('matricula').setValue(data.matricula);
+  Ext.getCmp('ano').setValue(data.ano_fabricacion);
+  Ext.getCmp('precio').setValue(data.precio_venta);
+  Ext.getCmp('serial').setValue(data.serial_motor);
+};
+
+function asignarDatosConcesionarioLista () {
+  Ext.getCmp('rif_conc').setValue(data.rif_conce);
+  Ext.getCmp('nombre_conc').setValue(data.concesionario);
+  Ext.getCmp('direccion_conc').setValue(data.direccion_conc);
+  Ext.getCmp('telefono_conc').setValue(data.telefono_conc);
+  Ext.getCmp('correo_conc').setValue(data.correo_conc);
+};
+
+function asignarDatosProforma () {
+  Ext.getCmp('fecha').setValue(data.fecha);
+  Ext.getCmp('validez').setValue(data.validez);
+  Ext.getCmp('estatus').setValue(data.estatus);
+};

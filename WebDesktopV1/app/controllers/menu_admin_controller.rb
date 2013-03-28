@@ -69,8 +69,8 @@ class MenuAdminController < ApplicationController
   
   def generarcomboMarcas
     @marca = Marca.all
-    $tira = @marca.to_json
-    render :text => $tira
+    $tira_marcajson = @marca.to_json
+    render :text => $tira_marcajson
   end
 
   def generardatalistamarcas
@@ -144,7 +144,7 @@ class MenuAdminController < ApplicationController
     valor = @estados.buscarnombreEstado(id_estado)
     render :text => $tirajson
   end
-  
+  #Ma.Ale
   def generardataListaGlobal
     @solicitud_vehiculos = Solicitud_vehiculos.all
     @son = Solicitud_vehiculos.count
@@ -152,72 +152,74 @@ class MenuAdminController < ApplicationController
     @tirajson = '{ "datos": [ '
     @solicitud_vehiculos.each do |solicitud_vehiculos|
       @objproforma = Proformas.new
-      proforma = @objproforma.buscarprofroma(@solicitud_vehiculos[@i-1].proformas_id)
+      solicitud = @solicitud_vehiculos[@i-1].id
+      $proformas = @objproforma.buscarprofroma(@solicitud_vehiculos[@i-1].proformas_id)
       @objcomprador_vehiculo = Comprador_Vehiculo.new
-      comprador_vehiculo = @objcomprador_vehiculo.buscarcomprador(proforma.comprador_vehiculos_id)
+      $comprador_vehiculo = @objcomprador_vehiculo.buscarcomprador($proformas.comprador_vehiculos_id)
       @objconcesionario = Concesionario_vehiculos.new
-      concesionario = @objconcesionario.buscarconcesionario(proforma.concesionario_vehiculos_id)
+      $concesionario = @objconcesionario.buscarconcesionario($proformas.concesionario_vehiculos_id)
       @objdetalle_vehiculo = Detalle_vehiculos.new
-      detalle_vehiculos = @objdetalle_vehiculo.buscardetalle_vehiculo(proforma.detalle_vehiculos_id)
+      $detalle_vehiculos = @objdetalle_vehiculo.buscardetalle_vehiculo($proformas.detalle_vehiculos_id)
       @objvehiculos = Vehiculos.new
-      vehiculo = @objvehiculos.buscarid(detalle_vehiculos.vehiculos_id)
-      @objmodelo_vehiculos = Modelo_vehiculo.new
-      modelo_vehiculos = @objmodelo_vehiculos.buscarmodelovehiculos(vehiculo.modelo_vehiculos_id)
+      $vehiculo = @objvehiculos.buscarvehiculo($detalle_vehiculos.vehiculos_id)
+      @objmodelo_vehiculos = Modelo_Vehiculo.new
+      $modelo_vehiculos = @objmodelo_vehiculos.buscarmodelovehiculos($vehiculo.modelo_vehiculos_id)
       @objmarca = Marca.new
-      marca = @objmarca.buscamarca(modelo_vehiculos.marcas_id)
+      $marca = @objmarca.buscamarca($modelo_vehiculos.marcas_id)
       #print proforma
       
       if @i<@son
-        @tirajson = @tirajson + ' { "nombre": "' + comprador_vehiculo.nombres + '", "posicion": "' + @i + '", "fecha": "' + proforma.fecha.to_s + '", "modelo_vehiculo": "' + modelo_vehiculos.descripcion + '", "concesionarios": "' + concesionario.nombre + '", "marcas": "' + marca.nombre + '"},'
+        @tirajson = @tirajson + ' { "nombre": "'          + $comprador_vehiculo.nombres +
+                                '", "cedula": "'          + $comprador_vehiculo.cedula.to_s +
+                                '", "idcomprador": "'     + $comprador_vehiculo.id.to_s +
+                                '", "apellido": "'        + $comprador_vehiculo.apellidos +
+                                '", "telefono_comp": "'   + $comprador_vehiculo.telefono +
+                                '", "direccion_comp": "'  + $comprador_vehiculo.direccion +
+                                '", "correo_comp": "'     + $comprador_vehiculo.correo +
+                                '", "fechanacim_comp": "' + $comprador_vehiculo.fecha_nacimiento.to_s +
+                                '", "matricula": "'       + $vehiculo.matricula.to_s +
+                                '", "ano_fabricacion": "' + $vehiculo.ano_fabricacion.to_s +
+                                '", "precio_venta": "'    + $vehiculo.precio_venta.to_s +
+                                '", "serial_motor": "'    + $vehiculo.serial_motor.to_s +
+                                '", "posicion": "'        + solicitud.to_s +
+                                '", "fecha": "'           + $proformas.fecha.to_s + 
+                                '", "validez": "'         + $proformas.validez.to_s + 
+                                '", "estatus": "'         + $proformas.estatus + 
+                                '", "modelo": "'          + $modelo_vehiculos.descripcion +
+                                '", "concesionario": "'   + $concesionario.nombre +
+                                '", "rif_conce": "'       + $concesionario.rif +
+                                '", "direccion_conc": "'  + $concesionario.direccion +
+                                '", "telefono_conc": "'   + $concesionario.telefono +
+                                '", "correo_conc": "'     + $concesionario.correo +
+                                '", "marca": "'           + $marca.nombre + '"}, '
       else
-        @tirajson = @tirajson + ' { "nombre": "' + comprador_vehiculo.nombres + '", "posicion": "' + @i + '", "fecha": "' + proforma.fecha.to_s + '", "modelo_vehiculo": "' + modelo_vehiculos.descripcion + '", "concesionarios": "' + concesionario.nombre + '", "marcas": "' + marca.nombre + '"},'
+        @tirajson = @tirajson + ' { "nombre": "'          + $comprador_vehiculo.nombres +
+                                '", "cedula": "'          + $comprador_vehiculo.cedula.to_s +
+                                '", "idcomprador": "'     + $comprador_vehiculo.id.to_s +
+                                '", "apellido": "'        + $comprador_vehiculo.apellidos +
+                                '", "telefono_comp": "'   + $comprador_vehiculo.telefono +
+                                '", "direccion_comp": "'  + $comprador_vehiculo.direccion +
+                                '", "correo_comp": "'     + $comprador_vehiculo.correo +
+                                '", "fechanacim_comp": "' + $comprador_vehiculo.fecha_nacimiento.to_s +
+                                '", "matricula": "'       + $vehiculo.matricula.to_s +
+                                '", "ano_fabricacion": "' + $vehiculo.ano_fabricacion.to_s +
+                                '", "precio_venta": "'    + $vehiculo.precio_venta.to_s +
+                                '", "serial_motor": "'    + $vehiculo.serial_motor.to_s +
+                                '", "posicion": "'        + solicitud.to_s +
+                                '", "fecha": "'           + $proformas.fecha.to_s + 
+                                '", "validez": "'         + $proformas.validez.to_s + 
+                                '", "estatus": "'         + $proformas.estatus +
+                                '", "modelo": "'          + $modelo_vehiculos.descripcion +
+                                '", "concesionario": "'   + $concesionario.nombre +
+                                '", "rif_conce": "'       + $concesionario.rif +
+                                '", "direccion_conc": "'  + $concesionario.direccion +
+                                '", "telefono_conc": "'   + $concesionario.telefono +
+                                '", "correo_conc": "'     + $concesionario.correo +
+                                '", "marca": "'           + $marca.nombre + '"}, '
       end
       @i=@i+1
     end
     @tirajson = @tirajson + ' ] }'
     render :text => @tirajson
   end
-  
-  # def generarDataProforma
-    # @proforma = Proforma.all
-    # @tira_proformajson = @proforma.to_json
-    # render :text => @tira_proformajson
-  # end
-# 
-  # def generarDataCompradorVehiculo
-    # @comprador_vehiculos = Comprador_vehiculos.all
-    # @tira_compradorjson = @comprador_vehiculos.to_json
-    # render :text => @tira_compradorjson
-  # end
-#   
-   # def generardataSolicitudVehiculo
-    # @solicitud_vehiculos = Solicitud_vehiculos.all
-    # $tira_solicitudjson = @solicitud_vehiculos.to_json
-    # render :text => $tira_solicitudjson
-  # end
-#   
-  # def generardataDetalleVehiculo
-    # @detalle_vehiculos = Detalle_vehiculos.all
-    # $tira_detallejson = @detalle_vehiculos.to_json
-    # render :text => $tira_detallejson
-  # end
-#   
-  # def generardataVehiculo
-    # @vehiculos = Vehiculos.all
-    # $tira_vehiculosjson = @vehiculos.to_json
-    # render :text => $tira_vehiculosjson
-  # end
-# 
-  # def generardataModeloVehiculo
-    # @modelo_vehiculos = Vehiculos.all
-    # $tira_modelovehiculosjson = @modelo_vehiculos.to_json
-    # render :text => $tira_modelovehiculosjson
-  # end
-# 
-  # def generardataConcesionario
-    # @concesionario_vehiculos = Concesionario_vehiculos.all
-    # $tira_concesionariojson = @concesionario_vehiculos.to_json
-    # render :text => $tira_concesionariojson
-  # end
-
 end

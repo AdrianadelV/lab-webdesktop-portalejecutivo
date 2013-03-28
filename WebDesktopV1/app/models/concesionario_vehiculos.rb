@@ -60,5 +60,17 @@ class Concesionario_vehiculos < ActiveRecord::Base
    end
    return tirajson 
   end
+  #Ma.Ale
+  def buscarconcesionario(pro_concesionario_vehiculos_id)
+    @concesionario_vehiculos =  Concesionario_vehiculos.find(:first, :conditions => "id='#{pro_concesionario_vehiculos_id}'")
+    if @concesionario_vehiculos!=nil
+      $tirajson = @concesionario_vehiculos.to_json
+      valor = 1
+    else
+      $tirajson = '{ "success": "true", "exito": "false", "msg": " no existe!" }'
+      valor = 0
+    end 
+    return @concesionario_vehiculos
+  end
 
 end
