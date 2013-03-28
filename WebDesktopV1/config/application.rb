@@ -61,6 +61,6 @@ module WebDesktopV1
     
     # Variable global
     $log = Logger.new("WebDesktop.log", 5, 10*1024)
-    
+    $directorio_raiz = File.expand_path('../../', __FILE__)
   end
 end
