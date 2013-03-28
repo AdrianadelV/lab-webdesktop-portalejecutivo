@@ -4,13 +4,6 @@ class Modelo_Vehiculo < ActiveRecord::Base
     @objmarcas = Modelo_Vehiculo.find(:all, :conditions => "marcas_id='#{id_marca}'")
     if @objmarcas!=nil
       $tirajson = @objmarcas.to_json
-      parsed_json = ActiveSupport::JSON.decode($tirajson)
-      i=0
-      @objmarcas.each do |marca|
-         parsed_json[i]["ano_m"]="2011"
-         puts parsed_json.to_json
-         i=i+1
-      end
       valor = 1
     else
       $tirajson = '{ "success": "true", "exito": "false", "msg": "Marca no existe!" }'
@@ -36,6 +29,16 @@ class Modelo_Vehiculo < ActiveRecord::Base
     @modelo.save
     valor=1
     $tirajson = '{ "success": "true", "exito": "true", "message": "Datos guardados satisfactoriamente!" }'
+  end
+  #Adriana Santana
+  def buscarModelos(id)
+    @modelo = Modelo_Vehiculo.find(:first, :conditions => "id='#{id}'")
+    if @modelo!=nil
+      $tirajson = @modelo.to_json
+    else
+      $tirajson = '{ "success": "true", "exito": "false", "msg": "Modelo no Encontrado!" }'
+    end
+    return @modelo
   end
     #Ma.Ale
    def buscarmodelovehiculos(vehic_modelo_vehiculos_id)
