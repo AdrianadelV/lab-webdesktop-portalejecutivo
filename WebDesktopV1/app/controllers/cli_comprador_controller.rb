@@ -21,19 +21,21 @@ class CliCompradorController < ApplicationController
     @tira = @arbols.BuscarTodosArbolJson(@tipo)
     render :text => @tira
   end
-   def buscarUsuarioLo
-   @usuarios = Usuario.new
-   valor = @usuarios.buscarUsuarioLo(session[:nombre])
+
+  def buscarUsuarioLo
+    @usuarios = Usuario.new
+    valor = @usuarios.buscarUsuarioLo(session[:nombre])
   end
+
   def buscarComprador
     buscarUsuarioLo()
     parsed_json = ActiveSupport::JSON.decode($tirajson)
     @comprador=Comprador_Vehiculo.new
     valor=@comprador.buscarUsuarioComprador(parsed_json["id"])
-    render :text => $tirajson 
+    render :text => $tirajson
   end
-  
-  def grabarComprador  
+
+  def grabarComprador
     @comprador= Comprador_Vehiculo.new
     parsed_json = ActiveSupport::JSON.decode($tirajson)
     @cedula=params[:cedula]
@@ -47,13 +49,26 @@ class CliCompradorController < ApplicationController
     @comprador.grabarComprador(@cedula,@nombres,@apellidos,@telefono,@direccion,@correo,@fecha_nacimiento,@sexo)
     render :text => $tirajson
   end
-  
+
   def modificarContrasena
     @usuario = Usuario.new
     @nombre = params[:nombre]
     @canterior=params[:canterior]
     @cnueva=params[:cnueva]
     @usuario.modificarContrasena(@nombre,@canterior,@cnueva,)
+    render :text => $tirajson
+  end
+  
+  def buscarModelosVehiculos
+    @modelo = Modelo_Vehiculo.new
+    @id=params[:id]
+    @objmodelo = @modelo.buscarModelos(@id)
+    puts @objmodelo.imagen1
+    @modelo.creararchivofisico(@objmodelo.descripcion+'.jpg',$directorio_raiz+'/public/images/modelovehiculo',@objmodelo.imagen1)
+    parsed_json = ActiveSupport::JSON.decode($tirajson)
+    parsed_json["imagen3"]="/public/images/modelovehiculo/"+@objmodelo.descripcion+'.jpg'
+    parsed_json["imagen1"]=""
+    puts parsed_json.to_json
     render :text => $tirajson
   end
   def imprimir_proforma
@@ -246,5 +261,4 @@ class CliCompradorController < ApplicationController
    @tirajson = '{"success":true}'
    render :text => $tirajson
   end
-end  
-  
+end
