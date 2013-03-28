@@ -1,3 +1,31 @@
+
+Ext.define('Bancos', {
+	extend : 'Ext.data.Model',
+	fields : [{
+		name : 'bancos',
+		type : 'varchar'
+	}, {
+		name : 'banco',
+		type : 'varchar'
+	},{
+		name : 'rif',
+		type : 'varchar'
+	}
+	],
+	proxy : {
+		type : 'ajax',
+		url : 'cliente_resful/call_service',
+		 reader: {
+       		type  : 'json',
+       		root  : 'bancos'
+   },
+	}
+});
+var bancosStore = Ext.create('Ext.data.Store', {
+	model : 'Bancos',
+	autoLoad : true,
+});
+
 Ext.define('proforma_banco', {
     extend: 'Ext.window.Window',
     x:350,
@@ -227,6 +255,12 @@ Ext.define('proforma_banco', {
                     height: 30,
                     width: 80,
                     text: 'Cancelar',
+                    listeners:{
+                    	click:function(){	
+                    		buscar_banco();
+                    	alert('FUNCIONA');
+                    	}
+                    },
                     tooltip: 'Cancelar envio'
                 },
                 {
@@ -271,11 +305,57 @@ Ext.define('proforma_banco', {
                     vtypeText: 'solo texto',
                     fieldLabel: 'Sexo',
                     id:'sexo'
+                },
+                {
+                    xtype: 'combobox',
+                    store : bancosStore,
+                    x: 40,
+                    y: 520,
+                    width: 310,
+                    id : 'cmb_banco',
+				    valueField : 'rif',
+				    emptyText : 'Seleccionar',
+				    displayField : 'banco',
+				    triggerAction : 'all',
+				    editable : 'false',
+				    queryMode : 'remote',
+				    selecOnFocus : true,
+                    fieldLabel: 'Banco'
+                },
+                {
+                    xtype: 'label',
+                    x: 10,
+                    y: 500,
+                    text: 'Datos del BANCO'
                 }
             ]
         });
 
         me.callParent(arguments);
     }
+ });
 
-});
+function buscar_banco() {
+	Ext.Ajax.request({
+				//Llamar la direcion del servicio
+				url : 'servicios_eai/servicios',
+				method:'GET',
+				type:'ajax',
+				success : function(resultado, request) {
+					//La tira JSON donde retorna los valores
+					datos = Ext.JSON.decode(resultado.responseText);
+					if (datos.exito=5) {
+						alert(datos);
+						for (var i = 0; i < datos.length; i++){
+						alert(datos.rif);
+						alert("pase");
+						}
+					} else {
+						alert('NO HAY BANCOS');
+					}
+				},
+				failure : function(error) {
+					Ext.Msg.alert("Error", "Servidor no conectado");
+				}
+			});
+}
