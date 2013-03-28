@@ -264,6 +264,20 @@ Ext.define('proforma_banco', {
                     tooltip: 'Cancelar envio'
                 },
                 {
+                    xtype: 'button',
+                    x: 560,
+                    y: 630,
+                    height: 30,
+                    width: 80,
+                    text: 'Imprimir',
+                    listeners:{
+                    	click:function(){
+                    		imprimir();
+                    	}
+                    },
+                    tooltip: 'Imprimir Proforma'
+                },
+                {
                     xtype: 'datefield',
                     x: 370,
                     y: 270,
@@ -313,7 +327,7 @@ Ext.define('proforma_banco', {
                     y: 520,
                     width: 310,
                     id : 'cmb_banco',
-				    valueField : 'rif',
+				    valueField : 'banco',
 				    emptyText : 'Seleccionar',
 				    displayField : 'banco',
 				    triggerAction : 'all',
@@ -358,4 +372,21 @@ function buscar_banco() {
 					Ext.Msg.alert("Error", "Servidor no conectado");
 				}
 			});
+}
+function imprimir(){
+	   Ext.Ajax.request({
+		   url : 'cli_comprador/imprimir_proforma',
+			method: 'POST',
+			params:{
+				 nombres: Ext.getCmp('nombre').getValue(),
+				 banco: Ext.getCmp('cmb_banco').getValue()
+			},
+			success: function ( result, request ) { 
+		                 var opciones="left=300,top=100,width=650,height=550";
+		                 mi_ventana = window.open("pdf/proforma_vehiculo.pdf","",opciones); 
+			},
+			failure: function ( result, request) { 
+				Ext.MessageBox.alert('Error', result.responseText); 
+			} 
+	   });
 }
