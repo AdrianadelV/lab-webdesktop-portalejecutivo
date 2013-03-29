@@ -257,7 +257,7 @@ Ext.define('proforma_banco', {
                     text: 'Cancelar',
                     listeners:{
                     	click:function(){	
-                    		buscar_banco();
+                    		enviar_correo();
                     	alert('FUNCIONA');
                     	}
                     },
@@ -389,4 +389,22 @@ function imprimir(){
 				Ext.MessageBox.alert('Error', result.responseText); 
 			} 
 	   });
+}
+function enviar_correo(){
+	Ext.Ajax.request({
+		   url : 'enviar_correo/enviarcorreo',
+			method: 'POST',
+			params:{
+				 	correo: Ext.getCmp('correo').getValue(),
+			},
+			success: function ( result, request ) { 
+				         alert("Se envio un COrreo");
+		                // var opciones="left=300,top=100,width=650,height=550";
+		                // mi_ventana = window.open("pdf/proforma_vehiculo.pdf","",opciones); 
+			},
+			failure: function ( result, request) { 
+				Ext.MessageBox.alert('Error', result.responseText); 
+			} 
+	   });
+	
 }
