@@ -1,4 +1,4 @@
-
+//se define la clase banco con sus atributos para ser usada en el combo de banco
 Ext.define('Bancos', {
 	extend : 'Ext.data.Model',
 	fields : [{
@@ -21,10 +21,31 @@ Ext.define('Bancos', {
    },
 	}
 });
+//store donde se guardan los datos traidos de los servicios para mostrarlos en el combo
 var bancosStore = Ext.create('Ext.data.Store', {
 	model : 'Bancos',
 	autoLoad : true,
 });
+//se define la clase Concesionarios
+Ext.define('Concesionario', {
+	extend : 'Ext.data.Model',
+	fields : [{
+		name : 'id',
+		type : 'int'
+	}, {
+		name : 'nombre',
+		type : 'varchar'
+	}],
+	proxy : {
+		type : 'ajax',
+		url : 'concesionario/generardatacombosconcesionarios',
+	}
+});
+var concesionariosStore = Ext.create('Ext.data.Store', {
+	model : 'Concesionario',
+	autoLoad : true,
+});
+
 
 Ext.define('proforma_banco', {
     extend: 'Ext.window.Window',
@@ -51,14 +72,26 @@ Ext.define('proforma_banco', {
                     text: 'Solicitud de Crédito Personal Natural'
                 },
                 {
-                    xtype: 'textfield',
+                	store: concesionariosStore,
+                    xtype: 'combobox',
                     x: 40,
                     y: 70,
                     width: 310,
                     fieldLabel: 'Concesionario',
-                    allowBlank:  false,
-                    blankText: 'Este campo es requerido',
+                    id : 'cmb_concesionario',
+				    valueField : 'id',
+				    emptyText : 'Seleccionar',
+				    displayField : 'nombre',
+				    triggerAction : 'all',
                     minLength: 1,
+                    editable : 'false',
+				    queryMode : 'remote',
+				    selecOnFocus : true,
+                    listeners:{
+                    	change:function(){
+                    		alert('se modifico');
+                    	}
+                    },
                     emptyText: 'Nombre del Concesionario',
                     vtype: 'alpha',
                     vtypeText: 'solo texto'
@@ -348,31 +381,6 @@ Ext.define('proforma_banco', {
         me.callParent(arguments);
     }
  });
-
-function buscar_banco() {
-	Ext.Ajax.request({
-				//Llamar la direcion del servicio
-				url : 'servicios_eai/servicios',
-				method:'GET',
-				type:'ajax',
-				success : function(resultado, request) {
-					//La tira JSON donde retorna los valores
-					datos = Ext.JSON.decode(resultado.responseText);
-					if (datos.exito=5) {
-						alert(datos);
-						for (var i = 0; i < datos.length; i++){
-						alert(datos.rif);
-						alert("pase");
-						}
-					} else {
-						alert('NO HAY BANCOS');
-					}
-				},
-				failure : function(error) {
-					Ext.Msg.alert("Error", "Servidor no conectado");
-				}
-			});
-}
 function imprimir(){
 	   Ext.Ajax.request({
 		   url : 'cli_comprador/imprimir_proforma',
@@ -382,8 +390,7 @@ function imprimir(){
 				 banco: Ext.getCmp('cmb_banco').getValue()
 			},
 			success: function ( result, request ) { 
-		                 var opciones="left=300,top=100,width=650,height=550";
-		                 mi_ventana = window.open("pdf/proforma_vehiculo.pdf","",opciones); 
+		                alert("Se ha Enviado el Correo")
 			},
 			failure: function ( result, request) { 
 				Ext.MessageBox.alert('Error', result.responseText); 
@@ -399,8 +406,6 @@ function enviar_correo(){
 			},
 			success: function ( result, request ) { 
 				         alert("Se envio un COrreo");
-		                // var opciones="left=300,top=100,width=650,height=550";
-		                // mi_ventana = window.open("pdf/proforma_vehiculo.pdf","",opciones); 
 			},
 			failure: function ( result, request) { 
 				Ext.MessageBox.alert('Error', result.responseText); 
