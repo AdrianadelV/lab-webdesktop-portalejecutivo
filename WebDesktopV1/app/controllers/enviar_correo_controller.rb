@@ -43,7 +43,7 @@ class EnviarCorreoController < ApplicationController
     TU PASSWORD ES :'+@password+' 
     ------------------------------------------------------------------------
     Para logearte en tu cuenta con el siguiente link
-    http://localhost/inicio
+    http://localhost:3000/inicio
     Para mas informacion Llamar al 0500-SIAEVEV')
   end 
   def enviarcorreo_nuevoindicador
