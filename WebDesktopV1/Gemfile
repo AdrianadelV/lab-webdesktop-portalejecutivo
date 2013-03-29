@@ -22,8 +22,9 @@ group :assets do
 end
 
 gem 'jquery-rails'
-gem  'nestful'
+gem 'nestful'
 gem 'fpdf'
+gem 'pony'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
