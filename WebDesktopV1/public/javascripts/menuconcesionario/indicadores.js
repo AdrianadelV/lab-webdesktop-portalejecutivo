@@ -105,6 +105,7 @@ Ext.define('miVentanaIndicadores', {
             items: [
                 {
                     xtype: 'form',
+                    id: 'formularioindicadores',
                     x: 0,
                     y: -1,
                     height: 450,
@@ -144,7 +145,7 @@ Ext.define('miVentanaIndicadores', {
                             xtype: 'combobox',
                             x: 360,
                             y: 80,
-                            fieldLabel: 'Unidad',
+                            fieldLabel: 'Unidad de la Meta',
 							id : 'cmb_unidad',
 							store : unidadesStore,
 							valueField : 'id',
@@ -168,53 +169,61 @@ Ext.define('miVentanaIndicadores', {
                             xtype: 'textfield',
                             x: 20,
                             y: 80,
-                            fieldLabel: 'Valor de la Meta'
+                            fieldLabel: 'Valor de la Meta',
+                            id: 'valormeta'
                         },
                         {
                             xtype: 'datefield',
                             x: 680,
                             y: 80,
                             width: 290,
-                            fieldLabel: 'Fecha de la Meta'
+                            fieldLabel: 'Fecha de la Meta',
+                            id: 'fechameta'
                         },
                         {
                             xtype: 'textfield',
                             x: 20,
                             y: 130,
-                            fieldLabel: 'Valor Amarillo'
+                            fieldLabel: 'Valor Amarillo',
+                            id:'valoramarillo'
                         },
                         {
                             xtype: 'datefield',
                             x: 360,
                             y: 130,
                             width: 290,
-                            fieldLabel: 'Fecha Amarillo'
+                            fieldLabel: 'Fecha Amarillo',
+                            id: 'fechaamarillo'
                         },
                         {
                             xtype: 'textfield',
                             x: 20,
                             y: 180,
-                            fieldLabel: 'Valor Rojo'
+                            fieldLabel: 'Valor Rojo',
+                            id: 'valorrojo'
                         },
                         {
                             xtype: 'datefield',
                             x: 360,
                             y: 180,
                             width: 290,
-                            fieldLabel: 'Fecha Rojo'
+                            fieldLabel: 'Fecha Rojo',
+                            id: 'fecharojo'
                         },
                         {
                             xtype: 'textfield',
                             x: 20,
                             y: 230,
-                            fieldLabel: 'Valor Verde'
+                            fieldLabel: 'Valor Verde',
+                            id: 'valorverde'
                         },
                         {
                             xtype: 'datefield',
                             x: 360,
                             y: 230,
                             width: 290,
-                            fieldLabel: 'Fecha Verde'
+                            fieldLabel: 'Fecha Verde',
+                            id: 'fechaverde'
                         },
                         {
                             xtype: 'combobox',
@@ -269,25 +278,34 @@ Ext.define('miVentanaIndicadores', {
                             xtype: 'textfield',
                             x: 20,
                             y: 330,
-                            fieldLabel: 'Responsable'
+                            fieldLabel: 'Responsable',
+                            id: 'responsable'
                         },
                         {
                             xtype: 'textfield',
                             x: 360,
                             y: 330,
-                            fieldLabel: 'Correo del Responsable'
+                            fieldLabel: 'Correo del Responsable',
+                            id: 'correorespponsable'
                         },
                         {
                             xtype: 'textfield',
                             x: 670,
                             y: 330,
-                            fieldLabel: 'Telefono'
+                            fieldLabel: 'Telefono',
+                            id: 'telefono'
                         },
                         {
                             xtype: 'button',
                             x: 800,
                             y: 375,
-                            text: 'Guardar la Configuracion'
+                            text: 'Guardar la Configuracion',
+                            listeners : {
+								click : function() {
+									alert('PASO');
+                            		buscarUsuarioIndicador();
+                            	}
+                            }
                         }
                     ]
                 }
@@ -296,5 +314,68 @@ Ext.define('miVentanaIndicadores', {
 
         me.callParent(arguments);
     }
-
 });
+
+function buscarUsuarioIndicador () {
+	Ext.Ajax.request({
+		   url: 'concesionario/buscarUsuarioIndi',    
+		     //Enviando los parametros a la pagina servidora
+		   params: {
+		   		nombre: document.getElementById("user_name").textContent,
+		   },
+		     //Retorno exitoso de la pagina servidora a traves del formato JSON
+		   success: function( resultado, request ) {
+		      datos=Ext.JSON.decode(resultado.responseText);
+		      if (datos.exito=='false') {
+		      	Ext.Msg.alert("Error", 'No encontro');
+		      } else{
+		      	//alert(datos.id);
+				var id_usuario = datos.id;
+				guardarconfiguracion(id_usuario);
+				var rols_id = datos.rols_id;
+				//alert('Busco Id del Usuario');
+				//Ext.Msg.alert("Exito", datos.msg); 
+		      };
+		   },
+		     //No hay retorno de la pagina servidora
+		   failure: function() {
+		      Ext.Msg.alert("Error", "Servidor no conectado!AQUI");
+		   }
+	});
+}
+function guardarconfiguracion (id_usuario) {
+	alert('Entrando a guardar la configuracion');
+	Ext.Ajax.request({
+		   url: 'concesionario/guardarConfiguracionIndicador',    
+		     //Enviando los parametros a la pagina servidora
+		   params: {
+		      usuarios_id: id_usuario,
+		      indicadors_id: Ext.getCmp('cmb_indicador').getValue(),
+		      valor_meta: Ext.getCmp('valormeta').getValue(),
+		      unidads_id: Ext.getCmp('cmb_unidad').getValue(),
+		      fecha_meta: Ext.getCmp('fechameta').getValue(),
+		      valor_amarillo: Ext.getCmp('valoramarillo').getValue(),
+		      valor_rojo: Ext.getCmp('valorrojo').getValue(),
+		      valor_verde: Ext.getCmp('valorverde').getValue(),
+		      fecha_amarillo: Ext.getCmp('fechaamarillo').getValue(),
+		      fecha_rojo: Ext.getCmp('fecharojo').getValue(),
+		      fecha_verde: Ext.getCmp('fechaverde').getValue(),
+		      estados_indicadors_id: Ext.getCmp('cmb_estadoindi').getValue(),
+		      responsable: Ext.getCmp('responsable').getValue(),
+		      correo_responsable: Ext.getCmp('correorespponsable').getValue(),
+		      telefono: Ext.getCmp('telefono').getValue(),
+		      frecuencia_notificacions_id: Ext.getCmp('cmb_frecuencia').getValue(),
+		      
+		   },
+		     //Retorno exitoso de la pagina servidora a traves del formato JSON
+		   success: function( resultado, request ) {
+		      datos=Ext.JSON.decode(resultado.responseText);
+		      Ext.getCmp('formularioindicadores').getForm().reset(),
+		      Ext.Msg.alert("Exito", datos.message);
+		   },
+		     //No hay retorno de la pagina servidora
+		   failure: function() {
+		      Ext.Msg.alert("Error", "Servidor no conectado!AQUI");
+		   }
+		}); 
+}

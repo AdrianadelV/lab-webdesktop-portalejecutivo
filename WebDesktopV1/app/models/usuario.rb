@@ -12,6 +12,7 @@ class Usuario < ActiveRecord::Base
   end
   	def buscarUsuarioLo(nombre)
      @usuario = Usuario.find(:first, :conditions => "nombre='#{nombre}'")
+     puts @usuario
     if @usuario!=nil
       $tirajson = @usuario.to_json
       valor = 1
