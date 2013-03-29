@@ -59,6 +59,21 @@ class CliCompradorController < ApplicationController
     render :text => $tirajson
   end
   
+  def buscarCaracteristicasModelos
+    @caracteristica = Modelo_Caracteristicas.new
+    @modelo_id=params[:modelo_vehiculos_id]
+    @caracteristica.buscarCaracteristicas(@modelo_id)
+    render :text => $tirajson
+  end
+  
+  def buscarValorCaracteristicasModelos
+    @caracteristica = Caracteristicas.new
+    @caract_id=params[:caracteristicas_id]
+    @caracteristica.buscarValorCaracteristicasModelos(@caract_id)
+    puts $tirajson
+    render :text => $tirajson
+  end
+  
   def buscarModelosVehiculos
     @modelo = Modelo_Vehiculo.new
     @id=params[:id]
@@ -66,9 +81,9 @@ class CliCompradorController < ApplicationController
     puts @objmodelo.imagen1
     @modelo.creararchivofisico(@objmodelo.descripcion+'.jpg',$directorio_raiz+'/public/images/modelovehiculo',@objmodelo.imagen1)
     parsed_json = ActiveSupport::JSON.decode($tirajson)
-    parsed_json["imagen3"]="/public/images/modelovehiculo/"+@objmodelo.descripcion+'.jpg'
+    parsed_json["imagen3"]="images/modelovehiculo/"+@objmodelo.descripcion+'.jpg'
     parsed_json["imagen1"]=""
-    puts parsed_json.to_json
+    $tirajson =  parsed_json.to_json
     render :text => $tirajson
   end
   def imprimir_proforma
