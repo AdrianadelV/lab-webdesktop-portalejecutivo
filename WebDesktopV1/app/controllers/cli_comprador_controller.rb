@@ -91,6 +91,7 @@ class CliCompradorController < ApplicationController
    @data2= Array.new
    @objetoUsuarios=Comprador_Vehiculo.find(:first, :conditions => "nombres='#{params[:nombres]}'")
    puts @objetoUsuarios.nombres
+   puts $directorio_raiz
    puts"*******************************************"
    #objetoUsuarios.each do |comprador|
     @banco=params[:banco]
@@ -256,8 +257,8 @@ class CliCompradorController < ApplicationController
    pdf.FancyTable(@header, @data, @wh, @wd, @fillcolor, @textcolor, @drawcolor, @linewidth, @font, @fillcolorRestart, @textcolorRestart, @fontRestart)
    # Se debe crear en la carpeta public la carpeta pdf y como super usuario cambiar
    # La propiedades 777 con el comando: chmod -R 777 pdf/
-   $directorio='/home/fernando/Documents/Aptana Studio 3 Workspace/WebDesktopV1/public/'
-   pdf.Output($directorio+'pdf/proforma_vehiculo.pdf')
+   puts $directorio_raiz
+   pdf.Output($directorio_raiz+'/public/pdf/proforma_vehiculo.pdf')
    @tirajson = '{"success":true}'
    render :text => $tirajson
   end
