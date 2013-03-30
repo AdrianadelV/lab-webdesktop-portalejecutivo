@@ -91,21 +91,14 @@ Ext.onReady(function() {
 				}
 				if (node.get('text') == 'Configurar Nuevo Indicador') {
 					ventana.close();
-					ventana = Ext.create('mipanelejecutivo', {
-						renderTo : 'tree_el',
-						title : node.get('text'),
-					});
+					ventana = Ext.create('miVentanaIndicadores');
+					ventana.show();
 				}
 				if (node.get('text') == "Registrar Modelo de Vehiculo") {
 					ventana.close();
 					ventana = Ext.create('miVentanaModelo');
 					ventana.show();
 				}
-				if (node.get('text') == "Registrar Caracteristica de un Modelo") {
-					ventana.close();
-					ventana = Ext.create('miVentanaCaracteristica');
-					ventana.show();
-				};
 			}
 		}
 	});
