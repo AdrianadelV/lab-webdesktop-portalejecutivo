@@ -62,7 +62,7 @@ var panel = Ext.define('miVentana',{
    width: 300, 
    height: 1100, 
    alias: 'widget.imagenpanel',
-   tpl : new Ext.XTemplate('<img src="{url}" />')
+   tpl : new Ext.XTemplate('<div><img src="{url}" style="height:300px; width:400px;" /></div>')
    
 }); 
 
@@ -170,51 +170,68 @@ Ext.define('miVentanaGaleria', {
 	                 	},{
 							xtype : 'label',
 							x : 500,
-							y : 70,
+							y : 50,
 							height : 40,
 							width : 300,
 							text : 'Caracteristicas del Modelo'
 						},{
+                        	xtype: 'combobox',
+                            x: 450,
+                            y: 90,
+                            width : 300,
+                            fieldLabel: 'Caracteristicas',
+                        },{
 	                 		xtype : 'textfield',
 							x : 450,
-							y : 120,
+							y : 140,
 							width : 300,
 							id : 'ano_v',
 							msgTarget : 'under',
 							blankText : 'Este campo es requerido',
 							enableKeyEvents : true,
 							fieldLabel : 'Año del Vehiculo',
-							disabled : true
+							//disabled : true
 	                 	},{
 	                 		xtype : 'textfield',
 							x : 450,
-							y : 170,
+							y : 190,
 							width : 300,
 							id : 'tapiceria',
 							msgTarget : 'under',
 							blankText : 'Este campo es requerido',
 							enableKeyEvents : true,
-							disabled : true
+							//disabled : true
 	                 	},{
 	                 		xtype : 'textfield',
 							x : 450,
-							y : 220,
+							y : 240,
 							width : 300,
 							id : 'color',
 							msgTarget : 'under',
 							blankText : 'Este campo es requerido',
 							enableKeyEvents : true,
-							disabled : true
+							//disabled : true
 	                 	},{
 	                 		xtype : 'textfield',
 							x : 450,
-							y : 270,
+							y : 290,
 							width : 300,
 							id : 'trasmision',
 							msgTarget : 'under',
 							blankText : 'Este campo es requerido',
 							enableKeyEvents : true,
-							disabled : true
+							//disabled : true
+	                 	},{
+	                 		xtype : 'textfield',
+							x : 450,
+							y : 340,
+							width : 300,
+							id : 'precio',
+							msgTarget : 'under',
+							blankText : 'Este campo es requerido',
+							enableKeyEvents : true,
+							fieldLabel : 'Precio',
+							//disabled : true
 	                 	}
 	                ]
                 }
@@ -269,7 +286,7 @@ function buscarCaracteristicasModelo () {
 			if (datos.exito == 'false') {
 				Ext.Msg.alert("Error", datos.msg);
 			} else {
-				Ext.Msg.alert("Exito", 'Encontro');
+				// Ext.Msg.alert("Exito", 'Encontro');
 				for (var i=0; i < datos.length; i++) {
 				  id_car_modelo=datos[i].caracteristicas_id;
 				  buscarValorCaracteristica (id_car_modelo);
@@ -306,7 +323,7 @@ function buscarValorCaracteristica (id_car_modelo) {
 				if (datos[0].nombre=='Tapiceria') {
 					Ext.getCmp('tapiceria').setValue(datos[0].valor);
 				};	
-				Ext.Msg.alert("Exito", 'Encontro');
+				//Ext.Msg.alert("Exito", 'Encontro');
 			}
 		},
 		//No hay retorno de la pagina servidora
