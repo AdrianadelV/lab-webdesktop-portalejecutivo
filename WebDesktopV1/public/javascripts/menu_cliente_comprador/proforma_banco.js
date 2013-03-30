@@ -269,10 +269,11 @@ Ext.define('proforma_banco', {
                     allowBlank:  false,
                     blankText: 'Este campo es requerido',
                     minLength: 1,
-                    emptyText: 'Tipo Vehiculo',
+                    emptyText: 'Transmision Vehiculo',
                     vtype: 'alphanum',
                     vtypeText: 'solo texto',
-                    fieldLabel: 'Tipo Vehiculo'
+                    fieldLabel: 'Transmision Vehiculo',
+                    id:'transmision_vehiculo'
                 },
                 {
                     xtype: 'button',
@@ -292,7 +293,11 @@ Ext.define('proforma_banco', {
                     text: 'Cancelar',
                     listeners:{
                     	click:function(){	
-                    		enviar_correo();
+                    		alert("HOLA PASE")
+                    		var hola=id_tapiceria();
+                    		console.log(hola);
+                    		ventana.close();
+                    		//enviar_correo();
                     	alert('FUNCIONA');
                     	}
                     },
@@ -359,7 +364,7 @@ Ext.define('proforma_banco', {
                     xtype: 'combobox',
                     store : bancosStore,
                     x: 40,
-                    y: 520,
+                    y: 560,
                     width: 310,
                     id : 'cmb_banco',
 				    valueField : 'banco',
@@ -372,9 +377,23 @@ Ext.define('proforma_banco', {
                     fieldLabel: 'Banco'
                 },
                 {
+                    xtype: 'textfield',
+                    x: 40,
+                    y: 505,
+                    width: 310,
+                    allowBlank:  false,
+                    blankText: 'Este campo es requerido',
+                    minLength: 1,
+                    emptyText: 'tapiceria',
+                    vtype: 'alphanum',
+                    vtypeText: 'solo texto',
+                    fieldLabel: 'Tapiceria',
+                    id:'tapiceria'
+                },
+                {
                     xtype: 'label',
                     x: 10,
-                    y: 500,
+                    y: 540,
                     text: 'Datos del BANCO'
                 }
             ]
