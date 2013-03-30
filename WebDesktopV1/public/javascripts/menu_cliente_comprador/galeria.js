@@ -231,8 +231,13 @@ Ext.define('miVentanaGaleria', {
                             		Ext.getCmp('modelo_vehiculo').setValue(Ext.getCmp('cmb_modelo').getRawValue());
                             		Ext.getCmp('marca_vehiculo').setValue(Ext.getCmp('cmb_marca').getRawValue());
                             		Ext.getCmp('ano_vehiculo').setValue(Ext.getCmp('ano_v').getValue());
-                            		Ext.getCmp('color_vehiculo').setValue(Ext.getCmp('cmb_color').getValue());
+                            		Ext.getCmp('color_vehiculo').setValue(Ext.getCmp('cmb_color').getRawValue());
                             		Ext.getCmp('costo_vehiculo').setValue(Ext.getCmp('precio').getValue());
+                            		Ext.getCmp('transmision_vehiculo').setValue(Ext.getCmp('cmb_trasmision').getRawValue());
+                            		Ext.getCmp('tapiceria').setValue(Ext.getCmp('cmb_tapiceria').getRawValue());
+                                    id_color();
+                            		id_transmision();
+                            		id_tapiceria();
                             		var currentDate = new Date();
 								    Ext.getCmp('fecha2').setValue(currentDate);
 									var day=currentDate.getDate();
@@ -251,7 +256,7 @@ Ext.define('miVentanaGaleria', {
 									currentDate.setMonth(month);
 									currentDate.setYear(year);			
 								    Ext.getCmp('validez').setValue(currentDate);
-								    ventana.close();
+								    
                             	}
                             },
                         },{
@@ -424,4 +429,17 @@ function buscar_precio_vehiculo() {
 			Ext.Msg.alert("Error", "Falla al Conectar con los Servicios-EAI");
 		}
 	});
+}
+function id_color(){
+	var id_color=Ext.getCmp('cmb_color').getValue();
+	return id_color;
+}
+function id_transmision()
+{
+	var id_transmision=Ext.getCmp('cmb_trasmision').getValue();
+	return id_transmision;
+}
+function id_tapiceria(){
+	var id_tapiceria=Ext.getCmp('cmb_tapiceria').getValue();
+	return id_tapiceria
 }
