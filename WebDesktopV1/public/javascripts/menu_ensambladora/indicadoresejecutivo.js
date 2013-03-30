@@ -274,9 +274,9 @@ function buscar_indicador() {
 			} else {
 					 Ext.getCmp('indicador1').setText(dato.datos[0].nombre_indic);
 					 id_indicador1=dato.datos[0].id_indicador;
-					 // alert('boton 1'+id_indicador1);
-					 if (id_indicador1=null) {
-					 	alert('boton 1'+id_indicador1);
+					  alert('boton 1...'+id_indicador1);
+					 if (id_indicador1!=null) {
+					 	alert('boton 1..'+id_indicador1);
 					 	boton1 = Ext.create('miBoton1');
 					 	boton1.show();
 					 };
@@ -367,6 +367,41 @@ function buscar_indicador() {
 		}
 	});
 }
+
+
+// function asignarDetalleIndicador() {
+	// alert('metodo detalle'+id_indicador1);
+	// Ext.Ajax.request({
+		// url : 'menu_ensambladora/generarDataUsuarioIndicador',
+		// params : {
+			// ajax : 'true',
+			// funcion : 'generarDataUsuarioIndicador',
+			// idindicador : id_indicador1
+		// },
+		// success : function(exito, request) {
+			// datos = Ext.JSON.decode(exito.responseText);
+			// alert('PasoImagen');
+			// if (datos.exito == 'false') {
+				// Ext.Msg.alert("Error", datos.msg);
+				// alert('dentro if');
+			// } else {
+				// alert('dentro else');
+				// Ext.getCmp('valor_meta').setText(datos.valor_meta);
+				// Ext.getCmp('fecha_meta').setText(datos.fecha_meta);
+				// Ext.getCmp('valor_amarillo').setText(datos.valor_amarillo);
+				// Ext.getCmp('valor_rojo').setText(datos.valor_rojo);
+				// Ext.getCmp('fecha_amarillo').setText(datos.fecha_amarillo);
+				// Ext.getCmp('fecha_rojo').setText(datos.fecha_rojo);
+				// Ext.getCmp('responsable').setText(datos.responsable);
+				// Ext.getCmp('correo_responsable').setText(datos.correo_responsable);
+				// Ext.getCmp('telefono').setText(datos.telefono);
+			// }
+		// },
+		// failure : function() {
+			// Ext.Msg.alert("Error", "Servidor NO Conectado!!");
+		// }
+	// });
+// }
 
 boton1= Ext.define('miBoton1', {
     extend: 'Ext.button.Button',
