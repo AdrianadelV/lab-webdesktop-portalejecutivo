@@ -2,6 +2,7 @@ var primeravez = true;
 var id_vehiculo = null;
 var id_ensambladora = null;
 var id_marca_sel = null;
+var id_modelo = null;
 Ext.require([
 	         	'Ext.tree.*',
 	         	'Ext.data.*',
@@ -133,9 +134,6 @@ var panel = Ext.define('miVentana',{
    
 }); 
 
-var imagenUrl = "/public/images/modelovehiculo/chevrolet 4x4 .jpg"; 
-
-
 Ext.define('miVentanaGaleria', {
     extend: 'Ext.window.Window',
 
@@ -182,7 +180,6 @@ Ext.define('miVentanaGaleria', {
 								select : function(combo, rec) {
 									var marca_val = rec[0].get(combo.valueField);
 									id_marca_sel = rec[0].get(combo.valueField);
-									buscarIdEnsambladora_Marca(id_marca_sel);
 									var marcas_obj = Ext.getCmp('cmb_modelo');
 									if (primeravez) {
 										primeravez = false;
@@ -406,6 +403,34 @@ function buscarModelos (id_modelo) {
 		}
 	});
 }
+function guardar_detallevehiculo (id_modelo) {
+  Ext.Ajax.request({
+		url : '/cli_comprador/guardardetallevehiculo',
+		params: {
+			ajax: 'true',
+            funcion: 'guardardetallevehiculo',
+            color: Ext.getCmp('cmb_color').getValue(),
+            transmision:Ext.getCmp('cmb_trasmision').getValue(),
+            tapiceria:Ext.getCmp('cmb_tapiceria').getValue(),
+            modelo_vehiculos_id:id_modelo,
+		},
+		//Retorno exitoso de la pagina servidora a traves del formato JSON
+		success : function(exito, request) {
+			datos = Ext.JSON.decode(exito.responseText);
+			
+			if (datos.exito == 'false') {
+				Ext.Msg.alert("Error", datos.msg);
+			} else {
+				Ext.Msg.alert("Exito", 'Se ha guardado el detalle de vehiculo');
+			}
+		},
+		//No hay retorno de la pagina servidora
+		failure : function() {
+			Ext.Msg.alert("Error", "Servidor no conectado");
+
+		}
+	});
+}
 function buscar_precio_vehiculo() {
 	Ext.Ajax.request({
 		//Llamar la direcion del servicio
@@ -430,6 +455,7 @@ function buscar_precio_vehiculo() {
 		}
 	});
 }
+
 function id_color(){
 	var id_color=Ext.getCmp('cmb_color').getValue();
 	return id_color;
