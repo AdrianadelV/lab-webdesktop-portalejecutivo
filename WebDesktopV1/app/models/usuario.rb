@@ -51,9 +51,11 @@ class Usuario < ActiveRecord::Base
       @usuario.rols_id= 3
       @usuario.estatus='a'
       @usuario.save
+       $tirajson = '{ "success": "true", "exito": "true", "message": "Datos guardados satisfactoriamente!" }'
+       valor=1
     end
-     valor=1
-     $tirajson = '{ "success": "true", "exito": "true", "message": "Datos guardados satisfactoriamente!" }'
+     
+    
   end
   
   def modificarContrasena(nombre,canterior,cnueva)
