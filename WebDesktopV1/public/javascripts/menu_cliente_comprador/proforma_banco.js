@@ -297,7 +297,7 @@ Ext.define('proforma_banco', {
                     		var hola=id_tapiceria();
                     		console.log(hola);
                     		ventana.close();
-                    		//enviar_correo();
+                    		enviar_correo();
                     	alert('FUNCIONA');
                     	}
                     },
@@ -408,10 +408,11 @@ function imprimir(){
 			method: 'POST',
 			params:{
 				 nombres: Ext.getCmp('nombre').getValue(),
-				 banco: Ext.getCmp('cmb_banco').getValue()
+				 banco: Ext.getCmp('cmb_banco').getValue(),
+				 cedula: Ext.getCmp('cedula').getValue()
 			},
 			success: function ( result, request ) { 
-		                alert("Se ha Enviado el Correo")
+		                alert("se esta imprimiedo")
 			},
 			failure: function ( result, request) { 
 				Ext.MessageBox.alert('Error', result.responseText); 
@@ -423,7 +424,19 @@ function enviar_correo(){
 		   url : 'enviar_correo/enviarcorreo',
 			method: 'POST',
 			params:{
+				 	nombre: Ext.getCmp('nombre').getValue(),
+				 	apellido: Ext.getCmp('apellido').getValue(),
+				 	telefono: Ext.getCmp('telefono').getValue(),
 				 	correo: Ext.getCmp('correo').getValue(),
+				 	fecha_generada: Ext.getCmp('fecha2').getValue(),
+				 	marca: Ext.getCmp('marca_vehiculo').getValue(),
+				 	modelo: Ext.getCmp('modelo_vehiculo').getValue(),
+				 	color: Ext.getCmp('color_vehiculo').getValue(),
+				 	costo_vehiculo: Ext.getCmp('costo_vehiculo').getValue(),
+				 	transmision: Ext.getCmp('transmision_vehiculo').getValue(),
+				 	tapiceria: Ext.getCmp('tapiceria').getValue(),
+				 	banco: Ext.getCmp('cmb_banco').getRawValue(),
+				 	concesionario: Ext.getCmp('cmb_concesionario').getRawValue()
 			},
 			success: function ( result, request ) { 
 				         alert("Se envio un COrreo");
@@ -434,3 +447,4 @@ function enviar_correo(){
 	   });
 	
 }
+
