@@ -1,6 +1,6 @@
 class Usuarios_indicadors < ActiveRecord::Base
   # Ma.Ale
-  def buscarUsuarioIndi(indicador_id)
+  def buscarUsuarioIndicador(indicador_id)
     @usuarios_indicadors =  Usuarios_indicadors.find(:first, :conditions => "indicadors_id='#{indicador_id}'")
     if @usuarios_indicadors!=nil
       $tira_usuariojson = @usuarios_indicadors.to_json
