@@ -55,7 +55,7 @@ class ConcesionarioController < ApplicationController
   end
   
   def guardarConfiguracionIndicador
-    @indicador= Usuarios_Indicadors.new
+    @indicador = Usuarios_indicadors.new
     @usuarios_id = params[:usuarios_id]
     @indicadors_id = params[:indicadors_id]
     @valor_meta = params[:valor_meta]
