@@ -63,13 +63,6 @@ class CliCompradorController < ApplicationController
     @caracteristica = Modelo_Caracteristicas.new
     @modelo_id=params[:modelo_vehiculos_id]
     @caracteristica.buscarCaracteristicas(@modelo_id)
-    render :text => $tirajson
-  end
-  
-  def buscarValorCaracteristicasModelos
-    @caracteristica = Caracteristicas.new
-    @caract_id=params[:caracteristicas_id]
-    @caracteristica.buscarValorCaracteristicasModelos(@caract_id)
     puts $tirajson
     render :text => $tirajson
   end
@@ -86,6 +79,18 @@ class CliCompradorController < ApplicationController
     $tirajson =  parsed_json.to_json
     render :text => $tirajson
   end
+  
+   #Adriana Santana
+  def guardar_caracteristica
+    @modelo_vehiculos_id = params[:modelo_vehiculos_id]
+    @caracteristicas_id = params[:caracteristicas_id]
+    @id_ensambladora = params[:id_ensambladora]
+    @caracteristicas = Modelo_Caracteristicas.new
+    @caracteristicas.guardar_caracteristica(@modelo_vehiculos_id,@caracteristicas_id,@id_ensambladora)
+    puts @caracteristicas
+    render :text => $tirajson
+  end
+  
   def imprimir_proforma
      # Crear el objeto pdf de la clase Mypdf
    # Orientacion: P = Portrait y L = Landscape

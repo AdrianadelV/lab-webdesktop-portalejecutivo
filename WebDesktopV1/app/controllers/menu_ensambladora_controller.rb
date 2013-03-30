@@ -45,13 +45,5 @@ class MenuEnsambladoraController < ApplicationController
     render :text => $tirajson
     puts $tirajson
   end
-  #Adriana Santana
-  def guardar_caracteristica
-    @modelo_vehiculos_id = params[:modelo_vehiculos_id]
-    @caracteristicas_id = params[:caracteristicas_id]
-    @id_ensambladora = params[:id_ensambladora]
-    @caracteristicas = Modelo_Caracteristicas.new
-    @caracteristicas.guardar_caracteristica(@modelo_vehiculos_id,@caracteristicas_id,@id_ensambladora)
-    render :text => $tirajson
-  end
+ 
 end

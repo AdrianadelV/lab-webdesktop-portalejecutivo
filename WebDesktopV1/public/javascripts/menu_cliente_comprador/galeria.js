@@ -1,6 +1,7 @@
 var primeravez = true;
 var id_vehiculo = null;
-var id_car_modelo = null;
+var id_ensambladora = null;
+var id_marca_sel = null;
 Ext.require([
 	         	'Ext.tree.*',
 	         	'Ext.data.*',
@@ -26,6 +27,54 @@ Ext.define('Marcas', {
 	}
 });
 
+//Definicion del Modelo Caracteristica del Color
+Ext.define('Caracteristicas_Color', {
+	extend : 'Ext.data.Model',
+	fields : [{
+		name : 'id',
+		type : 'int'
+	}, {
+		name : 'valor',
+		type : 'varchar'
+	}],
+	proxy : {
+		type : 'ajax',
+		url : 'menu_admin/generardatacomboscaracteristicas_modelo_color'
+	}
+});
+
+//Definicion del Modelo Caracteristica de Tapiceria
+Ext.define('Caracteristicas_Tapiceria', {
+	extend : 'Ext.data.Model',
+	fields : [{
+		name : 'id',
+		type : 'int'
+	}, {
+		name : 'valor',
+		type : 'varchar'
+	}],
+	proxy : {
+		type : 'ajax',
+		url : 'menu_admin/generardatacomboscaracteristicas_modelo_tapiceria'
+	}
+});
+
+//Definicion del Modelo Caracteristica de Trasmision
+Ext.define('Caracteristicas_Trasmision', {
+	extend : 'Ext.data.Model',
+	fields : [{
+		name : 'id',
+		type : 'int'
+	}, {
+		name : 'valor',
+		type : 'varchar'
+	}],
+	proxy : {
+		type : 'ajax',
+		url : 'menu_admin/generardatacomboscaracteristicas_modelo_trasmision'
+	}
+});
+
 //Definicion del Modelo del Modelo
 Ext.define('Modelo', {
 	extend : 'Ext.data.Model',
@@ -43,6 +92,24 @@ Ext.define('Modelo', {
 		type : 'ajax',
 		url : 'menu_admin/generardatacombosmodelos'
 	}
+});
+
+//Definicion del Data Store de la Caracteristicas Color
+var caracteristicacolorStore = Ext.create('Ext.data.Store', {
+	model : 'Caracteristicas_Color',
+	autoLoad : true,
+});
+
+//Definicion del Data Store de la Caracteristicas Trasmision
+var caracteristicatrasmisionStore = Ext.create('Ext.data.Store', {
+	model : 'Caracteristicas_Trasmision',
+	autoLoad : true,
+});
+
+//Definicion del Data Store de la Caracteristicas Tapiceria
+var caracteristicatapiceriaStore = Ext.create('Ext.data.Store', {
+	model : 'Caracteristicas_Tapiceria',
+	autoLoad : true,
 });
 
 //Definicion del Data Store de Marcas
@@ -114,7 +181,8 @@ Ext.define('miVentanaGaleria', {
 								scope : this,
 								select : function(combo, rec) {
 									var marca_val = rec[0].get(combo.valueField);
-									// alert(estado_val);
+									id_marca_sel = rec[0].get(combo.valueField);
+									buscarIdEnsambladora_Marca(id_marca_sel);
 									var marcas_obj = Ext.getCmp('cmb_modelo');
 									if (primeravez) {
 										primeravez = false;
@@ -146,11 +214,7 @@ Ext.define('miVentanaGaleria', {
 								select : function(combo, rec) {
 									//alert(rec[0].get(combo.valueField));
 									var id_modelo=rec[0].get(combo.valueField);
-									Ext.getCmp('tapiceria').setValue("");
-									Ext.getCmp('trasmision').setValue("");
-									Ext.getCmp('color').setValue("");
 									buscarModelos (id_modelo);
-									buscarCaracteristicasModelo(id_modelo);
 								}
 							}
                         },{
@@ -166,7 +230,7 @@ Ext.define('miVentanaGaleria', {
 					          border: '1',
 					          frame: true,
 					          height: 300,
-					          width: 400,
+					          width: 400
 	                 	},{
 							xtype : 'label',
 							x : 500,
@@ -175,15 +239,9 @@ Ext.define('miVentanaGaleria', {
 							width : 300,
 							text : 'Caracteristicas del Modelo'
 						},{
-                        	xtype: 'combobox',
-                            x: 450,
-                            y: 90,
-                            width : 300,
-                            fieldLabel: 'Caracteristicas',
-                        },{
 	                 		xtype : 'textfield',
 							x : 450,
-							y : 140,
+							y : 90,
 							width : 300,
 							id : 'ano_v',
 							msgTarget : 'under',
@@ -194,37 +252,7 @@ Ext.define('miVentanaGaleria', {
 	                 	},{
 	                 		xtype : 'textfield',
 							x : 450,
-							y : 190,
-							width : 300,
-							id : 'tapiceria',
-							msgTarget : 'under',
-							blankText : 'Este campo es requerido',
-							enableKeyEvents : true,
-							//disabled : true
-	                 	},{
-	                 		xtype : 'textfield',
-							x : 450,
-							y : 240,
-							width : 300,
-							id : 'color',
-							msgTarget : 'under',
-							blankText : 'Este campo es requerido',
-							enableKeyEvents : true,
-							//disabled : true
-	                 	},{
-	                 		xtype : 'textfield',
-							x : 450,
-							y : 290,
-							width : 300,
-							id : 'trasmision',
-							msgTarget : 'under',
-							blankText : 'Este campo es requerido',
-							enableKeyEvents : true,
-							//disabled : true
-	                 	},{
-	                 		xtype : 'textfield',
-							x : 450,
-							y : 340,
+							y : 140,
 							width : 300,
 							id : 'precio',
 							msgTarget : 'under',
@@ -232,6 +260,76 @@ Ext.define('miVentanaGaleria', {
 							enableKeyEvents : true,
 							fieldLabel : 'Precio',
 							//disabled : true
+	                 	},{
+	                 		xtype: 'combobox',
+                            x : 450,
+							y : 190,
+							width : 300,
+                            fieldLabel: 'Tapiceria',
+							id : 'cmb_tapiceria',
+							store : caracteristicatapiceriaStore,
+							valueField : 'id',
+							displayField : 'valor',
+							queryMode : 'remote',
+							typeAhead : true,
+							emptyText : 'Seleccionar',
+							triggerActio : 'all',
+							editable : 'false',
+							selecOnFocus : true,
+							listeners : {
+								scope : this,
+								select : function(combo, rec) {
+									//alert(rec[0].get(combo.valueField));
+									var id_modelo=rec[0].get(combo.valueField);
+								}
+							}
+	                 	},{
+							xtype: 'combobox',
+                            x : 450,
+							y : 240,
+							width : 300,
+                            fieldLabel: 'Trasmision',
+							id : 'cmb_trasmision',
+							store : caracteristicatrasmisionStore,
+							valueField : 'id',
+							displayField : 'valor',
+							queryMode : 'remote',
+							typeAhead : true,
+							emptyText : 'Seleccionar',
+							triggerActio : 'all',
+							editable : 'false',
+							selecOnFocus : true,
+							listeners : {
+								scope : this,
+								select : function(combo, rec) {
+									//alert(rec[0].get(combo.valueField));
+									var id_modelo=rec[0].get(combo.valueField);
+								}
+							}
+							
+	                 	},{
+							xtype: 'combobox',
+                            x : 450,
+							y : 290,
+							width : 300,
+                            fieldLabel: 'Color',
+							id : 'cmb_color',
+							store : caracteristicacolorStore,
+							valueField : 'id',
+							displayField : 'valor',
+							queryMode : 'remote',
+							typeAhead : true,
+							emptyText : 'Seleccionar',
+							triggerActio : 'all',
+							editable : 'false',
+							selecOnFocus : true,
+							listeners : {
+								scope : this,
+								select : function(combo, rec) {
+									//alert(rec[0].get(combo.valueField));
+									var id_modelo=rec[0].get(combo.valueField);
+								}
+							}
 	                 	}
 	                ]
                 }
@@ -261,69 +359,7 @@ function buscarModelos (id_modelo) {
 				id_vehiculo=datos.id;
 				Ext.getCmp('ano_v').setValue(datos.ano_m);
 				Ext.getCmp('imagen').update({url:imagenUrl});
-				buscarCaracteristicasModelo();	 
-			}
-		},
-		//No hay retorno de la pagina servidora
-		failure : function() {
-			Ext.Msg.alert("Error", "Servidor no conectado");
-
-		}
-	});
-}
-function buscarCaracteristicasModelo () {
-  //alert(id_vehiculo);
-	Ext.Ajax.request({
-		url : '/cli_comprador/buscarCaracteristicasModelos',
-		params: {
-			ajax: 'true',
-            funcion: 'buscarCaracteristicasModelos',
-            modelo_vehiculos_id: id_vehiculo
-		},
-		//Retorno exitoso de la pagina servidora a traves del formato JSON
-		success : function(exito, request) {
-			datos = Ext.JSON.decode(exito.responseText);
-			if (datos.exito == 'false') {
-				Ext.Msg.alert("Error", datos.msg);
-			} else {
-				// Ext.Msg.alert("Exito", 'Encontro');
-				for (var i=0; i < datos.length; i++) {
-				  id_car_modelo=datos[i].caracteristicas_id;
-				  buscarValorCaracteristica (id_car_modelo);
-				};
-			}
-		},
-		//No hay retorno de la pagina servidora
-		failure : function() {
-			Ext.Msg.alert("Error", "Servidor no conectado");
-
-		}
-	});
-}
-function buscarValorCaracteristica (id_car_modelo) {
-  Ext.Ajax.request({
-		url : '/cli_comprador/buscarValorCaracteristicasModelos',
-		params: {
-			ajax: 'true',
-            funcion: 'buscarValorCaracteristicasModelos',
-            caracteristicas_id: id_car_modelo
-		},
-		//Retorno exitoso de la pagina servidora a traves del formato JSON
-		success : function(exito, request) {
-			datos = Ext.JSON.decode(exito.responseText);
-			if (datos.exito == 'false') {
-				Ext.Msg.alert("Error", datos.msg);
-			} else {
-				if(datos[0].nombre=='Color'){
-					Ext.getCmp('color').setValue(datos[0].valor);
-				};
-				if (datos[0].nombre=='Trasmision') {
-					Ext.getCmp('trasmision').setValue(datos[0].valor);
-				};
-				if (datos[0].nombre=='Tapiceria') {
-					Ext.getCmp('tapiceria').setValue(datos[0].valor);
-				};	
-				//Ext.Msg.alert("Exito", 'Encontro');
+				//buscarCaracteristicasModelo();	 
 			}
 		},
 		//No hay retorno de la pagina servidora

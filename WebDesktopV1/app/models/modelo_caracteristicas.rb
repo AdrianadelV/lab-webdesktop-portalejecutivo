@@ -8,6 +8,7 @@ class Modelo_Caracteristicas < ActiveRecord::Base
     @caracteristicas.save
     valor=1
     $tirajson = '{ "success": "true", "exito": "true", "message": "Datos guardados satisfactoriamente!" }'
+    return @caracteristicas
   end
   #Adriana Santana
   def buscarCaracteristicas(modelo_id)

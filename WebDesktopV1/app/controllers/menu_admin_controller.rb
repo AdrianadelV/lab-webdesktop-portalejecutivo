@@ -61,12 +61,24 @@ class MenuAdminController < ApplicationController
     render :text => $tirajson
   end
   
-  def generardatacomboscaracteristicas
-    @caracteristicas = Caracteristicas.all
+  def generardatacomboscaracteristicas_modelo_color
+    @caracteristicas = Caracteristicas.find(:all, :conditions => "nombre='#{'Color'}'")
     $tirajson = @caracteristicas.to_json
+    puts $tirajson
     render :text => $tirajson
   end
-  
+  def generardatacomboscaracteristicas_modelo_tapiceria
+    @caracteristicas = Caracteristicas.find(:all, :conditions => "nombre='#{'Tapiceria'}'")
+    $tirajson = @caracteristicas.to_json
+    puts $tirajson
+    render :text => $tirajson
+  end
+  def generardatacomboscaracteristicas_modelo_trasmision
+    @caracteristicas = Caracteristicas.find(:all, :conditions => "nombre='#{'Trasmision'}'")
+    $tirajson = @caracteristicas.to_json
+    puts $tirajson
+    render :text => $tirajson
+  end
   def generarcomboMarcas
     @marca = Marca.all
     $tira_marcajson = @marca.to_json

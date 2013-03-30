@@ -41,4 +41,16 @@ class Ensambladora_vehiculos < ActiveRecord::Base
       valor = 0
     end 
   end
+  #Este metodo busca el id de la ensambladora dado el id de la marca
+  def buscarId_Ensambladora_Marca(marcas_id)
+    @ensambladora = Ensambladora_vehiculos.find(:first, :conditions => "marcas_id='#{marcas_id}'")
+    if @ensambladora!=nil
+      $tirajson = @ensambladora.to_json
+      valor = 1
+    else
+      $tirajson = '{ "success": "true", "exito": "false", "msg": " no existe!" }'
+      valor = 0
+    end
+    return @ensambladora
+  end
 end
