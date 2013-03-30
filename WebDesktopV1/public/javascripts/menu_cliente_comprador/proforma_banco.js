@@ -45,8 +45,6 @@ var concesionariosStore = Ext.create('Ext.data.Store', {
 	model : 'Concesionario',
 	autoLoad : true,
 });
-
-
 Ext.define('proforma_banco', {
     extend: 'Ext.window.Window',
     x:350,
@@ -95,7 +93,6 @@ Ext.define('proforma_banco', {
                     emptyText: 'Nombre del Concesionario',
                     vtype: 'alpha',
                     vtypeText: 'solo texto'
-                    
                 },
                 {
                     xtype: 'label',
@@ -204,6 +201,7 @@ Ext.define('proforma_banco', {
                     minLength: 1,
                     emptyText: 'Marca',
                     vtype: 'alpha',
+                    id:'marca_vehiculo',
                     vtypeText: 'solo texto',
                     fieldLabel: 'Marca'
                 },
@@ -216,6 +214,7 @@ Ext.define('proforma_banco', {
                     blankText: 'Este campo es requerido',
                     minLength: 1,
                     emptyText: 'Modelo',
+                    id:'modelo_vehiculo',
                     vtype: 'alphanum',
                     vtypeText: 'solo texto',
                     fieldLabel: 'Modelo'
@@ -231,7 +230,8 @@ Ext.define('proforma_banco', {
                     emptyText: 'Año del Vehiculo',
                     vtype: 'alpha',
                     vtypeText: 'solo numero',
-                    fieldLabel: 'Año'
+                    fieldLabel: 'Año',
+                    id: 'ano_vehiculo'
                 },
                 {
                     xtype: 'textfield',
@@ -244,7 +244,8 @@ Ext.define('proforma_banco', {
                     emptyText: 'Color',
                     vtype: 'alpha',
                     vtypeText: 'solo texto',
-                    fieldLabel: 'Color'
+                    fieldLabel: 'Color',
+                    id: 'color_vehiculo'
                 },
                 {
                     xtype: 'textfield',
@@ -257,7 +258,8 @@ Ext.define('proforma_banco', {
                     emptyText: 'Costo',
                     vtype: 'alphanum',
                     vtypeText: 'solo Numero',
-                    fieldLabel: 'Costo'
+                    fieldLabel: 'Costo',
+                    id: 'costo_vehiculo'
                 },
                 {
                     xtype: 'textfield',
