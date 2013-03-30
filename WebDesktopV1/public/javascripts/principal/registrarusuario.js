@@ -2,11 +2,7 @@
 
 Ext.require(['Ext.tree.*', 'Ext.data.*', 'Ext.tip.*', 'Ext.container.Viewport', 'Ext.container.ButtonGroup']);
 
-/*
- var sexoo = new Ext.data.SimpleStore({
- fields : ['id', 'sexoo'],
- data : [['1', 'Masculino'], ['2', 'Femenino']]
- });*/
+
 var modelo = new Ext.data.SimpleStore({
 	fields : ['id', 'modelo'],
 	data : [['1', 'Femenino'], ['2', 'Masculino']]
@@ -18,11 +14,11 @@ function verificaredad() {
 	// fn = new Date();
 	var fn = Ext.getCmp('fecha_nacimiento').getValue();
 
-	// alert("entre 1234" + fn + "xx");
-	//alert("entre 1234" + currentDate + "xx");
+	
+	
 	var day = currentDate.getDate();
 	var fd = fn.getDate();
-	// el mes es devuelto entre 0 y 11
+	
 	var month = currentDate.getMonth() + 1;
 	var fm = fn.getMonth() + 1;
 
@@ -32,30 +28,30 @@ function verificaredad() {
 	var pa = false;
 
 	if ((year - fa) < 18) {
-		//alert(" año menor" + year + "-"+ fa);
+		
 		pa = false
 	} else {
 		if ((year - fa) == 18) {
-			//alert(" año igual");
-			if (fm > month) {//alert(" mes menor");
+			
+			if (fm > month) {
 				pa = false
 			} else {
 				if (fm == month) {
-					//alert(" mes igual");
+					
 					if (fd <= day) {
-						//alert(" dia mayor");
+						
 						pa = true
 					} else {
-						//alert(" dia menor");
+						
 						pa = false
 					}
 
 				} else {
-					//alert(" mes mayor");
+					
 					pa = true
 				}
 			}
-		} else {//alert(" año mayor");
+		} else {
 			pa = true
 		}
 	}
@@ -122,7 +118,7 @@ Ext.onReady(function() {
 				id : 'nombres',
 				minLength : 1,
 				vtype : 'alpha',
-				emptyText : 'Campo obligatorio'
+				emptyText : 'Nombre1_Nombre2'
 			}, {
 				xtype : 'textfield',
 				x : 0,
@@ -132,7 +128,7 @@ Ext.onReady(function() {
 				id : 'apellidos',
 				minLength : 1,
 				vtype : 'alpha',
-				emptyText : 'Campo obligatorio'
+				emptyText : 'Apellido1_Apellido2'
 			}, {
 				xtype : 'textfield',
 				x : 0,
@@ -169,7 +165,7 @@ Ext.onReady(function() {
 				id : 'direccion',
 				minLength : 1,
 				vtype : 'alphanum',
-				emptyText : 'Campo obligatorio'
+				emptyText : 'calle_x_carrera_x_casa_x_urb_x'
 			}, {
 				xtype : 'datefield',
 				x : 260,
@@ -230,7 +226,7 @@ Ext.onReady(function() {
 				id : 'registrar',
 				listeners : {
 					click : function() {
-						//alert('pse por el boton')
+						
 						if (verificarcampos()) {
 
 							if (verificarpassword()) {
@@ -241,7 +237,7 @@ Ext.onReady(function() {
 										grabar_comprador();
 										enviar_correo();
 										Ext.getCmp('formulariocomprador').getForm().reset();
-										url:'inicio'
+										
 									} else {
 										alert("El usuario es menor de edad, no se va a registrar");
 									}
@@ -256,10 +252,10 @@ Ext.onReady(function() {
 							alert("Debe llenar todos los campos");
 						}
 						//ventanaregistrarusuario.close();
-						url:'inicio'
+						
 					}
 				}
-				//aqui va a otro lugar
+				//aqui va a otro lugar url:'inicio'
 			}, {
 				xtype : 'button',
 				x : 360,
@@ -270,7 +266,18 @@ Ext.onReady(function() {
 
 						Ext.getCmp('formulariocomprador').getForm().reset();
 					}
-				}
+				}, url:'inicio'
+			}, {
+				xtype : 'button',
+				x : 280,
+				y : 400,
+				text : 'Ir a INICIO',
+				listeners : {
+					click : function() {
+
+						
+					}
+				}, url:'inicio'
 			}]
 		}]
 
@@ -312,7 +319,7 @@ Ext.onReady(function() {
 	}
 
 	function grabar_comprador() {
-		alert('pase interno');
+		
 		Ext.Ajax.request({
 			url : 'registrarusuario/grabar_comprador',
 			params : {
@@ -336,18 +343,16 @@ Ext.onReady(function() {
 				datos = Ext.JSON.decode(exito, reponseText);
 
 				Ext.Msg.alert("Exito", "Se registro el usuario!!");
-				//Ext.getCmp('formulariocomprador').getForm().reset();
-				//Ext.getCmp('btnregistrar').disable(false);
+				
 
 			},
 			failure : function() {
 				//Ext.Msg.alert("Error", "Servidor NO Conectado!!");
 			}
-			//aqui estaban antes
-			//del header
+			
 		})
 
-		alert('Registro Existoso');
+		
 
 	}
 
