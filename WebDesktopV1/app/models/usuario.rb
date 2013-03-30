@@ -84,7 +84,7 @@ class Usuario < ActiveRecord::Base
     @usuario.save
      valor=1
     $tirajson = '{ "success": "true", "exito": "true", "message": "Datos de usuario guardados satisfactoriamente!" }'
-    puts' graba tira de js usuario------------------------------------'
+    
   
   end
   
