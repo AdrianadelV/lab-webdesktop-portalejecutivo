@@ -90,8 +90,9 @@ var indicadoresStore = Ext.create('Ext.data.Store', {
 
 Ext.define('miVentanaIndicadores', {
     extend: 'Ext.window.Window',
-
+   
     height: 450,
+    y: 250,
     width: 990,
     layout: {
         type: 'absolute'

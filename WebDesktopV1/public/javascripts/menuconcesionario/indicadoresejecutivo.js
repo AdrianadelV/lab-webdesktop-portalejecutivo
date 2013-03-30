@@ -8,8 +8,8 @@ Ext.define('indicadoreseje', {
 	height : 500,
 	width : 320,
 	collapsible : true,
-	y : 207,
-	x : 1095,
+	y : 245,
+	x : 1055,
 	autoScroll : true,
 	layout : {
 		type : 'absolute'
