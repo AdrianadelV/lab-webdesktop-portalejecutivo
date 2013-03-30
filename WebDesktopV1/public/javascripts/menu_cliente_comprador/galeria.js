@@ -215,13 +215,45 @@ Ext.define('miVentanaGaleria', {
 									//alert(rec[0].get(combo.valueField));
 									var id_modelo=rec[0].get(combo.valueField);
 									buscarModelos (id_modelo);
+									buscar_precio_vehiculo();
 								}
 							}
                         },{
                             xtype: 'button',
                             x: 750,
                             y: 390,
-                            text: 'Comprar'
+                            text: 'Comprar',
+                            listeners:{
+                            	click:function(){
+                            		var ventana_proforma=Ext.create('proforma_banco');
+                    				ventana_proforma.show();
+                       				buscar_comprador();
+                            		Ext.getCmp('modelo_vehiculo').setValue(Ext.getCmp('cmb_modelo').getRawValue());
+                            		Ext.getCmp('marca_vehiculo').setValue(Ext.getCmp('cmb_marca').getRawValue());
+                            		Ext.getCmp('ano_vehiculo').setValue(Ext.getCmp('ano_v').getValue());
+                            		Ext.getCmp('color_vehiculo').setValue(Ext.getCmp('cmb_color').getValue());
+                            		Ext.getCmp('costo_vehiculo').setValue(Ext.getCmp('precio').getValue());
+                            		var currentDate = new Date();
+								    Ext.getCmp('fecha2').setValue(currentDate);
+									var day=currentDate.getDate();
+									 // el mes es devuelto entre 0 y 11
+									var month=currentDate.getMonth()+1;
+									var year=currentDate.getFullYear();    
+									var tiempo=currentDate.getTime();
+									 //Calculamos los milisegundos sobre la fecha que hay que sumar o restar...
+									var milisegundos=parseInt(30*24*60*60*1000);
+									 //Modificamos la fecha actual
+									var total=currentDate.setTime(tiempo+milisegundos);
+									day=currentDate.getDate();
+									month=currentDate.getMonth()+1;
+									year=currentDate.getFullYear();
+									currentDate.setDate(day);
+									currentDate.setMonth(month);
+									currentDate.setYear(year);			
+								    Ext.getCmp('validez').setValue(currentDate);
+								    ventana.close();
+                            	}
+                            },
                         },{
                         	xtype: 'imagenpanel',
 					          id: 'imagen',
@@ -366,6 +398,30 @@ function buscarModelos (id_modelo) {
 		failure : function() {
 			Ext.Msg.alert("Error", "Servidor no conectado");
 
+		}
+	});
+}
+function buscar_precio_vehiculo() {
+	Ext.Ajax.request({
+		//Llamar la direcion del servicio
+		url : 'cliente_resful/call_service2_precio_vehiculo',
+		method : 'GET',
+		type : 'json',
+		params:{
+				 ajax: 'true',
+				 id_modelo: Ext.getCmp('cmb_modelo').getValue(),
+			},
+		success : function(resultado, request) {
+			//La tira JSON donde retorna los valores
+			datos = Ext.JSON.decode(resultado.responseText);
+			if (datos != null) {
+				Ext.getCmp('precio').setValue(datos.Precio);
+			} else {
+				alert('Existe Precios para este Vehiculo por Indepabis');
+			}
+		},
+		failure : function(error) {
+			Ext.Msg.alert("Error", "Falla al Conectar con los Servicios-EAI");
 		}
 	});
 }
