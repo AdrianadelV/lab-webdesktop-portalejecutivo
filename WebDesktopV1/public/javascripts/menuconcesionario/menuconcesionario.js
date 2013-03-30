@@ -94,7 +94,7 @@ Ext.onReady(function() {
 				 alert("PASO2");
 			 }if (node.get('text') == "Configurar nuevo Indicador"){
 				 ventana.close();
-				 ventana =Ext.create(miVentanaIndicadores);
+				 ventana =Ext.create('miVentanaIndicadores');
 				 ventana.show();
 			 }
 		 }
