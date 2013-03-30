@@ -38,6 +38,13 @@ class ConcesionarioController < ApplicationController
     @tirajson = @frecuencia.to_json
     render :text => @tirajson
   end
+  
+  def generardatacombosconcesionarios
+    @concesionarios = Concesionario_vehiculos.all
+    @tirajson = @concesionarios.to_json
+    render :text => @tirajson 
+  end
+
   #metodo utilizado para buscar el usuario en la vista de indicadores
   def buscarUsuarioIndi
     @nombre=params[:nombre]
@@ -69,4 +76,5 @@ class ConcesionarioController < ApplicationController
                                @correo_responsable,@telefono,@frecuencia_notificacions_id)
     render :text => $tirajson
   end
+
 end
