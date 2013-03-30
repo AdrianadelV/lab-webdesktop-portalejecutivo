@@ -87,4 +87,19 @@ class Usuario < ActiveRecord::Base
     puts' graba tira de js usuario------------------------------------'
   
   end
+  
+  #Ma.Ale
+  def buscarUsuario(usuario_indic_id)
+    @usuarios =  Usuario.find(:first, :conditions => "id='#{usuario_indic_id}'")
+    if @usuarios!=nil
+      $tira_usuajson = @usuarios.to_json
+      valor = 1
+    else
+      $tira_usuajson = '{ "success": "true", "exito": "false", "msg": " no existe!" }'
+      valor = 0
+    end 
+    puts 'tira usua '+$tira_usuajson
+    # return @usuarios
+    return valor
+  end
 end

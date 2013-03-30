@@ -28,6 +28,7 @@ class Ensambladora_vehiculos < ActiveRecord::Base
     else
       $tirajson = '{ "success": "true", "exito": "false", "msg": " no existe!" }'
       valor = 0
+      puts 'usuario lo'+$tirajson
     end 
   end
   #Adriana Santana
