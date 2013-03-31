@@ -225,6 +225,8 @@ Ext.define('miVentanaGaleria', {
                             	click:function(){
                             		var ventana_proforma=Ext.create('proforma_banco');
                     				ventana_proforma.show();
+                    				var currentDate = new Date();
+								    Ext.getCmp('fecha2').setValue(currentDate);
                        				buscar_comprador();
                             		Ext.getCmp('modelo_vehiculo').setValue(Ext.getCmp('cmb_modelo').getRawValue());
                             		Ext.getCmp('marca_vehiculo').setValue(Ext.getCmp('cmb_marca').getRawValue());
@@ -237,8 +239,6 @@ Ext.define('miVentanaGaleria', {
                             		id_transmision();
                             		id_tapiceria();
                             		id_modelo();
-                            		var currentDate = new Date();
-								    Ext.getCmp('fecha2').setValue(currentDate);
 									var day=currentDate.getDate();
 									 // el mes es devuelto entre 0 y 11
 									var month=currentDate.getMonth()+1;
@@ -396,34 +396,6 @@ function buscarModelos (id_modelo) {
 				Ext.getCmp('ano_v').setValue(datos.ano_m);
 				Ext.getCmp('imagen').update({url:imagenUrl});
 				//buscarCaracteristicasModelo();	 
-			}
-		},
-		//No hay retorno de la pagina servidora
-		failure : function() {
-			Ext.Msg.alert("Error", "Servidor no conectado");
-
-		}
-	});
-}
-function guardar_detallevehiculo (id_modelo) {
-  Ext.Ajax.request({
-		url : '/cli_comprador/guardardetallevehiculo',
-		params: {
-			ajax: 'true',
-            funcion: 'guardardetallevehiculo',
-            color: Ext.getCmp('cmb_color').getValue(),
-            transmision:Ext.getCmp('cmb_trasmision').getValue(),
-            tapiceria:Ext.getCmp('cmb_tapiceria').getValue(),
-            modelo_vehiculos_id:id_modelo,
-		},
-		//Retorno exitoso de la pagina servidora a traves del formato JSON
-		success : function(exito, request) {
-			datos = Ext.JSON.decode(exito.responseText);
-			
-			if (datos.exito == 'false') {
-				Ext.Msg.alert("Error", datos.msg);
-			} else {
-				Ext.Msg.alert("Exito", 'Se ha guardado el detalle de vehiculo');
 			}
 		},
 		//No hay retorno de la pagina servidora
