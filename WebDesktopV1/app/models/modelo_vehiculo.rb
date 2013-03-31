@@ -42,8 +42,8 @@ class Modelo_Vehiculo < ActiveRecord::Base
     return @modelo
   end
     #Ma.Ale
-   def buscarmodelovehiculos(vehic_modelo_vehiculos_id)
-    @modelo =  Modelo_Vehiculo.find(:first, :conditions => "id='#{vehic_modelo_vehiculos_id}'")
+   def buscarmodelovehiculos(detalle_modelo_vehiculos_id)
+    @modelo =  Modelo_Vehiculo.find(:first, :conditions => "id='#{detalle_modelo_vehiculos_id}'")
     if @modelo!=nil
       $tirajson = @modelo.to_json
       valor = 1

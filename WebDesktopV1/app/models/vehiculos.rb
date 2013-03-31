@@ -1,7 +1,7 @@
 class Vehiculos < ActiveRecord::Base
      #Ma.Ale
-   def buscarvehiculo(detalle_vehiculos_id)
-    @vehiculos =  Vehiculos.find(:first, :conditions => "id='#{detalle_vehiculos_id}'")
+   def buscarvehiculo(modelo_vehiculos_id)
+    @vehiculos =  Vehiculos.find(:first, :conditions => "modelo_vehiculos_id='#{modelo_vehiculos_id}'")
     if @vehiculos!=nil
       $tirajson = @vehiculos.to_json
       valor = 1

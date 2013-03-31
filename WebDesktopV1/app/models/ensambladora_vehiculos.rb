@@ -54,4 +54,41 @@ class Ensambladora_vehiculos < ActiveRecord::Base
     end
     return @ensambladora
   end
+  #Ma.Ale
+  def generardatalistaEnsambladora()
+   @objEnsambladora = Ensambladora_vehiculos.all
+   @son = Ensambladora_vehiculos.count
+   if @son > 0 
+    @i=1
+    tirajson = '{ "datos": [ '
+    @objEnsambladora.each do |ensambladora|
+     if @i<@son
+      tirajson = tirajson +   ' { "id_ensam": "'           + ensambladora.id.to_s +
+                              '", "rif_ensam": "'          + ensambladora.rif + 
+                              '", "nombre_ensam": "'       + ensambladora.nombre +
+                              '", "direccion_ensam": "'    + ensambladora.direccion +
+                              '", "telefono_ensam": "'     + ensambladora.telefono + 
+                              '", "correo_ensam": "'       + ensambladora.correo +
+                              '", "ciudads_id_ensam": "'   + ensambladora.ciudads_id.to_s +
+                              '", "usuarios_id_ensam": "'  + ensambladora.usuarios_id.to_s +
+                              '", "marcas_id_ensam": "'    + ensambladora.marcas_id.to_s + '"},'                              
+     else
+      tirajson = tirajson +   ' { "id_ensam": "'           + ensambladora.id.to_s +
+                              '", "rif_ensam": "'          + ensambladora.rif + 
+                              '", "nombre_ensam": "'       + ensambladora.nombre +
+                              '", "direccion_ensam": "'    + ensambladora.direccion +
+                              '", "telefono_ensam": "'     + ensambladora.telefono + 
+                              '", "correo_ensam": "'       + ensambladora.correo +
+                              '", "ciudads_id_ensam": "'   + ensambladora.ciudads_id.to_s +
+                              '", "usuarios_id_ensam": "'  + ensambladora.usuarios_id.to_s +
+                              '", "marcas_id_ensam": "'    + ensambladora.marcas_id.to_s + '"}'      
+     end
+     @i=@i+1
+    end
+    tirajson = tirajson + ' ] }'
+   else
+    tirajson = '{ "success": "true", "exito": "false", "msg": "No hay datos!" }'; 
+   end
+   return tirajson 
+  end
 end
