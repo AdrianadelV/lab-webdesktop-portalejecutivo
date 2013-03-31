@@ -63,7 +63,7 @@ class CliCompradorController < ApplicationController
     @caracteristica = Modelo_Caracteristicas.new
     @modelo_id=params[:modelo_vehiculos_id]
     @caracteristica.buscarCaracteristicas(@modelo_id)
-    puts $tirajson
+    #puts $tirajson
     render :text => $tirajson
   end
   
@@ -71,7 +71,7 @@ class CliCompradorController < ApplicationController
     @modelo = Modelo_Vehiculo.new
     @id=params[:id]
     @objmodelo = @modelo.buscarModelos(@id)
-    puts @objmodelo.imagen1
+   # puts @objmodelo.imagen1
     @modelo.creararchivofisico(@objmodelo.descripcion+'.jpg',$directorio_raiz+'/public/images/modelovehiculo',@objmodelo.imagen1)
     parsed_json = ActiveSupport::JSON.decode($tirajson)
     parsed_json["imagen3"]="images/modelovehiculo/"+@objmodelo.descripcion+'.jpg'
@@ -87,7 +87,7 @@ class CliCompradorController < ApplicationController
     @id_ensambladora = params[:id_ensambladora]
     @caracteristicas = Modelo_Caracteristicas.new
     @caracteristicas.guardar_caracteristica(@modelo_vehiculos_id,@caracteristicas_id,@id_ensambladora)
-    puts @caracteristicas
+   # puts @caracteristicas
     render :text => $tirajson
   end
   
@@ -110,9 +110,9 @@ class CliCompradorController < ApplicationController
    @data = Array.new
    @data2= Array.new
    @objetoUsuarios=Comprador_Vehiculo.find(:first, :conditions => "nombres='#{params[:nombres]}'")
-   puts @objetoUsuarios.nombres
-   puts $directorio_raiz
-   puts"*******************************************"
+  # puts @objetoUsuarios.nombres
+  # puts $directorio_raiz
+  # puts"*******************************************"
    #objetoUsuarios.each do |comprador|
     @banco=params[:banco]
     @registro = Array.new
@@ -277,7 +277,7 @@ class CliCompradorController < ApplicationController
    pdf.FancyTable(@header, @data, @wh, @wd, @fillcolor, @textcolor, @drawcolor, @linewidth, @font, @fillcolorRestart, @textcolorRestart, @fontRestart)
    # Se debe crear en la carpeta public la carpeta pdf y como super usuario cambiar
    # La propiedades 777 con el comando: chmod -R 777 pdf/
-   puts $directorio_raiz
+   #puts $directorio_raiz
    pdf.Output($directorio_raiz+'/public/pdf/proforma_vehiculo.pdf')
    @tirajson = '{"success":true}'
    render :text => $tirajson
