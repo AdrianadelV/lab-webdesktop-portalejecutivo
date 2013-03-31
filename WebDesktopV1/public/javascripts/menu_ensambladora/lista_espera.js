@@ -131,6 +131,15 @@ Ext.define('App.ListaColaGeneralGrid', {
         App.ListaColaGeneralGrid.superclass.initComponent.call(this);
     }
 });
+//Definicion del Panel contenedor de la imagen
+var panel = Ext.define('miVentana',{ 
+	extend: 'Ext.Panel',
+   width: 300, 
+   height: 1100, 
+   alias: 'widget.imagenpanel',
+   tpl : new Ext.XTemplate('<div><img src="{url}" style="height:200px; width:150px;" /></div>')
+   
+}); 
 //Definicion de Tab
 Ext.define('ventanatab', {
     extend: 'Ext.tab.Panel',
@@ -211,11 +220,14 @@ Ext.define('ventanatab', {
                                     fieldLabel: 'Correo'
                                 },
                                 {
-                                	x: 450,
-                                	y: 50,
-                                	height: 200,
-    								width: 150,
-                                	html:'<div align="left"><img src="images/silueta.jpg""></div>'
+	                        	  xtype: 'imagenpanel',
+						          id: 'imagen',
+						          x: 450,
+	                              y: 50,
+						          border: '1',
+						          frame: true,
+						          height: 200,
+	    						  width: 150
                                 }
                             ]
                 },
@@ -258,12 +270,14 @@ Ext.define('ventanatab', {
                                     id: 'tipo_vehiculo',
                                     fieldLabel: 'Tipo Vehículo'
                                 },                                
-                                {
+                                {	xtype: 'imagenpanel',
+						            id: 'imagen2',
                                 	x: 400,
                                 	y: 55,
+                                	border: '1',
                                 	height: 200,
-    								width: 250,
-                                	html:'<div align="left"><img src="images/carrodaewood.jpg""></div>'
+	    						    width: 150
+                                	//html:'<div align="left"><img src="images/carrodaewood.jpg""></div>'
                                 }
                             ]
                 },
@@ -315,11 +329,14 @@ Ext.define('ventanatab', {
                                     fieldLabel: 'Correo'
                                 },
                                 {
+                                	xtype: 'imagenpanel',
+						            id: 'imagen3',
                                 	x: 400,
                                 	y: 50,
+                                	border: '1',
                                 	height: 200,
-    								width: 300,
-                                	html:'<div align="left"><img src="images/Daewoo.jpg""></div>'
+    								width: 150
+                                	//html:'<div align="left"><img src="images/Daewoo.jpg""></div>'
                                 }
                                 
                             ]
@@ -425,8 +442,8 @@ Ext.define('miVentanalista', {
    
   
    //Metodo para buscar y mostrar datos del comprador de vehiculo
-   function buscar_CompradorVehiculo() {
-   //	alert('metodo buscar comprado');
+ function buscar_CompradorVehiculo() {
+   	//alert('metodo buscar comprado');
 			Ext.Ajax.request({
 				url : 'menu_admin/buscar_CompradorVehiculo',
 				params : {
@@ -458,6 +475,9 @@ function asignarDatosComprador () {
   Ext.getCmp('apellido_comp').setValue(data.apellido);
   Ext.getCmp('direccion_comp').setValue(data.direccion_comp);
   Ext.getCmp('telefono_comp').setValue(data.telefono_comp);
+  var imagenUrl=data.imagen_usu;
+  alert(imagenUrl);
+  Ext.getCmp('imagen').update({url:imagenUrl});
   Ext.getCmp('correo_comp').setValue(data.correo_comp);
   Ext.getCmp('fechanacimiento_comp').setValue(data.fechanacim_comp);
 };

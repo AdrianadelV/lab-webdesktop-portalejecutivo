@@ -45,8 +45,8 @@ Ext.onReady(function() {
 	ventana.show();
 
 	ventanaindicadores = Ext.create('indicadoreseje');
-	buscar_usuarioLoCon();
-	buscar_indicadorCon()
+	//buscar_usuarioLoCon();
+	//buscar_indicadorCon()
 	ventanaindicadores.show();
 	// ventana = Ext.create('edopedidoensamb');
 	// ventana.show();
