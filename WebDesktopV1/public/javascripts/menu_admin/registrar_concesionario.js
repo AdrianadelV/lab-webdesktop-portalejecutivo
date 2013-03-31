@@ -253,9 +253,9 @@ Ext.define('VentanaConcesionarioAdmin', {
 						listeners: {
 			                 scope: this,
 			                'select': function(combo, rec) {
-			                      alert(rec[0].get(combo.valueField)); 
+			                     // alert(rec[0].get(combo.valueField)); 
 			                      valoridmarca =rec[0].get(combo.valueField);
-			                      alert(valoridmarca); 
+			                     // alert(valoridmarca); 
 			                 }
 			            }
 					}]
