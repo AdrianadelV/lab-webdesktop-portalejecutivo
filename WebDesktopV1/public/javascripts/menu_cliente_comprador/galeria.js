@@ -236,6 +236,7 @@ Ext.define('miVentanaGaleria', {
                                     id_color();
                             		id_transmision();
                             		id_tapiceria();
+                            		id_modelo();
                             		var currentDate = new Date();
 								    Ext.getCmp('fecha2').setValue(currentDate);
 									var day=currentDate.getDate();
@@ -469,4 +470,10 @@ function id_transmision()
 function id_tapiceria(){
 	var id_tapiceria=Ext.getCmp('cmb_tapiceria').getValue();
 	return id_tapiceria
+
 }
+function id_modelo(){
+	var id_modelo=Ext.getCmp('cmb_modelo').getValue();
+	return id_modelo
+}
+
