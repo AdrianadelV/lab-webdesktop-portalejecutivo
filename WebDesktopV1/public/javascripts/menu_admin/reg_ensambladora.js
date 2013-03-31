@@ -248,7 +248,7 @@ Ext.define('VentanaEnsambladoraAdmin', {
 						fieldLabel : 'Marca Asociada',
 						listeners: { scope: this,
 							'select': function(combo, rec) {
-								alert(rec[0].get(combo.valueField));
+								//alert(rec[0].get(combo.valueField));
 							}
 						}
 
@@ -352,7 +352,8 @@ Ext.define('VentanaEnsambladoraAdmin', {
 	}
 });
 function guardarEnsambladora() {
-	alert('Comenzando');
+	//alert('Comenzando');
+	//alert('ahora');
 	if (Ext.getCmp('contrasena').getValue()==Ext.getCmp('contrasena2').getValue()) {
 		Ext.Ajax.request({
 				url : 'menu_admin/grabar_ensambladora',
