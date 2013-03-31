@@ -227,8 +227,8 @@ Ext.define('ventanatab', {
                                     x: 70,
                                     y: 20,
                                     disabled: true,
-                                    id: 'matricula',
-                                    fieldLabel: 'Matricula'
+                                    id: 'nombre_modelo',
+                                    fieldLabel: 'Nombre'
                                 },
                                 {
                                     xtype: 'textfield',
@@ -251,8 +251,8 @@ Ext.define('ventanatab', {
                                     x: 70,
                                     y: 140,
                                     disabled: true,
-                                    id: 'serial',
-                                    fieldLabel: 'Serial del Motor'
+                                    id: 'tipo_vehiculo',
+                                    fieldLabel: 'Tipo Vehículo'
                                 },                                
                                 {
                                 	x: 400,
@@ -438,7 +438,6 @@ Ext.define('miVentanalista', {
 					} else {
 						alert(datos.cedula);
 						Ext.getCmp('cedula_comp').setValue(datos.cedula);
-						// buscar_nombreEstado();
 					}
 				},
 				//No hay retorno de la pagina servidora
@@ -460,10 +459,10 @@ function asignarDatosComprador () {
 };
 
 function asignarDatosVehiculo () {
-  Ext.getCmp('matricula').setValue(data.matricula);
+  Ext.getCmp('nombre_modelo').setValue(data.nombre_desc);
   Ext.getCmp('ano').setValue(data.ano_fabricacion);
   Ext.getCmp('precio').setValue(data.precio_venta);
-  Ext.getCmp('serial').setValue(data.serial_motor);
+  Ext.getCmp('tipo_vehiculo').setValue(data.tipo_vehi);
 };
 
 function asignarDatosConcesionarioLista () {

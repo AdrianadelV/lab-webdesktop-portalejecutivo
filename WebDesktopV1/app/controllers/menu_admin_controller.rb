@@ -99,7 +99,7 @@ class MenuAdminController < ApplicationController
 
   #Adriana Santana -->Sino quieren ver una trigra con tigritos recien nacidos por favor no borren esto
   def grabar_concesionario
-    puts 'AQUI'
+    # puts 'AQUI'
     @concesionario = Concesionario_vehiculos.new
     @usuario = Usuario.new
     @rif=params[:rif]
@@ -112,16 +112,16 @@ class MenuAdminController < ApplicationController
     #------
     @nombre_usuario=params[:nombre_usuario]
     @contrasena=params[:contrasena]
-    puts ''+@nombre_usuario+''
+    # puts ''+@nombre_usuario+''
     @usuario.grabar_usuario_concesionario(@nombre_usuario, @contrasena);
-    puts '+++++++++++++++++++++++++++++++++++++++++++++++++++++++metio usuario'
+    # puts '+++++++++++++++++++++++++++++++++++++++++++++++++++++++metio usuario'
     @concesionario.grabar_concesionario(@rif,@nombre,@correo,@telefono,@ciudad,@direccion,@marca,@nombre_usuario)
     render :text => $tirajson
   end
 
   #Adriana Santana -->Sino quieren ver una trigra con tigritos recien nacidos por favor no borren esto
   def grabar_ensambladora
-    puts 'AQUI'
+    # puts 'AQUI'
     @ensambladora = Ensambladora_vehiculos.new
     @usuario = Usuario.new
     @rif=params[:rif]
@@ -134,9 +134,9 @@ class MenuAdminController < ApplicationController
     #------
     @nombre_usuario=params[:nombre_usuario]
     @contrasena=params[:contrasena]
-    puts ''+@nombre_usuario+''
+    # puts ''+@nombre_usuario+''
     @usuario.grabar_usuario_ensambladora(@nombre_usuario, @contrasena);
-    puts '+++++++++++++++++++++++++++++++++++++++++++++++++++++++metio usuario'
+    # puts '+++++++++++++++++++++++++++++++++++++++++++++++++++++++metio usuario'
     @ensambladora.grabar_ensambladora(@rif,@nombre,@correo,@telefono,@ciudad,@direccion,@marca,@nombre_usuario)
     render :text => $tirajson
   end
@@ -171,13 +171,15 @@ class MenuAdminController < ApplicationController
       @objconcesionario = Concesionario_vehiculos.new
       $concesionario = @objconcesionario.buscarconcesionario($proformas.concesionario_vehiculos_id)
       @objdetalle_vehiculo = Detalle_vehiculos.new
-      $detalle_vehiculos = @objdetalle_vehiculo.buscardetalle_vehiculo($proformas.detalle_vehiculos_id)
-      @objvehiculos = Vehiculos.new
-      $vehiculo = @objvehiculos.buscarvehiculo($detalle_vehiculos.vehiculos_id)
+      $detalle_vehiculos = @objdetalle_vehiculo.buscardetalle_vehiculo($proformas.detalle_vehiculos_id) 
       @objmodelo_vehiculos = Modelo_Vehiculo.new
-      $modelo_vehiculos = @objmodelo_vehiculos.buscarmodelovehiculos($vehiculo.modelo_vehiculos_id)
+      $modelo_vehiculos = @objmodelo_vehiculos.buscarmodelovehiculos($detalle_vehiculos.modelo_vehiculos_id)
+      @objvehiculos = Vehiculos.new
+      $vehiculo = @objvehiculos.buscarvehiculo($modelo_vehiculos.id) 
       @objmarca = Marca.new
       $marca = @objmarca.buscamarca($modelo_vehiculos.marcas_id)
+      @objtipo_vehiculo = Tipo_Vehiculos.new
+      tipo_vehi = @objtipo_vehiculo.buscartipovehiculo($modelo_vehiculos.tipo_vehiculos_id)
       #print proforma
       
       if @i<@son
@@ -189,10 +191,10 @@ class MenuAdminController < ApplicationController
                                 '", "direccion_comp": "'  + $comprador_vehiculo.direccion +
                                 '", "correo_comp": "'     + $comprador_vehiculo.correo +
                                 '", "fechanacim_comp": "' + $comprador_vehiculo.fecha_nacimiento.to_s +
-                                '", "matricula": "'       + $vehiculo.matricula.to_s +
-                                '", "ano_fabricacion": "' + $vehiculo.ano_fabricacion.to_s +
+                                '", "nombre_desc": "'     + $modelo_vehiculos.descripcion +
+                                '", "ano_fabricacion": "' + $modelo_vehiculos.ano_m +
                                 '", "precio_venta": "'    + $vehiculo.precio_venta.to_s +
-                                '", "serial_motor": "'    + $vehiculo.serial_motor.to_s +
+                                '", "tipo_vehi": "'       + @objtipo_vehiculo.nombre.to_s +
                                 '", "posicion": "'        + solicitud.to_s +
                                 '", "fecha": "'           + $proformas.fecha.to_s + 
                                 '", "validez": "'         + $proformas.validez.to_s + 
@@ -213,21 +215,21 @@ class MenuAdminController < ApplicationController
                                 '", "direccion_comp": "'  + $comprador_vehiculo.direccion +
                                 '", "correo_comp": "'     + $comprador_vehiculo.correo +
                                 '", "fechanacim_comp": "' + $comprador_vehiculo.fecha_nacimiento.to_s +
-                                '", "matricula": "'       + $vehiculo.matricula.to_s +
-                                '", "ano_fabricacion": "' + $vehiculo.ano_fabricacion.to_s +
+                                '", "nombre_desc": "'     + $modelo_vehiculos.descripcion +
+                                '", "ano_fabricacion": "' + $modelo_vehiculos.ano_m +
                                 '", "precio_venta": "'    + $vehiculo.precio_venta.to_s +
-                                '", "serial_motor": "'    + $vehiculo.serial_motor.to_s +
+                                '", "tipo_vehi": "'       + @objtipo_vehiculo.nombre.to_s +
                                 '", "posicion": "'        + solicitud.to_s +
                                 '", "fecha": "'           + $proformas.fecha.to_s + 
                                 '", "validez": "'         + $proformas.validez.to_s + 
-                                '", "estatus": "'         + $proformas.estatus +
+                                '", "estatus": "'         + $proformas.estatus + 
                                 '", "modelo": "'          + $modelo_vehiculos.descripcion +
                                 '", "concesionario": "'   + $concesionario.nombre +
                                 '", "rif_conce": "'       + $concesionario.rif +
                                 '", "direccion_conc": "'  + $concesionario.direccion +
                                 '", "telefono_conc": "'   + $concesionario.telefono +
                                 '", "correo_conc": "'     + $concesionario.correo +
-                                '", "marca": "'           + $marca.nombre + '"}, '
+                                '", "marca": "'           + $marca.nombre + '"} '
       end
       @i=@i+1
     end
