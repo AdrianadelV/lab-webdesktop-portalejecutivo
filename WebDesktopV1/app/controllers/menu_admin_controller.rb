@@ -167,7 +167,7 @@ class MenuAdminController < ApplicationController
       solicitud = @solicitud_vehiculos[@i-1].id
       $proformas = @objproforma.buscarprofroma(@solicitud_vehiculos[@i-1].proformas_id)
       @objcomprador_vehiculo = Comprador_Vehiculo.new
-      $comprador_vehiculo = @objcomprador_vehiculo.buscarcomprador($proformas.comprador_vehiculos_id)
+      $comprador_vehiculo = @objcomprador_vehiculo.buscarcomprador($proformas.comprador_vehiculos_id)    
       @objconcesionario = Concesionario_vehiculos.new
       $concesionario = @objconcesionario.buscarconcesionario($proformas.concesionario_vehiculos_id)
       @objdetalle_vehiculo = Detalle_vehiculos.new
@@ -183,6 +183,13 @@ class MenuAdminController < ApplicationController
       @objusuario = Usuario.new
       usuario = @objusuario.buscarUsuario($comprador_vehiculo.usuarios_id)
       parsed_usuajson = ActiveSupport::JSON.decode($tira_usuajson)
+      @objusuario.creararchivofisico(parsed_usuajson["nombre"]+'.jpg',$directorio_raiz+'/public/images/usuarios',parsed_usuajson["imagen1"])
+      parsed_usuajson["imagen1"]="images/usuarios/"+parsed_usuajson["nombre"]+'.jpg'
+      parsed_usuajson["imagen"]=""
+      $tira_usuajson =  parsed_usuajson.to_json
+      parsed_usuajson = ActiveSupport::JSON.decode($tira_usuajson)
+      
+      
       
       #print proforma
       

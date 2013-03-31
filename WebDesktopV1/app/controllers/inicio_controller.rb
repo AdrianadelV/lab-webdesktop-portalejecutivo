@@ -13,16 +13,26 @@ class InicioController < ApplicationController
    render :text => $tirajson
   end
   def buscarIdMarca
-   puts 'aqui'
    @marcas = Marca.new
    id_marca = params[:id_marca]
    valor = @marcas.buscarMarca(id_marca)
    render :text => $tirajson
   end
+  #Adriana. Esta funcion busca todos los modelos de una marca en especifico
   def buscarModelos
     id_marca = params[:id_marca]
     @modelos = Modelo_Vehiculo.new
-    valor = @modelos.buscarModelosMarca(id_marca)
+    @objmodelos = @modelos.buscarModelosMarca(id_marca)
+    parsed_json = ActiveSupport::JSON.decode($tirajson)
+    i=0
+    @objmodelos.each do |modelo|
+        #puts @objmodelo.imagen1
+        @modelos.creararchivofisico(modelo.descripcion+'.jpg',$directorio_raiz+'/public/images/modelovehiculo/',modelo.imagen1)
+        parsed_json[i]["imagen3"]="images/modelovehiculo/"+modelo.descripcion+'.jpg'
+        parsed_json[i]["imagen1"]=""
+        i=i+1
+    end
+    $tirajson =  parsed_json.to_json
     render :text => $tirajson
   end
   def autenticarUsuario
