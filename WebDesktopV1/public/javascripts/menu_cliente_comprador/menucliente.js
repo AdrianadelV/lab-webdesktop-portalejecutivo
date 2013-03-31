@@ -52,7 +52,7 @@ Ext.onReady(function() {
 	var tree = Ext.create('Ext.tree.Panel', {
 		store : store,
 		renderTo : 'tree_el',
-		height : 500,
+		height : 350,
 		width : 300,
 		collapsible : true,
 		title : 'Menu AEVEV ',
