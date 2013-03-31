@@ -36,7 +36,7 @@ class Comprador_Vehiculo < ActiveRecord::Base
     if @usuario!=nil
       
  
-     puts "**********************************************************************modelo"
+    
     @comprador_vehiculo=Comprador_Vehiculo.new
     @comprador_vehiculo.cedula=cedula
     @comprador_vehiculo.nombres=nombres
@@ -53,7 +53,7 @@ class Comprador_Vehiculo < ActiveRecord::Base
     else
       $tirajson = '{ "success": "true", "exito": "false", "msg": " no se registro el comprador" }'
     end
-     puts "********************* FIN"
+     
   end
   
   def buscarcomprador(pro_comprador_vehiculos_id)
