@@ -1,1163 +1,0 @@
--- MySQL dump 10.13  Distrib 5.5.28, for debian-linux-gnu (i686)
---
--- Host: localhost    Database: db-dreamteamb
--- ------------------------------------------------------
--- Server version	5.5.28-0ubuntu0.12.10.2
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Current Database: `db-dreamteamb`
---
-
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `db-dreamteamb` /*!40100 DEFAULT CHARACTER SET utf8 */;
-
-USE `db-dreamteamb`;
-
---
--- Table structure for table `accesorios`
---
-
-DROP TABLE IF EXISTS `accesorios`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `accesorios` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `descripcion` varchar(45) NOT NULL,
-  `costo` float NOT NULL,
-  `tipo_accesorio_id` int(11) NOT NULL,
-  `concesionario_vehiculos_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_idx` (`tipo_accesorio_id`),
-  KEY `fk_accesorios_concesionario_vehiculos1_idx` (`concesionario_vehiculos_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `accesorios`
---
-
-LOCK TABLES `accesorios` WRITE;
-/*!40000 ALTER TABLE `accesorios` DISABLE KEYS */;
-/*!40000 ALTER TABLE `accesorios` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `arbols`
---
-
-DROP TABLE IF EXISTS `arbols`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `arbols` (
-  `id` int(11) NOT NULL,
-  `tipo` int(11) DEFAULT NULL,
-  `texto` varchar(45) DEFAULT NULL,
-  `vinculo` varchar(45) DEFAULT NULL,
-  `padre_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `arbols`
---
-
-LOCK TABLES `arbols` WRITE;
-/*!40000 ALTER TABLE `arbols` DISABLE KEYS */;
-INSERT INTO `arbols` VALUES (1,1,'Registrar o Modificar Nuevos Vehiculos','',0),(2,1,'Listado de Pedidos por Concesionario','',0),(3,1,'Configurar Nuevo Indicador','',4),(4,1,'Portal Ejecutivo','',0),(10,3,'Registrar Planes de Servicios','',0),(11,3,'Estado de la Proforma','',0),(12,3,'Portal Ejecutivo','',0),(13,3,'Configurar nuevo Indicador','',12),(14,3,'Lista de Espera','',0),(16,4,'Lista de Espera','',0),(17,4,'Anular Pedido','',0),(18,4,'Galeria','',0),(19,4,'Proforma','',0),(20,4,'Comprar Vehiculo','',0),(28,5,'Registrar Marca','',0),(29,5,'Registrar Concesionario','',0),(30,5,'Registrar Ensambladora','',0),(31,5,'Lista de Espera de Pedido','',0),(32,5,'Listado de Concesionarios','',0),(33,5,'Listado de Ensambladoras','',0),(34,5,'Listado de Marcas','',0),(35,1,'Registrar Modelo de Vehiculo',NULL,0),(36,1,'Registrar Caracteristica de un Modelo','',0);
-/*!40000 ALTER TABLE `arbols` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `bancos`
---
-
-DROP TABLE IF EXISTS `bancos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `bancos` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `rif` varchar(45) DEFAULT NULL,
-  `nombre` varchar(45) DEFAULT NULL,
-  `direccion` varchar(45) DEFAULT NULL,
-  `telefono` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `bancos`
---
-
-LOCK TABLES `bancos` WRITE;
-/*!40000 ALTER TABLE `bancos` DISABLE KEYS */;
-/*!40000 ALTER TABLE `bancos` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `bancos_comprador_vehiculos`
---
-
-DROP TABLE IF EXISTS `bancos_comprador_vehiculos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `bancos_comprador_vehiculos` (
-  `bancos_id` int(11) NOT NULL,
-  `comprador_vehiculos_id` int(11) NOT NULL,
-  `nro_cuentas` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`bancos_id`,`comprador_vehiculos_id`),
-  KEY `fk_bancos_has_comprador_vehiculos_comprador_vehiculos1_idx` (`comprador_vehiculos_id`),
-  KEY `fk_bancos_has_comprador_vehiculos_bancos1_idx` (`bancos_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `bancos_comprador_vehiculos`
---
-
-LOCK TABLES `bancos_comprador_vehiculos` WRITE;
-/*!40000 ALTER TABLE `bancos_comprador_vehiculos` DISABLE KEYS */;
-/*!40000 ALTER TABLE `bancos_comprador_vehiculos` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `bancos_concesionario_vehiculos`
---
-
-DROP TABLE IF EXISTS `bancos_concesionario_vehiculos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `bancos_concesionario_vehiculos` (
-  `bancos_id` int(11) NOT NULL,
-  `concesionario_vehiculos_id` int(11) NOT NULL,
-  PRIMARY KEY (`bancos_id`,`concesionario_vehiculos_id`),
-  KEY `fk_bancos_has_concesionario_vehiculos_concesionario_vehicul_idx` (`concesionario_vehiculos_id`),
-  KEY `fk_bancos_has_concesionario_vehiculos_bancos1_idx` (`bancos_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `bancos_concesionario_vehiculos`
---
-
-LOCK TABLES `bancos_concesionario_vehiculos` WRITE;
-/*!40000 ALTER TABLE `bancos_concesionario_vehiculos` DISABLE KEYS */;
-/*!40000 ALTER TABLE `bancos_concesionario_vehiculos` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `caracteristicas`
---
-
-DROP TABLE IF EXISTS `caracteristicas`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `caracteristicas` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(45) DEFAULT NULL,
-  `valor` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `caracteristicas`
---
-
-LOCK TABLES `caracteristicas` WRITE;
-/*!40000 ALTER TABLE `caracteristicas` DISABLE KEYS */;
-INSERT INTO `caracteristicas` VALUES (1,'Color','Color-Negro'),(2,'Color','Color-Blanco'),(3,'Color','Color-Plateado'),(4,'Color','Color-Rojo'),(5,'Color','Color-Azul'),(6,'Tapiceria','Tapiceria-Cuero'),(7,'Tapiceria','Tapiceria-Semi-Cuero'),(8,'Tapiceria','Tapiceria-Tela'),(9,'Trasmision','Trasmision Sincronico'),(10,'Trasmision','Trasmision Hidromatico');
-/*!40000 ALTER TABLE `caracteristicas` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `categorias`
---
-
-DROP TABLE IF EXISTS `categorias`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `categorias` (
-  `id_categoria` int(11) NOT NULL,
-  `nombre` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id_categoria`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `categorias`
---
-
-LOCK TABLES `categorias` WRITE;
-/*!40000 ALTER TABLE `categorias` DISABLE KEYS */;
-/*!40000 ALTER TABLE `categorias` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `ciudads`
---
-
-DROP TABLE IF EXISTS `ciudads`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `ciudads` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(45) DEFAULT NULL,
-  `estados_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_ciudad_estado1_idx` (`estados_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `ciudads`
---
-
-LOCK TABLES `ciudads` WRITE;
-/*!40000 ALTER TABLE `ciudads` DISABLE KEYS */;
-INSERT INTO `ciudads` VALUES (1,'Carora',1),(2,'El Tocuyo',1),(3,'Quibor',1),(4,'Cabudare',1),(5,'San Felipe',2),(6,'Yaritagua',2),(7,'Nirgua',2);
-/*!40000 ALTER TABLE `ciudads` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `comprador_vehiculos`
---
-
-DROP TABLE IF EXISTS `comprador_vehiculos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `comprador_vehiculos` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `cedula` varchar(45) DEFAULT NULL,
-  `nombres` varchar(45) DEFAULT NULL,
-  `apellidos` varchar(45) DEFAULT NULL,
-  `telefono` varchar(45) DEFAULT NULL,
-  `direccion` varchar(45) DEFAULT NULL,
-  `correo` varchar(45) DEFAULT NULL,
-  `fecha_nacimiento` date DEFAULT NULL,
-  `sexo` varchar(45) DEFAULT NULL,
-  `usuarios_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_comprador_vehiculos_usuarios1_idx` (`usuarios_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `comprador_vehiculos`
---
-
-LOCK TABLES `comprador_vehiculos` WRITE;
-/*!40000 ALTER TABLE `comprador_vehiculos` DISABLE KEYS */;
-INSERT INTO `comprador_vehiculos` VALUES (1,'19618874','maria','paez','123456','carora','mandnd@gndhj.com','1990-01-24','femenino',1);
-/*!40000 ALTER TABLE `comprador_vehiculos` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `concesionario_vehiculos`
---
-
-DROP TABLE IF EXISTS `concesionario_vehiculos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `concesionario_vehiculos` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `rif` varchar(45) DEFAULT NULL,
-  `nombre` varchar(45) DEFAULT NULL,
-  `direccion` varchar(45) DEFAULT NULL,
-  `telefono` varchar(45) DEFAULT NULL,
-  `correo` varchar(45) DEFAULT NULL,
-  `latitud` varchar(45) DEFAULT NULL,
-  `longitud` varchar(45) DEFAULT NULL,
-  `ciudads_id` int(11) NOT NULL,
-  `usuarios_id` int(11) NOT NULL,
-  `marcas_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_concesionario_vehiculos_ciudad1_idx` (`ciudads_id`),
-  KEY `fk_concesionario_vehiculos_usuarios1_idx` (`usuarios_id`),
-  KEY `fk_concesionario_vehiculos_marcas1_idx` (`marcas_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `concesionario_vehiculos`
---
-
-LOCK TABLES `concesionario_vehiculos` WRITE;
-/*!40000 ALTER TABLE `concesionario_vehiculos` DISABLE KEYS */;
-INSERT INTO `concesionario_vehiculos` VALUES (1,'L-123789','Concesionario Ford','Pedro Leon Torres con calle 54','0251-2456789','concesionarioford@gmail.com',NULL,NULL,1,5,1),(2,'N-456189','Concesionario Toyota','Calle 1300 con carrera 2000','0251-4569845','concesionariotoyota@gmail.com',NULL,NULL,4,6,4),(3,'T-8976','Concesionario Daewood','calle 300 entre carreras 90 y 91','0251-2345465','concesionariodaewood@gmail.com',NULL,NULL,5,9,2);
-/*!40000 ALTER TABLE `concesionario_vehiculos` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `detalle_vehiculos`
---
-
-DROP TABLE IF EXISTS `detalle_vehiculos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `detalle_vehiculos` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `vehiculos_id` int(11) NOT NULL,
-  `color` int(11) DEFAULT NULL,
-  `transmision` int(11) DEFAULT NULL,
-  `tapiceria` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_detalle_vehiculos_vehiculos1_idx` (`vehiculos_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `detalle_vehiculos`
---
-
-LOCK TABLES `detalle_vehiculos` WRITE;
-/*!40000 ALTER TABLE `detalle_vehiculos` DISABLE KEYS */;
-/*!40000 ALTER TABLE `detalle_vehiculos` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `ensambladora_vehiculos`
---
-
-DROP TABLE IF EXISTS `ensambladora_vehiculos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `ensambladora_vehiculos` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(45) DEFAULT NULL,
-  `rif` varchar(45) DEFAULT NULL,
-  `direccion` varchar(45) DEFAULT NULL,
-  `telefono` varchar(45) DEFAULT NULL,
-  `correo` varchar(45) DEFAULT NULL,
-  `ciudads_id` int(11) NOT NULL,
-  `usuarios_id` int(11) NOT NULL,
-  `marcas_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_ensambladora_vehiculos_ciudad1_idx` (`ciudads_id`),
-  KEY `fk_ensambladora_vehiculos_usuarios1_idx` (`usuarios_id`),
-  KEY `fk_ensambladora_vehiculos_marcas1_idx` (`marcas_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `ensambladora_vehiculos`
---
-
-LOCK TABLES `ensambladora_vehiculos` WRITE;
-/*!40000 ALTER TABLE `ensambladora_vehiculos` DISABLE KEYS */;
-INSERT INTO `ensambladora_vehiculos` VALUES (1,'Ensambladora Chevrolet','T-U896','Calle 53','0251-5674323','ensambladorachevrlet@gmail.com',6,10,6);
-/*!40000 ALTER TABLE `ensambladora_vehiculos` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `estados`
---
-
-DROP TABLE IF EXISTS `estados`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `estados` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `estados`
---
-
-LOCK TABLES `estados` WRITE;
-/*!40000 ALTER TABLE `estados` DISABLE KEYS */;
-INSERT INTO `estados` VALUES (1,'Lara'),(2,'Yaracuy'),(3,'Carabobo'),(4,'Zulia'),(5,'Trujullo');
-/*!40000 ALTER TABLE `estados` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `estados_indicadors`
---
-
-DROP TABLE IF EXISTS `estados_indicadors`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `estados_indicadors` (
-  `id_estado` int(11) NOT NULL,
-  `nombre` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id_estado`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `estados_indicadors`
---
-
-LOCK TABLES `estados_indicadors` WRITE;
-/*!40000 ALTER TABLE `estados_indicadors` DISABLE KEYS */;
-INSERT INTO `estados_indicadors` VALUES (1,'Activado'),(2,'Inactivo');
-/*!40000 ALTER TABLE `estados_indicadors` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `existencia_vehiculos`
---
-
-DROP TABLE IF EXISTS `existencia_vehiculos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `existencia_vehiculos` (
-  `id_existencia` int(11) NOT NULL AUTO_INCREMENT,
-  `cantidad` varchar(45) DEFAULT NULL,
-  `modelo_vehiculos_id` int(11) NOT NULL,
-  `concesionario_vehiculos_id` int(11) NOT NULL,
-  PRIMARY KEY (`id_existencia`),
-  KEY `fk_existencia_vehiculos_modelo_vehiculos1_idx` (`modelo_vehiculos_id`),
-  KEY `fk_existencia_vehiculos_concesionario_vehiculos1_idx` (`concesionario_vehiculos_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `existencia_vehiculos`
---
-
-LOCK TABLES `existencia_vehiculos` WRITE;
-/*!40000 ALTER TABLE `existencia_vehiculos` DISABLE KEYS */;
-/*!40000 ALTER TABLE `existencia_vehiculos` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `factura_accesorios`
---
-
-DROP TABLE IF EXISTS `factura_accesorios`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `factura_accesorios` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `comprador_vehiculos_id` int(11) NOT NULL,
-  `vehiculo_accesorios_id` int(11) NOT NULL,
-  `iva` float NOT NULL,
-  `formas_pagos_id` int(11) NOT NULL,
-  `subtotal` double DEFAULT NULL,
-  `total` double DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_factura_accesorios_vehiculo_accesorios_idx` (`vehiculo_accesorios_id`),
-  KEY `fk_factura_accesorios_formas_pagos2_idx` (`formas_pagos_id`),
-  KEY `fk_factura_accesorios_comprador_vehiculos1_idx` (`comprador_vehiculos_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `factura_accesorios`
---
-
-LOCK TABLES `factura_accesorios` WRITE;
-/*!40000 ALTER TABLE `factura_accesorios` DISABLE KEYS */;
-/*!40000 ALTER TABLE `factura_accesorios` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `factura_servicios`
---
-
-DROP TABLE IF EXISTS `factura_servicios`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `factura_servicios` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `iva` float DEFAULT NULL,
-  `plan_servicios_id` int(11) NOT NULL,
-  `comprador_vehiculos_id` int(11) NOT NULL,
-  `bancos_id` int(11) NOT NULL,
-  `formas_pagos_id` int(11) NOT NULL,
-  `subtotal` double DEFAULT NULL,
-  `total` double DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_factura_servicios_plan_servicios1_idx` (`plan_servicios_id`),
-  KEY `fk_factura_servicios_comprador_vehiculos1_idx` (`comprador_vehiculos_id`),
-  KEY `fk_factura_servicios_bancos1_idx` (`bancos_id`),
-  KEY `fk_factura_servicios_formas_pagos1_idx` (`formas_pagos_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `factura_servicios`
---
-
-LOCK TABLES `factura_servicios` WRITE;
-/*!40000 ALTER TABLE `factura_servicios` DISABLE KEYS */;
-/*!40000 ALTER TABLE `factura_servicios` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `facturas`
---
-
-DROP TABLE IF EXISTS `facturas`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `facturas` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `fecha` date NOT NULL,
-  `solicitud_vehiculos_id` int(11) NOT NULL,
-  `iva` float NOT NULL,
-  `subtotal` double DEFAULT NULL,
-  `total` double DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_facturas_solicitud_vehiculos1_idx` (`solicitud_vehiculos_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `facturas`
---
-
-LOCK TABLES `facturas` WRITE;
-/*!40000 ALTER TABLE `facturas` DISABLE KEYS */;
-/*!40000 ALTER TABLE `facturas` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `formas_pagos`
---
-
-DROP TABLE IF EXISTS `formas_pagos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `formas_pagos` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `descripcion` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `formas_pagos`
---
-
-LOCK TABLES `formas_pagos` WRITE;
-/*!40000 ALTER TABLE `formas_pagos` DISABLE KEYS */;
-/*!40000 ALTER TABLE `formas_pagos` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `frecuencia_notificacions`
---
-
-DROP TABLE IF EXISTS `frecuencia_notificacions`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `frecuencia_notificacions` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `frecuencia_notificacions`
---
-
-LOCK TABLES `frecuencia_notificacions` WRITE;
-/*!40000 ALTER TABLE `frecuencia_notificacions` DISABLE KEYS */;
-INSERT INTO `frecuencia_notificacions` VALUES (1,'Diaria'),(2,'Semanal'),(3,'Mensual'),(4,'Anual');
-/*!40000 ALTER TABLE `frecuencia_notificacions` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `garantia_vehiculos`
---
-
-DROP TABLE IF EXISTS `garantia_vehiculos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `garantia_vehiculos` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `fecha_emision` date DEFAULT NULL,
-  `fecha_vencimiento` date DEFAULT NULL,
-  `cobertura` varchar(45) DEFAULT NULL,
-  `vehiculos_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_garantia_vehiculos_vehiculos1_idx` (`vehiculos_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `garantia_vehiculos`
---
-
-LOCK TABLES `garantia_vehiculos` WRITE;
-/*!40000 ALTER TABLE `garantia_vehiculos` DISABLE KEYS */;
-/*!40000 ALTER TABLE `garantia_vehiculos` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `indicadors`
---
-
-DROP TABLE IF EXISTS `indicadors`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `indicadors` (
-  `id` int(10) NOT NULL,
-  `nombre` varchar(100) DEFAULT NULL,
-  `descripcion` varchar(255) DEFAULT NULL,
-  `funcion` int(10) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `indicadors`
---
-
-LOCK TABLES `indicadors` WRITE;
-/*!40000 ALTER TABLE `indicadors` DISABLE KEYS */;
-INSERT INTO `indicadors` VALUES (1,'Numero de Vehiculos Vendidos',NULL,NULL),(2,'Promedio de Vehiculos Vendidos',NULL,NULL);
-/*!40000 ALTER TABLE `indicadors` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `marcas`
---
-
-DROP TABLE IF EXISTS `marcas`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `marcas` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(45) DEFAULT NULL,
-  `imagen` longblob,
-  `mision` text,
-  `imagen1` char(100) DEFAULT NULL,
-  `vision` text,
-  `valores` text,
-  `contacto` text,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `marcas`
---
-
-LOCK TABLES `marcas` WRITE;
-/*!40000 ALTER TABLE `marcas` DISABLE KEYS */;
-INSERT INTO `marcas` VALUES (1,'Toyota',NULL,'Letras Letras letras',NULL,'Letras Letras letras','Letras Letras letras','Letras Letras letras'),(2,'Daewood',NULL,'Letras Letras letras',NULL,'Letras Letras letras','Letras Letras letras','Letras Letras letras'),(3,'Ford',NULL,'Letras Letras letras',NULL,'Letras Letras letras','Letras Letras letras','Letras Letras letras'),(4,'Chevrolet',NULL,'Letras',NULL,'Letras','Letras','Letras'),(5,'Jeep','C:\\fakepath\\stccargo2.jpg','La mejor',NULL,'LA MEJO','la mejond','kadksdok');
-/*!40000 ALTER TABLE `marcas` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `modelo_caracteristicas`
---
-
-DROP TABLE IF EXISTS `modelo_caracteristicas`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `modelo_caracteristicas` (
-  `caracteristicas_id` int(11) NOT NULL,
-  `modelo_vehiculos_id` int(11) NOT NULL,
-  `ensambladora_vehiculos_id` int(11) NOT NULL,
-  KEY `fk_modelo_caracteristicas_caracteristicas1_idx` (`caracteristicas_id`),
-  KEY `fk_modelo_caracteristicas_modelo_vehiculos1_idx` (`modelo_vehiculos_id`),
-  KEY `fk_modelo_caracteristicas_ensambladora_vehiculos1_idx` (`ensambladora_vehiculos_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `modelo_caracteristicas`
---
-
-LOCK TABLES `modelo_caracteristicas` WRITE;
-/*!40000 ALTER TABLE `modelo_caracteristicas` DISABLE KEYS */;
-INSERT INTO `modelo_caracteristicas` VALUES (7,1,1),(9,1,1),(7,1,1);
-/*!40000 ALTER TABLE `modelo_caracteristicas` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `modelo_vehiculos`
---
-
-DROP TABLE IF EXISTS `modelo_vehiculos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `modelo_vehiculos` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `descripcion` varchar(45) DEFAULT NULL,
-  `ano_m` varchar(45) DEFAULT NULL,
-  `marcas_id` int(11) NOT NULL,
-  `tipo_vehiculos_id` int(11) NOT NULL,
-  `imagen1` longblob,
-  `imagen2` longblob,
-  `imagen3` char(100) DEFAULT NULL,
-  `imgen5` char(100) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_modelo_vehiculos_marcas1_idx` (`marcas_id`),
-  KEY `fk_modelo_vehiculos_tipo_vehiculos1_idx` (`tipo_vehiculos_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `modelo_vehiculos`
---
-
-LOCK TABLES `modelo_vehiculos` WRITE;
-/*!40000 ALTER TABLE `modelo_vehiculos` DISABLE KEYS */;
-INSERT INTO `modelo_vehiculos` VALUES (1,'Ford 4x4 fortaleza','2010',3,1,NULL,NULL,NULL,NULL),(2,'qwer bnm','2007',4,2,'C:\\fakepath\\camioneta1.jpg',NULL,NULL,NULL),(3,'chevrolet 4x4 ','2009',1,1,'ˇÿˇ‡\0JFIF\0\0\0\0\0\0ˇ€\0Ñ\0	\'\Z#/ $\'),,,150*5&+,)	\n\n\r))),)),)))))),))))))),))))))))1))*),0)*)))))))))),+ˇ¿\0\0†;\"\0ˇƒ\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0ˇƒ\0Q\0\r\0\0\0!1AQa\"qÅë2BRSÇíì°±¡—“#3CTr¢”$b£≤¬4DÉ√·Ñ§Ò%cdtˇƒ\0\0\0\0\0\0\0\0\0\0\0\0\0\0ˇƒ\0\0\0\0\0\0\0\0\0\0\0!1Aq¡\"ˇ⁄\0\0\0?\0ºh¢ää(†(¢ää(†(¢ää+¬qAÌ¶[˝‰UsjÚ \0%#R⁄AŒì#à¡¡∆Æx8Œ\rhﬁI !Ì2˝aè˙hÀé˙«ÆÙ¡.Œ∏˜L>qøŸ]7Oc(Á’⁄?˙Æ~ *^n@≠M¥„›GúÅU÷—∫hŒ\n€Á¬ﬁ3Ù≥55K∑\\rè5Ωø€©¶-V€êér∆<Óø}jmÊ∂Ó!y∫™gﬁô«\'Õ∑kDõÈv9M˛U∑™v\\[á{≠?ZÉÁ£¸UáıŒœ8ˆ]øœE¯™©èzoÿgŸøµøk∆ﬁ;ˇ\0á∑o<VÁ˛ÿ¶¶-ƒﬁ´S ÊÊñ3˛Íﬁõr Xœô‘˝µJ…ºWæÈ,ﬂˆ≠‡?u&ìmπ¸ÊÀŸ≤È£÷≠ö∫b˚K≈<é|’òúw◊<´l8…±„_\'πÉ’ßÖ\"mË¯ÇK® ∏·•)E‘låñ÷sé<i¶:TJ;Î ’PZÌ\0jæΩ¸Æ)ÄœvtärŸõ◊#ÍÔ√ıjÎÌ◊Å@´ä@ ˜„WΩ4”u›ΩÁkÜ∆´y^ﬁRp{D√#<xÍ>jìÉU—EQ@QEQ@QEQ@QEQ@QEWÑ–ÿ®n€ﬁ)g∏6v2˛öb3≤o|ÁÌ#∞+ÜıÔ$≤L,lpndwÊ∂ÒÃèé‹ÅœàÌ\"ùˆFÀÉg[”âˆŒÌÌÂsÌùœyı\0\0Ωâ±b≥á´Lúí“;ùRK!∆©$n÷8\0\0\0∞⁄}Pp5⁄ª—œçBv∂Úc«Ä¨⁄÷&{C{|iÜ˚yøü’Q!¥7¿s§7;KSöäê‹mÃÛ¨#€à9¶O£çE⁄ÓïÏÕ§âùG cé\\\0Û˘Íaß©oã6DméÏ}§R{ôYπGèUf◊5¶IË§ÏØ›Ùä”-û#Å«\n‹””]•ÿ‘À⁄XëD/Í€ﬂ¶º√{ˇ\0Æµô´L˜öTö£zÃ¡ÙÉŸú‘_lK˝„“øH„Ï“[\'ª)ìkIô˝+ˆUë-]wlê!Ï“;|*)∑∂ôÇÌ.£‡%*≤˜uâû≠œùrá√=ı9ŸB[Hà‚4c“§©˙A¶Õ©∏Ω|rGÀP8=«öüA«™¢∑m™.†KõP˙I\0L£€A.=∏aë«ì…©ÓÂÔîWˆÎ,gÅ©O∂FÌSÊ9™tØ§Y:ó ∫±B0‡·óœ®îi⁄√jæ ⁄Å¯à.≤Ωô˝(øìE]GE—Zm.†e9‰AVÍ”\"ä(†(¢ää(†(¢ää(†(¢ää(†)∑iÔˇ\0ûö8ÛÀ¨uL˘Å<i≈πW/Ù€v[l ∏é ?÷∆Ç˘níˆpÁ{oÛãˆR]Òﬂa1≠∞‹\\·mëpu˚ sÀ—í9ÜŒ‹ QYòÈ∆êNxìèGÆ≠ΩÅm41{\"IYo\n,0û°¶ˆÒÆè úF≤6=±»\0û◊jä±6 ]ôn≈€¨πòÎ∏óôw9‡	„•r@$ÛcQù‚ﬁÄIÀI™„kÏÀÎÜ&[¿Ÿ?§òq·Õ∏pÓöN‡HO´1˚W	ü¶¢•7˚s9ÚÜ|Ù∆◊Ñ—m—ƒç¿^⁄¸Y°?˜)∆éùF\rÃMÁöl?\nÅ_¶2{O€ˇ\0ä@f©2ÓDúåÒ∞ÏhõfŒØ¶µ∂‡9˝*˙$ä©à·ñµ<’\"ì£ó?§ˇ\02#IdËÕΩˇ\0ÔG˜SaÜ”∑d˜√áÄ•`≥‰r»¿˚´ctm ‰ÕË“~™‘€É:ˆø…˚©‡Ú]ÏÄyø’M∂ÛaÂ˝ØØ4•wVÈóJ´∏˝Üb==ÇõÆˆ<êÁ≠ëΩYïõ‰j◊Bó°ﬂIvÖ«í1ﬂˆ\Z@\Z68dˇ\0Ü7cÍÕ:\\n≠ŸEuÇGçÜUÑl§É»ïÊ\r÷\'¶˚…s7§}ï≤ËºM¶D*A∆{#Á∫oi2Ÿ™éìËΩƒ–ò…‚æPÛ`ﬂH*óo÷˛¡≤LH`yÂî\n§(URYéyú„áaÂU6ËtßåÍÕ∫ÄÍ⁄Ü$„\r‹tüE4tùø´¥Ó÷hë„Eâc“‰dêŒƒ˘<=ﬁ=ãXmÌÎIoÂ∫äàHÀ&çjt»Å›+ó:tﬁ˝˛ãh«QŸºwb€≠V]DÈ#\ZA¡œ`™ Om:nåZ∂Ö™˜œˇ\01h:3¢-∫e¥Í_ÛñÏc#¥.NëË!”‚UÅ\\˜—¶ﬁ0Ìô„cÖyÊCÒ§bûß\\|s]\0ì9’F +ÕBå–{EPQEEPQEEPã8HÿWÌÕ˙∫úìcjÚ¿≠ 2Ä]A“NÇ9<y‡vPNˆÜÚ√““\r~ÒrŒ|»πo¢™Î›À´ˆªπ∫í0ÿ´À&%8ïO@f±]„⁄#@]1uåQpìÄYd˚¢0{ÕF€yG#Jô}e§ëÉ;ô•v÷°*ÛY<£ÿ´ÅQR∏o6T¢3z ;¨J}¢∞ìxˆpˆª:Y<döV˙5b¢ø÷Pã8‚!ñq˘Ü¡«è¶Ω€€Ú»±¨CÛq9ˆã˘‘W÷1»0„ıSRÖﬁ˚eˆõ˚JÎ∂ØH=¶»∑hî}B†ü◊©õáV£˛§ﬂcä’.ÛÃ{µ?~>\Zòö∞ˇ\0¥˚±ÌvlCÃáÓ¨áKw„ïíäj≠óoJ} ˙Lﬂƒ§Ì∂d>ÂÃ˛%0[_€%¯ˇ\0í_SVC¶ª—Œƒz5U<vÃûÙz‰¸t∑dmíM,§\r,IWqÄ™Xû,{®-q”§„€Xüﬁ≠´”»˜vl=uNGΩrg…24≠˜S≠é¯N ﬂîpPjÙ»ßœ©|‘MÔOñ ?‡ã>8}däçíØØﬂE≠Ω≠∫üvcBGéπ°PÌùm;«írà4çE´E‡«\Z„ü«MLcË´ÄÍˆî$\0»ß\'≥Iè4Ωù—á≤Äm•µÂü?¢äM1è+#‘¢ûÊËÀf€¶bX∞4™nõ∞.∑\'QÓQö™Æ˜&‚0Z-ßn‡d˘2……xìxå÷∏7SkÎ\\öõI√	T\r•Ä$‰y\\1√à†öÌ›…ÍaíS%¨+ÕLÓ÷·œhÍ∆£úr¬´€mÂ,1ñÂüdûå ·J,wbÊ[êóÇC)R[…Ô^Ãy™…èfŸÏÿÑì®\'∞Oré^öä¶ˆı§≈ì®ç	!|ñbO2ÌÊ*6|*¸ﬁ]˜≥⁄ñOh¿¡®°I\0(¿Á@∆xj∫≠Vù€⁄Õ±∫âcxFπªâÆ»è§j àHlåÇ|ìƒ‚¨J®∂FÊ]‹ßY¯Ä˙$e$s¡U9≠“t|=ã)„Äz∑\0Ò¿<T`yÒ„äÈ{ﬂ çJ≈[öÆÖ9D\'JdÈ\'ÜiÆˇ\0is„SWÏù‹/∑ûÊ2ˆ\n’aπœmqãpö‚eë|Üaî`GFjµ∂ßçA-ˆ≥ÕÆO\'Bú±8\ZI…·é56’»€<Jì<»Hëÿ±`xÍ-ØPÓ:∏÷KøóË”ÁË´ˆe4œ{yM\\Vô©•øK˚I¸J∑Ì≈ˇ\0H˚a”mÓ|•∂o8ï>ê∆™bk’b9PtV¡ÈNYYñ…Ü`G:ê†ê5ip<xUï‰fπfﬂa3¨´y]∏1ÅåvÒÆü‹ç†f∞∑ëΩ≥√o>Åüß4ïyqÃ?QEYQEEPQE{vô∑Ÿ◊2/∂XüN9Ía•1„©ÖWÒÌÎ•Ÿq-Ω¥qÖF$’íÚD≈•»¬†ÇT„Nyë¬ß˚Ô§⁄∫≥i\nÁâ¡ È8\0ûx‰*®›€±n›\\∑%£\0ymoq´≈@)û`9˚äQªªª¥ÚÊ=\r∆-K&πQ’jq‰çâ9Â√è∆ÛÏËÃ›VJØU2‰`∏1?ûŸO#R7⁄ÈÏü›–\"¶apt∆]õ…+É≠òü\n”uuow3≠æ?º√4L†¶YcÎ\"@‚f\0◊9ﬂΩﬂ_ΩzÃˆÑ\0\r≥0Ìâº˛—≈>ÔÆ€∂K®c;:	d÷ÄÀ$ó\nXµºe|ò§P0ßÖFvl≈≠`˘*Í~øG:îÔûZ∆ˆeˆzM!≤¥c+M<e≥ÖâÄ‡3œáÖts Ém°Âah2}ıÈÔˇ\0ˆáuJˆF∆ÜEåœio˘tÎB.@DŒ<è;Ç{‘)∆A$q*ª…8lËÄÂˇ\0yÿpø•ÔÂJ-∑Ùƒåëÿ¬H72˜ÖëŸCp‚q«∆µ∆…|≥Às¬S¥wVÕò€D=π2≤È\0x‰Û‡8Ò®ııv≤F#é⁄Dïã‰ÃÆ†≥(:‹g…» ‡Ç÷Áﬂb>ƒá–Â{3ùH]6K∂!f,˚>brKOtI>\'Æ…5Æ|∏Ÿ‚\' {≠0mÖ?Ú∂Á√Ú„≥¬jïl´®éŒ⁄2˚(û8cEí6îúœ/Wß;Y<1»”%æﬁÄrŸñ˘ˇ\0˙/Gt‘˝º;Z#∞UlñÌ5‡W	$≤Xa÷e%Ä\r Œ3ì€\\€A65Æ≤«∏¥ˇ\0∂óÌ¿G∫êê?eI˝c„\nœu≠À+\0=≥cèpR¿5d“m£8πº\n2#‘xÑâ¬ÇO·ŸA2‹≠ÖZu≤ª´1‘jX≤≠u»¨5c\'Â 9<©øoºä≤…ÏÒÇ—ßíÄooíûI8«î9©<≥äx›˝Ω∏eô\\˛P»≠?ì‰ïU$SçJT‡∆õ6û€Œ]4≈$ı%&tmX’®u`q¿Â»ŒπŒ˝ÆÊ|nıÎ3⁄eo≥§k{RnÏè®uöP¨f AUëÄ^¯Û„L–…r≥ƒÏ\Z8’ú¨æTz¡ê£…[SÇù⁄ª)FœﬁKb˚•xP°	4ÆÉP`°å`·H8„€«\'â6ˇ\0HVØç\0K§ÇÇTïcLìñXÇÅ®“NpxqÕnÕòún]YÈhì=¨ò‚Ø\"ì˚Qk∆|Ë*ÅÈ7zM›˚Ñ?íåîåvÙû5fo\'I÷1ÿ*ŸMÆ`[…+(`^	P±f@8™°‹›è%Õ‰iGpP»\rƒôv™(g#∑\0v◊?«√ß	∆¸kÚrúπ[>•˚ù∏Ë√72IÄDQ∆Ú∫ÜVî\"û¨ƒj¡#à·R}âº¶Œv≥ëºñ…CƒGåÒ·ﬁ+~ÙoÂ¶≈Œﬁ#<À∆R[[q-,ò%•lÍ>~cïEˆˆ‹ãjŸ5‘+’›Y#&rz≤|¨6•ÌÂ√IºwåÍO>ÚÄÚqÊT˛‚è≤öov˛{j&ﬁ$ìûx˙©,ªhû⁄ò∫ì_Ì\\ˆ‘v[ƒ\0‚1Ø$köô„N9Ò>ﬂ.–&ë…=Y“õãåöO™¥¥µÜkLî+d÷R∆@Õk≥UI∂. Yµ4üõN\'H\'ô…»¿;{j*?oµÂAÖvè\0xyX’√«’]I—<∫∂]∑Ñ`z´òv˛ Í&“QÄd<¯ﬂ?ö∫á¢ŸŸvÿƒJ=+¿öüZœÒs˙ó—E¶Q@QExM{X…»–Dv…öI£L_ì\\∂ü(™≥∑©ïG«Ô®.’Ÿ◊LNJ¸≥˜Uà$¸ìû˘¶%Ù∂£[@qÂX‰‘WW{∑;sd˘M¯j-∑≠ß≤∏IT„ÇÀù:ê\0F{¡Ù’´qÅıR)¢» åÉÃê|‡Û©.5f´õ›Ûäl≥YF≤9&Fç•A!<ÀF≤…<\0≠7{’⁄:€Tq\ZÑLJ/µPVAê<sŒß2Ï®æ/öè“∂tcÙ1|ÃÜµŸû®sÔ\"˚ò è€îÛÛ…ZnÓO ì¯ï.{(˛/öè÷á∂OÇãÊ¢¸4ÏuDõjÉÓO «XHØΩ?)ˇ\0Jö%¯8æj/√Zô¡«ÛQ˛\Z∫aÇ-≤Éú9ˇ\0©(˙û§“:5ºp>œ∂h‚,S&]Aü€±my$‡q\'∞wVñ?‡Oöè÷áî˜/Õ∆?€MLiõzã)K{h·/êz≥+±’¿Å≠€\0˙8SûÍ\\⁄ÿñ{•ëÁaÄ±Ö\"yÍ,√Úá¥j8$ÄŸ-ÎÄ@v\0Û”‰ÁœßŸ5ﬁÎ{¨õíL<Ëüc”]∆ﬁµ<ãè:}∆¢Õ ì\Zò∫êœ¥·<ôæI¢«cΩ…ƒ\\|¸*>úÍ≈Ë÷Ó%fÎ‡„Sü]_IÌ{>©Ù»ÿ¡„ÄO’V_G≥Ege{¥¿$AQn\\Æi4ó:x‡d¬æeo\ZÆ˜ï¡∏b∆O◊S=Óå√≤6mÇåŸsˆyRíc–Œ> †¨nÓZI›ã;±fcÕôéI>$ö}‹\r†#øâ_Ûs£∞§ﬁAœòê~--ÉqÃã‰˚lp√s<;ÛÂxS”ÿÚ⁄H:≈#â–‹Éhldwq«M1\"˛œ\'í@¡+ÈRWÏ§Snå´Ãä∏ÁπGRŸ_(+ÛÄ±˙MDˆç¬d˘kÚáﬂY÷≤+…wm«6ëˆ;Œ¶WWQ˚Ù˘K˜”EÕƒ~˝9èt;¸ıeKÈ,Ì≠=Aßkπ”±ó–i\n≤ÒÚÖVZS…„RÕÙ≈≠Ω≠í˚~©\'πÔÎ&\Z—Ï°Œ„∏SFÔl¡syo9Jä|#Q˘9≠[Ÿµ˝ï}q?díπ_Œ#Ñ\n=Vs≤¡<aô£¯í¶¥)%ı◊JÙE&≠ìl›ËsÁ‡è¢πí‘ˇ\0sú˘mœ©n˚´§:œÙ5æ{ÊıuÚbÜ‹≈ÅEUAEPQEXø* µ‹>–T˚¯±Î÷ΩjùRÜUöh–≤ ÍÃR7QíA9ÌÕU∑[_T‚†ydcÄ◊LIÓÆ‚jqº[d\\#»æ◊Øú/äñßQ>öäÓÿÜ€j±∏”x¶ç$sÖ&\n±or‘πˇ\0gÎ_Æÿ∆≈\0åº’Ã§éﬁ9îÁámjä˘CyPD√cÚãƒÇÂ7Éœ≤û:BΩéKÃƒAJJúå™q¡ÌÊ*.Z™6NCzM◊Ò´√∑ ¯˜?∆§˜õ#≠mq4yn,åÈVÌ∆≤)9#ëú√äÍ‰›…Û∞˛:«l√0ˇ\0Ó?ã^Ø¿√Íü¯îã˙µ?Ω_ùãÒ◊áw\'˜´Ûë~*áj√Qzß˛%xv§?˘ﬂƒ§ü’Ÿ˝Í¸‰äº˛ÆœÔWÁ\"¸T?§·¯8ΩS~:ƒÌ~?Ûø\'∑?ΩOùáÒ÷’ß^2…k⁄L±ªc¬4bÃ|\0†qï‡ÍQÑ)©≤IÃ‹Å#ÄÎ=ÔSHöd¯˝rˇ\0¥ﬁ^  ¬(\nÄ„!W¥„›ñ>,i1cDmö‚<‡Bπ2~:S¥6DêcØ¥xµØX$L˘µ\Z[π;Nvù¨ó\0£ïKƒ/•èÇ∂—Sﬁï6™BÇX§]0∫∑I∞ÏÚ1+úy<9Ò»=ºB© |ı∑ﬂSNç∑j“ˆs¬∫år9ÒŒjÁùJ∑Ki∏88˚)Vo÷√≥∂ôí›YÇˆ…#1˙1Ivå≥A$≤:bVrI\'HÒ$\nd€õLÀ#sìRŒèvÏíÌKb-∫ V≠é∞¨gSÕèŒ1Á¿§`\n6¥◊Vm˝Ê“HŒ9∆¢1íΩÉÈ9ßΩóu“áÿ≥≤ÊAàe¿.§0*1ÿN1Ê\'à„M›&Ï˘6\\vVkp“2%ƒå‹@nΩÙ‡°$•YpyÂªÍa{‘»éáæ2>K~</E0”∂Ò$‹∫Ok#J¢0«ØÍ∆Dh=ßRHÏ˜T“◊ñﬁÊÃ|i‰?ÈRéì†W◊´èÔRSû&Xpπ”Ÿî”Íı¡CP-k»ª-!‡ˇ\0›≠mtΩêD>tˇ\0™CIÎÕTçœ¯#}π¨DÁπ>B~\Z◊ö8Ô†|›{·“Np6Û¿Úí/S 94Ä˙)”u7Ÿ÷œÜ\'N5∫åÖÙÚÙ‘9dÊ3œ°«Î©Æ÷AÃ±ñ\"Î\"H¡éNñbâ7\08\r!Ä=ºh\"6“äD<2…ê{◊_\nËÄˆ¥”ÿ…◊HŒ#îG¨y*ëG‰èëT∂ÙX≥ﬁ\\cwúÑVm+2,úp8\0d#—]–˛Ì=ûÃç%R≤9iH¡R¯¬ëÿBÖ»ÔÕTNh¢ää(†(¢äô7 ≈e;ékÑyÙú}4˜QéíùôuÅì‘ø–2~å–s¡⁄Â-ŸUî·ó…“xÂNX6ÆÒéY<\rG•⁄ÏNJé\\9yéilºK«\'∏`å Áñ>)¶{«À∑í£èf@ıf§Zﬁv´wW˛kP‘Á:î~”ı“\\¯W°Í£sáÉ)«[=û|?üE%’·F|(ø7ÛË£Ÿ>oÁ—I≥·F|(7ôˇ\0ü‰WùoÛ¸ä”ü\n˜>:—¸ˇ\0ÒAlÚ˛~Í◊öPoñÿ®…d>ïè—Xxè6>Œ´4Pm¿˜ﬂG˛k7`¿e¯CòvRzıFME@‰~äQ◊#Ãπ˚kOW·ı◊ÇAÔ≠æ˙]›åïê¿ncãÀí#ï÷´Õ|úü˛xfÆ€ã≠∂]˜≥VIh	ä\0Ωdë≥yÁ2\"+ågàŒq∆ßŸ;z[;Hn-[´ï&p[\n¿áC¿Ü Åé=¬§{c~¶ºk+÷\Z2—7SØ„xÂ}#<5FÍ0s»‚¢ßù$Ùb6ÑL˜F6DHZ<ÎUÀÜE\0Ÿsëúq¡´˙Aÿ÷ˆ§⁄€A ˆ8W{â±ú ´ÿ\0T\09·ª™⁄ﬁÕ‡í÷≈ÊíQu†,äBuk˘LFã®û,I˙1€Kmç¸∫æIVUÑ)a\Z. Ä	\',OÃˆ–+íÏ\\lW\\‡≈,N5dúùQ∞=∫Å¯µ√ﬂ}_i©NÎ\\*ŸO≠5£4`©!CfD˜DyÒ¬≠kﬁŸlö°ŸM(^\Z¥JrGçJz(9ÍAÇFs[‰¥x¬ñR5åÆFC⁄8`◊@40«˘≠ÇO˛úü§µ\'üo^/v/w˜h˛“i¶(5¥s…˘î÷¶R;\r[ª¡ø[VŸ:…l⁄›bâF¢	!9‡UW{ÀΩS_2¥Ìù\0ÈÂ√QÚ∏P4¬8˙*÷ﬁM”ËÎ@Ï©\Z%ƒ≈…·ÆsTò…Í˙°·™™∏:ª„ﬁ…/,„ÄC√≈\0»8\n—™Î\'›2Ë=‹X{‹\"i—ÇMìl›∫4ì⁄Ll»2|¿ENB‚´ÓÉ«ˇ\0hÉœ\'èÈaUAEPQEEP›∑ÏzÎyc?§G_î§}¥„X∫‰Pqº¿£pTå©é§89ÂÓÅıSe…„ö±∫g›sk|eUƒW9p{ÉÛã·ƒÜ¯«∫´ôj\r4QEPQEc=›ÃVÒ‡4¨»gô>\0}amûÄn‚Ñ…©;~MT£€§±¡#áæjUˇ\0”˛Í.^Ò◊»ÑåëŒGQ¸)ëˇ\0PWCi†‰S—é“„˝∆nÔ„HFÂ_~£sÛ2~\ZÏn®wWù@Ó†‰K^é6îô”c8«æBû≠xÕ)˛ 6ßÍRz„¸U÷b›^ıc∫Éç∂ÊË›ŸÖ70<A…\n[$ë¿û gÆöÈœau€-ùFL≤¸QîR∂Øã\\–¸Ë0ØTÒØ+m≠≥HÍà2Œ¡T÷cÄ=dPln°™i“VÁG›@z©Z2Nx® …„Ì∏˘òT1≈èw-\rÕ¥÷„\Z≤≤)9Ê_WgùÖ]˚\'bÿYÏY!òErmcˆDÍ’÷Hö„e<◊RÈUnÍÁùã¥Ã+éŒwÉ¿ÉÁrmõˇ\0fÏŸ›·Ygé…vXÑê¬Ú8\n«\nØ©∞ ƒ9‡EI˜Syˆv—Ÿw-,kJ4›#∞b™€X\0ü%@SåÂ08ÅU>ˆn Ï˚W“Â÷nÆ(Ö¸™Ïâeè„@œ|Ñv\ZYπ˚Ω.Œëﬁ˙H\"∂ñ\'éX˙ÿÊñ`FW™ä\"«Xp§1¿<x”Ú_õ©îË1[ƒ°-‚ÏH¡Ô‰Yè{¸¬ÇU—Ì-ƒä≤gLef#±ä8–√W5–©\0™€°äR—ßaéΩÜå¸yU>ñ.|ÿ´6™0ÍáuPÓ¨Ë†Æ˙pŸ°ˆDƒ1ò‰;§U8¯¨ﬁå◊1◊bÔñÀˆEçƒ#úëH£ˆä?Ωä„ö\ràÿÕ^õµº÷«g≤h…nëÃ¨°èX‚÷bÂ≥Ì0„ª%{MP˘´GpÏ¢û¬v28ô£Í%®E∑VY€b°|o5J±lÙ=lSd€Ã´Ón∆¶ÙÀ∫6]Uú)åiç>¨ü§”’TQEEPQEEP0ÔéÈ≈¥-ö	G≈XcR8ˆÆπÌH$v◊.o~Â\\ÏÈJNáI>D™	éAﬁ∞ˇ\0ÑÒÿ4öÔg§™VDVV‡UÄe>px\Z&≈Æ∂ì¢›öN}Ö°1Ù\n‘z&Ÿü©CÍoæÉì±RmÀ‹IvÑÉG#\\ØÄÇ|∂i—∞ÙQ≥T‰YCü[ËbE.áe˙¨? PgªñvˆñÈ%U#P$ˆíOkíOyß_gßæ±Lˇ\0‘+/’!˘∞nèÏè¸¨^¢>£@˜ÏÙ˜√÷(ˆz{·Î«˝ûY~≠Ô}ıâËÍ«ıXˇ\0{Ô†};I=Ú˙≈\'õx`Om4k˚NÉÎ4–z6∞˝V?ﬁ˚Î—éœ˝R?ﬁ˚Ë<€;Ò≥˙∂In`*¿´.∞˘0Aû\ZÊ\r·Ÿë«pÎm/]&¯ È<ÉàÂûGÆû=lˇ\0’c˝Ôæº˛À6Í±˛˜‚®ÆPˆ;wTœ¢Á¥Ç\\^…ß™„Èfœ\rL@8“8ÅﬂÉ√oøÏ´g˛™û∂¸UÉtM≥œ¸≤˙˛*?H˚›≥6Ö°åM˘TÚ°a˘.\"HKr>ÉŸTcäÍüÏèg˛¨ø)ˇ\0jü°≠ö„ÿz@}a®éWß-ìº€ÁAÚN2ßà85—ÿ6Õ¯)>u˛˙Ù≥~Oùz¢ëÏ„\n√ê=ôÒÒ≠v¢Í‚5ùä@Î[H˜*=ÒÂ·úˆUÊùÏ¡Œ)ûY>¬)ÔfÙaa¥∂N˚Sˇ\0®öò¶Ωõ“eîq¨qá\n†*Å¿U\0q‰\0ßH∫CÅπ,«˛ìSÙ;%ˆ±†Û*è®RïµûCEæÙ+ûOÛMKly/ÕI˜R·Øz±U\rÚm@F4KÛO˜W9Ùã—µƒwÆˆñ”IßX”ƒñB1úƒx;+ß:±^GuT/Rπ˘ô?\rMz2ËÊÚ[•3C,‡É)ëJuÄq™‹NOqÄ3€äÈ>†wVKîDò¨Ë¢Ä¢ä(\n(¢ÉˇŸ',NULL,NULL,NULL);
-/*!40000 ALTER TABLE `modelo_vehiculos` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `noticias`
---
-
-DROP TABLE IF EXISTS `noticias`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `noticias` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `imagen` longblob,
-  `detalles` text,
-  `titulo` varchar(100) DEFAULT NULL,
-  `fecha` date DEFAULT NULL,
-  `usuarios_id` varchar(20) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_noticias_usuarios1_idx` (`usuarios_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `noticias`
---
-
-LOCK TABLES `noticias` WRITE;
-/*!40000 ALTER TABLE `noticias` DISABLE KEYS */;
-/*!40000 ALTER TABLE `noticias` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `pedido_concesionarios`
---
-
-DROP TABLE IF EXISTS `pedido_concesionarios`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `pedido_concesionarios` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `concesionario_vehiculos_id` int(11) NOT NULL,
-  `modelo_vehiculos_id` int(11) NOT NULL,
-  `fecha` datetime DEFAULT NULL,
-  `cantidad` varchar(45) DEFAULT NULL,
-  `estado` varchar(45) DEFAULT NULL,
-  `ensambladora_vehiculos_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_pedido_concesionario_modelo_vehiculos1_idx` (`modelo_vehiculos_id`),
-  KEY `fk_pedido_concesionario_ensambladora_vehiculos1_idx` (`ensambladora_vehiculos_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `pedido_concesionarios`
---
-
-LOCK TABLES `pedido_concesionarios` WRITE;
-/*!40000 ALTER TABLE `pedido_concesionarios` DISABLE KEYS */;
-/*!40000 ALTER TABLE `pedido_concesionarios` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `plan_servicios`
---
-
-DROP TABLE IF EXISTS `plan_servicios`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `plan_servicios` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `descripcion` varchar(45) DEFAULT NULL,
-  `costo` float DEFAULT NULL,
-  `servicios_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_plan_servicios_servicios1_idx` (`servicios_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `plan_servicios`
---
-
-LOCK TABLES `plan_servicios` WRITE;
-/*!40000 ALTER TABLE `plan_servicios` DISABLE KEYS */;
-/*!40000 ALTER TABLE `plan_servicios` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `proformas`
---
-
-DROP TABLE IF EXISTS `proformas`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `proformas` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `fecha` datetime DEFAULT NULL,
-  `validez` datetime DEFAULT NULL,
-  `estatus` varchar(45) DEFAULT NULL,
-  `bancos_id` int(11) NOT NULL,
-  `comprador_vehiculos_id` int(11) NOT NULL,
-  `concesionario_vehiculos_id` int(11) NOT NULL,
-  `vendedor_vehiculos_id` int(11) DEFAULT NULL,
-  `detalle_vehiculos_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_proformas_bancos1_idx` (`bancos_id`),
-  KEY `fk_proformas_comprador_vehiculos1_idx` (`comprador_vehiculos_id`),
-  KEY `fk_proformas_concesionario_vehiculos1_idx` (`concesionario_vehiculos_id`),
-  KEY `fk_proformas_vendedor_vehiculos1_idx` (`vendedor_vehiculos_id`),
-  KEY `fk_proformas_detalle_vehiculos1_idx` (`detalle_vehiculos_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `proformas`
---
-
-LOCK TABLES `proformas` WRITE;
-/*!40000 ALTER TABLE `proformas` DISABLE KEYS */;
-/*!40000 ALTER TABLE `proformas` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `rols`
---
-
-DROP TABLE IF EXISTS `rols`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `rols` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(20) DEFAULT NULL,
-  `estatus` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `rols`
---
-
-LOCK TABLES `rols` WRITE;
-/*!40000 ALTER TABLE `rols` DISABLE KEYS */;
-INSERT INTO `rols` VALUES (1,'Comprador','a'),(2,'Concesionario','a'),(3,'Ensambladora','a'),(4,'Gobierno','a');
-/*!40000 ALTER TABLE `rols` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `servicios`
---
-
-DROP TABLE IF EXISTS `servicios`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `servicios` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `descripcion` varchar(45) DEFAULT NULL,
-  `costo` float DEFAULT NULL,
-  `estatus` varchar(45) DEFAULT NULL,
-  `concesionario_vehiculos_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_servicios_concesionario_vehiculos1_idx` (`concesionario_vehiculos_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `servicios`
---
-
-LOCK TABLES `servicios` WRITE;
-/*!40000 ALTER TABLE `servicios` DISABLE KEYS */;
-/*!40000 ALTER TABLE `servicios` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `solicitud_vehiculos`
---
-
-DROP TABLE IF EXISTS `solicitud_vehiculos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `solicitud_vehiculos` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `proformas_id` int(11) NOT NULL,
-  `ensambladora_vehiculos_id` int(11) NOT NULL,
-  `estatus` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_solicitud_vehiculos_proformas1_idx` (`proformas_id`),
-  KEY `fk_solicitud_vehiculos_ensambladora_vehiculos1_idx` (`ensambladora_vehiculos_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `solicitud_vehiculos`
---
-
-LOCK TABLES `solicitud_vehiculos` WRITE;
-/*!40000 ALTER TABLE `solicitud_vehiculos` DISABLE KEYS */;
-/*!40000 ALTER TABLE `solicitud_vehiculos` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `tipo_accesorios`
---
-
-DROP TABLE IF EXISTS `tipo_accesorios`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tipo_accesorios` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(45) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `tipo_accesorios`
---
-
-LOCK TABLES `tipo_accesorios` WRITE;
-/*!40000 ALTER TABLE `tipo_accesorios` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tipo_accesorios` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `tipo_vehiculos`
---
-
-DROP TABLE IF EXISTS `tipo_vehiculos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `tipo_vehiculos` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `tipo_vehiculos`
---
-
-LOCK TABLES `tipo_vehiculos` WRITE;
-/*!40000 ALTER TABLE `tipo_vehiculos` DISABLE KEYS */;
-INSERT INTO `tipo_vehiculos` VALUES (1,'Camioneta'),(2,'Camion'),(3,'Carro');
-/*!40000 ALTER TABLE `tipo_vehiculos` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `unidads`
---
-
-DROP TABLE IF EXISTS `unidads`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `unidads` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `unidads`
---
-
-LOCK TABLES `unidads` WRITE;
-/*!40000 ALTER TABLE `unidads` DISABLE KEYS */;
-INSERT INTO `unidads` VALUES (1,'Cantidad'),(2,'Bolivares');
-/*!40000 ALTER TABLE `unidads` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `usuarios`
---
-
-DROP TABLE IF EXISTS `usuarios`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `usuarios` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
-  `estatus` varchar(45) NOT NULL,
-  `imagen` longblob,
-  `imagen1` char(100) DEFAULT NULL,
-  `rols_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `nombre` (`nombre`),
-  KEY `fk_usuarios_rol1_idx` (`rols_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `usuarios`
---
-
-LOCK TABLES `usuarios` WRITE;
-/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'AdrianaS','1234','a',NULL,NULL,1),(2,'Fernando','1234','a',NULL,NULL,4),(3,'Jose','1234','a',NULL,NULL,2),(4,'Maria','1234','a',NULL,NULL,3),(5,'adriana','1234','a',NULL,NULL,2),(6,'ConcesionarioToyota_Pedro','1234','a',NULL,NULL,2),(9,'concesionarioDaewood_Jose','1234','a',NULL,NULL,2),(10,'Ensambladorachevrolet_Pedro','1234','a',NULL,NULL,3);
-/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `usuarios_indicadors`
---
-
-DROP TABLE IF EXISTS `usuarios_indicadors`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `usuarios_indicadors` (
-  `usuarios_id` int(11) NOT NULL,
-  `indicadors_id` int(10) NOT NULL,
-  `valor_meta` int(10) DEFAULT NULL,
-  `unidads_id` int(11) NOT NULL,
-  `fecha_meta` date DEFAULT NULL,
-  `valor_amarillo` int(10) DEFAULT NULL,
-  `valor_rojo` int(10) DEFAULT NULL,
-  `valor_verde` int(10) DEFAULT NULL,
-  `fecha_amarillo` date DEFAULT NULL,
-  `fecha_rojo` date DEFAULT NULL,
-  `fecha_verde` date DEFAULT NULL,
-  `estados_indicadors_id` int(11) NOT NULL,
-  `responsable` varchar(100) DEFAULT NULL,
-  `correo_responsable` varchar(45) DEFAULT NULL,
-  `telefono` varchar(45) DEFAULT NULL,
-  `frecuencia_notificacions_id` int(11) NOT NULL,
-  PRIMARY KEY (`usuarios_id`,`indicadors_id`),
-  KEY `fk_usuarios_has_indicador_indicador1_idx` (`indicadors_id`),
-  KEY `fk_usuarios_has_indicador_usuarios1_idx` (`usuarios_id`),
-  KEY `fk_usuarios_indicador_unidad1_idx` (`unidads_id`),
-  KEY `fk_usuarios_indicador_estados1_idx` (`estados_indicadors_id`),
-  KEY `fk_usuarios_indicador_frecuencia_notificacion1_idx` (`frecuencia_notificacions_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `usuarios_indicadors`
---
-
-LOCK TABLES `usuarios_indicadors` WRITE;
-/*!40000 ALTER TABLE `usuarios_indicadors` DISABLE KEYS */;
-/*!40000 ALTER TABLE `usuarios_indicadors` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `vehiculo_accesorios`
---
-
-DROP TABLE IF EXISTS `vehiculo_accesorios`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `vehiculo_accesorios` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `vehiculos_id` int(11) NOT NULL,
-  `accesorios_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_vehiculo_accesorios_idx` (`vehiculos_id`),
-  KEY `fk_vehiculo_accesorios_accesorios1_idx` (`accesorios_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `vehiculo_accesorios`
---
-
-LOCK TABLES `vehiculo_accesorios` WRITE;
-/*!40000 ALTER TABLE `vehiculo_accesorios` DISABLE KEYS */;
-/*!40000 ALTER TABLE `vehiculo_accesorios` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `vehiculos`
---
-
-DROP TABLE IF EXISTS `vehiculos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `vehiculos` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `matricula` varchar(45) DEFAULT NULL,
-  `ano_fabricacion` varchar(45) DEFAULT NULL,
-  `precio_venta` float DEFAULT NULL,
-  `serial_motor` varchar(45) DEFAULT NULL,
-  `estatus` varchar(45) DEFAULT NULL,
-  `imagen` longblob,
-  `imagen1` char(100) DEFAULT NULL,
-  `concesionario_vehiculos_id` int(11) NOT NULL,
-  `modelo_vehiculos_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_vehiculos_concesionario_vehiculos1_idx` (`concesionario_vehiculos_id`),
-  KEY `fk_vehiculos_modelo_vehiculos1_idx` (`modelo_vehiculos_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `vehiculos`
---
-
-LOCK TABLES `vehiculos` WRITE;
-/*!40000 ALTER TABLE `vehiculos` DISABLE KEYS */;
-/*!40000 ALTER TABLE `vehiculos` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `vendedor_vehiculos`
---
-
-DROP TABLE IF EXISTS `vendedor_vehiculos`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `vendedor_vehiculos` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `concesionario_vehiculos_id` int(11) NOT NULL,
-  `nombre` varchar(45) DEFAULT NULL,
-  `apellidos` varchar(45) DEFAULT NULL,
-  `cedula` varchar(45) DEFAULT NULL,
-  `ciudads_id_ciudad` int(11) NOT NULL,
-  `telefono` varchar(45) DEFAULT NULL,
-  `direccion` varchar(45) DEFAULT NULL,
-  `correo` int(11) DEFAULT NULL,
-  `usuarios_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_vendedor_vehiculos_concesionario_vehiculos2_idx` (`concesionario_vehiculos_id`),
-  KEY `fk_vendedor_vehiculos_ciudad1_idx` (`ciudads_id_ciudad`),
-  KEY `fk_vendedor_vehiculos_usuarios1_idx` (`usuarios_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `vendedor_vehiculos`
---
-
-LOCK TABLES `vendedor_vehiculos` WRITE;
-/*!40000 ALTER TABLE `vendedor_vehiculos` DISABLE KEYS */;
-/*!40000 ALTER TABLE `vendedor_vehiculos` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2013-03-28 17:26:18
