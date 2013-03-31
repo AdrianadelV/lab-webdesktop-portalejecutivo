@@ -90,13 +90,19 @@ class MenuAdminController < ApplicationController
     $tirajson=@marca.generardatalistamarcas()
     render :text => $tirajson
   end
-
+  #Ma.Ale
   def generardatalistaConcesionarios
     @concesionario = Concesionario_vehiculos.new
     $tirajson=@concesionario.generardatalistaConcesionarios()
     render :text => $tirajson
   end
-
+  #Ma.Ale
+  def generardatalistaEnsambladora
+    @ensambladora = Ensambladora_vehiculos.new
+    $tirajson=@ensambladora.generardatalistaEnsambladora()
+    puts '------tira-----'+$tirajson
+    render :text => $tirajson
+  end
   #Adriana Santana -->Sino quieren ver una trigra con tigritos recien nacidos por favor no borren esto
   def grabar_concesionario
     # puts 'AQUI'
