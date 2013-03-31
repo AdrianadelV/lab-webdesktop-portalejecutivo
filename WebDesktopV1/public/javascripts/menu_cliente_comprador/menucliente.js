@@ -92,8 +92,8 @@ Ext.onReady(function() {
 					ventana = Ext.create('proforma_banco');
 					ventana.show();
 					buscar_comprador(); 
-					var currentDate = new Date();
-					Ext.getCmp('fecha2').setValue(currentDate);
+					//var currentDate = new Date();
+					Ext.getCmp('fecha2').setValue(new Date().getFullYear);
 				    var day=currentDate.getDate();
 				    // el mes es devuelto entre 0 y 11
 				    var month=currentDate.getMonth()+1;
