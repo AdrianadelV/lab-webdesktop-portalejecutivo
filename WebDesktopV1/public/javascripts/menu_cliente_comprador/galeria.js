@@ -136,7 +136,8 @@ var panel = Ext.define('miVentana',{
 
 Ext.define('miVentanaGaleria', {
     extend: 'Ext.window.Window',
-	y:250,
+	x:400,
+	y:240,
     height: 500,
     width: 900,
     layout: {
