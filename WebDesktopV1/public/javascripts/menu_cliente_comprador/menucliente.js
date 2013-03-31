@@ -46,9 +46,6 @@ Ext.onReady(function() {
 	ventana = Ext.create('miVentanalista');
 	ventana.show();
 
-	ventanaindicadores = Ext.create('indicadoreseje');
-	ventanaindicadores.show();
-
 	var tree = Ext.create('Ext.tree.Panel', {
 		store : store,
 		renderTo : 'tree_el',
@@ -119,13 +116,6 @@ Ext.onReady(function() {
 					ventana.close();
 					ventana = Ext.create('comprarvehiculo');
 					ventana.show();
-				}
-				if (node.get('text') == 'Configurar Nuevo Indicador') {
-					ventana.close();
-					ventana = Ext.create('mipanelejecutivo', {
-						renderTo : 'tree_el',
-						title : node.get('text'),
-					});
 				}
 				if (node.get('text') == "Galeria") {
 					ventana.close();
