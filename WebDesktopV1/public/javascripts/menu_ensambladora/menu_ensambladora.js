@@ -49,8 +49,8 @@ Ext.onReady(function() {
 	ventana.show();
 
 	ventanaindicadores = Ext.create('indicadoreseje');
-	buscar_usuarioLo();
-	buscar_indicador();
+	// buscar_usuarioLo();
+	// buscar_indicador();
 	ventanaindicadores.show();
 
 	// ventana = Ext.create('catalogo');
