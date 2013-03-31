@@ -293,9 +293,8 @@ Ext.define('proforma_banco', {
                     text: 'Cancelar',
                     listeners:{
                     	click:function(){	
-                    		alert("HOLA PASE")
-                    		var hola=id_tapiceria();
-                    		console.log(hola);
+                            grabar_detalle();
+                           grabar_proforma();
                     		ventana.close();
                     		enviar_correo();
                     	alert('FUNCIONA');
@@ -327,6 +326,7 @@ Ext.define('proforma_banco', {
                     minLength: 1,
                     emptyText: 'Validez',
                     vtype: 'alphanum',
+                    value : new Date(),
                     vtypeText: 'solo texto',
                     fieldLabel: 'Validez',
                     id:'validez',
@@ -446,5 +446,42 @@ function enviar_correo(){
 			} 
 	   });
 	
+}
+function grabar_detalle(){
+	   Ext.Ajax.request({
+		   url : 'cli_comprador/guardar_detalle_vehiculo_proforma',
+			method: 'POST',
+			params:{
+				 color: id_color(),         	
+				 transmision:id_transmision() ,
+				 tapiceria: id_tapiceria(),
+				 modelo:id_modelo()
+			},
+			success: function ( result, request ) { 
+		                alert("se grabo el detalle")
+			},
+			failure: function ( result, request) { 
+				Ext.MessageBox.alert('Error', result.responseText); 
+			} 
+	   });
+}
+function grabar_proforma(){
+	   Ext.Ajax.request({
+		   url : 'cli_comprador/guardar_proforma',
+			method: 'POST',
+			params:{
+				fecha: Ext.getCmp('fecha2').getValue(),
+				validez: Ext.getCmp('validez').getValue(),
+				estatus:'En espera',
+				banco:2,
+				cedula:Ext.getCmp('cedula').getValue()
+			},
+			success: function ( result, request ) { 
+		                alert("Se grabo la Proforma")
+			},
+			failure: function ( result, request) { 
+				Ext.MessageBox.alert('Error', result.responseText); 
+			} 
+	   });
 }
 
