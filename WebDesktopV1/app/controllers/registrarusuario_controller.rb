@@ -6,7 +6,7 @@ class RegistrarusuarioController < ApplicationController
   #de jose
   def grabar_comprador
     @comprador_vehiculo=Comprador_Vehiculo.new
-    puts '+++++++++++++++++++++++++++++++++++++++++++++++++++++++controler'
+  
  
  
     @cedula=params[:cedula]
@@ -24,11 +24,11 @@ class RegistrarusuarioController < ApplicationController
      @imagen=params[:imagen]
      
     if  buscar_u(params[:nusuario]) 
-      puts '+++++++++++++++++++++++++++++++++++++++++++++++++++++++no metio'
+     
        # $tirajson = '{ "success": "false", "exito": "false", "msg": " el nombre de usuario ya existe" }'
     else
       grabar_usuario(@nusuario, @password,@imagen);
-      puts '+++++++++++++++++++++++++++++++++++++++++++++++++++++++metio usuario'
+     
       @comprador_vehiculo.grabar_comprador1(@cedula,@nombres,@apellidos,@telefono,@direccion,@correo,@fecha_nacimiento,@sexo,@nusuario)
       render :text => $tirajson
       valor = 0 
@@ -46,7 +46,7 @@ class RegistrarusuarioController < ApplicationController
     @password=password
     @imagen=imagen
    # render :text => $tirajson
-     puts '+++++++++++++++++++++++++++++llama el guardar del modelo usuario'
+     
     @usuario.grabar_usuario1(@nombre,@password,@imagen)
   end
   
