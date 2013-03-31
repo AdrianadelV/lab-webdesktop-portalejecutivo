@@ -20,7 +20,7 @@ class RegistrarusuarioController < ApplicationController
     #------
     @nusuario=params[:nusuario]
     @password=params[:password]
-    puts ''+ @nusuario +  ''
+   # puts ''+ @nusuario +  ''
      @imagen=params[:imagen]
      
     if  buscar_u(params[:nusuario]) 
@@ -54,7 +54,7 @@ class RegistrarusuarioController < ApplicationController
   
   
   def buscar_u(nombre)
-    puts ''+ nombre+  ''
+    #puts ''+ nombre+  ''
     resp = false
    
     @usuario=Usuario.new
