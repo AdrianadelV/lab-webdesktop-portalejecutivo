@@ -259,7 +259,7 @@ Ext.onReady(function() {
 				//aqui va a otro lugar url:'inicio'
 			}, {
 				xtype : 'button',
-				x : 350,
+				x : 345,
 				y : 400,
 				text : 'Cancelar',
 				id :'cancelar',
