@@ -23,6 +23,9 @@ posy = parseInt(screen.height * factorh);
 
 Ext.require(['Ext.tree.*', 'Ext.data.*', 'Ext.tip.*']);
 
+// ventana = Ext.create('miVentanalista');
+// ventana.show();
+
 Ext.onReady(function() {
 	Ext.QuickTips.init();
 

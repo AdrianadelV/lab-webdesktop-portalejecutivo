@@ -66,7 +66,7 @@ function buscar(id_marca) {
 			} else {
 				tirahtmlgaleria="<div align='center' style='border:solid;overflow:auto; height:400px;'>";
 				for (var i = 0; i < datos.length; i++) {
-					tirahtmlgaleria = tirahtmlgaleria+ "<img src='" + datos[i].imagen + "' style='margin:5px;height:200px; width:200px;'/>"
+					tirahtmlgaleria = tirahtmlgaleria+ "<img src='" + datos[i].imagen3 + "' style='margin:5px;height:200px; width:200px;'/>"
 				};
 				tirahtmlgaleria = tirahtmlgaleria + "</div>";
 			}
