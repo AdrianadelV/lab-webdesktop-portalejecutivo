@@ -324,7 +324,13 @@ Ext.define('VentanaEnsambladoraAdmin', {
 						id : 'btnregistrar',
 						listeners : {
 							click : function() {
-									guardarEnsambladora();
+								if (Ext.getCmp('rif').getValue()=="" || Ext.getCmp('nombre').getValue()=="" || Ext.getCmp('correo').getValue()=="" || Ext.getCmp('telefono').getValue()=="" || Ext.getCmp('cmb_ciudad').getValue()=="" 
+									|| Ext.getCmp('direccion').getValue()=="" || Ext.getCmp('cmb_marca').getValue()=="" || Ext.getCmp('nombre_usuario').getValue()=="" || Ext.getCmp('contrasena').getValue()=="") {
+									Ext.Msg.alert("Error", "Debes llenar todos los Campos!!");
+								} else{
+									guardarEnsambladora();	
+								};
+									
 							}
 						}
 					}, {
@@ -334,7 +340,12 @@ Ext.define('VentanaEnsambladoraAdmin', {
 						text : 'Limpiar',
 						icon : 'images/limpiar.png',
 						tooltip : 'Limpiar Campos',
-						id : 'btnlimpiar'
+						id : 'btnlimpiar',
+						listeners: {
+							click: function () {
+							  limpiar();
+							}
+						}
 					}, {
 						xtype : 'button',
 						x : 300,
@@ -372,7 +383,7 @@ function guardarEnsambladora() {
 				},
 				success : function(exito, request) {
 					Ext.Msg.alert("Exito", "Se ha Guardado la Ensambladora!!");
-					//Ext.getCmp('formulariomarca').getForm().reset();
+					limpiar();
 				},
 				failure : function() {
 					Ext.Msg.alert("Error", "Servidor NO Conectado!!");
@@ -381,4 +392,18 @@ function guardarEnsambladora() {
 	} else{
 		Ext.Msg.alert("Error", "Las contraseñas no son iguales");
 	};
+}
+
+function limpiar() {
+	Ext.getCmp('rif').setValue("");
+	Ext.getCmp('nombre').setValue("");
+	Ext.getCmp('correo').setValue("");
+	Ext.getCmp('telefono').setValue("");
+	Ext.getCmp('cmb_ciudad').setValue("");
+	Ext.getCmp('cmb_estado').setValue("");
+	Ext.getCmp('direccion').setValue("");
+	Ext.getCmp('cmb_marca').setValue("");
+	Ext.getCmp('nombre_usuario').setValue("");
+	Ext.getCmp('contrasena').setValue(""); 
+	Ext.getCmp('contrasena2').setValue("");
 }
