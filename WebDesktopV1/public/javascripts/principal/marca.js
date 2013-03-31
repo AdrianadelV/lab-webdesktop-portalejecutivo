@@ -15,7 +15,7 @@ function buscar(id_marca) {
 			datos = Ext.JSON.decode(resultado.responseText);
 				// alert(datos.id);	
 			//if (datos.exito == 'true') {	
-				alert(datos.nombre);			
+				//alert(datos.nombre);			
 				Ext.create('MyApp.view.MyTabPanel', {
 					renderTo : 'tree_el',
 					title : datos.nombre,
