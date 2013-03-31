@@ -180,6 +180,10 @@ class MenuAdminController < ApplicationController
       $marca = @objmarca.buscamarca($modelo_vehiculos.marcas_id)
       @objtipo_vehiculo = Tipo_Vehiculos.new
       tipo_vehi = @objtipo_vehiculo.buscartipovehiculo($modelo_vehiculos.tipo_vehiculos_id)
+      @objusuario = Usuario.new
+      usuario = @objusuario.buscarUsuario($comprador_vehiculo.usuarios_id)
+      parsed_usuajson = ActiveSupport::JSON.decode($tira_usuajson)
+      
       #print proforma
       
       if @i<@son
@@ -190,11 +194,13 @@ class MenuAdminController < ApplicationController
                                 '", "telefono_comp": "'   + $comprador_vehiculo.telefono +
                                 '", "direccion_comp": "'  + $comprador_vehiculo.direccion +
                                 '", "correo_comp": "'     + $comprador_vehiculo.correo +
+                                '", "imagen_usu": "'      + parsed_usuajson["imagen1"].to_s +
                                 '", "fechanacim_comp": "' + $comprador_vehiculo.fecha_nacimiento.to_s +
                                 '", "nombre_desc": "'     + $modelo_vehiculos.descripcion +
                                 '", "ano_fabricacion": "' + $modelo_vehiculos.ano_m +
                                 '", "precio_venta": "'    + $vehiculo.precio_venta.to_s +
-                                '", "tipo_vehi": "'       + @objtipo_vehiculo.nombre.to_s +
+                                '", "imagen_vehic": "'    + $vehiculo.imagen1.to_s +
+                                '", "tipo_vehi": "'       + tipo_vehi.nombre.to_s +
                                 '", "posicion": "'        + solicitud.to_s +
                                 '", "fecha": "'           + $proformas.fecha.to_s + 
                                 '", "validez": "'         + $proformas.validez.to_s + 
@@ -205,6 +211,7 @@ class MenuAdminController < ApplicationController
                                 '", "direccion_conc": "'  + $concesionario.direccion +
                                 '", "telefono_conc": "'   + $concesionario.telefono +
                                 '", "correo_conc": "'     + $concesionario.correo +
+                                '", "imagen_marca": "'    + $marca.imagen1.to_s +
                                 '", "marca": "'           + $marca.nombre + '"}, '
       else
         @tirajson = @tirajson + ' { "nombre": "'          + $comprador_vehiculo.nombres +
@@ -214,11 +221,13 @@ class MenuAdminController < ApplicationController
                                 '", "telefono_comp": "'   + $comprador_vehiculo.telefono +
                                 '", "direccion_comp": "'  + $comprador_vehiculo.direccion +
                                 '", "correo_comp": "'     + $comprador_vehiculo.correo +
+                                '", "imagen_usu": "'      + parsed_usuajson["imagen1"].to_s +
                                 '", "fechanacim_comp": "' + $comprador_vehiculo.fecha_nacimiento.to_s +
                                 '", "nombre_desc": "'     + $modelo_vehiculos.descripcion +
                                 '", "ano_fabricacion": "' + $modelo_vehiculos.ano_m +
                                 '", "precio_venta": "'    + $vehiculo.precio_venta.to_s +
-                                '", "tipo_vehi": "'       + @objtipo_vehiculo.nombre.to_s +
+                                '", "imagen_vehic": "'    + $vehiculo.imagen1.to_s +
+                                '", "tipo_vehi": "'       + tipo_vehi.nombre.to_s +
                                 '", "posicion": "'        + solicitud.to_s +
                                 '", "fecha": "'           + $proformas.fecha.to_s + 
                                 '", "validez": "'         + $proformas.validez.to_s + 
@@ -229,6 +238,7 @@ class MenuAdminController < ApplicationController
                                 '", "direccion_conc": "'  + $concesionario.direccion +
                                 '", "telefono_conc": "'   + $concesionario.telefono +
                                 '", "correo_conc": "'     + $concesionario.correo +
+                                '", "imagen_marca": "'    + $marca.imagen1.to_s +
                                 '", "marca": "'           + $marca.nombre + '"} '
       end
       @i=@i+1

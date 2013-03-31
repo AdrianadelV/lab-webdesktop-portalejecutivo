@@ -45,8 +45,8 @@ Ext.onReady(function() {
 		}]
 	});
 
-	// ventana = Ext.create('miVentanalista');
-	// ventana.show();
+	ventana = Ext.create('miVentanalista');
+	ventana.show();
 
 	ventanaindicadores = Ext.create('indicadoreseje');
 	buscar_usuarioLo();

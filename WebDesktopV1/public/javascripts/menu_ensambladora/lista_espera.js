@@ -48,6 +48,9 @@ Ext.define('ListaColaGeneral', {
             {name: 'direccion_comp', type: 'varchar'},
             {name: 'correo_comp', type: 'varchar'},
             {name: 'fechanacim_comp', type: 'varchar'},
+            {name: 'imagen_usu', type: 'varchar'},
+            {name: 'imagen_vehic', type: 'varchar'},
+            {name: 'imagen_marca', type: 'varchar'},
             {name: 'posicion', type: 'string'},
             {name: 'fecha', type: 'string'},
             {name: 'validez', type: 'string'},
@@ -59,10 +62,10 @@ Ext.define('ListaColaGeneral', {
             {name: 'telefono_conc', type: 'varchar'},
             {name: 'correo_conc', type: 'varchar'},
             {name: 'marca', type: 'varchar'},
-            {name: 'matricula', type: 'string'},
+            {name: 'nombre_desc', type: 'string'},
             {name: 'ano_fabricacion', type: 'varchar'},
             {name: 'precio_venta', type: 'varchar'},
-            {name: 'serial_motor', type: 'varchar'},
+            {name: 'tipo_vehi', type: 'varchar'},
            ],
 });
 
@@ -86,26 +89,27 @@ Ext.define('App.ListaColaGeneralGrid', {
     extend: 'Ext.grid.Panel',
     //Definicion del alias que puede usado en un xtype
     alias: 'widget.listaColaGeneralgrid',
-
+	height: 180,
+    width: 638,
     //Sobre escribimos este metodo de Ext.grid.Panel
     initComponent : function() {
         //Definicion de las columnas del grid
         this.columns = [
-            {xtype: 'rownumberer', width: 20, sortable: true},
-            {text: "Nombre", width: 60, dataIndex: 'nombre', sortable: true},
-            {text: "posicion", width: 100, dataIndex: 'posicion', sortable: true},
+            // {xtype: 'rownumberer', width: 20, sortable: true},
+            {text: "Nombre", width: 90, dataIndex: 'nombre', sortable: true},
+            {text: "Posición", width: 60, dataIndex: 'posicion', sortable: true},
             {text: "Fecha de Solicitud", width: 100, dataIndex: 'fecha', sortable: true},
-            {text: "Modelo Vehiculo", width: 100, dataIndex: 'modelo', sortable: true},
-            {text: "Concesionario", width: 100, dataIndex: 'concesionario', sortable: true},
+            {text: "Modelo Vehículo", width: 120, dataIndex: 'modelo', sortable: true},
+            {text: "Concesionario", width: 120, dataIndex: 'concesionario', sortable: true},
             {text: "Marca", width: 100, dataIndex: 'marca', sortable: true},
         ];
-        this.dockedItems = [ {
-	  		xtype: 'pagingtoolbar',
-                    dock: 'bottom',
-                    width: 360,
-                    displayInfo: true,
-                    displayMsg : 'Personas en espera {0} - {1} de {2}',
-	  	} ];
+        // this.dockedItems = [ {
+	  		// xtype: 'pagingtoolbar',
+                    // dock: 'bottom',
+                    // width: 360,
+                    // displayInfo: true,
+                    // displayMsg : 'Personas en espera {0} - {1} de {2}',
+	  	// } ];
         // Origen de los datos, de un data store
         this.store = listageneralStore;
         this.forceFit = true;
@@ -227,8 +231,8 @@ Ext.define('ventanatab', {
                                     x: 70,
                                     y: 20,
                                     disabled: true,
-                                    id: 'matricula',
-                                    fieldLabel: 'Matricula'
+                                    id: 'nombre_modelo',
+                                    fieldLabel: 'Nombre'
                                 },
                                 {
                                     xtype: 'textfield',
@@ -251,8 +255,8 @@ Ext.define('ventanatab', {
                                     x: 70,
                                     y: 140,
                                     disabled: true,
-                                    id: 'serial',
-                                    fieldLabel: 'Serial del Motor'
+                                    id: 'tipo_vehiculo',
+                                    fieldLabel: 'Tipo Vehículo'
                                 },                                
                                 {
                                 	x: 400,
@@ -366,10 +370,10 @@ Ext.define('miVentanalista', {
     extend: 'Ext.window.Window',
 
                 layout: 'fit',
-                x: 420,
-                y: 100,
+                x: 440,
+                y: 35,
                 width       : 650,
-                height      : 575,
+                height      : 590,
                 closeAction :'hide',
                 plain       : true,
                 closable    : true,
@@ -438,7 +442,6 @@ Ext.define('miVentanalista', {
 					} else {
 						alert(datos.cedula);
 						Ext.getCmp('cedula_comp').setValue(datos.cedula);
-						// buscar_nombreEstado();
 					}
 				},
 				//No hay retorno de la pagina servidora
@@ -460,10 +463,10 @@ function asignarDatosComprador () {
 };
 
 function asignarDatosVehiculo () {
-  Ext.getCmp('matricula').setValue(data.matricula);
+  Ext.getCmp('nombre_modelo').setValue(data.nombre_desc);
   Ext.getCmp('ano').setValue(data.ano_fabricacion);
   Ext.getCmp('precio').setValue(data.precio_venta);
-  Ext.getCmp('serial').setValue(data.serial_motor);
+  Ext.getCmp('tipo_vehiculo').setValue(data.tipo_vehi);
 };
 
 function asignarDatosConcesionarioLista () {
