@@ -299,6 +299,7 @@ Ext.define('miVentanaIndicadores', {
                             xtype: 'button',
                             x: 800,
                             y: 375,
+                            icon : 'images/grabar.png',
                             text: 'Guardar la Configuracion',
                             listeners : {
 								click : function() {

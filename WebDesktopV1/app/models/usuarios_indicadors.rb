@@ -9,9 +9,9 @@ class Usuarios_indicadors < ActiveRecord::Base
       $tira_usuariojson = '{ "success": "true", "exito": "false", "msg": " no existe!" }'
       valor = 0
     end 
-    puts 'tira usu_ind '+$tira_usuariojson
+    puts 'tira usu_ind .....'+$tira_usuariojson
     # return @usuarios_indicadors
-    return valor
+    return @usuarios_indicadors
   end
   #Adriana Santana
   def grabarIndicador(usuarios_id,indicadors_id,valor_meta,unidads_id,fecha_meta,valor_amarillo,valor_rojo,valor_verde,fecha_amarillo,fecha_rojo,fecha_verde,estados_indicadors_id,responsable,correo_responsable,telefono,frecuencia_notificacions_id)
