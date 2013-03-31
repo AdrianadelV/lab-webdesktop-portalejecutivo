@@ -12,7 +12,7 @@ class Usuario < ActiveRecord::Base
   end
   	def buscarUsuarioLo(nombre)
      @usuario = Usuario.find(:first, :conditions => "nombre='#{nombre}'")
-     puts @usuario
+    # puts @usuario
     if @usuario!=nil
       $tirajson = @usuario.to_json
       valor = 1
@@ -100,7 +100,7 @@ class Usuario < ActiveRecord::Base
       $tira_usuajson = '{ "success": "true", "exito": "false", "msg": " no existe!" }'
       valor = 0
     end 
-    puts 'tira usua '+$tira_usuajson
+   # puts 'tira usua '+$tira_usuajson
     # return @usuarios
     return valor
   end
