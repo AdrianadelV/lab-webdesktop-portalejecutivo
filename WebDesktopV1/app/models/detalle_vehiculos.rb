@@ -11,4 +11,12 @@ class Detalle_vehiculos < ActiveRecord::Base
     end 
     return @detalle_vehiculos
   end
+  def grabar_detalle_vehiculo(color,transmision,tapiceria,modelo_vehiculos_id)
+    @detalle=Detalle_vehiculos.new
+    @detalle.color=color
+    @detalle.transmision=transmision
+    @detalle.tapiceria=tapiceria
+    @detalle.modelo_vehiculos_id=modelo_vehiculos_id
+    @detalle.save
+  end
 end
