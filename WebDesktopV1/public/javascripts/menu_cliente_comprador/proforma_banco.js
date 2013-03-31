@@ -87,7 +87,7 @@ Ext.define('proforma_banco', {
 				    selecOnFocus : true,
                     listeners:{
                     	change:function(){
-                    		alert('se modifico');
+                    		//alert('se modifico');
                     	}
                     },
                     emptyText: 'Nombre del Concesionario',
@@ -297,7 +297,7 @@ Ext.define('proforma_banco', {
                            grabar_proforma();
                     		ventana.close();
                     		enviar_correo();
-                    	alert('FUNCIONA');
+                    	//alert('FUNCIONA');
                     	}
                     },
                     tooltip: 'Cancelar envio'
