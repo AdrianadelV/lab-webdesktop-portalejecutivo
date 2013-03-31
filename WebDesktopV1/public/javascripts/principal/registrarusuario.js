@@ -222,8 +222,9 @@ Ext.onReady(function() {
 				xtype : 'button',
 				x : 440,
 				y : 400,
-				text : 'Registrar',
-				id : 'registrar',
+				text : 'Grabar',
+				id : 'grabar',
+				icon: 'images/grabar.png',
 				listeners : {
 					click : function() {
 						
@@ -258,9 +259,11 @@ Ext.onReady(function() {
 				//aqui va a otro lugar url:'inicio'
 			}, {
 				xtype : 'button',
-				x : 360,
+				x : 350,
 				y : 400,
 				text : 'Cancelar',
+				id :'cancelar',
+				icon: 'images/limpiar.png',
 				listeners : {
 					click : function() {
 
@@ -269,9 +272,11 @@ Ext.onReady(function() {
 				}, url:'inicio'
 			}, {
 				xtype : 'button',
-				x : 280,
+				x : 240,
 				y : 400,
 				text : 'Ir a INICIO',
+				id: 'ir',
+				icon: 'images/house_go.png',
 				listeners : {
 					click : function() {
 
