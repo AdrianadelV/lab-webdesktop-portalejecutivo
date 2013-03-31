@@ -80,9 +80,10 @@ Ext.onReady(function() {
 					ventana.show();
 				}
 				if (node.get('text') == "Registrar Planes de Servicios") {
-					ventana.close();
-					ventana = Ext.create('registrarservicios');
-					ventana.show();
+					//ventana.close();
+					//ventana = Ext.create('registrarservicios');
+					//ventana.show();
+					alert('Modulo en construccion');
 				}
 				if (node.get('text') == "Estado de Pedidos a la Ensambladora") {
 					ventana.close();
