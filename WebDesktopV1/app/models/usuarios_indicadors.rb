@@ -9,7 +9,7 @@ class Usuarios_indicadors < ActiveRecord::Base
       $tira_usuariojson = '{ "success": "true", "exito": "false", "msg": " no existe!" }'
       valor = 0
     end 
-    puts 'tira usu_ind .....'+$tira_usuariojson
+    #puts 'tira usu_ind .....'+$tira_usuariojson
     # return @usuarios_indicadors
     return @usuarios_indicadors
   end
