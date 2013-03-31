@@ -85,11 +85,6 @@ Ext.define('proforma_banco', {
                     editable : 'false',
 				    queryMode : 'remote',
 				    selecOnFocus : true,
-                    listeners:{
-                    	change:function(){
-                    		//alert('se modifico');
-                    	}
-                    },
                     emptyText: 'Nombre del Concesionario',
                     vtype: 'alpha',
                     vtypeText: 'solo texto'
@@ -282,6 +277,17 @@ Ext.define('proforma_banco', {
                     height: 30,
                     width: 80,
                     text: 'Enviar ',
+                    listeners:{
+                    	click:function(){
+                    		ventana.close();
+                    		enviar_correo();
+                    		imprimir();
+                    		grabar_detalle();
+                           	grabar_proforma();
+                    		ventana.close();
+                    		ventana_proforma.close();	
+                    	}
+                    },
                     tooltip: 'Enviar Proforma al Banco'
                 },
                 {
@@ -293,11 +299,8 @@ Ext.define('proforma_banco', {
                     text: 'Cancelar',
                     listeners:{
                     	click:function(){	
-                            grabar_detalle();
-                           grabar_proforma();
-                    		ventana.close();
-                    		enviar_correo();
-                    	//alert('FUNCIONA');
+                           ventana.close();
+                    	   ventana_proforma.close();
                     	}
                     },
                     tooltip: 'Cancelar envio'
@@ -326,7 +329,6 @@ Ext.define('proforma_banco', {
                     minLength: 1,
                     emptyText: 'Validez',
                     vtype: 'alphanum',
-                    value : new Date(),
                     vtypeText: 'solo texto',
                     fieldLabel: 'Validez',
                     id:'validez',
@@ -400,9 +402,7 @@ Ext.define('proforma_banco', {
         });
 
         me.callParent(arguments);
-    }
- });
-function imprimir(){
+        function imprimir(){
 	   Ext.Ajax.request({
 		   url : 'cli_comprador/imprimir_proforma',
 			method: 'POST',
@@ -412,7 +412,8 @@ function imprimir(){
 				 cedula: Ext.getCmp('cedula').getValue()
 			},
 			success: function ( result, request ) { 
-		                alert("se esta imprimiedo")
+		                 var opciones="left=300,top=100,width=650,height=550";
+		                 mi_ventana = window.open("pdf/proforma_vehiculo.pdf","",opciones); 
 			},
 			failure: function ( result, request) { 
 				Ext.MessageBox.alert('Error', result.responseText); 
@@ -473,8 +474,9 @@ function grabar_proforma(){
 				fecha: Ext.getCmp('fecha2').getValue(),
 				validez: Ext.getCmp('validez').getValue(),
 				estatus:'En espera',
-				banco:2,
-				cedula:Ext.getCmp('cedula').getValue()
+				banco:'2',
+				cedula: Ext.getCmp('cedula').getValue(),
+				concesionario:'3',
 			},
 			success: function ( result, request ) { 
 		                alert("Se grabo la Proforma")
@@ -484,4 +486,8 @@ function grabar_proforma(){
 			} 
 	   });
 }
+    }
+    
+ });
+
 
