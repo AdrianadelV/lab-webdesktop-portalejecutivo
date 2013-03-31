@@ -51,7 +51,6 @@ class ConcesionarioController < ApplicationController
     @ensambladora = Ensambladora_vehiculos.new
     @ensambladora.buscar_usuario(@nombre)
     render :text => $tirajson
-    puts $tirajson
   end
   
   def guardarConfiguracionIndicador
