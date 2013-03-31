@@ -19,14 +19,14 @@ class Concesionario_vehiculos < ActiveRecord::Base
       $tirajson = '{ "success": "true", "exito": "false", "msg": " no se registro el comprador" }'
     end
   end
-  
+  #Ma.Ale
   def generardatalistaConcesionarios()
-   @@objConcesionario_vehiculos = Concesionario_vehiculos.all
+   @objConcesionario_vehiculos = Concesionario_vehiculos.all
    @son = Concesionario_vehiculos.count
    if @son > 0 
     @i=1
     tirajson = '{ "datos": [ '
-    @@objConcesionario_vehiculos.each do |concesionario|
+    @objConcesionario_vehiculos.each do |concesionario|
      if @i<@son
       tirajson = tirajson +   ' { "id": "'        + concesionario.id.to_s +
                               '", "rif": "'        + concesionario.rif + 
