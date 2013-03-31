@@ -457,7 +457,7 @@ Ext.define('miVentanalista', {
 					if (datos.exito == 'false') {
 						Ext.Msg.alert("Error", datos.msg);
 					} else {
-						alert(datos.cedula);
+						//alert(datos.cedula);
 						Ext.getCmp('cedula_comp').setValue(datos.cedula);
 					}
 				},
