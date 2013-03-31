@@ -426,7 +426,7 @@ Ext.define('miVentanalista', {
   
    //Metodo para buscar y mostrar datos del comprador de vehiculo
    function buscar_CompradorVehiculo() {
-   	alert('metodo buscar comprado');
+   //	alert('metodo buscar comprado');
 			Ext.Ajax.request({
 				url : 'menu_admin/buscar_CompradorVehiculo',
 				params : {
@@ -440,7 +440,7 @@ Ext.define('miVentanalista', {
 					if (datos.exito == 'false') {
 						Ext.Msg.alert("Error", datos.msg);
 					} else {
-						alert(datos.cedula);
+						//alert(datos.cedula);
 						Ext.getCmp('cedula_comp').setValue(datos.cedula);
 					}
 				},

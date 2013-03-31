@@ -153,7 +153,7 @@ var boton = null;
 			this.listeners = {
 				itemclick : function() {
 					data = this.getSelectionModel().selected.items[0].data;
-					alert(data.usuario);
+					//alert(data.usuario);
 				}
 			};
 			//Llamamos a la super clase a iniciacion del componente

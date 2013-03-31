@@ -174,7 +174,7 @@ function buscar_usuarioLoCon() {
 				Ext.Msg.alert("Error", datos.msg);
 			} else {
 				rols_idc=datos.rols_id;
-				alert(rols_idc);
+				//alert(rols_idc);
 			}
 		},
 		//No hay retorno de la pagina servidora

@@ -303,7 +303,7 @@ Ext.define('miVentanaIndicadores', {
                             text: 'Guardar la Configuracion',
                             listeners : {
 								click : function() {
-									alert('PASO');
+									//alert('PASO');
                             		buscarUsuarioIndicador();
                             	}
                             }
@@ -345,7 +345,7 @@ function buscarUsuarioIndicador () {
 	});
 }
 function guardarconfiguracion (id_usuario) {
-	alert('Entrando a guardar la configuracion');
+	//alert('Entrando a guardar la configuracion');
 	Ext.Ajax.request({
 		   url: 'concesionario/guardarConfiguracionIndicador',    
 		     //Enviando los parametros a la pagina servidora

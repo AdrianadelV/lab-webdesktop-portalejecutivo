@@ -87,10 +87,10 @@ Ext.onReady(function() {
 				}
 				if (node.get('text') == "Estado de Pedidos a la Ensambladora") {
 					ventana.close();
-					alert("PASO");
+					//alert("PASO");
 					ventana = Ext.create('edopedidoensamb');
 					ventana.show();
-					alert("PASO2");
+					//alert("PASO2");
 				}
 				if (node.get('text') == "Configurar nuevo Indicador") {
 					ventana.close();
