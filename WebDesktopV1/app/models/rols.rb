@@ -9,7 +9,7 @@ class Rols < ActiveRecord::Base
       $tira_roljson = '{ "success": "true", "exito": "false", "msg": " no existe!" }'
       valor = 0
     end 
-    puts 'tira rol '+$tira_roljson
+   # puts 'tira rol '+$tira_roljson
     # return @rols
     return valor
   end

@@ -14,7 +14,7 @@ class Comprador_Vehiculo < ActiveRecord::Base
 
   #Adriana Santana -->Sino quieren ver una trigra con tigritos recien nacidos por favor no borren esto 
   def grabarComprador(cedula,nombres,apellidos,telefono,direccion,correo,fecha_nacimiento,sexo)
-    puts "pasehola"
+    #puts "pasehola"
     @comprador =  Comprador_Vehiculo.find(:first, :conditions => "cedula='#{cedula}'")
     if @comprador!=nil
        @comprador.cedula=cedula
@@ -89,8 +89,8 @@ class Comprador_Vehiculo < ActiveRecord::Base
       $tira_compradorjson = '{ "success": "true", "exito": "false", "msg": " no existe!" }'
       valor = 0
     end 
-        puts 'tira  comprador'
-        puts $tira_compradorjson
+       # puts 'tira  comprador'
+       # puts $tira_compradorjson
     return valor  
   end
 

@@ -83,7 +83,7 @@ class Marca < ActiveRecord::Base
    return tirajson 
   end
   def grabar_marca(nombre,imagen,mision,vision,valores,contacto)
-    puts "paseo"
+   # puts "paseo"
     @objmarcas = Marca.find(:first, :conditions => "nombre='#{nombre}'")
     if @objmarcas!=nil
     @objmarcas.id=@objmarcas.id
@@ -96,7 +96,7 @@ class Marca < ActiveRecord::Base
     @objmarcas.save
     valor=1
     $tirajson = '{ "success": "true", "exito": "true", "message": "Datos de la Marca Actualizada" }'
-    puts $tirajson 
+    #puts $tirajson 
     end
     @objmarcas = Marca.new
     @objmarcas.nombre=nombre

@@ -10,7 +10,7 @@ class Ciudads < ActiveRecord::Base
       $tirajson = '{ "success": "true", "exito": "false", "msg": " no existe!" }'
       valor = 0
     end 
-    puts $tirajson
+    #puts $tirajson
     return valor
   end 
 end

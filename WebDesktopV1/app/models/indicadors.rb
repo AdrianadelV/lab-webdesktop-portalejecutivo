@@ -9,7 +9,7 @@ class Indicadors < ActiveRecord::Base
       $tira_indjson = '{ "success": "true", "exito": "false", "msg": " no existe!" }'
       valor = 0
     end 
-    puts 'tira rol '+$tira_indjson
+   # puts 'tira rol '+$tira_indjson
     # return @rols
     return valor
   end

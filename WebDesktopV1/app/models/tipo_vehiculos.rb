@@ -9,7 +9,7 @@ class Tipo_Vehiculos < ActiveRecord::Base
       $tirajson = '{ "success": "true", "exito": "false", "msg": " no existe!" }'
       valor = 0
     end 
-    puts '----tira----'+$tirajson
+   # puts '----tira----'+$tirajson
     return @objtipo
   end  
 end

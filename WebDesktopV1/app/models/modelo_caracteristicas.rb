@@ -13,13 +13,13 @@ class Modelo_Caracteristicas < ActiveRecord::Base
   #Adriana Santana
   def buscarCaracteristicas(modelo_id)
     @caracteristicas = Modelo_Caracteristicas.find(:all, :conditions => "modelo_vehiculos_id='#{modelo_id}'")
-    puts @caracteristicas
+    ##ts @caracteristicas
     if @caracteristicas!=nil
       $tirajson = @caracteristicas.to_json
     else
       $tirajson = '{ "success": "true", "exito": "false", "msg": "Modelo no Encontrado!" }'
     end
-    puts $tirajson
+   # puts $tirajson
     return @caracteristicas
   end
 end
