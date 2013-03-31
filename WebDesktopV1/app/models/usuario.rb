@@ -104,4 +104,11 @@ class Usuario < ActiveRecord::Base
     # return @usuarios
     return valor
   end
+  #Adriana--->Crea el archivo fisico de l imagen del usuario
+  def creararchivofisico(name,directory,contenido)
+   # creando la ruta
+   path = File.join(directory,name)
+   #grabando el archivo
+   File.open(path, "wb") {|f1| f1.write(contenido) }
+  end
 end
