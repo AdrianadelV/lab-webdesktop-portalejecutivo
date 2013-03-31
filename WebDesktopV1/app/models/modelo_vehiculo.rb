@@ -1,15 +1,16 @@
 class Modelo_Vehiculo < ActiveRecord::Base
+  #Adriana Santana busca un modelo de una marca en especifico
   def buscarModelosMarca(id_marca)
     valor = 0
-    @objmarcas = Modelo_Vehiculo.find(:all, :conditions => "marcas_id='#{id_marca}'")
-    if @objmarcas!=nil
-      $tirajson = @objmarcas.to_json
+    @objmodelos = Modelo_Vehiculo.find(:all, :conditions => "marcas_id='#{id_marca}'")
+    if @objmodelos!=nil
+      $tirajson = @objmodelos.to_json
       valor = 1
     else
       $tirajson = '{ "success": "true", "exito": "false", "msg": "Marca no existe!" }'
       valor = 0
     end
-    return valor
+    return @objmodelos
   end
   def creararchivofisico(name,directory,contenido)
    # creando la ruta
