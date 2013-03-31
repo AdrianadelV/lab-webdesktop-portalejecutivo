@@ -142,7 +142,7 @@ Ext.define('VentanaMarca', {
 		            xtype: 'filefield',
 		            x : 60,
 					y : 90,
-		            id: 'imagen',
+		            id: 'imagen_m',
 		            emptyText: 'Imagen',
 		            fieldLabel: 'Imagen',
 		            name: 'photo-path',
@@ -245,7 +245,7 @@ Ext.define('VentanaMarca', {
 					vision : Ext.getCmp('vision').getValue(),
 					valores : Ext.getCmp('valores').getValue(),
 					contacto : Ext.getCmp('contacto').getValue(),
-					imagen : Ext.getCmp('imagen').getValue(),
+					imagen : Ext.getCmp('imagen_m').getValue(),
 				},
 				success : function(exito, request) {
 					//alert('PasoImagen');

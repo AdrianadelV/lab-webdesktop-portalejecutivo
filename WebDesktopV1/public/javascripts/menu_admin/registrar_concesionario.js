@@ -330,7 +330,14 @@ Ext.define('VentanaConcesionarioAdmin', {
 						id : 'btnregistrar',
 						listeners : {
 							click : function() {
-									guardarConcesionario();
+								if (Ext.getCmp('rif').getValue()=="" || Ext.getCmp('nombre').getValue()== "" || Ext.getCmp('correo').getValue()== "" || Ext.getCmp('telefono').getValue()=="" 
+								    || Ext.getCmp('cmb_ciudad').getValue()=="" ||  Ext.getCmp('direccion').getValue()=="" || Ext.getCmp('cmb_marca').getValue()=="" || Ext.getCmp('nombre_usuario').getValue()=="" 
+								    || Ext.getCmp('nombre_usuario').getValue()=="" || Ext.getCmp('contrasena').getValue()=="" || Ext.getCmp('cmb_estado').getValue()=="" || Ext.getCmp('contrasena2').getValue()=="") {
+								    Ext.Msg.alert("Error", "Debe llenar todos los Campos!!");	
+								    } else{
+								    	guardarConcesionario();
+								    };
+									
 							}
 						}
 					}, {
@@ -340,7 +347,12 @@ Ext.define('VentanaConcesionarioAdmin', {
 						text : 'Limpiar',
 						icon : 'images/limpiar.png',
 						tooltip : 'Limpiar Campos',
-						id : 'btnlimpiar'
+						id : 'btnlimpiar',
+						listeners : {
+							click : function() {
+								limpiar()
+							}
+						}
 					}, {
 						xtype : 'button',
 						x : 300,
@@ -376,6 +388,7 @@ function guardarConcesionario() {
 				},
 				success : function(exito, request) {
 					Ext.Msg.alert("Exito", "Se ha Guardado el Concesionario!!");
+					limpiar();
 					//Ext.getCmp('formulariomarca').getForm().reset();
 				},
 				failure : function() {
@@ -385,5 +398,18 @@ function guardarConcesionario() {
 	} else{
 		Ext.Msg.alert("Error", "Las contraseñas no son iguales");
 	};
+}
+function limpiar() {
+	Ext.getCmp('rif').setValue("");
+	Ext.getCmp('nombre').setValue("");
+	Ext.getCmp('correo').setValue("");
+	Ext.getCmp('telefono').setValue("");
+	Ext.getCmp('cmb_ciudad').setValue("");
+	Ext.getCmp('cmb_estado').setValue("");
+	Ext.getCmp('direccion').setValue("");
+	Ext.getCmp('cmb_marca').setValue("");
+	Ext.getCmp('nombre_usuario').setValue("");
+	Ext.getCmp('contrasena').setValue("");
+	Ext.getCmp('contrasena2').setValue("");
 }
 
