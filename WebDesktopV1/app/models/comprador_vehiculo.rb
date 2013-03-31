@@ -34,9 +34,6 @@ class Comprador_Vehiculo < ActiveRecord::Base
   def grabar_comprador1(cedula,nombres,apellidos,telefono,direccion,correo,fecha_nacimiento,sexo,nusuario)
     @usuario = Usuario.find(:first, :conditions => "nombre='#{nusuario}'")
     if @usuario!=nil
-      
- 
-    
     @comprador_vehiculo=Comprador_Vehiculo.new
     @comprador_vehiculo.cedula=cedula
     @comprador_vehiculo.nombres=nombres
@@ -53,7 +50,6 @@ class Comprador_Vehiculo < ActiveRecord::Base
     else
       $tirajson = '{ "success": "true", "exito": "false", "msg": " no se registro el comprador" }'
     end
-     
   end
   
   def buscarcomprador(pro_comprador_vehiculos_id)
@@ -89,8 +85,6 @@ class Comprador_Vehiculo < ActiveRecord::Base
       $tira_compradorjson = '{ "success": "true", "exito": "false", "msg": " no existe!" }'
       valor = 0
     end 
-       # puts 'tira  comprador'
-       # puts $tira_compradorjson
     return valor  
   end
 
