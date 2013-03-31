@@ -186,7 +186,7 @@ Ext.define('VentanaMarca', {
 					id : 'btncatalogo',
 					listeners : {
 						click : function() {
-							alert('pase');
+							//alert('pase');
 							//this.findById("formulario")
 						}
 					}
@@ -248,7 +248,7 @@ Ext.define('VentanaMarca', {
 					imagen : Ext.getCmp('imagen').getValue(),
 				},
 				success : function(exito, request) {
-					alert('PasoImagen');
+					//alert('PasoImagen');
 					// datos = Ext.JSON.decode(exito, reponseText);
 					// datos = Ext.JSON.decode(exito, reponseText);
 					Ext.Msg.alert("Exito", "Se ha Guardado la Marca!!");
@@ -281,7 +281,7 @@ Ext.define('VentanaMarca', {
 				},
 				//No hay retorno de la pagina servidora
 				failure : function() {
-					alert(Ext.getCmp('nombre').getValue());
+					//alert(Ext.getCmp('nombre').getValue());
 					Ext.Msg.alert("Mensaje", "Servidor no conectado");
 
 				}
