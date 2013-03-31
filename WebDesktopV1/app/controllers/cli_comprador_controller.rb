@@ -90,6 +90,32 @@ class CliCompradorController < ApplicationController
    # puts @caracteristicas
     render :text => $tirajson
   end
+  def guardar_detalle_vehiculo_proforma
+        @color=params[:color]
+        @transmision=params[:transmision]
+        @tapiceria=params[:tapiceria]
+        @modelo_vehiculoid=params[:modelo]
+        @detalles_ve= Detalle_vehiculos.new
+       @detalles_ve.grabar_detalle_vehiculo(@color,@transmision,@tapiceria,@modelo_vehiculoid)
+       render :text => $tirajson
+  end
+  def guardar_proforma
+      @fecha=params[:fecha]
+      @validez=params[:validez]
+      @estatus=params[:estatus]
+      @banco=params[:banco]
+      @concesionario=params[:concesionario]
+      @comprador= Comprador_Vehiculo.find(:first, :conditions => "cedula='#{params[:cedula]}'")
+      @comprador_id=@comprador.id
+      puts @comprador.id
+      @detalle_vehiculo_id=Detalle_vehiculos.last
+      @detalle_ve=@detalle_vehiculo_id.id
+      puts'antes del detalle'
+      puts @detalle_ve
+      @proforma=Proformas.new
+      @proforma.graba_proforma(@fecha,@validez,@estatus,@banco,@comprador_id,@concesionario,@detalle_ve)
+      render :text => $tirajson
+  end
   
   def imprimir_proforma
      # Crear el objeto pdf de la clase Mypdf
@@ -109,11 +135,7 @@ class CliCompradorController < ApplicationController
    # Cargar los datos de la tabla usuarios en @data cada posicion de data es un arreglo
    @data = Array.new
    @data2= Array.new
-   @objetoUsuarios=Comprador_Vehiculo.find(:first, :conditions => "nombres='#{params[:nombres]}'")
-  # puts @objetoUsuarios.nombres
-  # puts $directorio_raiz
-  # puts"*******************************************"
-   #objetoUsuarios.each do |comprador|
+   @objetoUsuarios=Comprador_Vehiculo.find(:first, :conditions => "cedula='#{params[:cedula]}'")
     @banco=params[:banco]
     @registro = Array.new
     @registrovehiculo=Array.new
@@ -125,7 +147,6 @@ class CliCompradorController < ApplicationController
     @registro.push(@banco)
     @data2.push(@registrovehiculo)
     @data.push(@registro)
-   #end
    # Definicion del encabezado
    # Definicion de la Fuente
    @font = Array.new
