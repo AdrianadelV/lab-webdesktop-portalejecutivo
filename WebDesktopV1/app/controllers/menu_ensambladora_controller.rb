@@ -31,7 +31,6 @@ class MenuEnsambladoraController < ApplicationController
   end
   #Adriana Santana
   def buscar_usuario
-      puts 'elam'
     @nombre = params[:nombre]
     @ensambladora = Ensambladora_vehiculos.new
     @ensambladora.buscar_usuario(@nombre)
@@ -43,17 +42,8 @@ class MenuEnsambladoraController < ApplicationController
     @ensambladora = Ensambladora_vehiculos.new
     @ensambladora.buscar_ensambladora_marca(@usuarios_id)
     render :text => $tirajson
-    # puts $tirajson
   end
- 
-  # #Ma.Ale
-  # def buscar_usuariolo
-    # @ensambladora = Ensambladora_vehiculos.new
-    # nombre = params[:nombre]
-    # valor = @ensambladora.buscar_usuario(nombre)
-    # render :text => $tirajson
-  # end
-  # #Ma.Ale
+ #Ma.Ale
   def buscar_indicador
     rolid= params[:rol_usu]
     @indicadors = Indicadors.all
@@ -71,10 +61,7 @@ class MenuEnsambladoraController < ApplicationController
       estado_indi = @estados_indi.buscarEstadoIndi(parsed_usuario_indijson["estados_indicadors_id"])
       @rol = Rols.new
       rols = @rol.buscarRols(rolid)
-      parsed_roljson = ActiveSupport::JSON.decode($tira_roljson)
-
-      #print proforma
-      
+      parsed_roljson = ActiveSupport::JSON.decode($tira_roljson)     
       if @i<@son
         @tira_indicadoresjson = @tira_indicadoresjson        + ' { "nombre_indic": "'       + @indicadors[@i-1].nombre +
                                 '", "id_indicador": "'       + @indicadors[@i-1].id.to_s + '"}, '
@@ -88,13 +75,10 @@ class MenuEnsambladoraController < ApplicationController
     render :text => @tira_indicadoresjson
     end
     
-   
   def generarDataUsuarioIndicador
     @idindicador = params[:idindicador]
     @usua_indi = Usuarios_indicadors.new
     @usua_indi.buscarUsuarioIndicador(@idindicador)
-    puts '+++++++++++++++++++'
-    puts 'INDICADOR'+$tira_usuariojson
     render :text => $tira_usuariojson
   end
 end
