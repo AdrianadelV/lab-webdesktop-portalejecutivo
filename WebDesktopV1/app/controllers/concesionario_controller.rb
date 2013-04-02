@@ -52,6 +52,11 @@ class ConcesionarioController < ApplicationController
     @ensambladora.buscar_usuario(@nombre)
     render :text => $tirajson
   end
+  def generardatacomboresponsables
+    @responsables = Responsables.all
+    @tirajson = @responsables.to_json
+    render :text => @tirajson
+  end
   
   def guardarConfiguracionIndicador
     @indicador = Usuarios_indicadors.new
@@ -68,12 +73,15 @@ class ConcesionarioController < ApplicationController
     @fecha_verde = params[:fecha_verde] 
     @estados_indicadors_id = params[:estados_indicadors_id] 
     @responsable = params[:responsable]  
-    @correo_responsable = params[:correo_responsable] 
-    @telefono = params[:telefono] 
     @frecuencia_notificacions_id = params[:frecuencia_notificacions_id] 
     @indicador.grabarIndicador(@usuarios_id,@indicadors_id,@valor_meta,@unidads_id,@fecha_meta,@valor_amarillo,@valor_rojo,@valor_verde,@fecha_amarillo,@fecha_rojo,@fecha_verde,@estados_indicadors_id,@responsable,
-                               @correo_responsable,@telefono,@frecuencia_notificacions_id)
+                               @frecuencia_notificacions_id)
     render :text => $tirajson
   end
-
+  def buscarResponsable
+    @id_responsable=params[:id_responsable]
+    @responsables = Responsables.new
+    @responsables.buscar_responsable(@id_responsable)
+    render :text => $tirajson
+  end
 end

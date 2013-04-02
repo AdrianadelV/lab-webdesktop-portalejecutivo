@@ -1,3 +1,5 @@
+var id_responsable = null;
+
 Ext.require(['Ext.tree.*', 'Ext.data.*', 'Ext.tip.*', 'Ext.container.Viewport', 'Ext.container.ButtonGroup', 'Ext.panel.Panel']);
 
 //Definicion del Modelo Indicadores
@@ -13,6 +15,28 @@ Ext.define('Indicadores', {
 	proxy : {
 		type : 'ajax',
 		url : 'concesionario/generardatacombosindicadores'
+	}
+});
+
+//Definicion del Modelo Responsable
+Ext.define('Responsables', {
+	extend : 'Ext.data.Model',
+	fields : [{
+		name : 'id_responsable',
+		type : 'int'
+	}, {
+		name : 'nombre',
+		type : 'varchar'
+	}, {
+		name : 'correo',
+		type : 'varchar'
+	}, {
+		name : 'telefono',
+		type : 'varchar'
+	}],
+	proxy : {
+		type : 'ajax',
+		url : 'concesionario/generardatacomboresponsables'
 	}
 });
 
@@ -67,6 +91,12 @@ Ext.define('Frecuencia', {
 //Definicion del Data Store de Estado del indicador
 var estadoMoStore = Ext.create('Ext.data.Store', {
 	model : 'EstadoMo',
+	autoLoad : true,
+});
+
+//Definicion del Data Store del Responsable
+var responsableStore = Ext.create('Ext.data.Store', {
+	model : 'Responsables',
 	autoLoad : true,
 });
 
@@ -275,25 +305,43 @@ Ext.define('miVentanaIndicadores', {
 				            }
                         },
                         {
-                            xtype: 'textfield',
+                            xtype: 'combobox',
                             x: 20,
                             y: 330,
                             fieldLabel: 'Responsable',
-                            id: 'responsable'
+							id : 'cmb_responsable',
+							store : responsableStore,
+							valueField : 'id_responsable',
+							displayField : 'nombre',
+							queryMode : 'remote',
+							typeAhead : true,
+							emptyText : 'Seleccionar',
+							triggerActio : 'all',
+							editable : 'false',
+							selecOnFocus : true,
+							listeners: {
+				                 scope: this,
+				                'select': function(combo, rec) {
+				                      id_responsable =rec[0].get(combo.valueField);
+				                      buscarUsuarioResponsable();
+				                 }
+				            }
                         },
                         {
                             xtype: 'textfield',
                             x: 360,
                             y: 330,
                             fieldLabel: 'Correo del Responsable',
-                            id: 'correorespponsable'
+                            id: 'correorespponsable',
+                            disabled: true
                         },
                         {
                             xtype: 'textfield',
                             x: 670,
                             y: 330,
                             fieldLabel: 'Telefono',
-                            id: 'telefono'
+                            id: 'telefono',
+                            disabled: true
                         },
                         {
                             xtype: 'button',
@@ -362,9 +410,7 @@ function guardarconfiguracion (id_usuario) {
 		      fecha_rojo: Ext.getCmp('fecharojo').getValue(),
 		      fecha_verde: Ext.getCmp('fechaverde').getValue(),
 		      estados_indicadors_id: Ext.getCmp('cmb_estadoindi').getValue(),
-		      responsable: Ext.getCmp('responsable').getValue(),
-		      correo_responsable: Ext.getCmp('correorespponsable').getValue(),
-		      telefono: Ext.getCmp('telefono').getValue(),
+		      responsable: Ext.getCmp('cmb_responsable').getValue(),
 		      frecuencia_notificacions_id: Ext.getCmp('cmb_frecuencia').getValue(),
 		      
 		   },
@@ -379,4 +425,28 @@ function guardarconfiguracion (id_usuario) {
 		      Ext.Msg.alert("Error", "Servidor no conectado!AQUI");
 		   }
 		}); 
+}
+
+function buscarUsuarioResponsable() {
+	Ext.Ajax.request({
+		   url: 'concesionario/buscarResponsable',    
+		     //Enviando los parametros a la pagina servidora
+		   params: {
+		   		id_responsable: id_responsable,
+		   },
+		     //Retorno exitoso de la pagina servidora a traves del formato JSON
+		   success: function( resultado, request ) {
+		      datos=Ext.JSON.decode(resultado.responseText);
+		      if (datos.exito=='false') {
+		      	Ext.Msg.alert("Error", 'No encontro');
+		      } else{
+				Ext.getCmp('correorespponsable').setValue(datos.correo);
+				Ext.getCmp('telefono').setValue(datos.telefono);
+		      };
+		   },
+		     //No hay retorno de la pagina servidora
+		   failure: function() {
+		      Ext.Msg.alert("Error", "Servidor no conectado!AQUI");
+		   }
+	});
 }

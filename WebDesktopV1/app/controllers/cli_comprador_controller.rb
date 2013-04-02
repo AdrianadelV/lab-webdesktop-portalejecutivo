@@ -91,11 +91,11 @@ class CliCompradorController < ApplicationController
     render :text => $tirajson
   end
   def guardar_detalle_vehiculo_proforma
-        @color=params[:color]
-        @transmision=params[:transmision]
-        @tapiceria=params[:tapiceria]
-        @modelo_vehiculoid=params[:modelo]
-        @detalles_ve= Detalle_vehiculos.new
+       @color=params[:color]
+       @transmision=params[:transmision]
+       @tapiceria=params[:tapiceria]
+       @modelo_vehiculoid=params[:modelo]
+       @detalles_ve= Detalle_vehiculos.new
        @detalles_ve.grabar_detalle_vehiculo(@color,@transmision,@tapiceria,@modelo_vehiculoid)
        render :text => $tirajson
   end
