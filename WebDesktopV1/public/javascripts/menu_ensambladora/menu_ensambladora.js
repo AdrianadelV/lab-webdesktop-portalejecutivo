@@ -25,6 +25,7 @@ Ext.require(['Ext.tree.*', 'Ext.data.*', 'Ext.tip.*', 'Ext.container.Viewport', 
 Ext.require('Ext.chart.*');
 Ext.require(['Ext.Window', 'Ext.layout.container.Fit', 'Ext.fx.target.Sprite', 'Ext.window.MessageBox']);
 
+
 Ext.onReady(function() {
 	Ext.QuickTips.init();
 
@@ -45,12 +46,11 @@ Ext.onReady(function() {
 		}]
 	});
 
-	ventana = Ext.create('miVentanalista');
-	ventana.show();
-
+	// ventana = Ext.create('miVentanalista');
+	// ventana.show();
+	
+	buscar_usuarioLogueado();	
 	ventanaindicadores = Ext.create('indicadoreseje');
-	// buscar_usuarioLo();
-	// buscar_indicador();
 	ventanaindicadores.show();
 
 	// ventana = Ext.create('catalogo');
@@ -86,12 +86,12 @@ Ext.onReady(function() {
 					alert('Modulo en construccion');
 				}
 				if (node.get('text') == "Listado de Pedidos por Concesionario") {
-					ventana.close();
-					ventana = Ext.create('miVentanalista');
-					ventana.show();
+					// ventana.close();
+					// ventana = Ext.create('miVentanalista');
+					// ventana.show();
 				}
 				if (node.get('text') == 'Configurar Nuevo Indicador') {
-					ventana.close();
+					// ventana.close();
 					ventana = Ext.create('miVentanaIndicadores');
 					ventana.show();
 				}
@@ -104,3 +104,28 @@ Ext.onReady(function() {
 		}
 	});
 });
+
+// function buscar_usuarioLo() {
+	// Ext.Ajax.request({
+		// url : '/menu_ensambladora/buscar_usuario',
+		// params: {
+			  // ajax : 'true',
+			  // funcion : 'buscar_usuario',
+		      // nombre: document.getElementById("user_name").textContent,
+		   // },
+		// //Retorno exitoso de la pagina servidora a traves del formato JSON
+		// success : function(exito, request) {
+			// datos = Ext.JSON.decode(exito.responseText);
+			// if (datos.exito == 'false') {
+				// Ext.Msg.alert("Error", datos.msg);
+			// } else {
+				// rols_id=datos.rols_id;
+				// alert(rols_id);
+			// }
+		// },
+		// //No hay retorno de la pagina servidora
+		// failure : function() {
+			// Ext.Msg.alert("Error", "Servidor no conectado buscar rols");
+		// }
+	// });
+// }

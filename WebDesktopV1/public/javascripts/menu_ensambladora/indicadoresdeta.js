@@ -1,3 +1,4 @@
+var responsable = null;
 
 Ext.define('indicadoresdeta', {
     extend: 'Ext.window.Window',
@@ -162,7 +163,8 @@ Ext.define('indicadoresdeta', {
     }
 });
 
-function asignarDetalleIndicador1() {
+function asignarDetalleIndicador11() {
+	alert('metodo asignar' + id_indicador1);
 	Ext.Ajax.request({
 		url : 'menu_ensambladora/generarDataUsuarioIndicador',
 		params : {
@@ -176,17 +178,18 @@ function asignarDetalleIndicador1() {
 				Ext.Msg.alert("Información", 'No se ha definido ningun indicador, seleccione otro');
 			} else {
 				if (datos.exito == 'false') {
+					alert('entre if');
 					Ext.Msg.alert("Error", datos.msg);
 				} else {
+					alert('entre else');
 					Ext.getCmp('valor_meta').setText(datos.valor_meta);
 					Ext.getCmp('fecha_meta').setText(datos.fecha_meta);
 					Ext.getCmp('valor_amarillo').setText(datos.valor_amarillo);
 					Ext.getCmp('valor_rojo').setText(datos.valor_rojo);
 					Ext.getCmp('fecha_amarillo').setText(datos.fecha_amarillo);
 					Ext.getCmp('fecha_rojo').setText(datos.fecha_rojo);
-					Ext.getCmp('nombre_resp').setText(datos.responsable);
-					Ext.getCmp('correo_resp').setText(datos.correo_responsable);
-					Ext.getCmp('telefono_resp').setText(datos.telefono);
+					responsable= datos.responsable;
+					buscarRespondable();
 				}
 			};
 
@@ -219,9 +222,8 @@ function asignarDetalleIndicador2() {
 					Ext.getCmp('valor_rojo').setText(datos.valor_rojo);
 					Ext.getCmp('fecha_amarillo').setText(datos.fecha_amarillo);
 					Ext.getCmp('fecha_rojo').setText(datos.fecha_rojo);
-					Ext.getCmp('nombre_resp').setText(datos.responsable);
-					Ext.getCmp('correo_resp').setText(datos.correo_responsable);
-					Ext.getCmp('telefono_resp').setText(datos.telefono);
+					responsable= datos.responsable;
+					buscarRespondable();
 				}
 			};
 
@@ -254,9 +256,8 @@ function asignarDetalleIndicador3() {
 					Ext.getCmp('valor_rojo').setText(datos.valor_rojo);
 					Ext.getCmp('fecha_amarillo').setText(datos.fecha_amarillo);
 					Ext.getCmp('fecha_rojo').setText(datos.fecha_rojo);
-					Ext.getCmp('nombre_resp').setText(datos.responsable);
-					Ext.getCmp('correo_resp').setText(datos.correo_responsable);
-					Ext.getCmp('telefono_resp').setText(datos.telefono);
+					responsable= datos.responsable;
+					buscarRespondable();
 				}
 			};
 
@@ -289,9 +290,8 @@ function asignarDetalleIndicador4() {
 					Ext.getCmp('valor_rojo').setText(datos.valor_rojo);
 					Ext.getCmp('fecha_amarillo').setText(datos.fecha_amarillo);
 					Ext.getCmp('fecha_rojo').setText(datos.fecha_rojo);
-					Ext.getCmp('nombre_resp').setText(datos.responsable);
-					Ext.getCmp('correo_resp').setText(datos.correo_responsable);
-					Ext.getCmp('telefono_resp').setText(datos.telefono);
+					responsable= datos.responsable;
+					buscarRespondable();
 				}
 			};
 
@@ -324,9 +324,8 @@ function asignarDetalleIndicador5() {
 					Ext.getCmp('valor_rojo').setText(datos.valor_rojo);
 					Ext.getCmp('fecha_amarillo').setText(datos.fecha_amarillo);
 					Ext.getCmp('fecha_rojo').setText(datos.fecha_rojo);
-					Ext.getCmp('nombre_resp').setText(datos.responsable);
-					Ext.getCmp('correo_resp').setText(datos.correo_responsable);
-					Ext.getCmp('telefono_resp').setText(datos.telefono);
+					responsable= datos.responsable;
+					buscarRespondable();
 				}
 			};
 
@@ -359,9 +358,8 @@ function asignarDetalleIndicador6() {
 					Ext.getCmp('valor_rojo').setText(datos.valor_rojo);
 					Ext.getCmp('fecha_amarillo').setText(datos.fecha_amarillo);
 					Ext.getCmp('fecha_rojo').setText(datos.fecha_rojo);
-					Ext.getCmp('nombre_resp').setText(datos.responsable);
-					Ext.getCmp('correo_resp').setText(datos.correo_responsable);
-					Ext.getCmp('telefono_resp').setText(datos.telefono);
+					responsable= datos.responsable;
+					buscarRespondable();
 				}
 			};
 
@@ -394,9 +392,8 @@ function asignarDetalleIndicador7() {
 					Ext.getCmp('valor_rojo').setText(datos.valor_rojo);
 					Ext.getCmp('fecha_amarillo').setText(datos.fecha_amarillo);
 					Ext.getCmp('fecha_rojo').setText(datos.fecha_rojo);
-					Ext.getCmp('nombre_resp').setText(datos.responsable);
-					Ext.getCmp('correo_resp').setText(datos.correo_responsable);
-					Ext.getCmp('telefono_resp').setText(datos.telefono);
+					responsable= datos.responsable;
+					buscarRespondable();
 				}
 			};
 
@@ -429,9 +426,8 @@ function asignarDetalleIndicador8() {
 					Ext.getCmp('valor_rojo').setText(datos.valor_rojo);
 					Ext.getCmp('fecha_amarillo').setText(datos.fecha_amarillo);
 					Ext.getCmp('fecha_rojo').setText(datos.fecha_rojo);
-					Ext.getCmp('nombre_resp').setText(datos.responsable);
-					Ext.getCmp('correo_resp').setText(datos.correo_responsable);
-					Ext.getCmp('telefono_resp').setText(datos.telefono);
+					responsable= datos.responsable;
+					buscarRespondable();
 				}
 			};
 
@@ -461,9 +457,8 @@ function asignarDetalleIndicador9() {
 				Ext.getCmp('valor_rojo').setText(datos.valor_rojo);
 				Ext.getCmp('fecha_amarillo').setText(datos.fecha_amarillo);
 				Ext.getCmp('fecha_rojo').setText(datos.fecha_rojo);
-				Ext.getCmp('nombre_resp').setText(datos.responsable);
-				Ext.getCmp('correo_resp').setText(datos.correo_responsable);
-				Ext.getCmp('telefono_resp').setText(datos.telefono);
+				responsable= datos.responsable;
+				buscarRespondable();
 			};
 
 		},
@@ -492,9 +487,8 @@ function asignarDetalleIndicador10() {
 				Ext.getCmp('valor_rojo').setText(datos.valor_rojo);
 				Ext.getCmp('fecha_amarillo').setText(datos.fecha_amarillo);
 				Ext.getCmp('fecha_rojo').setText(datos.fecha_rojo);
-				Ext.getCmp('nombre_resp').setText(datos.responsable);
-				Ext.getCmp('correo_resp').setText(datos.correo_responsable);
-				Ext.getCmp('telefono_resp').setText(datos.telefono);
+				responsable= datos.responsable;
+				buscarRespondable();
 			};
 
 		},
@@ -504,4 +498,27 @@ function asignarDetalleIndicador10() {
 	});
 }
 
+function buscarRespondable() {
+	Ext.Ajax.request({
+		url : 'menu_ensambladora/buscarResponsable',
+		params : {
+			ajax : 'true',
+			funcion : 'buscarResponsable',
+			responsable : responsable
+		},
+		success : function(exito, request) {
+			datos = Ext.JSON.decode(exito.responseText);
+				if (datos.exito == 'false') {
+					Ext.Msg.alert("Error", datos.msg);
+				} else {
+					Ext.getCmp('nombre_resp').setText(datos.nombre);
+					Ext.getCmp('correo_resp').setText(datos.correo);
+					Ext.getCmp('telefono_resp').setText(datos.telefono);
+				}
+		},
+		failure : function() {
+			Ext.Msg.alert("Error", "Servidor NO Conectado!!");
+		}
+	});
+}
 

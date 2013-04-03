@@ -299,7 +299,7 @@ Ext.define('miVentanaIndicadores', {
 				                 scope: this,
 				                'select': function(combo, rec) {
 				                      //alert(rec[0].get(combo.valueField)); 
-				                      valoridmarca =rec[0].get(combo.valueField);
+				                      //valoridmarca =rec[0].get(combo.valueField);
 				                      //alert(valoridmarca); 
 				                 }
 				            }
@@ -410,7 +410,7 @@ function guardarconfiguracion (id_usuario) {
 		      fecha_rojo: Ext.getCmp('fecharojo').getValue(),
 		      fecha_verde: Ext.getCmp('fechaverde').getValue(),
 		      estados_indicadors_id: Ext.getCmp('cmb_estadoindi').getValue(),
-		      responsable: Ext.getCmp('cmb_responsable').getValue(),
+		      responsable: Ext.getCmp('cmb_responsable'),
 		      frecuencia_notificacions_id: Ext.getCmp('cmb_frecuencia').getValue(),
 		      
 		   },
