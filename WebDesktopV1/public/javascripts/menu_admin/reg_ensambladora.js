@@ -77,18 +77,18 @@ Ext.define('Marcas', {
 //Definicion del Data Store de Estados
 var estadoStore = Ext.create('Ext.data.Store', {
 	model : 'Estados',
-	autoLoad : true,
+	autoLoad : false,
 });
 //Definicion del Data Store de ciudades
 var ciudadeStore = Ext.create('Ext.data.Store', {
 	model : 'Ciudades',
-	autoLoad : true,
+	autoLoad : false,
 });
 
 //Definicion del Data Store de Marcas
 var marcaStore = Ext.create('Ext.data.Store', {
 	model : 'Marcas',
-	autoLoad : true,
+	autoLoad : false,
 });
 
 Ext.define('VentanaEnsambladoraAdmin', {
