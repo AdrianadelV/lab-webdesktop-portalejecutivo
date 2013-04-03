@@ -72,7 +72,7 @@ Ext.define('ListaColaGeneral', {
 //Definicion del Data Store ListaColaGeneral
  listageneralStore = Ext.create('Ext.data.Store', {
     model: 'ListaColaGeneral',
-    autoLoad: true,
+    autoLoad: false,
     proxy: {
          type: 'ajax',
          url : 'menu_admin/generardataListaGlobal',
