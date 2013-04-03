@@ -280,8 +280,8 @@ Ext.define('proforma_banco', {
                     listeners:{
                     	click:function(){
                     		ventana.close();
-                    		enviar_correo();
-                    		imprimir();
+                    		//enviar_correo();
+                    		//imprimir();
                     		grabar_detalle();
                            	grabar_proforma();
                     		ventana.close();
@@ -299,8 +299,7 @@ Ext.define('proforma_banco', {
                     text: 'Cancelar',
                     listeners:{
                     	click:function(){	
-                           ventana.close();
-                    	   ventana_proforma.close();
+                          grabar_detalle();
                     	}
                     },
                     tooltip: 'Cancelar envio'
@@ -402,6 +401,7 @@ Ext.define('proforma_banco', {
         });
 
         me.callParent(arguments);
+       
         function imprimir(){
 	   Ext.Ajax.request({
 		   url : 'cli_comprador/imprimir_proforma',
@@ -448,24 +448,6 @@ function enviar_correo(){
 	   });
 	
 }
-function grabar_detalle(){
-	   Ext.Ajax.request({
-		   url : 'cli_comprador/guardar_detalle_vehiculo_proforma',
-			method: 'POST',
-			params:{
-				 color: id_color(),         	
-				 transmision:id_transmision() ,
-				 tapiceria: id_tapiceria(),
-				 modelo:id_modelo()
-			},
-			success: function ( result, request ) { 
-		                alert("se grabo el detalle")
-			},
-			failure: function ( result, request) { 
-				Ext.MessageBox.alert('Error', result.responseText); 
-			} 
-	   });
-}
 function grabar_proforma(){
 	   Ext.Ajax.request({
 		   url : 'cli_comprador/guardar_proforma',
@@ -490,4 +472,23 @@ function grabar_proforma(){
     
  });
 
+ function grabar_detalle(){
+        	alert("paso");
+	   Ext.Ajax.request({
+		    url :'cli_comprador/guardar_detalle_vehiculo_proforma',
+			method: 'POST',
+			params:{
+				 color: id_color(),         	
+				 transmision:id_transmision() ,
+				 tapiceria: id_tapiceria(),
+				 modelo:id_modelo()
+			},
+			success: function ( result, request ) { 
+		                alert("se grabo el detalle")
+			},
+			failure: function ( result, request) { 
+				Ext.MessageBox.alert('Error', result.responseText); 
+			} 
+	   });
+}
 
