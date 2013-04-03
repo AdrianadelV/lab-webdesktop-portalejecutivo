@@ -1,3 +1,4 @@
+var responsable = null;
 
 Ext.define('indicadoresdeta', {
     extend: 'Ext.window.Window',
@@ -41,7 +42,7 @@ Ext.define('indicadoresdeta', {
                                     x: 140,
                                     y: 200,
                                     height: 20,
-                                    id: 'ctelefono_resp',
+                                    id: 'telefono_resp',
                                     text: ''
                                 },
                                 {
@@ -54,7 +55,7 @@ Ext.define('indicadoresdeta', {
                                     xtype: 'label',
                                     x: 140,
                                     y: 170,
-                                    id: 'ccorreo_resp',
+                                    id: 'correo_resp',
                                     text: ''
                                 },
                                 {
@@ -70,7 +71,7 @@ Ext.define('indicadoresdeta', {
                                     y: 140,
                                     height: 20,
                                     width: 130,
-                                    id: 'cnombre_resp',
+                                    id: 'nombre_resp',
                                     text: ''
                                 },
                                 {
@@ -111,21 +112,21 @@ Ext.define('indicadoresdeta', {
                                     xtype: 'label',
                                     x: 120,
                                     y: 40,
-                                    id: 'cvalor_meta',
+                                    id: 'valor_meta',
                                     text: ''
                                 },
                                 {
                                     xtype: 'label',
                                     x: 120,
                                     y: 70,
-                                    id: 'cvalor_amarillo',
+                                    id: 'valor_amarillo',
                                     text: ''
                                 },
                                 {
                                     xtype: 'label',
                                     x: 120,
                                     y: 100,
-                                    id: 'cvalor_rojo',
+                                    id: 'valor_rojo',
                                     text: ''
                                 },
                                 {
@@ -133,7 +134,7 @@ Ext.define('indicadoresdeta', {
                                     x: 280,
                                     y: 70,
                                     height: 20,
-                                    id: 'cfecha_amarillo',
+                                    id: 'fecha_amarillo',
                                     text: ''
                                 },
                                 {
@@ -141,14 +142,14 @@ Ext.define('indicadoresdeta', {
                                     x: 280,
                                     y: 100,
                                     height: 20,
-                                    id: 'cfecha_rojo',
+                                    id: 'fecha_rojo',
                                     text: ''
                                 },
                                 {
                                     xtype: 'label',
                                     x: 280,
                                     y: 40,
-                                    id: 'cfecha_meta',
+                                    id: 'fecha_meta',
                                     text: ''
                                 }
                             ]
@@ -162,31 +163,35 @@ Ext.define('indicadoresdeta', {
     }
 });
 
-function asignarDetalleIndicadorCon1() {
+function asignarDetalleIndicador1() {
+	alert('metodo asignar'+id_indicador1);
 	Ext.Ajax.request({
 		url : 'menu_ensambladora/generarDataUsuarioIndicador',
 		params : {
 			ajax : 'true',
 			funcion : 'generarDataUsuarioIndicador',
-			idindicador : id_indicadorc1
+			idindicador : id_indicador1
 		},
 		success : function(exito, request) {
 			datos = Ext.JSON.decode(exito.responseText);
-			if (id_indicadorc1 == null) {
+			if (id_indicador1 == null) {
+				alert('entre if');
 				Ext.Msg.alert("Información", 'No se ha definido ningun indicador, seleccione otro');
 			} else {
 				if (datos.exito == 'false') {
+				alert('entre else');
+					alert('entre if');
 					Ext.Msg.alert("Error", datos.msg);
 				} else {
-					Ext.getCmp('cvalor_meta').setText(datos.valor_meta);
-					Ext.getCmp('cfecha_meta').setText(datos.fecha_meta);
-					Ext.getCmp('cvalor_amarillo').setText(datos.valor_amarillo);
-					Ext.getCmp('cvalor_rojo').setText(datos.valor_rojo);
-					Ext.getCmp('cfecha_amarillo').setText(datos.fecha_amarillo);
-					Ext.getCmp('cfecha_rojo').setText(datos.fecha_rojo);
-					Ext.getCmp('cnombre_resp').setText(datos.responsable);
-					Ext.getCmp('ccorreo_resp').setText(datos.correo_responsable);
-					Ext.getCmp('ctelefono_resp').setText(datos.telefono);
+					alert('entre else');
+					Ext.getCmp('valor_meta').setText(datos.valor_meta);
+					Ext.getCmp('fecha_meta').setText(datos.fecha_meta);
+					Ext.getCmp('valor_amarillo').setText(datos.valor_amarillo);
+					Ext.getCmp('valor_rojo').setText(datos.valor_rojo);
+					Ext.getCmp('fecha_amarillo').setText(datos.fecha_amarillo);
+					Ext.getCmp('fecha_rojo').setText(datos.fecha_rojo);
+					responsable= datos.responsable;
+					buscarRespondable();
 				}
 			};
 
@@ -197,31 +202,30 @@ function asignarDetalleIndicadorCon1() {
 	});
 }
 
-function asignarDetalleIndicadorCon2() {
+function asignarDetalleIndicador2() {
 	Ext.Ajax.request({
 		url : 'menu_ensambladora/generarDataUsuarioIndicador',
 		params : {
 			ajax : 'true',
 			funcion : 'generarDataUsuarioIndicador',
-			idindicador : id_indicadorc2
+			idindicador : id_indicador2
 		},
 		success : function(exito, request) {
 			datos = Ext.JSON.decode(exito.responseText);
-			if (id_indicadorc2 == null) {
+			if (id_indicador2 == null) {
 				Ext.Msg.alert("Información", 'No se ha definido ningun indicador, seleccione otro');
 			} else {
 				if (datos.exito == 'false') {
 					Ext.Msg.alert("Error", datos.msg);
 				} else {
-					Ext.getCmp('cvalor_meta').setText(datos.valor_meta);
-					Ext.getCmp('cfecha_meta').setText(datos.fecha_meta);
-					Ext.getCmp('cvalor_amarillo').setText(datos.valor_amarillo);
-					Ext.getCmp('cvalor_rojo').setText(datos.valor_rojo);
-					Ext.getCmp('cfecha_amarillo').setText(datos.fecha_amarillo);
-					Ext.getCmp('cfecha_rojo').setText(datos.fecha_rojo);
-					Ext.getCmp('cnombre_resp').setText(datos.responsable);
-					Ext.getCmp('ccorreo_resp').setText(datos.correo_responsable);
-					Ext.getCmp('ctelefono_resp').setText(datos.telefono);
+					Ext.getCmp('valor_meta').setText(datos.valor_meta);
+					Ext.getCmp('fecha_meta').setText(datos.fecha_meta);
+					Ext.getCmp('valor_amarillo').setText(datos.valor_amarillo);
+					Ext.getCmp('valor_rojo').setText(datos.valor_rojo);
+					Ext.getCmp('fecha_amarillo').setText(datos.fecha_amarillo);
+					Ext.getCmp('fecha_rojo').setText(datos.fecha_rojo);
+					responsable= datos.responsable;
+					buscarRespondable();
 				}
 			};
 
@@ -232,31 +236,30 @@ function asignarDetalleIndicadorCon2() {
 	});
 }
 
-function asignarDetalleIndicadorCon3() {
+function asignarDetalleIndicador3() {
 	Ext.Ajax.request({
 		url : 'menu_ensambladora/generarDataUsuarioIndicador',
 		params : {
 			ajax : 'true',
 			funcion : 'generarDataUsuarioIndicador',
-			idindicador : id_indicadorc3
+			idindicador : id_indicador3
 		},
 		success : function(exito, request) {
 			datos = Ext.JSON.decode(exito.responseText);
-			if (id_indicadorc3 == null) {
+			if (id_indicador3 == null) {
 				Ext.Msg.alert("Información", 'No se ha definido ningun indicador, seleccione otro');
 			} else {
 				if (datos.exito == 'false') {
 					Ext.Msg.alert("Error", datos.msg);
 				} else {
-					Ext.getCmp('cvalor_meta').setText(datos.valor_meta);
-					Ext.getCmp('cfecha_meta').setText(datos.fecha_meta);
-					Ext.getCmp('cvalor_amarillo').setText(datos.valor_amarillo);
-					Ext.getCmp('cvalor_rojo').setText(datos.valor_rojo);
-					Ext.getCmp('cfecha_amarillo').setText(datos.fecha_amarillo);
-					Ext.getCmp('cfecha_rojo').setText(datos.fecha_rojo);
-					Ext.getCmp('cnombre_resp').setText(datos.responsable);
-					Ext.getCmp('ccorreo_resp').setText(datos.correo_responsable);
-					Ext.getCmp('ctelefono_resp').setText(datos.telefono);
+					Ext.getCmp('valor_meta').setText(datos.valor_meta);
+					Ext.getCmp('fecha_meta').setText(datos.fecha_meta);
+					Ext.getCmp('valor_amarillo').setText(datos.valor_amarillo);
+					Ext.getCmp('valor_rojo').setText(datos.valor_rojo);
+					Ext.getCmp('fecha_amarillo').setText(datos.fecha_amarillo);
+					Ext.getCmp('fecha_rojo').setText(datos.fecha_rojo);
+					responsable= datos.responsable;
+					buscarRespondable();
 				}
 			};
 
@@ -267,31 +270,30 @@ function asignarDetalleIndicadorCon3() {
 	});
 }
 
-function asignarDetalleIndicadorCon4() {
+function asignarDetalleIndicador4() {
 	Ext.Ajax.request({
 		url : 'menu_ensambladora/generarDataUsuarioIndicador',
 		params : {
 			ajax : 'true',
 			funcion : 'generarDataUsuarioIndicador',
-			idindicador : id_indicadorc4
+			idindicador : id_indicador4
 		},
 		success : function(exito, request) {
 			datos = Ext.JSON.decode(exito.responseText);
-			if (id_indicadorc4 == null) {
+			if (id_indicador4 == null) {
 				Ext.Msg.alert("Información", 'No se ha definido ningun indicador, seleccione otro');
 			} else {
 				if (datos.exito == 'false') {
 					Ext.Msg.alert("Error", datos.msg);
 				} else {
-					Ext.getCmp('cvalor_meta').setText(datos.valor_meta);
-					Ext.getCmp('cfecha_meta').setText(datos.fecha_meta);
-					Ext.getCmp('cvalor_amarillo').setText(datos.valor_amarillo);
-					Ext.getCmp('cvalor_rojo').setText(datos.valor_rojo);
-					Ext.getCmp('cfecha_amarillo').setText(datos.fecha_amarillo);
-					Ext.getCmp('cfecha_rojo').setText(datos.fecha_rojo);
-					Ext.getCmp('cnombre_resp').setText(datos.responsable);
-					Ext.getCmp('ccorreo_resp').setText(datos.correo_responsable);
-					Ext.getCmp('ctelefono_resp').setText(datos.telefono);
+					Ext.getCmp('valor_meta').setText(datos.valor_meta);
+					Ext.getCmp('fecha_meta').setText(datos.fecha_meta);
+					Ext.getCmp('valor_amarillo').setText(datos.valor_amarillo);
+					Ext.getCmp('valor_rojo').setText(datos.valor_rojo);
+					Ext.getCmp('fecha_amarillo').setText(datos.fecha_amarillo);
+					Ext.getCmp('fecha_rojo').setText(datos.fecha_rojo);
+					responsable= datos.responsable;
+					buscarRespondable();
 				}
 			};
 
@@ -302,31 +304,30 @@ function asignarDetalleIndicadorCon4() {
 	});
 }
 
-function asignarDetalleIndicadorCon5() {
+function asignarDetalleIndicador5() {
 	Ext.Ajax.request({
 		url : 'menu_ensambladora/generarDataUsuarioIndicador',
 		params : {
 			ajax : 'true',
 			funcion : 'generarDataUsuarioIndicador',
-			idindicador : id_indicadorc5
+			idindicador : id_indicador5
 		},
 		success : function(exito, request) {
 			datos = Ext.JSON.decode(exito.responseText);
-			if (id_indicadorc5 == null) {
+			if (id_indicador5 == null) {
 				Ext.Msg.alert("Información", 'No se ha definido ningun indicador, seleccione otro');
 			} else {
 				if (datos.exito == 'false') {
 					Ext.Msg.alert("Error", datos.msg);
 				} else {
-					Ext.getCmp('cvalor_meta').setText(datos.valor_meta);
-					Ext.getCmp('cfecha_meta').setText(datos.fecha_meta);
-					Ext.getCmp('cvalor_amarillo').setText(datos.valor_amarillo);
-					Ext.getCmp('cvalor_rojo').setText(datos.valor_rojo);
-					Ext.getCmp('cfecha_amarillo').setText(datos.fecha_amarillo);
-					Ext.getCmp('cfecha_rojo').setText(datos.fecha_rojo);
-					Ext.getCmp('cnombre_resp').setText(datos.responsable);
-					Ext.getCmp('ccorreo_resp').setText(datos.correo_responsable);
-					Ext.getCmp('ctelefono_resp').setText(datos.telefono);
+					Ext.getCmp('valor_meta').setText(datos.valor_meta);
+					Ext.getCmp('fecha_meta').setText(datos.fecha_meta);
+					Ext.getCmp('valor_amarillo').setText(datos.valor_amarillo);
+					Ext.getCmp('valor_rojo').setText(datos.valor_rojo);
+					Ext.getCmp('fecha_amarillo').setText(datos.fecha_amarillo);
+					Ext.getCmp('fecha_rojo').setText(datos.fecha_rojo);
+					responsable= datos.responsable;
+					buscarRespondable();
 				}
 			};
 
@@ -337,31 +338,30 @@ function asignarDetalleIndicadorCon5() {
 	});
 }
 
-function asignarDetalleIndicadorCon6() {
+function asignarDetalleIndicador6() {
 	Ext.Ajax.request({
 		url : 'menu_ensambladora/generarDataUsuarioIndicador',
 		params : {
 			ajax : 'true',
 			funcion : 'generarDataUsuarioIndicador',
-			idindicador : id_indicadoc6
+			idindicador : id_indicador6
 		},
 		success : function(exito, request) {
 			datos = Ext.JSON.decode(exito.responseText);
-			if (id_indicadorc6 == null) {
+			if (id_indicador6 == null) {
 				Ext.Msg.alert("Información", 'No se ha definido ningun indicador, seleccione otro');
 			} else {
 				if (datos.exito == 'false') {
 					Ext.Msg.alert("Error", datos.msg);
 				} else {
-					Ext.getCmp('cvalor_meta').setText(datos.valor_meta);
-					Ext.getCmp('cfecha_meta').setText(datos.fecha_meta);
-					Ext.getCmp('cvalor_amarillo').setText(datos.valor_amarillo);
-					Ext.getCmp('cvalor_rojo').setText(datos.valor_rojo);
-					Ext.getCmp('cfecha_amarillo').setText(datos.fecha_amarillo);
-					Ext.getCmp('cfecha_rojo').setText(datos.fecha_rojo);
-					Ext.getCmp('cnombre_resp').setText(datos.responsable);
-					Ext.getCmp('ccorreo_resp').setText(datos.correo_responsable);
-					Ext.getCmp('ctelefono_resp').setText(datos.telefono);
+					Ext.getCmp('valor_meta').setText(datos.valor_meta);
+					Ext.getCmp('fecha_meta').setText(datos.fecha_meta);
+					Ext.getCmp('valor_amarillo').setText(datos.valor_amarillo);
+					Ext.getCmp('valor_rojo').setText(datos.valor_rojo);
+					Ext.getCmp('fecha_amarillo').setText(datos.fecha_amarillo);
+					Ext.getCmp('fecha_rojo').setText(datos.fecha_rojo);
+					responsable= datos.responsable;
+					buscarRespondable();
 				}
 			};
 
@@ -372,31 +372,30 @@ function asignarDetalleIndicadorCon6() {
 	});
 }
 
-function asignarDetalleIndicadorCon7() {
+function asignarDetalleIndicador7() {
 	Ext.Ajax.request({
 		url : 'menu_ensambladora/generarDataUsuarioIndicador',
 		params : {
 			ajax : 'true',
 			funcion : 'generarDataUsuarioIndicador',
-			idindicador : id_indicadorc7
+			idindicador : id_indicador7
 		},
 		success : function(exito, request) {
 			datos = Ext.JSON.decode(exito.responseText);
-			if (id_indicadorc7 == null) {
+			if (id_indicador7 == null) {
 				Ext.Msg.alert("Información", 'No se ha definido ningun indicador, seleccione otro');
 			} else {
 				if (datos.exito == 'false') {
 					Ext.Msg.alert("Error", datos.msg);
 				} else {
-					Ext.getCmp('cvalor_meta').setText(datos.valor_meta);
-					Ext.getCmp('cfecha_meta').setText(datos.fecha_meta);
-					Ext.getCmp('cvalor_amarillo').setText(datos.valor_amarillo);
-					Ext.getCmp('cvalor_rojo').setText(datos.valor_rojo);
-					Ext.getCmp('cfecha_amarillo').setText(datos.fecha_amarillo);
-					Ext.getCmp('cfecha_rojo').setText(datos.fecha_rojo);
-					Ext.getCmp('cnombre_resp').setText(datos.responsable);
-					Ext.getCmp('ccorreo_resp').setText(datos.correo_responsable);
-					Ext.getCmp('ctelefono_resp').setText(datos.telefono);
+					Ext.getCmp('valor_meta').setText(datos.valor_meta);
+					Ext.getCmp('fecha_meta').setText(datos.fecha_meta);
+					Ext.getCmp('valor_amarillo').setText(datos.valor_amarillo);
+					Ext.getCmp('valor_rojo').setText(datos.valor_rojo);
+					Ext.getCmp('fecha_amarillo').setText(datos.fecha_amarillo);
+					Ext.getCmp('fecha_rojo').setText(datos.fecha_rojo);
+					responsable= datos.responsable;
+					buscarRespondable();
 				}
 			};
 
@@ -407,31 +406,30 @@ function asignarDetalleIndicadorCon7() {
 	});
 }
 
-function asignarDetalleIndicadorCon8() {
+function asignarDetalleIndicador8() {
 	Ext.Ajax.request({
 		url : 'menu_ensambladora/generarDataUsuarioIndicador',
 		params : {
 			ajax : 'true',
 			funcion : 'generarDataUsuarioIndicador',
-			idindicador : id_indicadorc8
+			idindicador : id_indicador8
 		},
 		success : function(exito, request) {
 			datos = Ext.JSON.decode(exito.responseText);
-			if (id_indicadorc8 == null) {
+			if (id_indicador8 == null) {
 				Ext.Msg.alert("Información", 'No se ha definido ningun indicador, seleccione otro');
 			} else {
 				if (datos.exito == 'false') {
 					Ext.Msg.alert("Error", datos.msg);
 				} else {
-					Ext.getCmp('cvalor_meta').setText(datos.valor_meta);
-					Ext.getCmp('cfecha_meta').setText(datos.fecha_meta);
-					Ext.getCmp('cvalor_amarillo').setText(datos.valor_amarillo);
-					Ext.getCmp('cvalor_rojo').setText(datos.valor_rojo);
-					Ext.getCmp('cfecha_amarillo').setText(datos.fecha_amarillo);
-					Ext.getCmp('cfecha_rojo').setText(datos.fecha_rojo);
-					Ext.getCmp('cnombre_resp').setText(datos.responsable);
-					Ext.getCmp('ccorreo_resp').setText(datos.correo_responsable);
-					Ext.getCmp('ctelefono_resp').setText(datos.telefono);
+					Ext.getCmp('valor_meta').setText(datos.valor_meta);
+					Ext.getCmp('fecha_meta').setText(datos.fecha_meta);
+					Ext.getCmp('valor_amarillo').setText(datos.valor_amarillo);
+					Ext.getCmp('valor_rojo').setText(datos.valor_rojo);
+					Ext.getCmp('fecha_amarillo').setText(datos.fecha_amarillo);
+					Ext.getCmp('fecha_rojo').setText(datos.fecha_rojo);
+					responsable= datos.responsable;
+					buscarRespondable();
 				}
 			};
 
@@ -442,28 +440,27 @@ function asignarDetalleIndicadorCon8() {
 	});
 }
 
-function asignarDetalleIndicadorCon9() {
+function asignarDetalleIndicador9() {
 	Ext.Ajax.request({
 		url : 'menu_ensambladora/generarDataUsuarioIndicador',
 		params : {
 			ajax : 'true',
 			funcion : 'generarDataUsuarioIndicador',
-			idindicador : id_indicadorc9
+			idindicador : id_indicador9
 		},
 		success : function(exito, request) {
 			datos = Ext.JSON.decode(exito.responseText);
 			if (datos.exito == 'false') {
 				Ext.Msg.alert("Error", datos.msg);
 			} else {
-				Ext.getCmp('cvalor_meta').setText(datos.valor_meta);
-				Ext.getCmp('cfecha_meta').setText(datos.fecha_meta);
-				Ext.getCmp('cvalor_amarillo').setText(datos.valor_amarillo);
-				Ext.getCmp('cvalor_rojo').setText(datos.valor_rojo);
-				Ext.getCmp('cfecha_amarillo').setText(datos.fecha_amarillo);
-				Ext.getCmp('cfecha_rojo').setText(datos.fecha_rojo);
-				Ext.getCmp('cnombre_resp').setText(datos.responsable);
-				Ext.getCmp('ccorreo_resp').setText(datos.correo_responsable);
-				Ext.getCmp('ctelefono_resp').setText(datos.telefono);
+				Ext.getCmp('valor_meta').setText(datos.valor_meta);
+				Ext.getCmp('fecha_meta').setText(datos.fecha_meta);
+				Ext.getCmp('valor_amarillo').setText(datos.valor_amarillo);
+				Ext.getCmp('valor_rojo').setText(datos.valor_rojo);
+				Ext.getCmp('fecha_amarillo').setText(datos.fecha_amarillo);
+				Ext.getCmp('fecha_rojo').setText(datos.fecha_rojo);
+				responsable= datos.responsable;
+				buscarRespondable();
 			};
 
 		},
@@ -473,28 +470,27 @@ function asignarDetalleIndicadorCon9() {
 	});
 }
 
-function asignarDetalleIndicadorCon10() {
+function asignarDetalleIndicador10() {
 	Ext.Ajax.request({
 		url : 'menu_ensambladora/generarDataUsuarioIndicador',
 		params : {
 			ajax : 'true',
 			funcion : 'generarDataUsuarioIndicador',
-			idindicador : id_indicadorc10
+			idindicador : id_indicador10
 		},
 		success : function(exito, request) {
 			datos = Ext.JSON.decode(exito.responseText);
 			if (datos.exito == 'false') {
 				Ext.Msg.alert("Error", datos.msg);
 			} else {
-				Ext.getCmp('cvalor_meta').setText(datos.valor_meta);
-				Ext.getCmp('cfecha_meta').setText(datos.fecha_meta);
-				Ext.getCmp('cvalor_amarillo').setText(datos.valor_amarillo);
-				Ext.getCmp('cvalor_rojo').setText(datos.valor_rojo);
-				Ext.getCmp('cfecha_amarillo').setText(datos.fecha_amarillo);
-				Ext.getCmp('cfecha_rojo').setText(datos.fecha_rojo);
-				Ext.getCmp('cnombre_resp').setText(datos.responsable);
-				Ext.getCmp('ccorreo_resp').setText(datos.correo_responsable);
-				Ext.getCmp('ctelefono_resp').setText(datos.telefono);
+				Ext.getCmp('valor_meta').setText(datos.valor_meta);
+				Ext.getCmp('fecha_meta').setText(datos.fecha_meta);
+				Ext.getCmp('valor_amarillo').setText(datos.valor_amarillo);
+				Ext.getCmp('valor_rojo').setText(datos.valor_rojo);
+				Ext.getCmp('fecha_amarillo').setText(datos.fecha_amarillo);
+				Ext.getCmp('fecha_rojo').setText(datos.fecha_rojo);
+				responsable= datos.responsable;
+				buscarRespondable();
 			};
 
 		},
@@ -504,4 +500,28 @@ function asignarDetalleIndicadorCon10() {
 	});
 }
 
+function buscarRespondable() {
+	alert('responsable');
+	Ext.Ajax.request({
+		url : 'menu_ensambladora/buscarResponsable',
+		params : {
+			ajax : 'true',
+			funcion : 'buscarResponsable',
+			responsable : responsable
+		},
+		success : function(exito, request) {
+			datos = Ext.JSON.decode(exito.responseText);
+				if (datos.exito == 'false') {
+					Ext.Msg.alert("Error", datos.msg);
+				} else {
+					Ext.getCmp('nombre_resp').setText(datos.nombre);
+					Ext.getCmp('correo_resp').setText(datos.correo);
+					Ext.getCmp('telefono_resp').setText(datos.telefono);
+				}
+		},
+		failure : function() {
+			Ext.Msg.alert("Error", "Servidor NO Conectado!!");
+		}
+	});
+}
 

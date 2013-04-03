@@ -1,15 +1,15 @@
-var idindicadorc = null;
-var rols_idc = null;
-var id_indicadorc1 = null;
-var id_indicadorc2 = null;
-var id_indicadorc3 = null;
-var id_indicadorc4 = null;
-var id_indicadorc5 = null;
-var id_indicadorc6 = null;
-var id_indicadorc7 = null;
-var id_indicadorc8 = null;
-var id_indicadorc9 = null;
-var id_indicadorc10 = null;
+var idindicador = null;
+var id_indicador1 = null;
+var id_indicador2 = null;
+var id_indicador3 = null;
+var id_indicador4 = null;
+var id_indicador5 = null;
+var id_indicador6 = null;
+var id_indicador7 = null;
+var id_indicador8 = null;
+var id_indicador9 = null;
+var id_indicador10 = null;
+var rols_id = null;
 
 Ext.define('indicadoreseje', {
 	extend : 'Ext.window.Window',
@@ -36,7 +36,7 @@ Ext.define('indicadoreseje', {
 				 y : 30,
 				 width : 280,
 				 heigth : 50,
-				 id: 'indicadorc1',
+				 id: 'indicador1',
 				 text : ''
 			 }, 
 			{
@@ -45,7 +45,7 @@ Ext.define('indicadoreseje', {
 				y : 90,
 				height : 50,
 				width : 280,
-				id: 'indicadorc2',
+				id: 'indicador2',
 				text : ''
 			}, {
 				xtype : 'label',
@@ -53,7 +53,7 @@ Ext.define('indicadoreseje', {
 				y : 150,
 				height : 50,
 				width : 280,
-				id: 'indicadorc3',
+				id: 'indicador3',
 				text : ''
 			}, {
 				xtype : 'label',
@@ -61,7 +61,7 @@ Ext.define('indicadoreseje', {
 				y : 210,
 				height : 50,
 				width : 280,
-				id: 'indicadorc4',
+				id: 'indicador4',
 				text : ''
 			},{
 				xtype : 'label',
@@ -69,7 +69,7 @@ Ext.define('indicadoreseje', {
 				y : 270,
 				height : 50,
 				width : 280,
-				id: 'indicadorc5',
+				id: 'indicador5',
 				text : ''
 			},{
 				xtype : 'label',
@@ -77,7 +77,7 @@ Ext.define('indicadoreseje', {
 				y : 330,
 				height : 50,
 				width : 280,
-				id: 'indicadorc6',
+				id: 'indicador6',
 				text : ''
 			},{
 				xtype : 'label',
@@ -85,7 +85,7 @@ Ext.define('indicadoreseje', {
 				y : 390,
 				height : 50,
 				width : 280,
-				id: 'indicadorc7',
+				id: 'indicador7',
 				text : ''
 			},{
 				xtype : 'label',
@@ -93,7 +93,7 @@ Ext.define('indicadoreseje', {
 				y : 450,
 				height : 50,
 				width : 280,
-				id: 'indicadorc8',
+				id: 'indicador8',
 				text : ''
 			},{
 				xtype : 'label',
@@ -101,7 +101,7 @@ Ext.define('indicadoreseje', {
 				y : 510,
 				height : 50,
 				width : 280,
-				id: 'indicadorc9',
+				id: 'indicador9',
 				text : ''
 			},{
 				xtype : 'label',
@@ -109,46 +109,46 @@ Ext.define('indicadoreseje', {
 				y : 570,
 				height : 50,
 				width : 280,
-				id: 'indicadorc10',
+				id: 'indicador10',
 				text : ''
 			},{ 
-	             xtype:'botonc1',
+	             xtype:'boton1',
 	             viewConfig: {
 	             }
 	         },{ 
-	             xtype:'botonc2',
+	             xtype:'boton2',
 	             viewConfig: {
 	             }
 	          },{ 
-	             xtype:'botonc3',
+	             xtype:'boton3',
 	             viewConfig: {
 	             }
 	          },{ 
-	             xtype:'botonc4',
+	             xtype:'boton4',
 	             viewConfig: {
 	             }
 	         },{ 
-	             xtype:'botonc5',
+	             xtype:'boton5',
 	             viewConfig: {
 	             }
 	         },{ 
-	             xtype:'botonc6',
+	             xtype:'boton6',
 	             viewConfig: {
 	             }
 	         },{ 
-	             xtype:'botonc7',
+	             xtype:'boton7',
 	             viewConfig: {
 	             }
 	         },{ 
-	             xtype:'botonc8',
+	             xtype:'boton8',
 	             viewConfig: {
 	             }
 	         },{ 
-	             xtype:'botonc9',
+	             xtype:'boton9',
 	             viewConfig: {
 	             }
 	         },{ 
-	             xtype:'botonc10',
+	             xtype:'boton10',
 	             viewConfig: {
 	             }
 	         },
@@ -159,7 +159,7 @@ Ext.define('indicadoreseje', {
 	}
 }); 
 
-function buscar_usuarioLoCon() {
+function buscar_usuarioLogueado() {
 	Ext.Ajax.request({
 		url : '/menu_ensambladora/buscar_usuario',
 		params: {
@@ -173,8 +173,8 @@ function buscar_usuarioLoCon() {
 			if (datos.exito == 'false') {
 				Ext.Msg.alert("Error", datos.msg);
 			} else {
-				rols_idc=datos.rols_id;
-				//alert(rols_idc);
+				rols_id=datos.rols_id;
+				buscar_indicador();
 			}
 		},
 		//No hay retorno de la pagina servidora
@@ -184,13 +184,14 @@ function buscar_usuarioLoCon() {
 	});
 }
 
-function buscar_indicadorCon() {
+function buscar_indicador() {
 	Ext.Ajax.request({
 		url : '/menu_ensambladora/buscar_indicador',
 		params : {
 			ajax : 'true',
 			funcion : 'buscar_indicador',
-			rol_usu : rols_idc,
+			rol_usu : rols_id,
+			nombre: document.getElementById("user_name").textContent,
 		},
 		//Retorno exitoso de la pagina servidora a traves del formato JSON
 		success : function(exito, request) {
@@ -198,65 +199,87 @@ function buscar_indicadorCon() {
 			if (dato.exito == 'false') {
 				Ext.Msg.alert("Error", dato.msg);
 			} else {
-					 Ext.getCmp('indicador1').setText(dato.datos[0].nombre_indic);
-					 id_indicadorc1=dato.datos[0].id_indicador;
-					 if (id_indicadorc1!=null) {
-					 	botonc1 = Ext.create('miBoton1');
-					 	botonc1.show();
+					 if(dato.datos[0].nombre_indic!='' && dato.datos[0].id_indicador!=''){
+					 	 Ext.getCmp('indicador1').setText(dato.datos[0].nombre_indic);
+						 id_indicador1=dato.datos[0].id_indicador;
+						 if (id_indicador1!=null) {
+						 	boton1 = Ext.create('miBoton1');
+						 	boton1.show();
+						 };
 					 };
-					 Ext.getCmp('indicador2').setText(dato.datos[1].nombre_indic);
-					 id_indicadorc2=dato.datos[1].id_indicador;
-					 if (id_indicadorc2!=null) {
-					 	botonc2 = Ext.create('miBoton2');
-					 	botonc2.show();
+					 
+					 if(dato.datos[1].nombre_indic!='' && dato.datos[1].id_indicador!=''){
+						 Ext.getCmp('indicador2').setText(dato.datos[1].nombre_indic);
+						 id_indicador2=dato.datos[1].id_indicador;
+						 if (id_indicador2!=null) {
+						 	boton2 = Ext.create('miBoton2');
+						 	boton2.show();
+						 };	
+					 }
+					 if(dato.datos[2].nombre_indic!='' && dato.datos[2].id_indicador!=''){
+					 	 Ext.getCmp('indicador3').setText(dato.datos[2].nombre_indic);
+						 id_indicador3=dato.datos[2].id_indicador;
+						 if (id_indicador3!=null) {
+						 	boton3 = Ext.create('miBoton3');
+						 	boton3.show();
+						 };
 					 };
-					 Ext.getCmp('indicador3').setText(dato.datos[2].nombre_indic);
-					 id_indicadorc3=dato.datos[2].id_indicador;
-					 if (id_indicadorc3!=null) {
-					 	botonc3 = Ext.create('miBoton3');
-					 	botonc3.show();
+					 if(dato.datos[3].nombre_indic!='' && dato.datos[3].id_indicador!=''){
+					 	 Ext.getCmp('indicador4').setText(dato.datos[3].nombre_indic);
+						 id_indicador4=dato.datos[3].id_indicador;
+						 alert('indicador4444...'+id_indicador4);
+						 if (id_indicador4!=null) {
+						 	boton4 = Ext.create('miBoton4');
+						 	boton4.show();
+						 };
 					 };
-					 Ext.getCmp('indicador4').setText(dato.datos[3].nombre_indic);
-					 id_indicadorc4=dato.datos[3].id_indicador;
-					 if (id_indicadorc4!=null) {
-					 	botonc4 = Ext.create('miBoton4');
-					 	botonc4.show();
+					 if(dato.datos[4].nombre_indic!='' && dato.datos[4].id_indicador!=''){
+					 	 Ext.getCmp('indicador5').setText(dato.datos[4].nombre_indic);
+						 id_indicador5=dato.datos[4].id_indicador;
+						 if (id_indicador5!=null) {
+						 	boton5 = Ext.create('miBoton5');
+						 	boton5.show();
+						 };
 					 };
-					 Ext.getCmp('indicador5').setText(dato.datos[4].nombre_indic);
-					 id_indicadorc5=dato.datos[4].id_indicador;
-					 if (id_indicadorc5!=null) {
-					 	botonc5 = Ext.create('miBoton5');
-					 	botonc5.show();
+					 if(dato.datos[5].nombre_indic!='' && dato.datos[5].id_indicador!=''){
+						 Ext.getCmp('indicador6').setText(dato.datos[5].nombre_indic);
+						 id_indicador6=dato.datos[5].id_indicador;
+						 if (id_indicador6!=null) {
+						 	boton6 = Ext.create('miBoton6');
+						 	boton6.show();
+						 };	
 					 };
-					 Ext.getCmp('indicador6').setText(dato.datos[5].nombre_indic);
-					 id_indicadorc6=dato.datos[5].id_indicador;
-					 if (id_indicadorc6!=null) {
-					 	botonc6 = Ext.create('miBoton6');
-					 	botonc6.show();
+					 if(dato.datos[6].nombre_indic!='' && dato.datos[6].id_indicador!=''){
+						 Ext.getCmp('indicador7').setText(dato.datos[6].nombre_indic);
+						 id_indicador7=dato.datos[6].id_indicador;
+						 if (id_indicador7!=null) {
+						 	boton7 = Ext.create('miBoton7');
+						 	boton7.show();
+						 };	
 					 };
-					 Ext.getCmp('indicador7').setText(dato.datos[6].nombre_indic);
-					 id_indicadorc7=dato.datos[6].id_indicador;
-					 if (id_indicadorc7!=null) {
-					 	botonc7 = Ext.create('miBoton7');
-					 	botonc7.show();
+					 if(dato.datos[7].nombre_indic!='' && dato.datos[7].id_indicador!=''){
+						 Ext.getCmp('indicador8').setText(dato.datos[7].nombre_indic);
+						 id_indicador8=dato.datos[7].id_indicador;
+						 if (id_indicador8!=null) {
+						 	boton8 = Ext.create('miBoton8');
+						 	boton8.show();
+						 };	
 					 };
-					 Ext.getCmp('indicador8').setText(dato.datos[7].nombre_indic);
-					 id_indicadorc8=dato.datos[7].id_indicador;
-					 if (id_indicadorc8!=null) {
-					 	botonc8 = Ext.create('miBoton8');
-					 	botonc8.show();
+					 if(dato.datos[8].nombre_indic!='' && dato.datos[8].id_indicador!=''){
+						 Ext.getCmp('indicador9').setText(dato.datos[8].nombre_indic);
+						 id_indicador9=dato.datos[8].id_indicador;
+						 if (id_indicador9!=null) {
+						 	boton9 = Ext.create('miBoton9');
+						 	boton9.show();
+						 };	
 					 };
-					 Ext.getCmp('indicador9').setText(dato.datos[8].nombre_indic);
-					 id_indicadorc9=dato.datos[8].id_indicador;
-					 if (id_indicadorc9!=null) {
-					 	botonc9 = Ext.create('miBoton9');
-					 	botonc9.show();
-					 };
-					 Ext.getCmp('indicador10').setText(dato.datos[9].nombre_indic);
-					 id_indicadorc10=dato.datos[9].id_indicador;
-					 if (id_indicadorc10!=null) {
-					 	botonc10 = Ext.create('miBoton10');
-					 	botonc10.show();
+					 if(dato.datos[9].nombre_indic!='' && dato.datos[9].id_indicador!=''){
+						 Ext.getCmp('indicador10').setText(dato.datos[9].nombre_indic);
+						 id_indicador10=dato.datos[9].id_indicador;
+						 if (id_indicador10!=null) {
+						 	boton10 = Ext.create('miBoton10');
+						 	boton10.show();
+						 };	
 					 };
 			}
 		},
@@ -267,9 +290,9 @@ function buscar_indicadorCon() {
 	});
 }
 
-botonc1= Ext.define('miBotonc1', {
+boton1= Ext.define('miBoton1', {
     extend: 'Ext.button.Button',
-	alias: 'widget.botonc1',
+	alias: 'widget.boton1',
 	y : 30,
     x : 10,
     height : 28,
@@ -278,13 +301,14 @@ botonc1= Ext.define('miBotonc1', {
 	text : '',
 	listeners : {
 		click : function() {
-			if (id_indicadorc1 == null) {
+			alert('boton1 id´´´'+ id_indicador1);
+			if (id_indicador1 == null) {
 				Ext.Msg.alert("Información", 'No se ha definido ningun indicador, seleccione otro');
 			} else {
-				asignarDetalleIndicadorCon1();
+				asignarDetalleIndicador11();
 				ventana_ind = Ext.create('indicadoresdeta');
 				ventana_ind.show();
-			};	
+			};
 		}
 	},
     initComponent: function() {
@@ -294,9 +318,9 @@ botonc1= Ext.define('miBotonc1', {
     }
 }); 
 
-botonc2= Ext.define('miBotonc2', {
+boton2= Ext.define('miBoton2', {
     extend: 'Ext.button.Button',
-	alias: 'widget.botonc2',
+	alias: 'widget.boton2',
     y : 90,
     x : 10,
     height : 28,
@@ -305,10 +329,10 @@ botonc2= Ext.define('miBotonc2', {
 	text : '',
 	listeners : {
 		click : function() {
-			if (id_indicadorc2 == null) {
+			if (id_indicador2 == null) {
 				Ext.Msg.alert("Información", 'No se ha definido ningun indicador, seleccione otro');
 			} else {
-				asignarDetalleIndicadorCon2();
+				asignarDetalleIndicador2();
 				ventana_ind = Ext.create('indicadoresdeta');
 				ventana_ind.show();
 			};
@@ -321,9 +345,9 @@ botonc2= Ext.define('miBotonc2', {
     }
 }); 
 
-botonc3= Ext.define('miBotonc3', {
+boton3= Ext.define('miBoton3', {
     extend: 'Ext.button.Button',
-	alias: 'widget.botonc3',
+	alias: 'widget.boton3',
     y : 150,
     x : 10,
     height : 28,
@@ -332,10 +356,10 @@ botonc3= Ext.define('miBotonc3', {
 	text : '',
 	listeners : {
 		click : function() {
-			if (id_indicadorc3 == null) {
+			if (id_indicador3 == null) {
 				Ext.Msg.alert("Información", 'No se ha definido ningun indicador, seleccione otro');
 			} else {
-				asignarDetalleIndicadorCon3();
+				asignarDetalleIndicador3();
 				ventana_ind = Ext.create('indicadoresdeta');
 				ventana_ind.show();
 			};
@@ -348,9 +372,9 @@ botonc3= Ext.define('miBotonc3', {
     }
 }); 
 
-botonc4= Ext.define('miBotonc4', {
+boton4= Ext.define('miBoton4', {
     extend: 'Ext.button.Button',
-	alias: 'widget.botonc4',
+	alias: 'widget.boton4',
     y : 210,
     x : 10,
     height : 28,
@@ -359,10 +383,10 @@ botonc4= Ext.define('miBotonc4', {
 	text : '',
 	listeners : {
 		click : function() {
-			if (id_indicadorc4 == null) {
+			if (id_indicador4 == null) {
 				Ext.Msg.alert("Información", 'No se ha definido ningun indicador, seleccione otro');
 			} else {
-				asignarDetalleIndicadorCon4();
+				asignarDetalleIndicador4();
 				ventana_ind = Ext.create('indicadoresdeta');
 				ventana_ind.show();
 			};
@@ -375,9 +399,9 @@ botonc4= Ext.define('miBotonc4', {
     }
 }); 
 
-botonc5= Ext.define('miBotonc5', {
+boton5= Ext.define('miBoton5', {
     extend: 'Ext.button.Button',
-	alias: 'widget.botonc5',
+	alias: 'widget.boton5',
     y : 270,
     x : 10,
     height : 28,
@@ -386,10 +410,10 @@ botonc5= Ext.define('miBotonc5', {
 	text : '',
 	listeners : {
 		click : function() {
-			if (id_indicadorc5 == null) {
+			if (id_indicador5 == null) {
 				Ext.Msg.alert("Información", 'No se ha definido ningun indicador, seleccione otro');
 			} else {
-				asignarDetalleIndicadorCon5();
+				asignarDetalleIndicador5();
 				ventana_ind = Ext.create('indicadoresdeta');
 				ventana_ind.show();
 			};
@@ -402,9 +426,9 @@ botonc5= Ext.define('miBotonc5', {
     }
 }); 
 
-botonc6= Ext.define('miBotonc6', {
+boton6= Ext.define('miBoton6', {
     extend: 'Ext.button.Button',
-	alias: 'widget.botonc6',
+	alias: 'widget.boton6',
     y : 330,
     x : 10,
     height : 28,
@@ -413,10 +437,10 @@ botonc6= Ext.define('miBotonc6', {
 	text : '',
 	listeners : {
 		click : function() {
-			if (id_indicadorc6 == null) {
+			if (id_indicador6 == null) {
 				Ext.Msg.alert("Información", 'No se ha definido ningun indicador, seleccione otro');
 			} else {
-				asignarDetalleIndicadorCon6();
+				asignarDetalleIndicador6();
 				ventana_ind = Ext.create('indicadoresdeta');
 				ventana_ind.show();
 			};
@@ -429,9 +453,9 @@ botonc6= Ext.define('miBotonc6', {
     }
 }); 
 
-botonc7= Ext.define('miBotonc7', {
+boton7= Ext.define('miBoton7', {
     extend: 'Ext.button.Button',
-	alias: 'widget.botonc7',
+	alias: 'widget.boton7',
     y : 390,
     x : 10,
     height : 28,
@@ -440,10 +464,10 @@ botonc7= Ext.define('miBotonc7', {
 	text : '',
 	listeners : {
 		click : function() {
-			if (id_indicadorc7 == null) {
+			if (id_indicador7 == null) {
 				Ext.Msg.alert("Información", 'No se ha definido ningun indicador, seleccione otro');
 			} else {
-				asignarDetalleIndicadorCon7();
+				asignarDetalleIndicador7();
 				ventana_ind = Ext.create('indicadoresdeta');
 				ventana_ind.show();
 			};
@@ -456,9 +480,9 @@ botonc7= Ext.define('miBotonc7', {
     }
 }); 
 
-botonc8= Ext.define('miBotonc8', {
+boton8= Ext.define('miBoton8', {
     extend: 'Ext.button.Button',
-	alias: 'widget.botonc8',
+	alias: 'widget.boton8',
     y : 450,
     x : 10,
     height : 28,
@@ -467,10 +491,10 @@ botonc8= Ext.define('miBotonc8', {
 	text : '',
 	listeners : {
 		click : function() {
-			if (id_indicadorc8 == null) {
+			if (id_indicador8 == null) {
 				Ext.Msg.alert("Información", 'No se ha definido ningun indicador, seleccione otro');
 			} else {
-				asignarDetalleIndicadorCon8();
+				asignarDetalleIndicador8();
 				ventana_ind = Ext.create('indicadoresdeta');
 				ventana_ind.show();
 			};
@@ -483,9 +507,9 @@ botonc8= Ext.define('miBotonc8', {
     }
 }); 
 
-botonc9= Ext.define('miBotonc9', {
+boton9= Ext.define('miBoton9', {
     extend: 'Ext.button.Button',
-	alias: 'widget.botonc9',
+	alias: 'widget.boton9',
     y : 510,
     x : 10,
     height : 28,
@@ -494,10 +518,10 @@ botonc9= Ext.define('miBotonc9', {
 	text : '',
 	listeners : {
 		click : function() {
-			if (id_indicadorc9 == null) {
+			if (id_indicador9 == null) {
 				Ext.Msg.alert("Información", 'No se ha definido ningun indicador, seleccione otro');
 			} else {
-				asignarDetalleIndicadorCon9();
+				asignarDetalleIndicador9();
 				ventana_ind = Ext.create('indicadoresdeta');
 				ventana_ind.show();
 			};
@@ -510,9 +534,9 @@ botonc9= Ext.define('miBotonc9', {
     }
 }); 
 
-botonc10= Ext.define('miBotonc10', {
+boton10= Ext.define('miBoton10', {
     extend: 'Ext.button.Button',
-	alias: 'widget.botonc10',
+	alias: 'widget.boton10',
     y : 570,
     x : 10,
     height : 28,
@@ -521,10 +545,10 @@ botonc10= Ext.define('miBotonc10', {
 	text : '',
 	listeners : {
 		click : function() {
-			if (id_indicadorc10 == null) {
+			if (id_indicador10 == null) {
 				Ext.Msg.alert("Información", 'No se ha definido ningun indicador, seleccione otro');
 			} else {
-				asignarDetalleIndicadorCon10();
+				asignarDetalleIndicador10();
 				ventana_ind = Ext.create('indicadoresdeta');
 				ventana_ind.show();
 			};

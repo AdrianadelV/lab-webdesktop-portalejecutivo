@@ -41,12 +41,11 @@ Ext.onReady(function() {
 			direction : 'ASC'
 		}],
 	});
-	ventana = Ext.create('miVentanalista');
-	ventana.show();
+	// ventana = Ext.create('miVentanalista');
+	// ventana.show();
 
+	buscar_usuarioLogueado();
 	ventanaindicadores = Ext.create('indicadoreseje');
-	//buscar_usuarioLoCon();
-	//buscar_indicadorCon()
 	ventanaindicadores.show();
 	// ventana = Ext.create('edopedidoensamb');
 	// ventana.show();
@@ -75,9 +74,9 @@ Ext.onReady(function() {
 					ventana.show();
 				}
 				if (node.get('text') == "Lista de Espera") {
-					ventana.close();
-					ventana = Ext.create('miVentanalista');
-					ventana.show();
+					// ventana.close();
+					// ventana = Ext.create('miVentanalista');
+					// ventana.show();
 				}
 				if (node.get('text') == "Registrar Planes de Servicios") {
 					//ventana.close();
@@ -93,7 +92,7 @@ Ext.onReady(function() {
 					//alert("PASO2");
 				}
 				if (node.get('text') == "Configurar nuevo Indicador") {
-					ventana.close();
+					//ventana.close();
 					ventana = Ext.create('miVentanaIndicadores');
 					ventana.show();
 				}
