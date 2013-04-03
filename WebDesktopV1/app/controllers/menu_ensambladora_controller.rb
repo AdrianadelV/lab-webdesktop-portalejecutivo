@@ -44,41 +44,54 @@ class MenuEnsambladoraController < ApplicationController
     render :text => $tirajson
   end
  #Ma.Ale
-  def buscar_indicador
-    rolid= params[:rol_usu]
-    @indicadors = Indicadors.all
-    @son = Indicadors.count
+ def buscar_indicador
+    rol_usu= params[:rol_usu]
+    nombre= params[:nombre]
+    @usuario_indi = Usuarios_indicadors.all
+    @son = Usuarios_indicadors.count
     @i=1
     @tira_indicadoresjson = '{ "datos": [ '
-    @indicadors.each do |indicador|
-      @usuario_indi = Usuarios_indicadors.new
-      usuario_indic = @usuario_indi.buscarUsuarioIndicador(@indicadors[@i-1].id)
-      parsed_usuario_indijson = ActiveSupport::JSON.decode($tira_usuariojson)
+    @usuario_indi.each do |usuario_indicador|
+      @indicadors = Indicadors.new
+      indicador = @indicadors.buscarIndicadors(@usuario_indi[@i-1].indicadors_id)
+      parsed_indijson = ActiveSupport::JSON.decode($tira_indjson)
+      
       @usuarios = Usuario.new
-      usuario = @usuarios.buscarUsuario(parsed_usuario_indijson["usuarios_id"])
+      usuario = @usuarios.buscarUsuarioindcadorrol(@usuario_indi[@i-1].usuarios_id, rol_usu, nombre)
       parsed_usuajson = ActiveSupport::JSON.decode($tira_usuajson)
+      
+      @usuario_indicador = Usuarios_indicadors.new
+      usuario_indicadors = @usuario_indicador.buscarUsuarioIndicadorrol(parsed_usuajson["id"],parsed_indijson["id"])
+      parsed_usuarioindica = ActiveSupport::JSON.decode($tira_usuarioindicadorjson)
+        
       @estados_indi = Estados_Indicadors.new
-      estado_indi = @estados_indi.buscarEstadoIndi(parsed_usuario_indijson["estados_indicadors_id"])
-      @rol = Rols.new
-      rols = @rol.buscarRols(rolid)
-      parsed_roljson = ActiveSupport::JSON.decode($tira_roljson)     
+      estado_indi = @estados_indi.buscarEstadoIndi(@usuario_indi[@i-1].estados_indicadors_id)
       if @i<@son
-        @tira_indicadoresjson = @tira_indicadoresjson        + ' { "nombre_indic": "'       + @indicadors[@i-1].nombre +
-                                '", "id_indicador": "'       + @indicadors[@i-1].id.to_s + '"}, '
+        @tira_indicadoresjson = @tira_indicadoresjson        + ' { "nombre_indic": "'       + parsed_indijson["nombre"].to_s +
+                                                               '", "id_indicador": "'       + parsed_usuarioindica["indicadors_id"].to_s + '"}, '
       else
-        @tira_indicadoresjson = @tira_indicadoresjson        + ' { "nombre_indic": "'       + @indicadors[@i-1].nombre +
-                                '", "id_indicador": "'       + @indicadors[@i-1].id.to_s + '"} '
+        @tira_indicadoresjson = @tira_indicadoresjson        +' { "nombre_indic": "'        + parsed_indijson["nombre"].to_s +
+                                                               '", "id_indicador": "'       + parsed_usuarioindica["indicadors_id"].to_s + '"} '
       end
       @i=@i+1
     end
     @tira_indicadoresjson = @tira_indicadoresjson + ' ] }'
+     puts 'tirA INDICADORES +++++++++++++++'+ @tira_indicadoresjson
     render :text => @tira_indicadoresjson
-    end
+  end
     
   def generarDataUsuarioIndicador
     @idindicador = params[:idindicador]
     @usua_indi = Usuarios_indicadors.new
     @usua_indi.buscarUsuarioIndicador(@idindicador)
+    puts 'tira.........'+$tira_usuariojson
     render :text => $tira_usuariojson
+  end
+  
+    def buscarResponsable
+    @responsable = params[:responsable]
+    @objresponsable = Responsables.new
+    @objresponsable.buscar_responsable(@responsable)
+    render :text => $tirajson
   end
 end
