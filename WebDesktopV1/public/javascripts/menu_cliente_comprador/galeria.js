@@ -98,31 +98,31 @@ Ext.define('Modelo', {
 //Definicion del Data Store de la Caracteristicas Color
 var caracteristicacolorStore = Ext.create('Ext.data.Store', {
 	model : 'Caracteristicas_Color',
-	autoLoad : true,
+	autoLoad : false,
 });
 
 //Definicion del Data Store de la Caracteristicas Trasmision
 var caracteristicatrasmisionStore = Ext.create('Ext.data.Store', {
 	model : 'Caracteristicas_Trasmision',
-	autoLoad : true,
+	autoLoad : false,
 });
 
 //Definicion del Data Store de la Caracteristicas Tapiceria
 var caracteristicatapiceriaStore = Ext.create('Ext.data.Store', {
 	model : 'Caracteristicas_Tapiceria',
-	autoLoad : true,
+	autoLoad : false,
 });
 
 //Definicion del Data Store de Marcas
 var marcaStore = Ext.create('Ext.data.Store', {
 	model : 'Marcas',
-	autoLoad : true,
+	autoLoad : false,
 });
 
 //Definicion del Data Store de Modelos
 var modelosStore = Ext.create('Ext.data.Store', {
 	model : 'Modelo',
-	autoLoad : true,
+	autoLoad : false,
 });
 //Definicion del Panel contenedor de la imagen
 var panel = Ext.define('miVentana',{ 
