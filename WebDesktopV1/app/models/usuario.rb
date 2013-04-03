@@ -100,7 +100,22 @@ class Usuario < ActiveRecord::Base
       $tira_usuajson = '{ "success": "true", "exito": "false", "msg": " no existe!" }'
       valor = 0
     end 
-   # puts 'tira usua '+$tira_usuajson
+   puts 'tira usua '+$tira_usuajson
+    # return @usuarios
+    return valor
+  end
+  
+    #Ma.Ale
+  def buscarUsuarioindcadorrol(usuario_indic_id, rolid, nombre)
+    @usuarios =  Usuario.find(:first, :conditions => "id='#{usuario_indic_id}' and nombre='#{nombre}' and rols_id='#{rolid}'")
+    if @usuarios!=nil
+      $tira_usuajson = @usuarios.to_json
+      valor = 1
+    else
+      $tira_usuajson = '{ "success": "true", "exito": "false", "msg": " no existe!" }'
+      valor = 0
+    end 
+   puts 'tira usua ,.,.,.'+$tira_usuajson
     # return @usuarios
     return valor
   end

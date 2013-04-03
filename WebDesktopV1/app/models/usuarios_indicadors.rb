@@ -10,11 +10,25 @@ class Usuarios_indicadors < ActiveRecord::Base
       valor = 0
     end 
     #puts 'tira usu_ind .....'+$tira_usuariojson
+     return @usuarios_indicadors
+    # return $tira_usuariojson
+  end
+  
+   def buscarUsuarioIndicadorrol(usuario_id, indicador_id)
+    @usuarios_indicadors =  Usuarios_indicadors.find(:first, :conditions => "usuarios_id='#{usuario_id}' and indicadors_id='#{indicador_id}'")
+    if @usuarios_indicadors!=nil
+      $tira_usuarioindicadorjson = @usuarios_indicadors.to_json
+      valor = 1
+    else
+      $tira_usuarioindicadorjson = '{ "success": "true", "exito": "false", "msg": " no existe!" }'
+      valor = 0
+    end 
+    puts 'tira usu_ind .....'+$tira_usuarioindicadorjson
     # return @usuarios_indicadors
-    return @usuarios_indicadors
+    return valor
   end
   #Adriana Santana
-  def grabarIndicador(usuarios_id,indicadors_id,valor_meta,unidads_id,fecha_meta,valor_amarillo,valor_rojo,valor_verde,fecha_amarillo,fecha_rojo,fecha_verde,estados_indicadors_id,responsable,correo_responsable,telefono,frecuencia_notificacions_id)
+  def grabarIndicador(usuarios_id,indicadors_id,valor_meta,unidads_id,fecha_meta,valor_amarillo,valor_rojo,valor_verde,fecha_amarillo,fecha_rojo,fecha_verde,estados_indicadors_id,responsable,frecuencia_notificacions_id)
     @usuario = Usuarios_indicadors.new
     @usuario.usuarios_id=usuarios_id
     @usuario.indicadors_id=indicadors_id
@@ -29,8 +43,6 @@ class Usuarios_indicadors < ActiveRecord::Base
     @usuario.fecha_verde=fecha_verde
     @usuario.estados_indicadors_id=estados_indicadors_id
     @usuario.responsable=responsable
-    @usuario.correo_responsable=correo_responsable
-    @usuario.telefono=telefono
     @usuario.frecuencia_notificacions_id=frecuencia_notificacions_id
     @usuario.save
     valor=1

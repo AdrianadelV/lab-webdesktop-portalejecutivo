@@ -46,8 +46,8 @@ class Concesionario_vehiculos < ActiveRecord::Base
                               '", "direccion": "'       + concesionario.direccion +
                               '", "telefono": "'      + concesionario.telefono + 
                               '", "correo": "'       + concesionario.correo +
-                              '", "latitud": "'       + concesionario.latitud +
-                              '", "longitud": "'       + concesionario.longitud +
+                              '", "latitud": "'       + concesionario.latitud.to_s +
+                              '", "longitud": "'       + concesionario.longitud.to_s +
                               '", "ciudads_id": "'       + concesionario.ciudads_id.to_s +
                               '", "usuarios_id": "'       + concesionario.usuarios_id.to_s +
                               '", "marcas_id": "'       + concesionario.marcas_id.to_s + '"}, '       
