@@ -24,7 +24,7 @@ Ext.define('Bancos', {
 //store donde se guardan los datos traidos de los servicios para mostrarlos en el combo
 var bancosStore = Ext.create('Ext.data.Store', {
 	model : 'Bancos',
-	autoLoad : true,
+	autoLoad : false,
 });
 //se define la clase Concesionarios
 Ext.define('Concesionario', {
@@ -43,7 +43,7 @@ Ext.define('Concesionario', {
 });
 var concesionariosStore = Ext.create('Ext.data.Store', {
 	model : 'Concesionario',
-	autoLoad : true,
+	autoLoad : false,
 });
 Ext.define('proforma_banco', {
     extend: 'Ext.window.Window',
